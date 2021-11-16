@@ -1,0 +1,9 @@
+require 'liquid'
+require "minitest/autorun"
+
+
+MemoryFileSystem = Struct.new(:templates) do
+  def read_template_file(path)
+    templates.fetch(path)
+  end
+end

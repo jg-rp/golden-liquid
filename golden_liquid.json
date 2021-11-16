@@ -1,0 +1,2782 @@
+{
+    "version": "0.1.0",
+    "test_groups": [
+        {
+            "name": "liquid.golden.assign_tag",
+            "tests": [
+                {
+                    "name": "assign a filtered literal",
+                    "template": "{% assign foo = 'foo' | upcase %}{{ foo }}",
+                    "want": "FOO",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "local variables shadow global variables",
+                    "template": "{{ foo }}{% assign foo = 'foo' | upcase %}{{ foo }}",
+                    "want": "barFOO",
+                    "context": {
+                        "foo": "bar"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "assign a range literal",
+                    "template": "{% assign foo = (1..3) %}{{ foo }}",
+                    "want": "1..3",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.capture_tag",
+            "tests": [
+                {
+                    "name": "capture template literal and global variable",
+                    "template": "{% capture greeting %}Hello, {{ customer.first_name }}.{% endcapture %}{{ greeting }}",
+                    "want": "Hello, Holly.",
+                    "context": {
+                        "customer": {
+                            "first_name": "Holly"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "capture into a variable with a hyphen",
+                    "template": "{% capture this-thing %}Hello, {{ customer.first_name }}.{% endcapture %}{{ this-thing }}",
+                    "want": "Hello, Holly.",
+                    "context": {
+                        "customer": {
+                            "first_name": "Holly"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "assign to a variable from a captured variable",
+                    "template": "{% capture some %}hello{% endcapture %}{% assign other = some %}{{ some }}-{{ other }}",
+                    "want": "hello-hello",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.case_tag",
+            "tests": [
+                {
+                    "name": "simple case/when",
+                    "template": "{% case title %}{% when 'foo' %}foo{% when 'Hello' %}bar{% endcase %}",
+                    "want": "bar",
+                    "context": {
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "'when' expression using an identifier",
+                    "template": "{% case title %}{% when other %}foo{% when 'Hello' %}bar{% endcase %}",
+                    "want": "foo",
+                    "context": {
+                        "title": "Hello",
+                        "other": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "'when' expression using an out of scope identifier",
+                    "template": "{% case title %}{% when nosuchthing %}foo{% when 'Hello' %}bar{% endcase %}",
+                    "want": "bar",
+                    "context": {
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "name not in scope",
+                    "template": "{% case nosuchthing %}{% when 'foo' %}foo{% when 'bar' %}bar{% endcase %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "no match and no default",
+                    "template": "{% case title %}{% when 'foo' %}foo{% when 'bar' %}bar{% endcase %}",
+                    "want": "",
+                    "context": {
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "with default",
+                    "template": "{% case title %}{% when 'foo' %}foo{% else %}bar{% endcase %}",
+                    "want": "bar",
+                    "context": {
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "no whens",
+                    "template": "{% case title %}{% else %}bar{% endcase %}",
+                    "want": "bar",
+                    "context": {
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "no whens or default",
+                    "template": "{% case title %}{% endcase %}",
+                    "want": "",
+                    "context": {
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "whitespace",
+                    "template": "{% case title %}  \n\t{% when 'foo' %}foo\n{% when 'Hello' %}bar{% endcase %}",
+                    "want": "bar",
+                    "context": {
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.comment_tag",
+            "tests": [
+                {
+                    "name": "don't render comments",
+                    "template": "{% comment %}foo{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "respect whitespace control in comments",
+                    "template": "\n{%- comment %}foo{% endcomment -%}\t \r",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "don't render comments with tags",
+                    "template": "{% comment %}{% if true %}{{ title }}{% endif %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.cycle_tag",
+            "tests": [
+                {
+                    "name": "no identifier",
+                    "template": "{% cycle 'some', 'other' %}{% cycle 'some', 'other' %}{% cycle 'some', 'other' %}",
+                    "want": "someothersome",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "with identifier",
+                    "template": "{% cycle 'foo': 'some', 'other' %}{% cycle 'some', 'other' %}{% cycle 'foo': 'some', 'other' %}",
+                    "want": "somesomeother",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "different items",
+                    "template": "{% cycle '1', '2', '3' %}{% cycle '1', '2' %}{% cycle '1', '2', '3' %}",
+                    "want": "112",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "integers",
+                    "template": "{% cycle 1, 2, 3 %}{% cycle 1, 2, 3 %}{% cycle 1, 2, 3 %}",
+                    "want": "123",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.decrement_tag",
+            "tests": [
+                {
+                    "name": "named counter",
+                    "template": "{% decrement foo %}{{ foo }} {% decrement foo %}{{ foo }}",
+                    "want": "-1-1 -2-2",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "increment and decrement named counter",
+                    "template": "{% decrement foo %} {% decrement foo %} {% increment foo %}",
+                    "want": "-1 -2 -2",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.echo_tag",
+            "tests": [
+                {
+                    "name": "render a string literal",
+                    "template": "{% echo 'hello' %}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render an integer literal",
+                    "template": "{% echo 123 %}",
+                    "want": "123",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a float literal",
+                    "template": "{% echo 1.23 %}",
+                    "want": "1.23",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a variable from the global namespace",
+                    "template": "{% echo product.title %}",
+                    "want": "foo",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a variable from the local namespace",
+                    "template": "{% assign name = 'Brian' %}{% echo name %}",
+                    "want": "Brian",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render an undefined variable",
+                    "template": "{% echo age %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render an undefined property",
+                    "template": "{% echo product.age %}",
+                    "want": "",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "access an array item by index",
+                    "template": "{% echo product.tags[1] %}",
+                    "want": "garden",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "access an array item by negative index",
+                    "template": "{% echo product.tags[-2] %}",
+                    "want": "sports",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "access array item by index stored in a local variable",
+                    "template": "{% assign i = 1 %}{% echo product.tags[i] %}",
+                    "want": "garden",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a global identifier with a filter",
+                    "template": "{% echo product.title | upcase %}",
+                    "want": "FOO",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "dump an array from the global context",
+                    "template": "{% echo product.tags %}",
+                    "want": "sportsgarden",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "assign a variable the value of an existing variable",
+                    "template": "{% capture some %}hello{% endcapture %}{% assign other = some %}{% assign some = 'foo' %}{% echo some %}-{% echo other %}",
+                    "want": "foo-hello",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "traverse variables with bracketed identifiers",
+                    "template": "{% echo site.data.menu[include.menu][include.locale] %}",
+                    "want": "it works!",
+                    "context": {
+                        "site": {
+                            "data": {
+                                "menu": {
+                                    "foo": {
+                                        "bar": "it works!"
+                                    }
+                                }
+                            }
+                        },
+                        "include": {
+                            "menu": "foo",
+                            "locale": "bar"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render the special built in variable 'now'",
+                    "template": "{% echo now | date: '%d/%m/%Y' %}",
+                    "want": "16/11/2021",
+                    "context": {},
+                    "partials": {},
+                    "standard": false
+                },
+                {
+                    "name": "render the special built in variable 'today'",
+                    "template": "{% echo today | date: '%d/%m/%Y' %}",
+                    "want": "16/11/2021",
+                    "context": {},
+                    "partials": {},
+                    "standard": false
+                },
+                {
+                    "name": "access an undefined variable by index",
+                    "template": "{% echo nosuchthing[0] %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.for_tag",
+            "tests": [
+                {
+                    "name": "simple range loop",
+                    "template": "{% for i in (0..3) %}{{ i }} {% endfor %}",
+                    "want": "0 1 2 3 ",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "range loop using identifier",
+                    "template": "{% for i in (0..product.end_range) %}{{ i }} - {{ product.tags[i] }} {% endfor %}",
+                    "want": "0 - sports 1 - garden ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ],
+                            "end_range": 1
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "simple array loop",
+                    "template": "{% for tag in product.tags %}{{ tag }} {% endfor %}",
+                    "want": "sports garden ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "simple hash loop",
+                    "template": "{% for c in collection %}{{ c[0] }} {{ c[1] }} {% endfor %}",
+                    "want": "title foo description bar ",
+                    "context": {
+                        "collection": {
+                            "title": "foo",
+                            "description": "bar"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "empty array with default",
+                    "template": "{% for img in emptythings.array %}{{ img.url }} {% else %}no images{% endfor %}",
+                    "want": "no images",
+                    "context": {
+                        "emptythings": {
+                            "array": [],
+                            "map": {},
+                            "string": ""
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "break",
+                    "template": "{% for tag in product.tags %}{% if tag == 'sports' %}{% break %}{% else %}{{ tag }} {% endif %}{% else %}no images{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "continue",
+                    "template": "{% for tag in product.tags %}{% if tag == 'sports' %}{% continue %}{% else %}{{ tag }} {% endif %}{% else %}no images{% endfor %}",
+                    "want": "garden ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "limit",
+                    "template": "{% for tag in product.tags limit:1 %}{{ tag }} {% endfor %}",
+                    "want": "sports ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "offset",
+                    "template": "{% for tag in product.tags offset:1 %}{{ tag }} {% endfor %}",
+                    "want": "garden ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop length",
+                    "template": "{% for tag in product.tags %}{{ forloop.length }} {% endfor %}",
+                    "want": "2 2 ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop length with limit",
+                    "template": "{% for tag in product.tags limit:3 %}{{ forloop.length }} {% endfor %}",
+                    "want": "3 3 3 ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden",
+                                "sports",
+                                "garden",
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop length with offset",
+                    "template": "{% for tag in product.tags offset:3 %}{{ forloop.length }} {% endfor %}",
+                    "want": "3 3 3 ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden",
+                                "sports",
+                                "garden",
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop goes out of scope",
+                    "template": "{% for tag in product.tags %}{{ forloop.length }} {% endfor %}{{ forloop.length }}",
+                    "want": "2 2 ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop.first",
+                    "template": "{% for tag in product.tags %}{{ forloop.first }} {% endfor %}",
+                    "want": "true false ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop.last",
+                    "template": "{% for tag in product.tags %}{{ forloop.last }} {% endfor %}",
+                    "want": "false true ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop.index",
+                    "template": "{% for tag in product.tags %}{{ forloop.index }} {% endfor %}",
+                    "want": "1 2 ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop.index0",
+                    "template": "{% for tag in product.tags %}{{ forloop.index0 }} {% endfor %}",
+                    "want": "0 1 ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop.rindex",
+                    "template": "{% for tag in product.tags %}{{ forloop.rindex }} {% endfor %}",
+                    "want": "2 1 ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop.rindex0",
+                    "template": "{% for tag in product.tags %}{{ forloop.rindex0 }} {% endfor %}",
+                    "want": "1 0 ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "forloop no such attribute",
+                    "template": "{% for tag in product.tags %}{{ forloop.nosuchthing }}{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "iterate an empty array",
+                    "template": "{% for item in emptythings.array %}{{ item }}{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "emptythings": {
+                            "array": [],
+                            "map": {},
+                            "string": ""
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "iterate an empty array with default",
+                    "template": "{% for item in emptythings.array %}{{ item }}{% else %}foo{% endfor %}",
+                    "want": "foo",
+                    "context": {
+                        "emptythings": {
+                            "array": [],
+                            "map": {},
+                            "string": ""
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "lookup a filter from an outer context",
+                    "template": "{% for tag in product.tags %}{{ tag | upcase }} {% endfor %}",
+                    "want": "SPORTS GARDEN ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "assign inside loop",
+                    "template": "{% for tag in product.tags %}{% assign x = tag %}{% endfor %}{{ x }}",
+                    "want": "garden",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "blank empty loops",
+                    "template": "{% for i in (0..10) %}  {% endfor %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "loop over nested and chained object from context with trailing identifier",
+                    "template": "{% for link in linklists[section.settings.menu].links %}{{ link }} {% endfor %}",
+                    "want": "1 2 ",
+                    "context": {
+                        "linklists": {
+                            "main": {
+                                "links": [
+                                    "1",
+                                    "2"
+                                ]
+                            }
+                        },
+                        "section": {
+                            "settings": {
+                                "menu": "main"
+                            }
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "loop over undefined",
+                    "template": "{% for tag in nosuchthing %}{{ tag }}{% endfor %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "continue a loop",
+                    "template": "{% for item in array limit: 3 %}{{ item }} {% endfor %}{% for item in array offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 4 5 6 ",
+                    "context": {
+                        "array": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "continue a loop over an assigned range",
+                    "template": "{% assign nums = (1..5) %}{% for item in nums limit: 3 %}{{ item }} {% endfor %}{% for item in nums offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 4 5 ",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "continue a loop over a changing array",
+                    "template": "{% assign foo = '1,2,3,4,5,6' | split: ',' %}{% for item in foo limit: 3 %}{{ item }} {% endfor %}{% assign foo = 'u,v,w,x,y,z' | split: ',' %}{% for item in foo offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 x y z ",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "continue with changing loop var",
+                    "template": "{% for foo in array limit: 3 %}{{ foo }} {% endfor %}{% for bar in array offset: continue %}{{ bar }} {% endfor %}",
+                    "want": "1 2 3 1 2 3 4 5 6 ",
+                    "context": {
+                        "array": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "nothing to continue from",
+                    "template": "{% for item in array %}{{ item }} {% endfor %}{% for item in array offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 4 5 6 ",
+                    "context": {
+                        "array": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "continue from a limit that is greater than length",
+                    "template": "{% for item in array limit: 99 %}{{ item }} {% endfor %}{% for item in array offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 4 5 6 ",
+                    "context": {
+                        "array": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "continue from a range expression",
+                    "template": "{% for item in (1..6) limit: 3 %}{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 4 5 6 ",
+                    "context": {
+                        "array": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "parentloop is normally undefined",
+                    "template": "{% for i in (1..2)%}{{ forloop.parentloop.index }}{% endfor %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "access parentloop",
+                    "template": "{% for i in (1..2)%}{% for j in (1..2) %}{{ i }} {{j}} {{ forloop.parentloop.index }} {{ forloop.index }} {% endfor %}{% endfor %}",
+                    "want": "1 1 1 1 1 2 1 2 2 1 2 1 2 2 2 2 ",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "parentloop goes out of scope",
+                    "template": "{% for i in (1..2)%}{% for j in (1..2) %}{{ i }} {{ j }} {% endfor %}{{ forloop.parentloop.index }}{% endfor %}",
+                    "want": "1 1 1 2 2 1 2 2 ",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "parent's parentloop",
+                    "template": "{% for i in (1..2) %}{% for j in (1..2) %}{% for k in (1..2) %}i={{ forloop.parentloop.parentloop.index }} j={{ forloop.parentloop.index }} k={{ forloop.index }} {% endfor %}{% endfor %}{% endfor %}",
+                    "want": "i=1 j=1 k=1 i=1 j=1 k=2 i=1 j=2 k=1 i=1 j=2 k=2 i=2 j=1 k=1 i=2 j=1 k=2 i=2 j=2 k=1 i=2 j=2 k=2 ",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "loop over an existing range object",
+                    "template": "{% assign foo = (1..3) %}{{ foo }}{% for i in foo %}{{ i }}{% endfor %}{% for i in foo %}{{ i }}{% endfor %}",
+                    "want": "1..3123123",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "loop over range with float start",
+                    "template": "{% assign x = (2.4..5) %}{% for i in x %}{{ i }}{% endfor %}",
+                    "want": "2345",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.if_tag",
+            "tests": [
+                {
+                    "name": "condition with literal consequence",
+                    "template": "{% if product.title == 'foo' %}bar{% endif %}",
+                    "want": "bar",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "condition with literal consequence and literal alternative",
+                    "template": "{% if product.title == 'hello' %}bar{% else %}baz{% endif %}",
+                    "want": "baz",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "condition with conditional alternative",
+                    "template": "{% if product.title == 'hello' %}foo{% elsif product.title == 'foo' %}bar{% endif %}",
+                    "want": "bar",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "condition with conditional alternative and final alternative",
+                    "template": "{% if product.title == 'hello' %}foo{% elsif product.title == 'goodbye' %}bar{% else %}baz{% endif %}",
+                    "want": "baz",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "non-empty hash is truthy",
+                    "template": "{% if product %}bar{% else %}foo{% endif %}",
+                    "want": "bar",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "literal nil is falsy",
+                    "template": "{% if nil %}bar{% else %}foo{% endif %}",
+                    "want": "foo",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "undefined variables are falsy",
+                    "template": "{% if nosuchthing %}bar{% else %}foo{% endif %}",
+                    "want": "foo",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "nested condition in the consequence block",
+                    "template": "{% if product %}{% if title == 'Hello' %}baz{% endif %}{% endif %}",
+                    "want": "baz",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        },
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "nested condition, alternative in the consequence block",
+                    "template": "{% if product %}{% if title == 'goodbye' %}baz{% else %}hello{% endif %}{% endif %}",
+                    "want": "hello",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        },
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "literal false condition",
+                    "template": "{% if false %}{% endif %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "contains condition",
+                    "template": "{% if product.tags contains 'garden' %}baz{% endif %}",
+                    "want": "baz",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "not equal condition",
+                    "template": "{% if product.title != 'foo' %}baz{% endif %}",
+                    "want": "",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "alternate not equal condition",
+                    "template": "{% if product.title <> 'foo' %}baz{% endif %}",
+                    "want": "",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "blocks that contain only whitespace are not rendered",
+                    "template": "{% if true %}  {% elsif false %} {% else %} {% endif %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "blocks that contain only whitespace and comments are not rendered",
+                    "template": "{% if true %} {% comment %} this is blank {% endcomment %} {% endif %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "compare global variable to blank",
+                    "template": "{% if username == blank %}username is blank{% endif %}",
+                    "want": "username is blank",
+                    "context": {
+                        "username": ""
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "conditional alternative with default",
+                    "template": "{% if false %}foo{% elsif false %}bar{% else %}hello{% endif %}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "range equals range",
+                    "template": "{% assign foo = (1..3) %}{% if foo == (1..3) %}true{% else %}false{% endif %}",
+                    "want": "true",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.ifchanged_tag",
+            "tests": [
+                {
+                    "name": "changed from initial state",
+                    "template": "{% ifchanged %}hello{% endifchanged %}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "not changed from initial state",
+                    "template": "{% ifchanged %}{% endifchanged %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "no change from assign",
+                    "template": "{% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "no change from assign",
+                    "template": "{% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}{% assign foo = 'goodbye' %}{% ifchanged %}{{ foo }}{% endifchanged %}",
+                    "want": "hellogoodbye",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "within for loop",
+                    "template": "{% assign list = \"1,3,2,1,3,1,2\" | split: \",\" | sort %}{% for item in list -%}{%- ifchanged %} {{ item }}{% endifchanged -%}{%- endfor %}",
+                    "want": " 1 2 3",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.illegal_tag",
+            "tests": [
+                {
+                    "name": "unknown tag",
+                    "template": "{% nosuchthing %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.include_tag",
+            "tests": [
+                {
+                    "name": "string literal name",
+                    "template": "{% include 'product-hero' %}",
+                    "want": "foo\n- sports\n- garden\n",
+                    "context": {
+                        "product": {
+                            "title": "foo",
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product-hero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }}\n{% endfor %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "name from identifier",
+                    "template": "{% include snippet %}",
+                    "want": "foo\n- sports\n- garden\n",
+                    "context": {
+                        "snippet": "product-hero",
+                        "product": {
+                            "title": "foo",
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product-hero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }}\n{% endfor %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "bound variable",
+                    "template": "{% include 'product-title' with collection.products[1] %}",
+                    "want": "car",
+                    "context": {
+                        "collection": {
+                            "products": [
+                                {
+                                    "title": "bike"
+                                },
+                                {
+                                    "title": "car"
+                                }
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product-title": "{{ product-title.title }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "bound variable does not exist",
+                    "template": "{% include 'product-title' with no.such.thing %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {
+                        "product-title": "{{ product-title.title }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "bound array variable",
+                    "template": "{% include 'prod' for collection.products %}",
+                    "want": "bikecar",
+                    "context": {
+                        "collection": {
+                            "products": [
+                                {
+                                    "title": "bike"
+                                },
+                                {
+                                    "title": "car"
+                                }
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "prod": "{{ prod.title }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "bound variable with alias",
+                    "template": "{% include 'product-alias' with collection.products[1] as product %}",
+                    "want": "car",
+                    "context": {
+                        "collection": {
+                            "products": [
+                                {
+                                    "title": "bike"
+                                },
+                                {
+                                    "title": "car"
+                                }
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product-alias": "{{ product.title }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "some keyword arguments",
+                    "template": "{% include 'product-args', foo: 'hello', bar: 'there' %}",
+                    "want": "hello there",
+                    "context": {},
+                    "partials": {
+                        "product-args": "{{ foo }} {{ bar }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "some keyword arguments without leading comma",
+                    "template": "{% include 'product-args' foo: 'hello', bar: 'there' %}",
+                    "want": "hello there",
+                    "context": {},
+                    "partials": {
+                        "product-args": "{{ foo }} {{ bar }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "some keyword arguments with float literals",
+                    "template": "{% include 'product-args' foo: 1.1, bar: 'there' %}",
+                    "want": "1.1 there",
+                    "context": {},
+                    "partials": {
+                        "product-args": "{{ foo }} {{ bar }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "some keyword arguments with range literal",
+                    "template": "{% include 'product-args' foo: (1..3), bar: 'there' %}",
+                    "want": "1..3 there",
+                    "context": {},
+                    "partials": {
+                        "product-args": "{{ foo }} {{ bar }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "template drop",
+                    "template": "{% include 'some/template-attrs.alt.txt' %}",
+                    "want": "template-attrs.alt some template-attrs alt",
+                    "context": {},
+                    "partials": {
+                        "some/template-attrs.alt.txt": "{{ template }} {{ template.directory }} {{ template.name }} {{ template.suffix }}"
+                    },
+                    "standard": false
+                },
+                {
+                    "name": "template drop no parent",
+                    "template": "{% include 'template-attrs.alt.txt' %}",
+                    "want": "template-attrs.alt  template-attrs alt",
+                    "context": {},
+                    "partials": {
+                        "template-attrs.alt.txt": "{{ template }} {{ template.directory }} {{ template.name }} {{ template.suffix }}"
+                    },
+                    "standard": false
+                },
+                {
+                    "name": "template drop no suffix",
+                    "template": "{% include 'some/template-attrs.txt' %}",
+                    "want": "template-attrs some template-attrs ",
+                    "context": {},
+                    "partials": {
+                        "some/template-attrs.txt": "{{ template }} {{ template.directory }} {{ template.name }} {{ template.suffix }}"
+                    },
+                    "standard": false
+                },
+                {
+                    "name": "template drop no suffix or extension",
+                    "template": "{% include 'some/template-attrs' %}",
+                    "want": "template-attrs some template-attrs ",
+                    "context": {},
+                    "partials": {
+                        "some/template-attrs": "{{ template }} {{ template.directory }} {{ template.name }} {{ template.suffix }}"
+                    },
+                    "standard": false
+                },
+                {
+                    "name": "use globals from outer scope",
+                    "template": "{% include 'outer-scope' %}",
+                    "want": "Hello, Holly",
+                    "context": {
+                        "customer": {
+                            "first_name": "Holly"
+                        }
+                    },
+                    "partials": {
+                        "outer-scope": "Hello, {{ customer.first_name }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "assign persists in outer scope",
+                    "template": "{% include 'assign-outer-scope' %} {{ last_name }}",
+                    "want": "Hello, Holly Smith",
+                    "context": {
+                        "customer": {
+                            "first_name": "Holly"
+                        }
+                    },
+                    "partials": {
+                        "assign-outer-scope": "Hello, {{ customer.first_name }}{% assign last_name = 'Smith' %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "counter from outer scope",
+                    "template": "{% increment foo %} {% include 'increment-outer-scope' %} {% increment foo %}",
+                    "want": "0 1 2",
+                    "context": {},
+                    "partials": {
+                        "increment-outer-scope": "{% increment foo %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "break from include",
+                    "template": "{% for tag in product.tags %}{% include 'tag-break' %}{% endfor %}",
+                    "want": "SPORTS",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "tag-break": "{{ tag | upcase }}{% break %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "break from nested include",
+                    "template": "{% for tag in product.tags %}{% include 'tag' %}{% endfor %}",
+                    "want": "SPORTS break!",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "tag": "{{ tag | upcase }}{% include 'break' %}",
+                        "break": " break!{% break %}"
+                    },
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.increment_tag",
+            "tests": [
+                {
+                    "name": "named counter",
+                    "template": "{% increment foo %} {% increment foo %} {% increment foo %}",
+                    "want": "0 1 2",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "incrementing counter renders before incrementing",
+                    "template": "{% increment foo %} {{ foo }}",
+                    "want": "0 1",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "multiple named counters",
+                    "template": "{% increment foo %} {% increment bar %} {% increment foo %} {% increment bar %}",
+                    "want": "0 0 1 1",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "assign and increment",
+                    "template": "{% assign foo = 5 %}{{ foo }} {% increment foo %} {% increment foo %} {{ foo }}",
+                    "want": "5 0 1 5",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "named counters are in scope for subsequent expressions",
+                    "template": "{% increment foo %} {% increment foo %} {% if foo > 0 %}{{ foo }}{% endif %}",
+                    "want": "0 1 2",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.liquid_tag",
+            "tests": [
+                {
+                    "name": "multiple tags",
+                    "template": "{% liquid\nif product.title\n   echo product.title | upcase\nelse\n   echo 'product-1' | upcase \nendif\n\nfor i in (0..5)\n   echo i\nendfor %}",
+                    "want": "FOO012345",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.not_liquid",
+            "tests": [
+                {
+                    "name": "plain text gets passed through unchanged",
+                    "template": "a literal string",
+                    "want": "a literal string",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "css text gets passed through unchanged",
+                    "template": " div { font-weight: bold; } ",
+                    "want": " div { font-weight: bold; } ",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.output_statement",
+            "tests": [
+                {
+                    "name": "render a string literal",
+                    "template": "{{ 'hello' }}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render an integer literal",
+                    "template": "{{ 123 }}",
+                    "want": "123",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a negative integer literal",
+                    "template": "{{ -123 }}",
+                    "want": "-123",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a float literal",
+                    "template": "{{ 1.23 }}",
+                    "want": "1.23",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a variable from the global namespace",
+                    "template": "{{ product.title }}",
+                    "want": "foo",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a variable from the local namespace",
+                    "template": "{% assign name = 'Brian' %}{{ name }}",
+                    "want": "Brian",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render an undefined variable",
+                    "template": "{{ age }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render an undefined property",
+                    "template": "{{ product.age }}",
+                    "want": "",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "access an array item by index",
+                    "template": "{{ product.tags[1] }}",
+                    "want": "garden",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "access an array item by negative index",
+                    "template": "{{ product.tags[-2] }}",
+                    "want": "sports",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "access array item by index stored in a local variable",
+                    "template": "{% assign i = 1 %}{{ product.tags[i] }}",
+                    "want": "garden",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a global variable with a filter",
+                    "template": "{{ product.title | upcase }}",
+                    "want": "FOO",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "dump an array from the global context",
+                    "template": "{{ product.tags }}",
+                    "want": "sportsgarden",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "assign a variable the value of an existing variable",
+                    "template": "{% capture some %}hello{% endcapture %}{% assign other = some %}{% assign some = 'foo' %}{{ some }}-{{ other }}",
+                    "want": "foo-hello",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "traverse variables with bracketed identifiers",
+                    "template": "{{ site.data.menu[include.menu][include.locale] }}",
+                    "want": "it works!",
+                    "context": {
+                        "site": {
+                            "data": {
+                                "menu": {
+                                    "foo": {
+                                        "bar": "it works!"
+                                    }
+                                }
+                            }
+                        },
+                        "include": {
+                            "menu": "foo",
+                            "locale": "bar"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render the special built in variable 'now'",
+                    "template": "{{ now | date: '%d/%m/%Y' }}",
+                    "want": "16/11/2021",
+                    "context": {},
+                    "partials": {},
+                    "standard": false
+                },
+                {
+                    "name": "render the special built in variable 'today'",
+                    "template": "{{ today | date: '%d/%m/%Y' }}",
+                    "want": "16/11/2021",
+                    "context": {},
+                    "partials": {},
+                    "standard": false
+                },
+                {
+                    "name": "render a default f given a literal false",
+                    "template": "{{ false | default: 'bar' }}",
+                    "want": "bar",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a default filter given a literal false with 'allow false' equal to true",
+                    "template": "{{ false | default: 'bar', allow_false: true }}",
+                    "want": "false",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a default filter given a literal false with 'allow false' equal to false",
+                    "template": "{{ false | default: 'bar', allow_false: false }}",
+                    "want": "bar",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "unexpected left value for the `join` filter passes through",
+                    "template": "{{ 12 | join: '#' }}",
+                    "want": "12",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render an output start sequence as a string literal",
+                    "template": "{{ '{{' }}",
+                    "want": "{{",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "access an undefined variable by index",
+                    "template": "{{ nosuchthing[0] }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a range object",
+                    "template": "{{ (1..5) }}",
+                    "want": "1..5",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a range object that uses a float",
+                    "template": "{{ (1.4..5) }}",
+                    "want": "1..5",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "render a range object that uses an identifier",
+                    "template": "{{ (foo..5) }}",
+                    "want": "2..5",
+                    "context": {
+                        "foo": 2
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "reverse a range",
+                    "template": "{{ (foo..5) | reverse }}",
+                    "want": "5432",
+                    "context": {
+                        "foo": 2
+                    },
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.raw_tag",
+            "tests": [
+                {
+                    "name": "literal",
+                    "template": "{% raw %}foo{% endraw %}",
+                    "want": "foo",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "statement",
+                    "template": "{% raw %}{{ foo }}{% endraw %}",
+                    "want": "{{ foo }}",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "tag",
+                    "template": "{% raw %}{% assign x = 1 %}{% endraw %}",
+                    "want": "{% assign x = 1 %}",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "partial tag",
+                    "template": "{% raw %} %} {% }} {{ {% endraw %}",
+                    "want": " %} {% }} {{ ",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "continue after raw",
+                    "template": "{% raw %} {% some raw content %} {% endraw %}a literal",
+                    "want": " {% some raw content %} a literal",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.render_tag",
+            "tests": [
+                {
+                    "name": "string literal name",
+                    "template": "{% render 'product-hero' %}",
+                    "want": "foo\n- sports - garden ",
+                    "context": {
+                        "product": {
+                            "title": "foo",
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product-hero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }} {% endfor %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "bound variable",
+                    "template": "{% render 'product-title' with collection.products[1] %}",
+                    "want": "car",
+                    "context": {
+                        "collection": {
+                            "products": [
+                                {
+                                    "title": "bike"
+                                },
+                                {
+                                    "title": "car"
+                                }
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product-title": "{{ product-title.title }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "bound variable does not exist",
+                    "template": "{% render 'product-title' with no.such.thing %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {
+                        "product-title": "{{ product-title.title }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "bound array variable",
+                    "template": "{% render 'prod' for collection.products %}",
+                    "want": "bikecar",
+                    "context": {
+                        "collection": {
+                            "products": [
+                                {
+                                    "title": "bike"
+                                },
+                                {
+                                    "title": "car"
+                                }
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "prod": "{{ prod.title }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "bound variable with alias",
+                    "template": "{% render 'product-alias' with collection.products[1] as product %}",
+                    "want": "car",
+                    "context": {
+                        "collection": {
+                            "products": [
+                                {
+                                    "title": "bike"
+                                },
+                                {
+                                    "title": "car"
+                                }
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product-alias": "{{ product.title }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "some keyword arguments",
+                    "template": "{% render 'product-args', foo: 'hello', bar: 'there' %}",
+                    "want": "hello there",
+                    "context": {},
+                    "partials": {
+                        "product-args": "{{ foo }} {{ bar }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "some keyword arguments including a range literal",
+                    "template": "{% render 'product-args', foo: (1..3), bar: 'there' %}",
+                    "want": "1..3 there",
+                    "context": {},
+                    "partials": {
+                        "product-args": "{{ foo }} {{ bar }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "some keyword arguments no leading coma",
+                    "template": "{% render 'product-args' foo: 'hello', bar: 'there' %}",
+                    "want": "hello there",
+                    "context": {},
+                    "partials": {
+                        "product-args": "{{ foo }} {{ bar }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "template drop",
+                    "template": "{% render 'some/template-attrs.alt.txt' %}",
+                    "want": "template-attrs.alt some template-attrs alt",
+                    "context": {},
+                    "partials": {
+                        "some/template-attrs.alt.txt": "{{ template }} {{ template.directory }} {{ template.name }} {{ template.suffix }}"
+                    },
+                    "standard": false
+                },
+                {
+                    "name": "template drop no parent",
+                    "template": "{% render 'template-attrs.alt.txt' %}",
+                    "want": "template-attrs.alt  template-attrs alt",
+                    "context": {},
+                    "partials": {
+                        "template-attrs.alt.txt": "{{ template }} {{ template.directory }} {{ template.name }} {{ template.suffix }}"
+                    },
+                    "standard": false
+                },
+                {
+                    "name": "template drop no suffix",
+                    "template": "{% render 'some/template-attrs.txt' %}",
+                    "want": "template-attrs some template-attrs ",
+                    "context": {},
+                    "partials": {
+                        "some/template-attrs.txt": "{{ template }} {{ template.directory }} {{ template.name }} {{ template.suffix }}"
+                    },
+                    "standard": false
+                },
+                {
+                    "name": "template drop no suffix or extension",
+                    "template": "{% render 'some/template-attrs' %}",
+                    "want": "template-attrs some template-attrs ",
+                    "context": {},
+                    "partials": {
+                        "some/template-attrs": "{{ template }} {{ template.directory }} {{ template.name }} {{ template.suffix }}"
+                    },
+                    "standard": false
+                },
+                {
+                    "name": "parent variables go out of scope",
+                    "template": "{% assign greeting = 'good morning' %}{{ greeting }} {% render 'outer-scope' %}{{ greeting }}",
+                    "want": "good morning good morning",
+                    "context": {},
+                    "partials": {
+                        "outer-scope": "{{ greeting }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "for loop variables go out of scope",
+                    "template": "{% for i in (1..3) %}{{ i }}{% render 'loop-scope' %}{{ i }}{% endfor %}{{ i }}",
+                    "want": "112233",
+                    "context": {},
+                    "partials": {
+                        "loop-scope": "{{ i }}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "assigned variables do not leek into outer scope",
+                    "template": "{% render 'assign-outer-scope' %} {{ last_name }}",
+                    "want": "Hello, Holly ",
+                    "context": {
+                        "customer": {
+                            "first_name": "Holly"
+                        }
+                    },
+                    "partials": {
+                        "assign-outer-scope": "Hello, {{ customer.first_name }}{% assign last_name = 'Smith' %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "increment is isolated between renders",
+                    "template": "{% increment foo %} {% render 'increment' %} {% increment foo %}",
+                    "want": "0 0 1",
+                    "context": {},
+                    "partials": {
+                        "increment": "{% increment foo %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "decrement is isolated between renders",
+                    "template": "{% decrement foo %} {% render 'decrement' %} {% decrement foo %}",
+                    "want": "-1 -1 -2",
+                    "context": {},
+                    "partials": {
+                        "decrement": "{% decrement foo %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "forloop helper",
+                    "template": "{% render 'product' for collection.products %}",
+                    "want": "Product: bike first index:1 Product: car last index:2 ",
+                    "context": {
+                        "collection": {
+                            "products": [
+                                {
+                                    "title": "bike"
+                                },
+                                {
+                                    "title": "car"
+                                }
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product": "Product: {{ product.title }} {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %} index:{{ forloop.index }} "
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "render loops don't add parentloop",
+                    "template": "{% render 'product' for collection.products %}",
+                    "want": "bike-0 0 1 2 car-1 0 1 2 ",
+                    "context": {
+                        "collection": {
+                            "products": [
+                                {
+                                    "title": "bike"
+                                },
+                                {
+                                    "title": "car"
+                                }
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product": "{{ product.title }}-{{ forloop.index0 }} {% for x in (1..3) %}{{ forloop.index0 }}{{ forloop.parentloop.index0 }} {% endfor %}"
+                    },
+                    "standard": true
+                },
+                {
+                    "name": "render loops can't access parentloop",
+                    "template": "{% for x in (1..3) %}{% render 'product' for collection.products %}{% endfor %}",
+                    "want": "bike-0 car-1 bike-0 car-1 bike-0 car-1 ",
+                    "context": {
+                        "collection": {
+                            "products": [
+                                {
+                                    "title": "bike"
+                                },
+                                {
+                                    "title": "car"
+                                }
+                            ]
+                        }
+                    },
+                    "partials": {
+                        "product": "{{ product.title }}-{{ forloop.index0 }} {{ forloop.parentloop.index0 }}"
+                    },
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.tablerow_tag",
+            "tests": [
+                {
+                    "name": "one row",
+                    "template": "{% tablerow tag in collection.tags %}{{ tag }}{% endtablerow %}",
+                    "want": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td><td class=\"col3\">tag3</td><td class=\"col4\">tag4</td></tr>\n",
+                    "context": {
+                        "collection": {
+                            "tags": [
+                                "tag1",
+                                "tag2",
+                                "tag3",
+                                "tag4"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "one row with limit",
+                    "template": "{% tablerow tag in collection.tags limit: 2 %}{{ tag }}{% endtablerow %}",
+                    "want": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td></tr>\n",
+                    "context": {
+                        "collection": {
+                            "tags": [
+                                "tag1",
+                                "tag2",
+                                "tag3",
+                                "tag4"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "one row with offset",
+                    "template": "{% tablerow tag in collection.tags offset: 2 %}{{ tag }}{% endtablerow %}",
+                    "want": "<tr class=\"row1\">\n<td class=\"col1\">tag3</td><td class=\"col2\">tag4</td></tr>\n",
+                    "context": {
+                        "collection": {
+                            "tags": [
+                                "tag1",
+                                "tag2",
+                                "tag3",
+                                "tag4"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "two columns",
+                    "template": "{% tablerow tag in collection.tags cols:2 %}{{ tag }}{% endtablerow %}",
+                    "want": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td></tr>\n<tr class=\"row2\"><td class=\"col1\">tag3</td><td class=\"col2\">tag4</td></tr>\n",
+                    "context": {
+                        "collection": {
+                            "tags": [
+                                "tag1",
+                                "tag2",
+                                "tag3",
+                                "tag4"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "two column range",
+                    "template": "{% tablerow i in (1..4) cols:2 %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
+                    "want": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "two column odd range",
+                    "template": "{% tablerow i in (1..5) cols:2 %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
+                    "want": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n<tr class=\"row3\"><td class=\"col1\">5 true</td></tr>\n",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.unless_tag",
+            "tests": [
+                {
+                    "name": "literal false condition",
+                    "template": "{% unless false %}foo{% endunless %}",
+                    "want": "foo",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "literal true condition",
+                    "template": "{% unless true %}foo{% endunless %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "blocks that contain only whitespace are not rendered",
+                    "template": "{% unless false %}  {% endunless %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "alternative block",
+                    "template": "{% unless true %}foo{% else %}bar{% endunless %}",
+                    "want": "bar",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "conditional alternative block",
+                    "template": "{% unless true %}foo{% elsif true %}bar{% endunless %}",
+                    "want": "bar",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "conditional alternative block with default",
+                    "template": "{% unless true %}foo{% elsif false %}bar{% else %}hello{% endunless %}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.whitespace_control",
+            "tests": [
+                {
+                    "name": "white space control with newlines and spaces",
+                    "template": "\n{% if customer -%}\nWelcome back,  {{ customer.first_name -}} !\n {%- endif -%}",
+                    "want": "\nWelcome back,  Holly!",
+                    "context": {
+                        "customer": {
+                            "first_name": "Holly"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "white space control with carriage return and spaces",
+                    "template": "\r{% if customer -%}\rWelcome back,  {{ customer.first_name -}} !\r {%- endif -%}",
+                    "want": "\rWelcome back,  Holly!",
+                    "context": {
+                        "customer": {
+                            "first_name": "Holly"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "white space control with  carriage return, newline and spaces",
+                    "template": "\r\n{% if customer -%}\r\nWelcome back,  {{ customer.first_name -}} !\r\n {%- endif -%}",
+                    "want": "\r\nWelcome back,  Holly!",
+                    "context": {
+                        "customer": {
+                            "first_name": "Holly"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "white space control with newlines, tabs and spaces",
+                    "template": "\n\t{% if customer -%}\t\nWelcome back,  {{ customer.first_name -}}\t !\r\n {%- endif -%}",
+                    "want": "\n\tWelcome back,  Holly!",
+                    "context": {
+                        "customer": {
+                            "first_name": "Holly"
+                        }
+                    },
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.concat_filter",
+            "tests": [
+                {
+                    "name": "range literal concat filter left value",
+                    "template": "{{ (1..3) | concat: foo }}",
+                    "want": "123567",
+                    "context": {
+                        "foo": [
+                            5,
+                            6,
+                            7
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "two arrays of strings",
+                    "template": "{{ a | concat: b | join: '#' }}",
+                    "want": "a#b#c#d",
+                    "context": {
+                        "a": [
+                            "a",
+                            "b"
+                        ],
+                        "b": [
+                            "c",
+                            "d"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "missing argument returns left value",
+                    "template": "{{ a | concat | join '#' }}",
+                    "want": "a#b",
+                    "context": {
+                        "a": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "argument is not array-like",
+                    "template": "{{ a | concat: b | join '#' }}",
+                    "want": "a#b",
+                    "context": {
+                        "a": [
+                            "a",
+                            "b"
+                        ],
+                        "b": 5
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "left value is not array-like",
+                    "template": "{{ a | concat: b | join '#' }}",
+                    "want": "",
+                    "context": {
+                        "a": "ab",
+                        "b": [
+                            "c",
+                            "d"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "left value contains non string",
+                    "template": "{{ a | concat: b | join '#' }}",
+                    "want": "a#b#5#c#d",
+                    "context": {
+                        "a": [
+                            "a",
+                            "b",
+                            5
+                        ],
+                        "b": [
+                            "c",
+                            "d"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "undefined left value",
+                    "template": "{{ nosuchthing | concat: b | join '#' }}",
+                    "want": "",
+                    "context": {
+                        "b": [
+                            "c",
+                            "d"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "undefined argument",
+                    "template": "{{ a | concat: nosuchthing | join '#' }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.first_filter",
+            "tests": [
+                {
+                    "name": "range literal first filter left value",
+                    "template": "{{ (1..3) | first }}",
+                    "want": "1",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "array of strings",
+                    "template": "{{ arr | first }}",
+                    "want": "a",
+                    "context": {
+                        "arr": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "array of things",
+                    "template": "{{ arr | first }}",
+                    "want": "a",
+                    "context": {
+                        "arr": [
+                            "a",
+                            "b",
+                            1,
+                            [],
+                            {}
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "empty left value",
+                    "template": "{{ arr | first }}",
+                    "want": "",
+                    "context": {
+                        "arr": []
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "left value is not an array",
+                    "template": "{{ arr | first }}",
+                    "want": "",
+                    "context": {
+                        "arr": 12
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "left value is undefined",
+                    "template": "{{ nosuchthing | first }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.join_filter",
+            "tests": [
+                {
+                    "name": "range literal join filter left value",
+                    "template": "{{ (1..3) | join: '#' }}",
+                    "want": "1#2#3",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "joining a string is a noop",
+                    "template": "{{ 'a,b' | join: '#' }}",
+                    "want": "a,b",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "joining an int is a noop",
+                    "template": "{{ 123 | join: '#' }}",
+                    "want": "123",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "join an array of strings",
+                    "template": "{{ arr | join: '#' }}",
+                    "want": "a#b",
+                    "context": {
+                        "arr": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "join an array of integers",
+                    "template": "{{ arr | join: '#' }}",
+                    "want": "1#2",
+                    "context": {
+                        "arr": [
+                            "1",
+                            "2"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "missing argument defaults to a space",
+                    "template": "{{ arr | join }}",
+                    "want": "a b",
+                    "context": {
+                        "arr": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "argument is not a string",
+                    "template": "{{ arr | join: 5 }}",
+                    "want": "a5b",
+                    "context": {
+                        "arr": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "left value contains non string",
+                    "template": "{{ arr | join: '#' }}",
+                    "want": "a#b#1",
+                    "context": {
+                        "arr": [
+                            "a",
+                            "b",
+                            1
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "undefined left value",
+                    "template": "{{ nosuchthing | join: '#' }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "undefined argument",
+                    "template": "{{ arr | join: nosuchthing }}",
+                    "want": "ab",
+                    "context": {
+                        "arr": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.last_filter",
+            "tests": [
+                {
+                    "name": "range literal last filter left value",
+                    "template": "{{ (1..3) | last }}",
+                    "want": "3",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "array of strings",
+                    "template": "{{ arr | last }}",
+                    "want": "b",
+                    "context": {
+                        "arr": [
+                            "a",
+                            "b"
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "array of things",
+                    "template": "{{ arr | last }}",
+                    "want": "{}",
+                    "context": {
+                        "arr": [
+                            "a",
+                            "b",
+                            1,
+                            [],
+                            {}
+                        ]
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "empty array",
+                    "template": "{{ arr | last }}",
+                    "want": "",
+                    "context": {
+                        "arr": []
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "left value not an array",
+                    "template": "{{ arr | last }}",
+                    "want": "",
+                    "context": {
+                        "arr": 12
+                    },
+                    "partials": {},
+                    "standard": true
+                },
+                {
+                    "name": "left value is undefined",
+                    "template": "{{ nosuchthing | last }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "standard": true
+                }
+            ]
+        }
+    ]
+}
