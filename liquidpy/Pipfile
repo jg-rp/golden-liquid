@@ -4,10 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-python-liquid = {editable = true, path = "./../liquipy2"}
+liquidpy = "*"
+python-dateutil = "*"
+pytest = "*"
 
 [dev-packages]
 black = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.9"
