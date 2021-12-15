@@ -1,5 +1,5 @@
 {
-    "version": "0.1.0",
+    "version": "0.2.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -231,9 +231,27 @@
             "name": "liquid.golden.at_least_filter",
             "tests": [
                 {
+                    "name": "argument string not a number",
+                    "template": "{{ -1 | at_least: \"abc\" }}",
+                    "want": "0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "left value not a number",
                     "template": "{{ \"abc\" | at_least: 2 }}",
                     "want": "2",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "left value not a number negative argument",
+                    "template": "{{ \"abc\" | at_least: -2 }}",
+                    "want": "0",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -839,6 +857,18 @@
                     "want": "bar",
                     "context": {
                         "title": "Hello"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "tags inside when block",
+                    "template": "{% case title %}{% when other %}{% if true %}foo{% endif %}{% when 'goodbye' %}bar{% endcase %}",
+                    "want": "foo",
+                    "context": {
+                        "title": "Hello",
+                        "other": "Hello"
                     },
                     "partials": {},
                     "error": false,
@@ -2568,6 +2598,22 @@
                     "strict": false
                 },
                 {
+                    "name": "loop over an array in reverse",
+                    "template": "{% for tag in product.tags reversed %}{{ tag }} {% endfor %}",
+                    "want": "garden sports ",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "loop over an existing range object",
                     "template": "{% assign foo = (1..3) %}{{ foo }}{% for i in foo %}{{ i }}{% endfor %}{% for i in foo %}{{ i }}{% endfor %}",
                     "want": "1..3123123",
@@ -2943,6 +2989,15 @@
             "name": "liquid.golden.ifchanged_tag",
             "tests": [
                 {
+                    "name": "change from assign",
+                    "template": "{% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}{% assign foo = 'goodbye' %}{% ifchanged %}{{ foo }}{% endifchanged %}",
+                    "want": "hellogoodbye",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "changed from initial state",
                     "template": "{% ifchanged %}hello{% endifchanged %}",
                     "want": "hello",
@@ -2955,15 +3010,6 @@
                     "name": "no change from assign",
                     "template": "{% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}",
                     "want": "hello",
-                    "context": {},
-                    "partials": {},
-                    "error": false,
-                    "strict": false
-                },
-                {
-                    "name": "no change from assign",
-                    "template": "{% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}{% assign foo = 'goodbye' %}{% ifchanged %}{{ foo }}{% endifchanged %}",
-                    "want": "hellogoodbye",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -2990,7 +3036,7 @@
             ]
         },
         {
-            "name": "liquid.golden.illegal_tag",
+            "name": "liquid.golden.illegal",
             "tests": [
                 {
                     "name": "no addition operator",
@@ -3174,11 +3220,22 @@
                     "strict": false
                 },
                 {
+                    "name": "keyword arguments go out of scope",
+                    "template": "{% include 'product-args', foo: 'hello', bar: 'there' %}{{ foo }}",
+                    "want": "hello there",
+                    "context": {},
+                    "partials": {
+                        "product-args": "{{ foo }} {{ bar }}"
+                    },
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "name from identifier",
                     "template": "{% include snippet %}",
                     "want": "foo\n- sports\n- garden\n",
                     "context": {
-                        "snippet": "producthero",
+                        "snippet": "product-hero",
                         "product": {
                             "title": "foo",
                             "tags": [
@@ -3188,7 +3245,7 @@
                         }
                     },
                     "partials": {
-                        "producthero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }}\n{% endfor %}"
+                        "product-hero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }}\n{% endfor %}"
                     },
                     "error": false,
                     "strict": false
@@ -3239,7 +3296,7 @@
                 },
                 {
                     "name": "string literal name",
-                    "template": "{% include 'producthero' %}",
+                    "template": "{% include 'product-hero' %}",
                     "want": "foo\n- sports\n- garden\n",
                     "context": {
                         "product": {
@@ -3251,7 +3308,7 @@
                         }
                     },
                     "partials": {
-                        "producthero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }}\n{% endfor %}"
+                        "product-hero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }}\n{% endfor %}"
                     },
                     "error": false,
                     "strict": false
@@ -3346,8 +3403,8 @@
                     "want": "1#2",
                     "context": {
                         "arr": [
-                            "1",
-                            "2"
+                            1,
+                            2
                         ]
                     },
                     "partials": {},
@@ -4474,6 +4531,47 @@
             ]
         },
         {
+            "name": "liquid.golden.range_objects",
+            "tests": [
+                {
+                    "name": "end is less than start",
+                    "template": "{{ (start..end) | join: '#' }}",
+                    "want": "",
+                    "context": {
+                        "start": 5,
+                        "end": 1
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "end is not a number",
+                    "template": "{{ (start..end) | join: '#' }}",
+                    "want": "",
+                    "context": {
+                        "start": "1",
+                        "end": "foo"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "start is not a number",
+                    "template": "{{ (start..end) | join: '#' }}",
+                    "want": "0#1#2#3#4#5",
+                    "context": {
+                        "start": "foo",
+                        "end": 5
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                }
+            ]
+        },
+        {
             "name": "liquid.golden.raw_tag",
             "tests": [
                 {
@@ -5399,6 +5497,24 @@
             "name": "liquid.golden.slice_filter",
             "tests": [
                 {
+                    "name": "first argument is a float",
+                    "template": "{{ 'Liquid' | slice: 2.2 }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "first argument is a sstring",
+                    "template": "{{ \"hello\" | slice: \"2\" }}",
+                    "want": "l",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "first argument not an integer",
                     "template": "{{ \"hello\" | slice: \"foo\" }}",
                     "want": "",
@@ -5414,6 +5530,42 @@
                     "context": {},
                     "partials": {},
                     "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "negative first argument",
+                    "template": "{{ 'Liquid' | slice: -2 }}",
+                    "want": "i",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "negative first argument and length out of range",
+                    "template": "{{ 'Liquid' | slice: -2, 99 }}",
+                    "want": "id",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "negative first argument and negative length",
+                    "template": "{{ 'Liquid' | slice: -2, -1 }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "negative first argument and positive length",
+                    "template": "{{ 'Liquid' | slice: -2, 2 }}",
+                    "want": "id",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
                     "strict": false
                 },
                 {
@@ -5453,8 +5605,8 @@
                     "strict": false
                 },
                 {
-                    "name": "second argument not an integer",
-                    "template": "{{ \"hello\" | slice: 5, \"foo\" }}",
+                    "name": "second argument is a float",
+                    "template": "{{ 'Liquid' | slice: 1, 2.2 }}",
                     "want": "",
                     "context": {},
                     "partials": {},
@@ -5462,20 +5614,21 @@
                     "strict": false
                 },
                 {
-                    "name": "slice a hash",
-                    "template": "{{ a | slice: 2, 1 | join: '#' }}",
-                    "want": "a",
-                    "context": {
-                        "a": {
-                            "a": 1,
-                            "b": 2,
-                            "c": 3,
-                            "d": 4,
-                            "e": 5
-                        }
-                    },
+                    "name": "second argument is a string",
+                    "template": "{{ \"hello\" | slice: 3, \"2\" }}",
+                    "want": "lo",
+                    "context": {},
                     "partials": {},
                     "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "second argument not an integer",
+                    "template": "{{ \"hello\" | slice: 5, \"foo\" }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
                     "strict": false
                 },
                 {
@@ -5650,6 +5803,15 @@
                     "strict": false
                 },
                 {
+                    "name": "sort a string",
+                    "template": "{{ 'BzAa4' | sort | join: '#' }}",
+                    "want": "BzAa4",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "too many arguments",
                     "template": "{{ a | sort: 'title', 'foo' | join: '#' }}",
                     "want": "",
@@ -5703,6 +5865,27 @@
                             },
                             {
                                 "title": "Baz"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of objects with a key gets stringified",
+                    "template": "{% assign x = a | sort_natural: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(title,1111)(title,87)(title,9)",
+                    "context": {
+                        "a": [
+                            {
+                                "title": 9
+                            },
+                            {
+                                "title": 1111
+                            },
+                            {
+                                "title": 87
                             }
                         ]
                     },
@@ -6242,6 +6425,15 @@
                     "strict": false
                 },
                 {
+                    "name": "default length is 50",
+                    "template": "{{ \"Ground control to Major Tom. Ground control to Major Tom.\" | truncate }}",
+                    "want": "Ground control to Major Tom. Ground control to ...",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "no end",
                     "template": "{{ \"Ground control to Major Tom.\" | truncate: 20, \"\" }}",
                     "want": "Ground control to Ma",
@@ -6349,6 +6541,15 @@
                     "name": "not a string",
                     "template": "{{ 5 | truncatewords: 10 }}",
                     "want": "5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "number of words defaults to 15",
+                    "template": "{{ \"a b c d e f g h i j k l m n o p q\" | truncatewords }}",
+                    "want": "a b c d e f g h i j k l m n o...",
                     "context": {},
                     "partials": {},
                     "error": false,

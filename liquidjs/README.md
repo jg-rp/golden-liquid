@@ -1,4 +1,4 @@
-# LiquidJS Version 9.28.4
+# LiquidJS Version 9.29.0
 
 ```
 npm install
@@ -40,11 +40,25 @@ npx jest --noStackTrace
     Expected: "1..3"
     Received: "1,2,3"
 
+  ● liquid.golden.at_least_filter › argument string not a number
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "0"
+    Received: "NaN"
+
   ● liquid.golden.at_least_filter › left value not a number
 
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "2"
+    Received: "NaN"
+
+  ● liquid.golden.at_least_filter › left value not a number negative argument
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "0"
     Received: "NaN"
 
   ● liquid.golden.at_least_filter › missing arg
@@ -647,6 +661,12 @@ npx jest --noStackTrace
     Expected: "true"
     Received: "false"
 
+  ● liquid.golden.ifchanged_tag › change from assign
+
+    tag "ifchanged" not found, line:1, col:27
+    >> 1| {% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}{% assign foo = 'goodbye' %}{% ifchanged %}{{ foo }}{% endifchanged %}
+    ParseError: tag "ifchanged" not found, line:1, col:27
+
   ● liquid.golden.ifchanged_tag › changed from initial state
 
     tag "ifchanged" not found, line:1, col:1
@@ -657,12 +677,6 @@ npx jest --noStackTrace
 
     tag "ifchanged" not found, line:1, col:27
     >> 1| {% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}
-    ParseError: tag "ifchanged" not found, line:1, col:27
-
-  ● liquid.golden.ifchanged_tag › no change from assign
-
-    tag "ifchanged" not found, line:1, col:27
-    >> 1| {% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}{% assign foo = 'goodbye' %}{% ifchanged %}{{ foo }}{% endifchanged %}
     ParseError: tag "ifchanged" not found, line:1, col:27
 
   ● liquid.golden.ifchanged_tag › not changed from initial state
@@ -1025,6 +1039,13 @@ npx jest --noStackTrace
     Expected: "2"
     Received: "NaN"
 
+  ● liquid.golden.range_objects › start is not a number
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "0#1#2#3#4#5"
+    Received: ""
+
   ● liquid.golden.remove_filter › missing argument
 
     expect(received).toThrow()
@@ -1163,6 +1184,13 @@ npx jest --noStackTrace
     >> 1| {{ nosuchthing | reverse | join: '#' }}
     RenderError: undefined is not iterable (cannot read property Symbol(Symbol.iterator)), line:1, col:1
 
+  ● liquid.golden.reverse_filter › left value not an array
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "123"
+    Received: ""
+
   ● liquid.golden.reverse_filter › unexpected argument
 
     expect(received).toThrow()
@@ -1208,6 +1236,19 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.slice_filter › first argument is a float
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.slice_filter › first argument is a sstring
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "l"
+    Received: "llo"
+
   ● liquid.golden.slice_filter › first argument not an integer
 
     expect(received).toThrow()
@@ -1226,17 +1267,17 @@ npx jest --noStackTrace
     >> 1| {{ 5 | slice: 1 }}
     RenderError: v.slice is not a function, line:1, col:1
 
-  ● liquid.golden.slice_filter › second argument not an integer
+  ● liquid.golden.slice_filter › second argument is a float
 
     expect(received).toThrow()
 
     Received function did not throw
 
-  ● liquid.golden.slice_filter › slice a hash
+  ● liquid.golden.slice_filter › second argument not an integer
 
-    v.slice is not a function, line:1, col:1
-    >> 1| {{ a | slice: 2, 1 | join: '#' }}
-    RenderError: v.slice is not a function, line:1, col:1
+    expect(received).toThrow()
+
+    Received function did not throw
 
   ● liquid.golden.slice_filter › too many arguments
 
@@ -1606,8 +1647,8 @@ npx jest --noStackTrace
     Received function did not throw
 
 Test Suites: 1 failed, 1 total
-Tests:       240 failed, 357 passed, 597 total
+Tests:       246 failed, 370 passed, 616 total
 Snapshots:   0 total
-Time:        1.911 s, estimated 3 s
+Time:        1.788 s, estimated 3 s
 Ran all test suites.
 ```
