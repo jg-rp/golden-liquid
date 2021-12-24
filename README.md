@@ -61,23 +61,23 @@ cases. Including a version number, `golden_liquid.json` looks like this.
 
 For each test case:
 
-**_name_** is a descriptive name for the test case. Together with the group name, it
-should uniquely identify the test cases.
+**`name`** is a descriptive name for the test case. Together with the group name, it
+should uniquely identify the test case.
 
-**_template_** is the Liquid template source as a string.
+**`template`** is the Liquid template source as a string.
 
-**_want_** is the expected result of rendering the template with the associated
+**`want`** is the expected result of rendering the template with the associated
 context.
 
-**_context_** is JSON object mapping strings to arbitrary, possibly nested, strings,
+**`context`** is JSON object mapping strings to arbitrary, possibly nested, strings,
 numbers, arrays, objects and booleans. These are the variables that the associated
 template should be rendered with.
 
-**_partials_** is a JSON object mapping strings to strings. You can think of it as a
+**`partials`** is a JSON object mapping strings to strings. You can think of it as a
 mock file system for testing `{% include %}` and `{% render %}`.
 
-**_error_** is a boolean indicating if the test case should raise/trow and
+**`error`** is a boolean indicating if the test case should raise/trow and
 exception/error.
 
-**_strict_** is a boolean indicating if the test should be rendered in "strict mode",
+**`strict`** is a boolean indicating if the test should be rendered in "strict mode",
 if the target environment has a strict mode.

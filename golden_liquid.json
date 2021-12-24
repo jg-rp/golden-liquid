@@ -1,5 +1,5 @@
 {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -1773,6 +1773,15 @@
                     "strict": false
                 },
                 {
+                    "name": "nothing to echo",
+                    "template": "{% echo %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "render a float literal",
                     "template": "{% echo 1.23 %}",
                     "want": "1.23",
@@ -2692,6 +2701,78 @@
                                 "garden"
                             ]
                         }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "offset continue forloop length",
+                    "template": "{% for item in (1..6) limit: 2 %}{{ item }} - {{ forloop.length }}, {% endfor %}{% for item in (1..6) offset: continue %}{{ item }} - {{ forloop.length }}, {% endfor %}",
+                    "want": "1 - 2, 2 - 2, 3 - 4, 4 - 4, 5 - 4, 6 - 4, ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "offset continue from a broken loop",
+                    "template": "{% for item in (1..6) %}{% if item == 3 %}{% break %}{% endif %}{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "offset continue from a broken loop with preceding limit",
+                    "template": "{% for item in (1..6) limit: 3 %}{{ item }} {% endfor %}{% for item in (1..6) %}{% if item == 3 %}{% break %}{% endif %}{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 1 2 ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "offset continue twice with changing limit",
+                    "template": "{% for item in (1..6) limit: 2 %}{{ item }} {% endfor %}{% for item in (1..6) limit: 3 offset: continue %}{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 4 5 6 ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "offset continue twice with limit",
+                    "template": "{% for item in (1..6) limit: 2 %}{{ item }} {% endfor %}{% for item in (1..6) limit: 2 offset: continue %}{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 4 5 6 ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "offset continue twice with no second limit",
+                    "template": "{% for item in (1..6) limit: 2 %}{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 4 5 6 ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "offset continue without preceding loop",
+                    "template": "{% for item in array offset: continue %}{{ item }} {% endfor %}",
+                    "want": "1 2 3 4 5 6 ",
+                    "context": {
+                        "array": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
                     },
                     "partials": {},
                     "error": false,
@@ -3623,7 +3704,69 @@
             "name": "liquid.golden.liquid_tag",
             "tests": [
                 {
-                    "name": "multiple tags",
+                    "name": "can't close nested blocks",
+                    "template": "{%- if true -%}\n42\n{%- liquid endif -%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "carriage return and newline terminated tags",
+                    "template": "{% liquid\r\nif product.title\r\n   echo product.title | upcase\r\nelse\r\n   echo 'product-1' | upcase \r\nendif\r\n\r\nfor i in (0..5)\r\n   echo i\r\nendfor %}",
+                    "want": "FOO012345",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "carriage return terminated tags",
+                    "template": "{% liquid\rif product.title\r   echo product.title | upcase\relse\r   echo 'product-1' | upcase \rendif\r\rfor i in (0..5)\r   echo i\rendfor %}",
+                    "want": "",
+                    "context": {
+                        "product": {
+                            "title": "foo"
+                        }
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "empty liquid tag",
+                    "template": "{% liquid %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "multi-line comment tag",
+                    "template": "{% liquid\ncomment this is a comment\nsplit over two lines\nendcomment\n%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "nested liquid",
+                    "template": "{%- if true %}\n  {%- liquid\n    echo \"good\"\n  %}\n{%- endif -%}",
+                    "want": "good",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "newline terminated tags",
                     "template": "{% liquid\nif product.title\n   echo product.title | upcase\nelse\n   echo 'product-1' | upcase \nendif\n\nfor i in (0..5)\n   echo i\nendfor %}",
                     "want": "FOO012345",
                     "context": {
@@ -3631,6 +3774,72 @@
                             "title": "foo"
                         }
                     },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "only whitespace",
+                    "template": "{% liquid\n   \n\n   \t \n\t\n  %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "reference test #2",
+                    "template": "{%- liquid\n  for value in array\n    echo value\n    unless forloop.last\n      echo '#'\n    endunless\n  endfor\n-%}",
+                    "want": "1#2#3",
+                    "context": {
+                        "array": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "reference test #3",
+                    "template": "{%- liquid\n  for value in array\n    assign double_value = value | times: 2\n    echo double_value | times: 2\n    unless forloop.last\n      echo '#'\n    endunless\n  endfor\n\n  echo '#'\n  echo double_value\n-%}",
+                    "want": "4#8#12#6",
+                    "context": {
+                        "array": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "reference test #4",
+                    "template": "{%- liquid echo 'a' -%}\nb\n{%- liquid echo 'c' -%}",
+                    "want": "abc",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "single line comment tag",
+                    "template": "{% liquid\ncomment this is a comment\nendcomment\n%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace control",
+                    "template": "Hello,     \n{%- liquid\n  echo ' World! '\n-%}\n   Goodbye.",
+                    "want": "Hello, World! Goodbye.",
+                    "context": {},
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -4552,6 +4761,30 @@
                     "context": {
                         "start": "1",
                         "end": "foo"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "start and end are negative",
+                    "template": "{{ (start..end) | join: '#' }}",
+                    "want": "-5#-4#-3#-2",
+                    "context": {
+                        "start": -5,
+                        "end": -2
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "start is negative",
+                    "template": "{{ (start..end) | join: '#' }}",
+                    "want": "-5#-4#-3#-2#-1#0#1",
+                    "context": {
+                        "start": -5,
+                        "end": 1
                     },
                     "partials": {},
                     "error": false,
