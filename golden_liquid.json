@@ -1,5 +1,5 @@
 {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -2987,6 +2987,15 @@
                     "name": "literal nil is falsy",
                     "template": "{% if nil %}bar{% else %}foo{% endif %}",
                     "want": "foo",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "logical operators are right associative",
+                    "template": "{% if true and false and false or true %}hello{% endif %}",
+                    "want": "",
                     "context": {},
                     "partials": {},
                     "error": false,
