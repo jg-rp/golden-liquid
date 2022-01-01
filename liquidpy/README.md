@@ -13,7 +13,6 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.abs_filter > posi
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.abs_filter > positive string integer] - TypeError: bad operand type for abs(): 'str'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.abs_filter > string not a number] - TypeError: bad operand type for abs(): 'str'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.abs_filter > undefined left value] - TypeError: bad operand type for abs(): 'Undefined'
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.assign_tag > assign a range literal] - AssertionError: assert 'range(1, 4)' == '1..3'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.at_least_filter > argument string not a number] - TypeError: '>' not supported between instances of 'str' and 'int'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.at_least_filter > left value not a number] - TypeError: '>' not supported between instances of 'int' and 'str'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.at_least_filter > left value not a number negative argument] - TypeError: '>' not supported between instances of 'int' and 'str'
@@ -34,13 +33,13 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_encode_fil
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_encode_filter > not a string] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_encode'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_encode_filter > undefined left value] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_encode'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_decode_filter > from string] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_url_safe_decode'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_decode_filter > from string with URL unsafe] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_ur...
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_decode_filter > undefined left value] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_url_safe_...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_decode_filter > from string with URL unsafe] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_url_safe_decode'.
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_decode_filter > undefined left value] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_url_safe_decode'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_encode_filter > from string] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_url_safe_encode'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_encode_filter > from string with URL unsafe] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_ur...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_encode_filter > from string with URL unsafe] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_url_safe_encode'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_encode_filter > not a string] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_url_safe_encode'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_encode_filter > undefined left value] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_url_safe_...
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.capture_tag > capture into a variable with a hyphen] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement bloc...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.base64_url_safe_encode_filter > undefined left value] - jinja2.exceptions.TemplateAssertionError: No filter named 'base64_url_safe_encode'.
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.capture_tag > capture into a variable with a hyphen] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got '-'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.case_tag > comma separated when expression] - AssertionError: assert '' == 'bar'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.case_tag > evaluate multiple matching blocks] - AssertionError: assert 'foo' == 'foobarbar'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.case_tag > no whens] - jinja2.exceptions.TemplateSyntaxError: expected token 'when', got 'else'
@@ -53,7 +52,7 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.compact_filter > 
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.compact_filter > left value is not an array] - TypeError: 'int' object is not iterable
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.concat_filter > left value is not array-like] - TypeError: descriptor '__add__' requires a 'list' object but received a 'str'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.concat_filter > nested left value gets flattened] - assert "['a', 'x']#[..., ['z']]]#c#d" == 'a#x#b#y#z#c#d'
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.concat_filter > range literal concat filter left value] - TypeError: descriptor '__add__' requires a 'list' object but received a '...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.concat_filter > range literal concat filter left value] - TypeError: descriptor '__add__' requires a 'list' object but received a 'range'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.concat_filter > undefined left value] - TypeError: descriptor '__add__' requires a 'list' object but received a 'Undefined'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.cycle_tag > different items] - jinja2.exceptions.UndefinedError: 'loop' is undefined
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.cycle_tag > integers] - jinja2.exceptions.UndefinedError: 'loop' is undefined
@@ -78,8 +77,8 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.downcase_filter >
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > access an array item by index] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > access an array item by negative index] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > access an undefined variable by index] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > access array item by index stored in a local variable] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag ...
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > assign a variable the value of an existing variable] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'e...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > access array item by index stored in a local variable] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'.
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > assign a variable the value of an existing variable] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > dump an array from the global context] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > nothing to echo] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > render a float literal] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'.
@@ -109,51 +108,51 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > break] 
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > continue a loop] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > continue a loop over a changing array] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > continue a loop over an assigned range] - TypeError: slice indices must be integers or None or have an __index__ method
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > continue from a limit that is greater than length] - TypeError: slice indices must be integers or None or have an __index...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > continue from a limit that is greater than length] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > continue from a range expression] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > continue with changing loop var] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > forloop goes out of scope] - jinja2.exceptions.UndefinedError: 'loop' is undefined
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > forloop.first] - AssertionError: assert 'True False ' == 'true false '
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > forloop.last] - AssertionError: assert 'False True ' == 'false true '
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > loop over an existing range object] - AssertionError: assert 'range(1, 4)123123' == '1..3123123'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > loop over range with float start] - jinja2.exceptions.TemplateSyntaxError: expected name or number
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > nothing to continue from] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > offset continue forloop length] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > offset continue from a broken loop] - TypeError: slice indices must be integers or None or have an __index__ method
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > offset continue from a broken loop with preceding limit] - TypeError: slice indices must be integers or None or have an _...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > offset continue from a broken loop with preceding limit] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > offset continue twice with changing limit] - jinja2.exceptions.UndefinedError: 'continue' is undefined
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > offset continue twice with limit] - jinja2.exceptions.UndefinedError: 'continue' is undefined
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > offset continue twice with no second limit] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > offset continue without preceding loop] - TypeError: slice indices must be integers or None or have an __index__ method
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > parent's parentloop] - jinja2.exceptions.UndefinedError: 'jinja2.runtime.LoopContext object' has no attribute 'parentloop'
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > parentloop goes out of scope] - jinja2.exceptions.UndefinedError: 'jinja2.runtime.LoopContext object' has no attribute 'p...
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > parentloop is normally undefined] - jinja2.exceptions.UndefinedError: 'jinja2.runtime.LoopContext object' has no attribut...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > parentloop goes out of scope] - jinja2.exceptions.UndefinedError: 'jinja2.runtime.LoopContext object' has no attribute 'parentloop'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > parentloop is normally undefined] - jinja2.exceptions.UndefinedError: 'jinja2.runtime.LoopContext object' has no attribute 'parentloop'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > range loop using identifier] - jinja2.exceptions.TemplateSyntaxError: expected name or number
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > simple hash loop] - AssertionError: assert 't i d e ' == 'title foo description bar '
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > alternate not equal condition] - jinja2.exceptions.TemplateSyntaxError: unexpected '>'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > blocks that contain only whitespace and comments are not rendered] - AssertionError: assert '  ' == ''
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > blocks that contain only whitespace are not rendered] - AssertionError: assert '  ' == ''
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > logical operators are right associative] - AssertionError: assert 'hello' == ''
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > change from assign] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > changed from initial state] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > no change from assign] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > not changed from initial state] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > within for loop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'. Jinja was looking fo...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > within for loop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'. Jinja was looking for the following tags: 'endfor' or 'else'. ...
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.illegal > no addition operator] - Failed: DID NOT RAISE <class 'Exception'>
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.illegal > no multiplication operator] - Failed: DID NOT RAISE <class 'Exception'>
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.illegal > no subtraction operator] - Failed: DID NOT RAISE <class 'Exception'>
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > assign persists in outer scope] - AssertionError: assert 'Hello, Holly ' == 'Hello, Holly Smith'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > bound array variable] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got 'for'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > bound variable] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got 'with'
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > bound variable does not exist] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got ...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > bound variable does not exist] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got 'with'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > bound variable with alias] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got 'with'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > break from include] -   File "<template>", line 19
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > break from nested include] -   File "<template>", line 12
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > counter from outer scope] - AssertionError: assert '0 1 1' == '0 1 2'
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > keyword arguments go out of scope] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', ...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > keyword arguments go out of scope] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got ','
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > some keyword arguments] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got ','
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > some keyword arguments with float literals] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement...
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > some keyword arguments with range literal] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement ...
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > some keyword arguments without leading comma] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of stateme...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > some keyword arguments with float literals] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got 'foo'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > some keyword arguments with range literal] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got 'foo'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.include_tag > some keyword arguments without leading comma] - jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got 'foo'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.increment_tag > incrementing counter renders before incrementing] - AssertionError: assert '0 ' == '0 1'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.increment_tag > named counters are in scope for subsequent expressions] - jinja2.exceptions.UndefinedError: 'foo' is undefined
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.join_filter > joining a string is a noop] - AssertionError: assert 'a#,#b' == 'a,b'
@@ -166,7 +165,7 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.last_filter > lef
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > carriage return and newline terminated tags] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > empty liquid tag] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > multi-line comment tag] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > nested liquid] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'. Jinja was looking for the fo...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > nested liquid] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'. Jinja was looking for the following tags: 'elif' or 'elsif' or 'else' ...
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > newline terminated tags] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > only whitespace] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > reference test #2] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
@@ -199,15 +198,11 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.newline_to_br_fil
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.newline_to_br_filter > string with newlines] - AssertionError: assert '- apples<br ...oranges<br />' == '- apples<br ...anges<br />\n'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.newline_to_br_filter > undefined left value] - jinja2.exceptions.UndefinedError: 'nosuchthing' is undefined
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > access an undefined variable by index] - jinja2.exceptions.UndefinedError: 'nosuchthing' is undefined
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > dump an array from the global context] - assert "['sports', 'garden']" == 'sportsgarden'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a default given a literal false] - AssertionError: assert 'False' == 'bar'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a default given a literal false with 'allow false' equal to false] - AssertionError: assert 'False' == 'bar'
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a default given a literal false with 'allow false' equal to true] - AssertionError: assert 'False' == 'fa...
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a range object] - AssertionError: assert 'range(1, 6)' == '1..5'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a default given a literal false with 'allow false' equal to true] - AssertionError: assert 'False' == 'false'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a range object that uses a float] - jinja2.exceptions.TemplateSyntaxError: expected name or number
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a range object that uses an identifier] - AssertionError: assert 'range(2, 6)' == '2..5'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render nil] - AssertionError: assert 'None' == ''
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > reverse a range] - AssertionError: assert '<range_itera...7f562e8d0390>' == '5432'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > unexpected left value for the `join` filter passes through] - TypeError: 'int' object is not iterable
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.plus_filter > arg string not a number] - AssertionError: assert '10foo' == '10'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.plus_filter > not a string, int or float] - TypeError: unsupported operand type(s) for +: 'dict' and 'int'
@@ -225,20 +220,20 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.remove_first_filt
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.remove_first_filter > not a string] - AttributeError: 'int' object has no attribute 'replace'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.remove_first_filter > undefined argument] - TypeError: replace() argument 1 must be str, not Undefined
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.remove_first_filter > undefined left value] - jinja2.exceptions.UndefinedError: 'nosuchthing' is undefined
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > assigned variables do not leak into outer scope] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ren...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > assigned variables do not leak into outer scope] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > bound array variable] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > bound variable] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > bound variable does not exist] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > bound variable with alias] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > decrement is isolated between renders] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > for loop variables go out of scope] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'. Jinja w...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > for loop variables go out of scope] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'. Jinja was looking for the following tags: 'endfor...
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > forloop helper] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > increment is isolated between renders] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > parent variables go out of scope] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > render loops can't access parentloop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'. Jinja...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > render loops can't access parentloop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'. Jinja was looking for the following tags: 'endf...
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > render loops don't add parentloop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > some keyword arguments] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > some keyword arguments including a range literal] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 're...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > some keyword arguments including a range literal] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > some keyword arguments no leading coma] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > string literal name] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.replace_filter > argument not a string] - TypeError: replace() argument 1 must be str, not int
@@ -279,9 +274,9 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_filter > lef
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_filter > sort a string] - AssertionError: assert '4#A#B#a#z' == 'BzAa4'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_natural_filter > argument is undefined] - TypeError: sort_natural() takes 1 positional argument but 2 were given
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_natural_filter > array of objects with a key] - TypeError: sort_natural() takes 1 positional argument but 2 were given
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_natural_filter > array of objects with a key gets stringified] - TypeError: sort_natural() takes 1 positional argument but 2 w...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_natural_filter > array of objects with a key gets stringified] - TypeError: sort_natural() takes 1 positional argument but 2 were given
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_natural_filter > array of objects with a missing key] - TypeError: sort_natural() takes 1 positional argument but 2 were given
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_natural_filter > array of strings with a nul] - TypeError: descriptor 'casefold' for 'str' objects doesn't apply to a 'NoneTyp...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_natural_filter > array of strings with a nul] - TypeError: descriptor 'casefold' for 'str' objects doesn't apply to a 'NoneType' object
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_natural_filter > empty array] - TypeError: 'EmptyDrop' object is not iterable
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_natural_filter > left value is not an array] - TypeError: 'int' object is not iterable
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.split_filter > argument not a string] - TypeError: must be str or None, not int
@@ -323,7 +318,7 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.unless_tag > cond
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.upcase_filter > not a string] - TypeError: descriptor 'upper' for 'str' objects doesn't apply to a 'int' object
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.upcase_filter > undefined left value] - TypeError: descriptor 'upper' for 'str' objects doesn't apply to a 'Undefined' object
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.url_decode_filter > not a string] - TypeError: argument of type 'int' is not iterable
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.url_decode_filter > some special URL characters] - AssertionError: assert 'email+addres...@example.com!' == 'email addres...@exampl...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.url_decode_filter > some special URL characters] - AssertionError: assert 'email+addres...@example.com!' == 'email addres...@example.com!'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.url_decode_filter > undefined left value] - jinja2.exceptions.UndefinedError: 'nosuchthing' is undefined
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > array of hashes] - TypeError: where() missing 1 required positional argument: 'value'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > array of hashes with a missing key] - AssertionError: assert '(t,i)' == '(title,bar)'
@@ -331,7 +326,7 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > ar
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > both arguments are undefined] - TypeError: getattr(): attribute name must be string
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > first argument is undefined] - TypeError: where() missing 1 required positional argument: 'value'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > left value is undefined] - TypeError: where() missing 1 required positional argument: 'value'
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with  carriage return, newline and spaces] - AssertionError: assert '\nWelcome back,  Holl...
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with carriage return and spaces] - AssertionError: assert '\nWelcome back,  Holly!' == '\r...
-327 failed, 311 passed in 1.44s
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with  carriage return, newline and spaces] - AssertionError: assert '\nWelcome back,  Holly!' == '\r\nWelcome back,  Holly!'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with carriage return and spaces] - AssertionError: assert '\nWelcome back,  Holly!' == '\rWelcome back,  Holly!'
+322 failed, 317 passed in 1.18s
 ```

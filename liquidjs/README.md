@@ -33,13 +33,6 @@ npx jest --noStackTrace
 
   Received function did not throw
 
-● liquid.golden.assign_tag › assign a range literal
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1..3"
-  Received: "1,2,3"
-
 ● liquid.golden.at_least_filter › argument string not a number
 
   expect(received).toBe(expected) // Object.is equality
@@ -275,13 +268,6 @@ npx jest --noStackTrace
   expect(received).toThrow()
 
   Received function did not throw
-
-● liquid.golden.concat_filter › range literal concat filter left value
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "123567"
-  Received: "1,2,3,5,6,7"
 
 ● liquid.golden.concat_filter › undefined argument is an error
 
@@ -523,13 +509,6 @@ npx jest --noStackTrace
   Expected: "1 2 3 4 5 6 "
   Received: "1 2 3 1 2 3 4 5 6 "
 
-● liquid.golden.for_tag › loop over an existing range object
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1..3123123"
-  Received: "1,2,3123123"
-
 ● liquid.golden.for_tag › loop over range with float start
 
   expect(received).toBe(expected) // Object.is equality
@@ -670,13 +649,6 @@ npx jest --noStackTrace
 
   Expected: "car"
   Received: ""
-
-● liquid.golden.include_tag › some keyword arguments with range literal
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1..3 there"
-  Received: "1,2,3 there"
 
 ● liquid.golden.join_filter › joining a string is a noop
 
@@ -900,13 +872,6 @@ npx jest --noStackTrace
   Expected: "sports"
   Received: ""
 
-● liquid.golden.output_statement › dump an array from the global context
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "sportsgarden"
-  Received: "sports,garden"
-
 ● liquid.golden.output_statement › render a default given a literal false with 'allow false' equal to true
 
   expect(received).toBe(expected) // Object.is equality
@@ -914,33 +879,12 @@ npx jest --noStackTrace
   Expected: "false"
   Received: "bar"
 
-● liquid.golden.output_statement › render a range object
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1..5"
-  Received: "1,2,3,4,5"
-
 ● liquid.golden.output_statement › render a range object that uses a float
 
   expect(received).toBe(expected) // Object.is equality
 
-  Expected: "1..5"
-  Received: "1.4,2.4,3.4,4.4,5.4"
-
-● liquid.golden.output_statement › render a range object that uses an identifier
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "2..5"
-  Received: "2,3,4,5"
-
-● liquid.golden.output_statement › reverse a range
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "5432"
-  Received: "5,4,3,2"
+  Expected: "1#2#3#4#5"
+  Received: "1.4#2.4#3.4#4.4#5.4"
 
 ● liquid.golden.output_statement › unexpected left value for the `join` filter passes through
 
@@ -1054,13 +998,6 @@ npx jest --noStackTrace
 
   Expected: "bike-0 0 1 2 car-1 0 1 2 "
   Received: "-0 0 1 2 -1 0 1 2 "
-
-● liquid.golden.render_tag › some keyword arguments including a range literal
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1..3 there"
-  Received: "1,2,3 there"
 
 ● liquid.golden.replace_filter › missing argument
 
@@ -1604,9 +1541,8 @@ npx jest --noStackTrace
   Received function did not throw
 
 Test Suites: 1 failed, 1 total
-Tests:       238 failed, 400 passed, 638 total
+Tests:       229 failed, 410 passed, 639 total
 Snapshots:   0 total
-Time:        2.044 s
+Time:        1.709 s, estimated 2 s
 Ran all test suites.
-
 ```

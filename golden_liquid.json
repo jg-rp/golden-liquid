@@ -207,8 +207,8 @@
                 },
                 {
                     "name": "assign a range literal",
-                    "template": "{% assign foo = (1..3) %}{{ foo }}",
-                    "want": "1..3",
+                    "template": "{% assign foo = (1..3) %}{{ foo | join: '#' }}",
+                    "want": "1#2#3",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -1218,8 +1218,8 @@
                 },
                 {
                     "name": "range literal concat filter left value",
-                    "template": "{{ (1..3) | concat: foo }}",
-                    "want": "123567",
+                    "template": "{{ (1..3) | concat: foo | join: '#' }}",
+                    "want": "1#2#3#5#6#7",
                     "context": {
                         "foo": [
                             5,
@@ -2624,8 +2624,8 @@
                 },
                 {
                     "name": "loop over an existing range object",
-                    "template": "{% assign foo = (1..3) %}{{ foo }}{% for i in foo %}{{ i }}{% endfor %}{% for i in foo %}{{ i }}{% endfor %}",
-                    "want": "1..3123123",
+                    "template": "{% assign foo = (1..3) %}{{ foo | join: '#' }}{% for i in foo %}{{ i }}{% endfor %}{% for i in foo %}{{ i }}{% endfor %}",
+                    "want": "1#2#3123123",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -3365,10 +3365,10 @@
                 {
                     "name": "some keyword arguments with range literal",
                     "template": "{% include 'product-args' foo: (1..3), bar: 'there' %}",
-                    "want": "1..3 there",
+                    "want": "1#2#3 there",
                     "context": {},
                     "partials": {
-                        "product-args": "{{ foo }} {{ bar }}"
+                        "product-args": "{{ foo | join: '#' }} {{ bar }}"
                     },
                     "error": false,
                     "strict": false
@@ -4357,8 +4357,8 @@
                 },
                 {
                     "name": "dump an array from the global context",
-                    "template": "{{ product.tags }}",
-                    "want": "sportsgarden",
+                    "template": "{{ product.tags | join: '#' }}",
+                    "want": "sports#garden",
                     "context": {
                         "product": {
                             "tags": [
@@ -4431,8 +4431,8 @@
                 },
                 {
                     "name": "render a range object",
-                    "template": "{{ (1..5) }}",
-                    "want": "1..5",
+                    "template": "{{ (1..5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -4440,8 +4440,8 @@
                 },
                 {
                     "name": "render a range object that uses a float",
-                    "template": "{{ (1.4..5) }}",
-                    "want": "1..5",
+                    "template": "{{ (1.4..5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -4449,8 +4449,8 @@
                 },
                 {
                     "name": "render a range object that uses an identifier",
-                    "template": "{{ (foo..5) }}",
-                    "want": "2..5",
+                    "template": "{{ (foo..5) | join: '#' }}",
+                    "want": "2#3#4#5",
                     "context": {
                         "foo": 2
                     },
@@ -4540,8 +4540,8 @@
                 },
                 {
                     "name": "reverse a range",
-                    "template": "{{ (foo..5) | reverse }}",
-                    "want": "5432",
+                    "template": "{{ (foo..5) | reverse | join: '#' }}",
+                    "want": "5#4#3#2",
                     "context": {
                         "foo": 2
                     },
@@ -5218,10 +5218,10 @@
                 {
                     "name": "some keyword arguments including a range literal",
                     "template": "{% render 'product-args', foo: (1..3), bar: 'there' %}",
-                    "want": "1..3 there",
+                    "want": "1#2#3 there",
                     "context": {},
                     "partials": {
-                        "product-args": "{{ foo }} {{ bar }}"
+                        "product-args": "{{ foo | join: '#' }} {{ bar }}"
                     },
                     "error": false,
                     "strict": false
