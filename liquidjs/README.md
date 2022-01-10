@@ -1,4 +1,4 @@
-# LiquidJS Version 9.31.0
+# LiquidJS Version 9.32.0
 
 ```
 npm install
@@ -300,13 +300,6 @@ npx jest --noStackTrace
 
   Expected: "March 14, 2016"
   Received: "undefined"
-
-● liquid.golden.default_filter › allow false
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "false"
-  Received: "bar"
 
 ● liquid.golden.default_filter › empty object
 
@@ -871,13 +864,6 @@ npx jest --noStackTrace
 
   Expected: "sports"
   Received: ""
-
-● liquid.golden.output_statement › render a default given a literal false with 'allow false' equal to true
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "false"
-  Received: "bar"
 
 ● liquid.golden.output_statement › render a range object that uses a float
 
@@ -1540,9 +1526,93 @@ npx jest --noStackTrace
 
   Received function did not throw
 
+● liquid.golden.whitespace_control › suppress whitespace only case blocks
+
+  expect(received).toBe(expected) // Object.is equality
+
+  - Expected  - 1
+  + Received  + 5
+
+  - !!
+  + !
+  +
+  +
+  +
+  + !
+
+● liquid.golden.whitespace_control › suppress whitespace only if blocks
+
+  expect(received).toBe(expected) // Object.is equality
+
+  - Expected  -  1
+  + Received  + 12
+
+  - !!
+  + !
+  +
+  +
+  +
+  +
+  +
+  +
+  +
+  +
+  +
+  +
+  + !
+
+● liquid.golden.whitespace_control › suppress whitespace only unless blocks
+
+  expect(received).toBe(expected) // Object.is equality
+
+  - Expected  -  1
+  + Received  + 12
+
+  - !!
+  + !
+  +
+  +
+  +
+  +
+  +
+  +
+  +
+  +
+  +
+  +
+  + !
+
+● liquid.golden.whitespace_control › suppress whitespace surrounding a capture block
+
+  expect(received).toBe(expected) // Object.is equality
+
+  - Expected  - 1
+  + Received  + 5
+
+  - !!
+  + !
+  +
+  +
+  +
+  + !
+
+● liquid.golden.whitespace_control › suppress whitespace surrounding an empty capture block
+
+  expect(received).toBe(expected) // Object.is equality
+
+  - Expected  - 1
+  + Received  + 5
+
+  - !!
+  + !
+  +
+  +
+  +
+  + !
+
 Test Suites: 1 failed, 1 total
-Tests:       229 failed, 410 passed, 639 total
+Tests:       232 failed, 426 passed, 658 total
 Snapshots:   0 total
-Time:        1.709 s, estimated 2 s
+Time:        1.997 s
 Ran all test suites.
 ```

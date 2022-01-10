@@ -1,4 +1,4 @@
-# Python Liquid Version 1.1.0
+# Python Liquid Version 1.1.1
 
 ```
 pipenv install
@@ -6,5 +6,5 @@ pipenv run pytest -q
 ```
 
 ```
-639 passed in 0.68s
+658 passed in 0.78s
 ```
