@@ -1,5 +1,10 @@
 # Golden Liquid Change Log
 
+## Version 0.6.0
+
+- Clarify some for loop test cases involving `offset: continue`
+- Upgrade liquidjs to 9.33.1, which implements `offset: continue`
+
 ## Version 0.5.0
 
 - Test automatic whitespace suppression in blank blocks.

@@ -1,4 +1,4 @@
-# LiquidJS Version 9.32.0
+# LiquidJS Version 9.33.1
 
 ```
 npm install
@@ -467,96 +467,12 @@ npx jest --noStackTrace
   Expected: ""
   Received: "                      "
 
-● liquid.golden.for_tag › continue a loop
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 4 5 6 "
-  Received: "1 2 3 1 2 3 4 5 6 "
-
-● liquid.golden.for_tag › continue a loop over a changing array
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 x y z "
-  Received: "1 2 3 u v w x y z "
-
-● liquid.golden.for_tag › continue a loop over an assigned range
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 4 5 "
-  Received: "1 2 3 1 2 3 4 5 "
-
-● liquid.golden.for_tag › continue from a limit that is greater than length
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 4 5 6 "
-  Received: "1 2 3 4 5 6 1 2 3 4 5 6 "
-
-● liquid.golden.for_tag › continue from a range expression
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 4 5 6 "
-  Received: "1 2 3 1 2 3 4 5 6 "
-
 ● liquid.golden.for_tag › loop over range with float start
 
   expect(received).toBe(expected) // Object.is equality
 
   Expected: "2345"
   Received: "2.43.44.45.4"
-
-● liquid.golden.for_tag › nothing to continue from
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 4 5 6 "
-  Received: "1 2 3 4 5 6 1 2 3 4 5 6 "
-
-● liquid.golden.for_tag › offset continue forloop length
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 - 2, 2 - 2, 3 - 4, 4 - 4, 5 - 4, 6 - 4, "
-  Received: "1 - 2, 2 - 2, 1 - 6, 2 - 6, 3 - 6, 4 - 6, 5 - 6, 6 - 6, "
-
-● liquid.golden.for_tag › offset continue from a broken loop
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 "
-  Received: "1 2 1 2 3 4 5 6 "
-
-● liquid.golden.for_tag › offset continue from a broken loop with preceding limit
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 1 2 "
-  Received: "1 2 3 1 2 1 2 3 4 5 6 "
-
-● liquid.golden.for_tag › offset continue twice with changing limit
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 4 5 6 "
-  Received: "1 2 1 2 3 1 2 3 4 5 6 "
-
-● liquid.golden.for_tag › offset continue twice with limit
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 4 5 6 "
-  Received: "1 2 1 2 1 2 3 4 5 6 "
-
-● liquid.golden.for_tag › offset continue twice with no second limit
-
-  expect(received).toBe(expected) // Object.is equality
-
-  Expected: "1 2 3 4 5 6 "
-  Received: "1 2 1 2 3 4 5 6 1 2 3 4 5 6 "
 
 ● liquid.golden.for_tag › parent's parentloop
 
@@ -864,6 +780,18 @@ npx jest --noStackTrace
 
   Expected: "sports"
   Received: ""
+
+● liquid.golden.output_statement › chained bracketed identifier index no dot
+
+  unexpected token at "title", line:1, col:1
+  >> 1| {{ products[0]title }}
+  ParseError: unexpected token at "title", line:1, col:1
+
+● liquid.golden.output_statement › chained identifier dot separated index
+
+  expect(received).toThrow()
+
+  Received function did not throw
 
 ● liquid.golden.output_statement › render a range object that uses a float
 
@@ -1611,8 +1539,8 @@ npx jest --noStackTrace
   + !
 
 Test Suites: 1 failed, 1 total
-Tests:       232 failed, 426 passed, 658 total
+Tests:       222 failed, 442 passed, 664 total
 Snapshots:   0 total
-Time:        1.997 s
+Time:        1.94 s
 Ran all test suites.
 ```

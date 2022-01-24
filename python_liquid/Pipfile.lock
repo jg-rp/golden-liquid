@@ -57,11 +57,11 @@
         },
         "pyparsing": {
             "hashes": [
-                "sha256:04ff808a5b90911829c55c4e26f75fa5ca8a2f5f36aa3a51f68e27033341d3e4",
-                "sha256:d9bdec0013ef1eb5a84ab39a3b3868911598afa494f5faa038647101504e2b81"
+                "sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea",
+                "sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==3.0.6"
+            "version": "==3.0.7"
         },
         "pytest": {
             "hashes": [
@@ -81,11 +81,11 @@
         },
         "python-liquid": {
             "hashes": [
-                "sha256:97d1b4a437f00011634a503e075896562ba76a270632adfea8f9e74a2ac1f323",
-                "sha256:f758f2b1d63876d0bbfe15a83de8f40ee520a6941f3137c4941310a171ae6bfc"
+                "sha256:0a63ba0fb314d73dae03b65e0e6238b0c01c10b7e13981803fa5d12f61feb362",
+                "sha256:1db25d7bafa24c4542c7462b6517918dc40f0b13e4b3d3685e3e27cb74d6f9ae"
             ],
             "index": "pypi",
-            "version": "==1.1.1"
+            "version": "==1.1.2"
         },
         "six": {
             "hashes": [
