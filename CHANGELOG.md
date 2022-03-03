@@ -1,5 +1,21 @@
 # Golden Liquid Change Log
 
+## Version 0.7.0
+
+- Test `cycle` tag groups with variable names.
+- Clarify `divided_by` filter with float value and integer argument.
+- Test `forloop.name`.
+- Test `remove_last` filter.
+- Test `replace_last` filter.
+- Test sort an array of incompatible types using the `sort` filter.
+- Test special built-in `first`, `last` and `size` properties of an object that already has those properties/keys.
+- Test striping of `script` and `style` HTML tags with the `strip_html` filter.
+- Test the `uniq` filter with a key argument and an array of objects with missing key properties.
+
+- Update Shopify/liquid to 5.3.0.alpha.
+- Update Python Liquid to 1.1.5.
+- Update LiquidJS to 9.35.2.
+
 ## Version 0.6.0
 
 - Clarify some for loop test cases involving `offset: continue`

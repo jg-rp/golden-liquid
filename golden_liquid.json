@@ -1,5 +1,5 @@
 {
-    "version": "0.6.0",
+    "version": "0.7.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -1283,6 +1283,17 @@
             "name": "liquid.golden.cycle_tag",
             "tests": [
                 {
+                    "name": "changing variable name",
+                    "template": "{% cycle a: 1, 2, 3 %}{% assign a = 'bar' %}{% cycle a: 1, 2, 3 %}{% cycle a: 1, 2, 3 %}",
+                    "want": "112",
+                    "context": {
+                        "a": "foo"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "different items",
                     "template": "{% cycle '1', '2', '3' %}{% cycle '1', '2' %}{% cycle '1', '2', '3' %}",
                     "want": "112",
@@ -1310,6 +1321,17 @@
                     "strict": false
                 },
                 {
+                    "name": "variable name",
+                    "template": "{% cycle a: 1, 2, 3 %}{% cycle a: 1, 2, 3 %}{% cycle a: 1, 2, 3 %}",
+                    "want": "123",
+                    "context": {
+                        "a": "foo"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "with identifier",
                     "template": "{% cycle 'foo': 'some', 'other' %}{% cycle 'some', 'other' %}{% cycle 'foo': 'some', 'other' %}",
                     "want": "somesomeother",
@@ -1323,6 +1345,15 @@
         {
             "name": "liquid.golden.date_filter",
             "tests": [
+                {
+                    "name": "literal percent",
+                    "template": "{{ 'March 14, 2016' | date: '%%%b %d, %y' }}",
+                    "want": "%Mar 14, 16",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
                 {
                     "name": "missing argument",
                     "template": "{{ 'March 14, 2016' | date }}",
@@ -1573,6 +1604,15 @@
                     "strict": false
                 },
                 {
+                    "name": "float value and integer arg",
+                    "template": "{{ 9.0 | divided_by: 2 }}",
+                    "want": "4.5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "integer division",
                     "template": "{{ 9 | divided_by: 2 }}",
                     "want": "4",
@@ -1600,6 +1640,24 @@
                     "strict": false
                 },
                 {
+                    "name": "issue",
+                    "template": "{{ 5 | divided_by: 3 }}",
+                    "want": "1",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "left value is an empty string",
+                    "template": "{{ '' | divided_by: 2 }}",
+                    "want": "0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "not a string, int or float",
                     "template": "{{ a | divided_by: 1 }}",
                     "want": "0",
@@ -1611,9 +1669,18 @@
                     "strict": false
                 },
                 {
+                    "name": "render",
+                    "template": "{{ 5.0 }} {{ 5 }}",
+                    "want": "5.0 5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "string not a number",
-                    "template": "{{ \"foo\" | divided_by: \"2.0\" }}",
-                    "want": "0.0",
+                    "template": "{{ \"foo\" | divided_by: \"2\" }}",
+                    "want": "0",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -1621,8 +1688,8 @@
                 },
                 {
                     "name": "string value and argument",
-                    "template": "{{ \"10\" | divided_by: \"2.0\" }}",
-                    "want": "5.0",
+                    "template": "{{ \"10\" | divided_by: \"2\" }}",
+                    "want": "5",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -1649,6 +1716,24 @@
                 {
                     "name": "undefined left value",
                     "template": "{{ nosuchthing | divided_by: 2 }}",
+                    "want": "0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "zero divided by float",
+                    "template": "{{ 0 | divided_by: 1.1 }}",
+                    "want": "0.0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "zero divided by integer",
+                    "template": "{{ 0 | divided_by: 1 }}",
                     "want": "0",
                     "context": {},
                     "partials": {},
@@ -2473,6 +2558,31 @@
                             "fashion"
                         ]
                     },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "forloop name",
+                    "template": "{% for tag in product.tags limit:1 %}{{ forloop.name }}{% endfor %}",
+                    "want": "tag-product.tags",
+                    "context": {
+                        "product": {
+                            "tags": [
+                                "sports",
+                                "garden"
+                            ]
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "forloop name of a range",
+                    "template": "{% for i in (1..3) limit:1 %}{{ forloop.name }}{% endfor %}",
+                    "want": "i-(1..3)",
+                    "context": {},
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -5126,6 +5236,74 @@
             ]
         },
         {
+            "name": "liquid.golden.remove_last_filter",
+            "tests": [
+                {
+                    "name": "argument not a string",
+                    "template": "{{ \"hello\" | remove_last: 5 }}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "missing argument",
+                    "template": "{{ \"hello\" | remove_last }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "not a string",
+                    "template": "{{ 5 | remove_last: 'rain' }}",
+                    "want": "5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "remove substrings",
+                    "template": "{{ \"I strained to see the train through the rain\" | remove_last: \"rain\" }}",
+                    "want": "I strained to see the train through the ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "too many arguments",
+                    "template": "{{ \"hello\" | remove_last: \"how\", \"are\", \"you\" }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "undefined argument",
+                    "template": "{{ \"hello\" | remove_last: nosuchthing }}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined left value",
+                    "template": "{{ nosuchthing | remove_last: \"rain\" }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                }
+            ]
+        },
+        {
             "name": "liquid.golden.render_tag",
             "tests": [
                 {
@@ -5397,6 +5575,17 @@
                     "strict": false
                 },
                 {
+                    "name": "left value is an object",
+                    "template": "{{ a | replace: '{', '!' }}",
+                    "want": "!}",
+                    "context": {
+                        "a": {}
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "missing argument",
                     "template": "{{ \"hello\" | replace: \"ll\" }}",
                     "want": "heo",
@@ -5549,6 +5738,92 @@
                     "name": "undefined second argument",
                     "template": "{{ \"Take my protein pills and put my helmet on\" | replace_first: \"my\", nosuchthing }}",
                     "want": "Take  protein pills and put my helmet on",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.replace_last_filter",
+            "tests": [
+                {
+                    "name": "argument not a string",
+                    "template": "{{ \"hello5\" | replace_last: 5, \"your\" }}",
+                    "want": "helloyour",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "missing argument",
+                    "template": "{{ \"hello\" | replace_last: \"ll\" }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "missing arguments",
+                    "template": "{{ \"hello\" | replace_last }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "not a string",
+                    "template": "{{ 5 | replace_last: 'rain', 'foo' }}",
+                    "want": "5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "replace substrings",
+                    "template": "{{ \"Take my protein pills and put my helmet on\" | replace_last: \"my\", \"your\" }}",
+                    "want": "Take my protein pills and put your helmet on",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "too many arguments",
+                    "template": "{{ \"hello\" | replace_last: \"how\", \"are\", \"you\" }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "undefined first argument",
+                    "template": "{{ \"Take my protein\" | replace_last: nosuchthing, \"#\" }}",
+                    "want": "Take my protein#",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined left value",
+                    "template": "{{ nosuchthing | replace_last: \"my\", \"your\" }}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined second argument",
+                    "template": "{{ \"Take my protein pills and put my helmet on\" | replace_last: \"my\", nosuchthing }}",
+                    "want": "Take my protein pills and put  helmet on",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -5874,7 +6149,7 @@
                     "strict": false
                 },
                 {
-                    "name": "first argument is a sstring",
+                    "name": "first argument is a string",
                     "template": "{{ \"hello\" | slice: \"2\" }}",
                     "want": "l",
                     "context": {},
@@ -6081,6 +6356,22 @@
                     "strict": false
                 },
                 {
+                    "name": "array of integers",
+                    "template": "{{ a | sort | join: '#' }}",
+                    "want": "1#3#30#1000",
+                    "context": {
+                        "a": [
+                            1,
+                            1000,
+                            3,
+                            30
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "array of objects",
                     "template": "{% assign x = a | sort: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
                     "want": "(title,Baz)(title,bar)(title,foo)",
@@ -6148,6 +6439,22 @@
                     },
                     "partials": {},
                     "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "incompatible types",
+                    "template": "{{ a | sort }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            [],
+                            {},
+                            1,
+                            "4"
+                        ]
+                    },
+                    "partials": {},
+                    "error": true,
                     "strict": false
                 },
                 {
@@ -6329,6 +6636,21 @@
                     "strict": false
                 },
                 {
+                    "name": "incompatible types",
+                    "template": "{{ a | sort_natural }}",
+                    "want": "14{}",
+                    "context": {
+                        "a": [
+                            {},
+                            1,
+                            "4"
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "left value is not an array",
                     "template": "{{ a | sort_natural }}",
                     "want": "123",
@@ -6380,6 +6702,59 @@
                     "strict": false
                 },
                 {
+                    "name": "first of an empty object",
+                    "template": "{{ obj.first | join: '#' }}",
+                    "want": "",
+                    "context": {
+                        "obj": {}
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "first of an object",
+                    "template": "{{ obj.first | join: '#' }}",
+                    "want": "a#1",
+                    "context": {
+                        "obj": {
+                            "a": 1,
+                            "b": 2
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "first of an object with a first property",
+                    "template": "{{ obj.first }}",
+                    "want": "99",
+                    "context": {
+                        "obj": {
+                            "a": 1,
+                            "first": 99
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "last of a object",
+                    "template": "{{ obj.last }}",
+                    "want": "",
+                    "context": {
+                        "obj": {
+                            "a": 1,
+                            "b": 2
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "last of a string",
                     "template": "{{ s.last }}",
                     "want": "",
@@ -6400,6 +6775,21 @@
                             2,
                             1
                         ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "last of an object with a last property",
+                    "template": "{{ obj.last }}",
+                    "want": "99",
+                    "context": {
+                        "obj": {
+                            "a": 1,
+                            "last": 99,
+                            "b": 42
+                        }
                     },
                     "partials": {},
                     "error": false,
@@ -6427,6 +6817,28 @@
                             1
                         ]
                     },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "size of an object with a size property",
+                    "template": "{{ obj.size }}",
+                    "want": "99",
+                    "context": {
+                        "obj": {
+                            "size": 99
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "size of undefined",
+                    "template": "{{ nosuchthing.last }}",
+                    "want": "",
+                    "context": {},
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -6564,10 +6976,65 @@
             "name": "liquid.golden.strip_html_filter",
             "tests": [
                 {
+                    "name": "html block",
+                    "template": "{{ s | strip_html }}",
+                    "want": "test",
+                    "context": {
+                        "s": "<div>test</div>"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "html block with id",
+                    "template": "{{ s | strip_html }}",
+                    "want": "test",
+                    "context": {
+                        "s": "<div id='test'>test</div>"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "html block with newline",
+                    "template": "{{ s | strip_html }}",
+                    "want": "test",
+                    "context": {
+                        "s": "<div\nclass='multiline'>test</div>"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "html comment with newline",
+                    "template": "{{ s | strip_html }}",
+                    "want": "test",
+                    "context": {
+                        "s": "<!-- foo bar \n test -->test"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "not a string",
                     "template": "{{ 5 | strip_html }}",
                     "want": "5",
                     "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "script block",
+                    "template": "{{ s | strip_html }}",
+                    "want": "",
+                    "context": {
+                        "s": "<script type='text/javascript'>document.write('some stuff');</script>"
+                    },
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -6589,6 +7056,17 @@
                     "want": "you read Ulysses &amp; &#20;?",
                     "context": {
                         "s": "<!-- Have --><em>you</em> read <strong>Ulysses</strong> &amp; &#20;?"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "style block",
+                    "template": "{{ s | strip_html }}",
+                    "want": "",
+                    "context": {
+                        "s": "<style type='text/css'>foo bar</style>"
                     },
                     "partials": {},
                     "error": false,
@@ -7118,6 +7596,38 @@
                             {
                                 "title": "bar",
                                 "name": "c"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of objects with missing key property",
+                    "template": "{% assign x = a | uniq: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(title,foo)(name,a)(title,bar)(name,c)(heading,bar)(name,c)",
+                    "context": {
+                        "a": [
+                            {
+                                "title": "foo",
+                                "name": "a"
+                            },
+                            {
+                                "title": "foo",
+                                "name": "b"
+                            },
+                            {
+                                "title": "bar",
+                                "name": "c"
+                            },
+                            {
+                                "heading": "bar",
+                                "name": "c"
+                            },
+                            {
+                                "heading": "baz",
+                                "name": "d"
                             }
                         ]
                     },
