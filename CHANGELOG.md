@@ -1,5 +1,15 @@
 # Golden Liquid Change Log
 
+## Version 0.8.0
+
+- Test keyword filter arguments before positional filter arguments.
+- Test explicit falsy values passed to the `where` filter.
+
+- Add LiquidScript test runner.
+- Update Ruby Liquid and dependencies.
+- Update Python Liquid and dependencies.
+- Update LiquidJS.
+
 ## Version 0.7.0
 
 - Test `cycle` tag groups with variable names.

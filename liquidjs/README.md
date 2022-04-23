@@ -1,4 +1,4 @@
-# LiquidJS Version 9.35.2
+# LiquidJS Version 9.37.0
 
 ```
 npm install
@@ -301,11 +301,23 @@ npx jest --noStackTrace
     Expected: "foo"
     Received: "[object Object]"
 
+  ● liquid.golden.default_filter › false keyword argument before positional
+
+    Iterator value bar is not an entry object, line:1, col:1
+    >> 1| {{ false | default: allow_false: false, "bar" }}
+    RenderError: Iterator value bar is not an entry object, line:1, col:1
+
   ● liquid.golden.default_filter › too many arguments
 
     expect(received).toThrow()
 
     Received function did not throw
+
+  ● liquid.golden.default_filter › true keyword argument before positional
+
+    Iterator value bar is not an entry object, line:1, col:1
+    >> 1| {{ false | default: allow_false: true, "bar" }}
+    RenderError: Iterator value bar is not an entry object, line:1, col:1
 
   ● liquid.golden.divided_by_filter › arg string not a number
 
@@ -392,13 +404,6 @@ npx jest --noStackTrace
     expect(received).toThrow()
 
     Received function did not throw
-
-  ● liquid.golden.echo_tag › access an array item by negative index
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "sports"
-    Received: ""
 
   ● liquid.golden.escape_filter › unexpected argument
 
@@ -730,13 +735,6 @@ npx jest --noStackTrace
     expect(received).toThrow()
 
     Received function did not throw
-
-  ● liquid.golden.output_statement › access an array item by negative index
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "sports"
-    Received: ""
 
   ● liquid.golden.output_statement › chained bracketed identifier index no dot
 
@@ -1447,6 +1445,13 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.where_filter › value is explicit nil
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "(b,bar)"
+    Received: "(b,)"
+
   ● liquid.golden.whitespace_control › suppress whitespace only case blocks
 
     expect(received).toBe(expected) // Object.is equality
@@ -1532,8 +1537,8 @@ npx jest --noStackTrace
     + !
 
 Test Suites: 1 failed, 1 total
-Tests:       219 failed, 490 passed, 709 total
+Tests:       220 failed, 494 passed, 714 total
 Snapshots:   0 total
-Time:        1.922 s
+Time:        1.802 s, estimated 3 s
 Ran all test suites.
 ```
