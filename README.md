@@ -1,26 +1,16 @@
 # Golden Liquid
 
-A test suite for [Liquid](https://shopify.github.io/liquid/), the safe, customer-facing
-template language for flexible web apps.
+A test suite for [Liquid](https://shopify.github.io/liquid/), the safe, customer-facing template language for flexible web apps.
 
-Intended for situations where template authors are untrusted and, perhaps, not software
-developers, Liquid is both restrictive and forgiving. It is restrictive in that Liquid
-expressions are somewhat limited compared to those found in other template languages,
-and forgiving in the way it automatically coerces data types and handles undefined
-variables.
+Intended for situations where template authors are untrusted and, perhaps, not software developers, Liquid is deliberately both restrictive and forgiving. It is restrictive in that Liquid expressions are somewhat limited compared to those found in other template languages, and forgiving in the way it automatically coerces data types and handles undefined variables.
 
-The tests defined in `golden_liquid.json` attempt to cover many of Liquid's limitations,
-as well as the behavior of all standard tags and filters.
+The tests defined in `golden_liquid.json` attempt to cover many of Liquid's limitations, as well as the behavior of all standard tags and filters.
 
 ## Standard Liquid
 
-For our purposes, "standard" Liquid is the one described [here](https://shopify.github.io/liquid/),
-with [Ruby Liquid](https://github.com/Shopify/liquid) being the reference implementation.
-Not to be confused with the extended variation of Liquid that is used for Shopify stores.
+For our purposes, "standard" Liquid is the one described [here](https://shopify.github.io/liquid/), with [Ruby Liquid](https://github.com/Shopify/liquid) being the reference implementation. Not to be confused with the extended variation of Liquid that is used for Shopify stores.
 
-All tests pass with Liquid version 5.1.0. If you have Ruby installed, you can run the
-test suite against the reference implementation by cloning this repository and running
-the following commands.
+All tests pass with Liquid version 5.3.0. If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
 
 ```
 cd liquid
@@ -30,12 +20,11 @@ ruby -Ilib:test golden_liquid.rb
 
 ## Test File Schema
 
-In `golden_liquid.json`, tests are grouped. Each group has a name and an array of test
-cases. Including a version number, `golden_liquid.json` looks like this.
+In `golden_liquid.json`, tests are grouped. Each group has a name and an array of test cases. Including a version number, `golden_liquid.json` looks like this.
 
 ```json
 {
-    "version": "0.1.0",
+    "version": "0.8.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -76,8 +65,22 @@ template should be rendered with.
 **`partials`** is a JSON object mapping strings to strings. You can think of it as a
 mock file system for testing `{% include %}` and `{% render %}`.
 
-**`error`** is a boolean indicating if the test case should raise/trow and
+**`error`** is a boolean indicating if the test case should raise/throw and
 exception/error.
 
 **`strict`** is a boolean indicating if the test should be rendered in "strict mode",
 if the target environment has a strict mode.
+
+## Results Summary
+
+This table summarizes the results of running version 0.8.0 of this test suit against the five Liquid engines with runners included in this repository.
+
+| Engine                                                | Version      | Passed | Failed |
+| ----------------------------------------------------- | ------------ | ------ | ------ |
+| [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.3.0        | 714    | 0      |
+| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 9.37.0       | 494    | 220    |
+| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.7.3        | 348    | 366    |
+| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.1.0-beta.1 | 708    | 6      |
+| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.1.7        | 714    | 0      |
+
+\*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments.
