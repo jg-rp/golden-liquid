@@ -1,5 +1,10 @@
 # Golden Liquid Change Log
 
+## Version 0.8.1
+
+- Update LiquidScript to 1.2.0-beta.1
+- Update Python Liquid to 1.2.1.
+
 ## Version 0.8.0
 
 - Test keyword filter arguments before positional filter arguments.

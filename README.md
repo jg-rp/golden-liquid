@@ -80,7 +80,7 @@ This table summarizes the results of running version 0.8.0 of this test suit aga
 | [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.3.0        | 714    | 0      |
 | [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 9.37.0       | 494    | 220    |
 | [liquidpy](https://github.com/pwwang/liquidpy)        | 0.7.3        | 348    | 366    |
-| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.1.0-beta.1 | 708    | 6      |
-| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.1.7        | 714    | 0      |
+| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.2.0-beta.1 | 711    | 3      |
+| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.2.1        | 714    | 0      |
 
 \*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments.
