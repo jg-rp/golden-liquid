@@ -20,6 +20,10 @@ npx jest --noStackTrace
     Expected: "Mar 14, 16"
     Received: "Invalid DateTime"
 
+  ● liquid.golden.identifiers › only digits
+
+    LiquidSyntaxError: invalid assignment expression '123 = 'hello'' (<string>:1)
+
   ● liquid.golden.sort_natural_filter › incompatible types
 
     expect(received).toBe(expected) // Object.is equality
@@ -28,8 +32,8 @@ npx jest --noStackTrace
     Received: "41[object Object]"
 
 Test Suites: 1 failed, 1 total
-Tests:       3 failed, 711 passed, 714 total
+Tests:       4 failed, 748 passed, 752 total
 Snapshots:   0 total
-Time:        1.999 s, estimated 3 s
+Time:        2.014 s
 Ran all test suites.
 ```

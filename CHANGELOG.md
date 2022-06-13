@@ -1,5 +1,13 @@
 # Golden Liquid Change Log
 
+## Version 0.9.0
+
+- Test allowed identifier characters.
+- Test new inline comment tag.
+
+- Update Shopify/liquid to 5.4.0.alpha
+- Update Liquidpy to 0.7.5
+
 ## Version 0.8.1
 
 - Update LiquidScript to 1.2.0-beta.1

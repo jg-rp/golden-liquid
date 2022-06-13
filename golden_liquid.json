@@ -1,5 +1,5 @@
 {
-    "version": "0.8.0",
+    "version": "0.9.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -3064,6 +3064,314 @@
             ]
         },
         {
+            "name": "liquid.golden.identifiers",
+            "tests": [
+                {
+                    "name": "ascii lowercase",
+                    "template": "{% assign foo = 'hello' %}{{ foo }} {{ bar }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "bar": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "ascii uppercase",
+                    "template": "{% assign FOO = 'hello' %}{{ FOO }} {{ BAR }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "BAR": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "capture ascii lowercase",
+                    "template": "{% capture foo %}hello{% endcapture %}{{ foo }}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "capture ascii uppercase",
+                    "template": "{% capture FOO %}hello{% endcapture %}{{ FOO }}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "capture digits",
+                    "template": "{% capture foo1 %}hello{% endcapture %}{{ foo1 }}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "capture hyphens",
+                    "template": "{% capture foo-a %}hello {{ bar-b }}{% endcapture %}{{ foo-a }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "bar-b": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "capture leading hyphen",
+                    "template": "{% capture -foo %}hello {{ -bar }}{% endcapture %}{{ -foo }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "-bar": "goodbye"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": true
+                },
+                {
+                    "name": "capture leading underscore",
+                    "template": "{% capture _foo %}hello {{ _bar }}{% endcapture %}{{ _foo }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "_bar": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "capture only digits",
+                    "template": "{% capture 123 %}hello{% endcapture %}{{ 123 }}",
+                    "want": "123",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "capture only underscore",
+                    "template": "{% capture _ %}hello {{ __ }}{% endcapture %}{{ _ }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "__": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "capture underscore",
+                    "template": "{% capture foo_a %}hello {{ bar_b }}{% endcapture %}{{ foo_a }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "bar_b": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "decrement with a hyphen",
+                    "template": "{% decrement f-oo %}{% decrement f-oo %}",
+                    "want": "-1-2",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "digits",
+                    "template": "{% assign foo1 = 'hello' %}{{ foo1 }} {{ bar2 }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "bar2": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "hyphen in for loop target",
+                    "template": "{% for x in f-oo %}{{ x }}{% endfor %}",
+                    "want": "123",
+                    "context": {
+                        "f-oo": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "hyphen in for loop variable",
+                    "template": "{% for x-y in foo %}{{ x-y }}{% endfor %}",
+                    "want": "123",
+                    "context": {
+                        "foo": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "hyphens",
+                    "template": "{% assign foo-a = 'hello' %}{{ foo-a }} {{ bar-b }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "bar-b": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "increment with a hyphen",
+                    "template": "{% increment f-oo %}{% increment f-oo %}",
+                    "want": "01",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "leading hyphen",
+                    "template": "{% assign -foo = 'hello' %}{{ -foo }} {{ -bar }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "-bar": "goodbye"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": true
+                },
+                {
+                    "name": "leading hyphen in for loop target",
+                    "template": "{% for x in -foo %}{{ x }}{% endfor %}",
+                    "want": "123",
+                    "context": {
+                        "-foo": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": true
+                },
+                {
+                    "name": "leading underscore",
+                    "template": "{% assign _foo = 'hello' %}{{ _foo }} {{ _bar }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "_bar": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "only digits",
+                    "template": "{% assign 123 = 'hello' %}{{ 123 }} {{ 456 }}",
+                    "want": "123 456",
+                    "context": {
+                        "456": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "only underscore",
+                    "template": "{% assign _ = 'hello' %}{{ _ }} {{ __ }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "__": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "trailing question mark assign",
+                    "template": "{% assign foo? = 'hello' %}{{ foo? }}",
+                    "want": "hello",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": true
+                },
+                {
+                    "name": "trailing question mark in for loop target",
+                    "template": "{% for x in foo? %}{{ x }}{% endfor %}",
+                    "want": "123",
+                    "context": {
+                        "foo?": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "trailing question mark in for loop variable",
+                    "template": "{% for x? in foo %}{{ x? }}{% endfor %}",
+                    "want": "123",
+                    "context": {
+                        "foo": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "trailing question mark output",
+                    "template": "{{ bar? }}",
+                    "want": "goodbye",
+                    "context": {
+                        "bar?": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "underscore",
+                    "template": "{% assign foo_a = 'hello' %}{{ foo_a }} {{ bar_b }}",
+                    "want": "hello goodbye",
+                    "context": {
+                        "bar_b": "goodbye"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                }
+            ]
+        },
+        {
             "name": "liquid.golden.if_tag",
             "tests": [
                 {
@@ -3663,6 +3971,110 @@
                     "name": "named counters are in scope for subsequent expressions",
                     "template": "{% increment foo %} {% increment foo %} {% if foo > 0 %}{{ foo }}{% endif %}",
                     "want": "0 1 2",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.inline_comment_tag",
+            "tests": [
+                {
+                    "name": "can't comment tags",
+                    "template": "{%- # {% echo 'hello world' %} -%}",
+                    "want": " -%}",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "empty",
+                    "template": "{%#%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "enforce leading hash",
+                    "template": "{%-\n  # spread inline comments\n  over multiple lines\n-%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "liquid tag",
+                    "template": "{% liquid \n  # first comment line\n  # second comment line\n\n  # another comment line\n  echo 'Hello '\n\n  # more comments\n  echo 'goodbye'\n-%}",
+                    "want": "Hello goodbye",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "lots of hashes in a liquid tag",
+                    "template": "{% liquid\n  ##########################\n  # spread inline comments #\n  ##########################\n-%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "multiple lines",
+                    "template": "{%-\n  # spread inline comments\n  # over multiple lines\n-%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "no padding after the hash",
+                    "template": "{%#some comment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "no whitespace control no padding",
+                    "template": "{%# some comment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "no whitespace control with padding",
+                    "template": "{% # some comment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "with whitespace control and padding",
+                    "template": "{%- # some comment -%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "with whitespace control no padding",
+                    "template": "{%-# some comment -%}",
+                    "want": "",
                     "context": {},
                     "partials": {},
                     "error": false,

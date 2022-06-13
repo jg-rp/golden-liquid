@@ -10,12 +10,12 @@ The tests defined in `golden_liquid.json` attempt to cover many of Liquid's limi
 
 For our purposes, "standard" Liquid is the one described [here](https://shopify.github.io/liquid/), with [Ruby Liquid](https://github.com/Shopify/liquid) being the reference implementation. Not to be confused with the extended variation of Liquid that is used for Shopify stores.
 
-All tests pass with Liquid version 5.3.0. If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
+All tests pass with Liquid version 5.4.0.alpha. If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
 
 ```
 cd liquid
 bundle install
-ruby -Ilib:test golden_liquid.rb
+bundle exec ruby golden_liquid.rb
 ```
 
 ## Test File Schema
@@ -24,7 +24,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 
 ```json
 {
-    "version": "0.8.0",
+    "version": "0.9.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -77,10 +77,10 @@ This table summarizes the results of running version 0.8.0 of this test suit aga
 
 | Engine                                                | Version      | Passed | Failed |
 | ----------------------------------------------------- | ------------ | ------ | ------ |
-| [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.3.0        | 714    | 0      |
-| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 9.37.0       | 494    | 220    |
-| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.7.3        | 348    | 366    |
-| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.2.0-beta.1 | 711    | 3      |
-| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.2.1        | 714    | 0      |
+| [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.4.0.alpha  | 752    | 0      |
+| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 9.37.0       | 518    | 234    |
+| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.7.5        | 365    | 387    |
+| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.2.0-beta.1 | 748    | 4      |
+| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.2.1        | 752    | 0      |
 
 \*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments.
