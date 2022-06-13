@@ -1,4 +1,4 @@
-# LiquidScript Version 1.2.0-beta.1
+# LiquidScript Version 1.3.0
 
 ```
 npm install

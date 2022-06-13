@@ -7,6 +7,7 @@
 
 - Update Shopify/liquid to 5.4.0.alpha
 - Update Liquidpy to 0.7.5
+- Update LiquidScript to 1.3.0
 
 ## Version 0.8.1
 
