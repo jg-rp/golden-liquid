@@ -78,7 +78,7 @@ This table summarizes the results of running version 0.9.0 of this test suit aga
 | Engine                                                | Version     | Passed | Failed |
 | ----------------------------------------------------- | ----------- | ------ | ------ |
 | [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.4.0.alpha | 752    | 0      |
-| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 9.37.0      | 518    | 234    |
+| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 9.39.1      | 528    | 224    |
 | [liquidpy](https://github.com/pwwang/liquidpy)        | 0.7.5       | 365    | 387    |
 | [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.3.0       | 748    | 4      |
 | [Python Liquid](https://github.com/jg-rp/liquid)      | 1.2.1       | 752    | 0      |

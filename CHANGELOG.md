@@ -1,5 +1,9 @@
 # Golden Liquid Change Log
 
+## Version 0.9.1
+
+- Update LiquidJS to 9.39.1
+
 ## Version 0.9.0
 
 - Test allowed identifier characters.

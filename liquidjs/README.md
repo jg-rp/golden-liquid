@@ -1,4 +1,4 @@
-# LiquidJS Version 9.37.0
+# LiquidJS Version 9.39.1
 
 ```
 npm install
@@ -580,75 +580,6 @@ npx jest --noStackTrace
 
     Expected: "car"
     Received: ""
-
-  ● liquid.golden.inline_comment_tag › can't comment tags
-
-    illegal tag syntax, line:1, col:1
-    >> 1| {%- # {% echo 'hello world' %} -%}
-    TokenizationError: illegal tag syntax, line:1, col:1
-
-  ● liquid.golden.inline_comment_tag › empty
-
-    illegal tag syntax, line:1, col:1
-    >> 1| {%#%}
-    TokenizationError: illegal tag syntax, line:1, col:1
-
-  ● liquid.golden.inline_comment_tag › liquid tag
-
-    illegal liquid tag syntax, line:1, col:1, line:1, col:1
-    >> 1| {% liquid
-       2|   # first comment line
-       3|   # second comment line
-       4|
-    ParseError: illegal liquid tag syntax, line:1, col:1, line:1, col:1
-
-  ● liquid.golden.inline_comment_tag › lots of hashes in a liquid tag
-
-    illegal liquid tag syntax, line:1, col:1, line:1, col:1
-    >> 1| {% liquid
-       2|   ##########################
-       3|   # spread inline comments #
-       4|   ##########################
-    ParseError: illegal liquid tag syntax, line:1, col:1, line:1, col:1
-
-  ● liquid.golden.inline_comment_tag › multiple lines
-
-    illegal tag syntax, line:1, col:1
-    >> 1| {%-
-       2|   # spread inline comments
-       3|   # over multiple lines
-       4| -%}
-    TokenizationError: illegal tag syntax, line:1, col:1
-
-  ● liquid.golden.inline_comment_tag › no padding after the hash
-
-    illegal tag syntax, line:1, col:1
-    >> 1| {%#some comment %}
-    TokenizationError: illegal tag syntax, line:1, col:1
-
-  ● liquid.golden.inline_comment_tag › no whitespace control no padding
-
-    illegal tag syntax, line:1, col:1
-    >> 1| {%# some comment %}
-    TokenizationError: illegal tag syntax, line:1, col:1
-
-  ● liquid.golden.inline_comment_tag › no whitespace control with padding
-
-    illegal tag syntax, line:1, col:1
-    >> 1| {% # some comment %}
-    TokenizationError: illegal tag syntax, line:1, col:1
-
-  ● liquid.golden.inline_comment_tag › with whitespace control and padding
-
-    illegal tag syntax, line:1, col:1
-    >> 1| {%- # some comment -%}
-    TokenizationError: illegal tag syntax, line:1, col:1
-
-  ● liquid.golden.inline_comment_tag › with whitespace control no padding
-
-    illegal tag syntax, line:1, col:1
-    >> 1| {%-# some comment -%}
-    TokenizationError: illegal tag syntax, line:1, col:1
 
   ● liquid.golden.join_filter › too many arguments
 
@@ -1630,8 +1561,8 @@ npx jest --noStackTrace
     + !
 
 Test Suites: 1 failed, 1 total
-Tests:       234 failed, 518 passed, 752 total
+Tests:       224 failed, 528 passed, 752 total
 Snapshots:   0 total
-Time:        1.841 s, estimated 3 s
+Time:        1.99 s, estimated 3 s
 Ran all test suites.
 ```
