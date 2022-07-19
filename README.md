@@ -10,7 +10,7 @@ The tests defined in `golden_liquid.json` attempt to cover many of Liquid's limi
 
 For our purposes, "standard" Liquid is the one described [here](https://shopify.github.io/liquid/), with [Ruby Liquid](https://github.com/Shopify/liquid) being the reference implementation. Not to be confused with the extended variation of Liquid that is used for Shopify stores.
 
-All tests pass with Liquid version 5.4.0.alpha. If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
+All tests pass with Liquid version 5.4.0.alpha and Ruby version 2.7.6. Due to some fixes with Ruby's BigDecimal library, one test case fails when running this test suit with Ruby version 3 (see issue [#1590](https://github.com/Shopify/liquid/issues/1590)). If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
 
 ```
 cd liquid
