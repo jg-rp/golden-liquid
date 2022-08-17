@@ -1,5 +1,18 @@
 # Golden Liquid Change Log
 
+## Version 0.10.0
+
+- Test ranges where start and stop values are equal.
+- Test that `0` is not falsy.
+- Test that `1` is not truthy.
+- Test that `0` is not equal to `false`.
+- Test that `1` is not equal to `true`.
+
+- Update Shopify/liquid to 5.4.0
+- Update LiquidJS to 9.40.0
+- Update Python Liquid to 1.4.2
+- Update LiquidScript to 1.3.1
+
 ## Version 0.9.1
 
 - Update LiquidJS to 9.39.1

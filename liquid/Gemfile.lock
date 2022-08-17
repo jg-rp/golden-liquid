@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:Shopify/liquid.git
-  revision: 4d8e55dbc4472c9eb1a856b7fdfc03c89451195b
+  revision: f1846d63a32f006cddf4b2d968ef4e552a9ccc94
   specs:
-    liquid (5.4.0.alpha)
+    liquid (5.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -31,6 +31,7 @@ GEM
     unicode-display_width (2.1.0)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES

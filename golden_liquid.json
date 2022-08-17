@@ -1,5 +1,5 @@
 {
-    "version": "0.9.1",
+    "version": "0.10.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -1588,6 +1588,24 @@
                     "partials": {},
                     "error": false,
                     "strict": false
+                },
+                {
+                    "name": "zero is not falsy",
+                    "template": "{{ 0 | default: \"bar\" }}",
+                    "want": "0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "zero is not falsy with allow_false",
+                    "template": "{{ 0 | default: \"bar\", allow_false: true }}",
+                    "want": "0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
                 }
             ]
         },
@@ -3014,6 +3032,24 @@
                     "strict": false
                 },
                 {
+                    "name": "range start and stop are the same",
+                    "template": "{% for i in (1..1) %}{{ i }} {% endfor %}",
+                    "want": "1 ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "range start and stop are zero",
+                    "template": "{% for i in (0..0) %}{{ i }} {% endfor %}",
+                    "want": "0 ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "share outer scope",
                     "template": "{% assign foo = 'hello' %}{% for x in (1..3) %}{% assign foo = x %}{% endfor %}{{ foo }}",
                     "want": "3",
@@ -3086,6 +3122,17 @@
                     },
                     "partials": {},
                     "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "at sign",
+                    "template": "{{ @foo }}",
+                    "want": "hello",
+                    "context": {
+                        "@foo": "hello"
+                    },
+                    "partials": {},
+                    "error": true,
                     "strict": true
                 },
                 {
@@ -3564,6 +3611,15 @@
                     "strict": false
                 },
                 {
+                    "name": "one is not equal to true",
+                    "template": "{% if 1 == true %}Hello{% else %}Goodbye{% endif %}",
+                    "want": "Goodbye",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "range equals range",
                     "template": "{% assign foo = (1..3) %}{% if foo == (1..3) %}true{% else %}false{% endif %}",
                     "want": "true",
@@ -3576,6 +3632,24 @@
                     "name": "undefined variables are falsy",
                     "template": "{% if nosuchthing %}bar{% else %}foo{% endif %}",
                     "want": "foo",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "zero is not equal to false",
+                    "template": "{% if 0 == false %}Hello{% else %}Goodbye{% endif %}",
+                    "want": "Goodbye",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "zero is truthy",
+                    "template": "{% if 0 %}Hello{% else %}Goodbye{% endif %}",
+                    "want": "Hello",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -8208,6 +8282,33 @@
                     "name": "literal true condition",
                     "template": "{% unless true %}foo{% endunless %}",
                     "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "one is not equal to true",
+                    "template": "{% unless 1 == true %}Hello{% else %}Goodbye{% endunless %}",
+                    "want": "Hello",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "zero is not equal to false",
+                    "template": "{% unless 0 == false %}Hello{% else %}Goodbye{% endunless %}",
+                    "want": "Hello",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "zero is truthy",
+                    "template": "{% unless 0 %}Hello{% else %}Goodbye{% endunless %}",
+                    "want": "Goodbye",
                     "context": {},
                     "partials": {},
                     "error": false,

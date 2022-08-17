@@ -1,4 +1,4 @@
-# LiquidScript Version 1.3.0
+# LiquidScript Version 1.3.1
 
 ```
 npm install
@@ -32,8 +32,8 @@ npx jest --noStackTrace
     Received: "41[object Object]"
 
 Test Suites: 1 failed, 1 total
-Tests:       4 failed, 748 passed, 752 total
+Tests:       4 failed, 759 passed, 763 total
 Snapshots:   0 total
-Time:        2.014 s
+Time:        2.248 s
 Ran all test suites.
 ```
