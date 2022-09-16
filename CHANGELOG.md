@@ -5,6 +5,7 @@
 - Test that `0.0` is not falsy.
 - Test that the `date` filter handles unix timestamps given as integers or strings.
 
+- Publish this test suite in YAML as well as JSON
 - Update Python Liquid to 1.4.5
 - Update LiquidJS to 9.42.0
 - Update LiquidScript to 1.4.0

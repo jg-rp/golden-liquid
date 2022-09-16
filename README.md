@@ -24,7 +24,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 
 ```json
 {
-    "version": "0.10.0",
+    "version": "0.11.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -46,6 +46,22 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
         .
     ]
 }
+```
+
+`golden_liquid.yaml` is the same test suite in YAML format.
+
+```yaml
+version: 0.11.0
+test_groups:
+  - name: liquid.golden.abs_filter
+    tests:
+      - name: negative float
+        template: "{{ -5.4 | abs }}"
+        want: "5.4"
+        context: {}
+        partials: {}
+        error: false
+        strict: false
 ```
 
 For each test case:
