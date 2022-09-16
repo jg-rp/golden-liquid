@@ -89,7 +89,7 @@ if the target environment has a strict mode.
 
 ## Results Summary
 
-This table summarizes the results of running version 0.10.0 of this test suit against the five Liquid engines with runners included in this repository.
+This table summarizes the results of running version 0.11.0 of this test suit against the five Liquid engines with runners included in this repository.
 
 | Engine                                                | Version | Passed | Failed |
 | ----------------------------------------------------- | ------- | ------ | ------ |
