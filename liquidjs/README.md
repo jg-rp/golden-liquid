@@ -1,4 +1,4 @@
-# LiquidJS Version 9.39.1
+# LiquidJS Version 9.42.0
 
 ```
 npm install
@@ -293,6 +293,13 @@ npx jest --noStackTrace
 
     Expected: "March 14, 2016"
     Received: ""
+
+  ● liquid.golden.default_filter › 0.0 is not falsy
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "0.0"
+    Received: "0"
 
   ● liquid.golden.default_filter › empty object
 
@@ -1561,8 +1568,8 @@ npx jest --noStackTrace
     + !
 
 Test Suites: 1 failed, 1 total
-Tests:       224 failed, 539 passed, 763 total
+Tests:       225 failed, 543 passed, 768 total
 Snapshots:   0 total
-Time:        1.98 s, estimated 3 s
+Time:        2.206 s
 Ran all test suites.
 ```

@@ -1,5 +1,14 @@
 # Golden Liquid Change Log
 
+## Version 0.11.0
+
+- Test that `0.0` is not falsy.
+- Test that the `date` filter handles unix timestamps given as integers or strings.
+
+- Update Python Liquid to 1.4.5
+- Update LiquidJS to 9.42.0
+- Update LiquidScript to 1.4.0
+
 ## Version 0.10.0
 
 - Test ranges where start and stop values are equal.

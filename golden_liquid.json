@@ -1,5 +1,5 @@
 {
-    "version": "0.10.0",
+    "version": "0.11.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -1364,6 +1364,33 @@
                     "strict": false
                 },
                 {
+                    "name": "negative timestamp string",
+                    "template": "{{ '-1152098955' | date: '%m/%d/%Y' }}",
+                    "want": "-1152098955",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "timestamp integer",
+                    "template": "{{ 1152098955 | date: '%m/%d/%Y' }}",
+                    "want": "07/05/2006",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "timestamp string",
+                    "template": "{{ '1152098955' | date: '%m/%d/%Y' }}",
+                    "want": "07/05/2006",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "too many arguments",
                     "template": "{{ 'March 14, 2016' | date: '%b %d, %y', 'foo' }}",
                     "want": "",
@@ -1427,6 +1454,15 @@
         {
             "name": "liquid.golden.default_filter",
             "tests": [
+                {
+                    "name": "0.0 is not falsy",
+                    "template": "{{ 0.0 | default: \"bar\" }}",
+                    "want": "0.0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
                 {
                     "name": "allow false",
                     "template": "{{ false | default: 'bar', allow_false:true }}",
@@ -3421,6 +3457,15 @@
         {
             "name": "liquid.golden.if_tag",
             "tests": [
+                {
+                    "name": "0.0 is truthy",
+                    "template": "{% if 0.0 %}Hello{% else %}Goodbye{% endif %}",
+                    "want": "Hello",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
                 {
                     "name": "alternate not equal condition",
                     "template": "{% if product.title <> 'foo' %}baz{% endif %}",
