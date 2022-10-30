@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:Shopify/liquid.git
-  revision: f1846d63a32f006cddf4b2d968ef4e552a9ccc94
+  revision: ace3fe15ac570036008156eaddacfb9d558fca31
   specs:
     liquid (5.4.0)
 
@@ -9,26 +9,27 @@ GEM
   specs:
     ast (2.4.2)
     json (2.6.2)
-    minitest (5.15.0)
+    minitest (5.16.3)
     parallel (1.22.1)
-    parser (3.1.2.0)
+    parser (3.1.2.1)
       ast (~> 2.4.1)
     rainbow (3.1.1)
-    regexp_parser (2.5.0)
+    regexp_parser (2.6.0)
     rexml (3.2.5)
-    rubocop (1.30.1)
+    rubocop (1.37.1)
+      json (~> 2.3)
       parallel (~> 1.10)
-      parser (>= 3.1.0.0)
+      parser (>= 3.1.2.1)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.18.0, < 2.0)
+      rubocop-ast (>= 1.23.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.18.0)
+    rubocop-ast (1.23.0)
       parser (>= 3.1.1.0)
     ruby-progressbar (1.11.0)
-    unicode-display_width (2.1.0)
+    unicode-display_width (2.3.0)
 
 PLATFORMS
   ruby

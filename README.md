@@ -24,7 +24,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 
 ```json
 {
-    "version": "0.11.0",
+    "version": "0.12.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -51,7 +51,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 `golden_liquid.yaml` is the same test suite in YAML format.
 
 ```yaml
-version: 0.11.0
+version: 0.12.0
 test_groups:
   - name: liquid.golden.abs_filter
     tests:
@@ -89,14 +89,14 @@ if the target environment has a strict mode.
 
 ## Results Summary
 
-This table summarizes the results of running version 0.11.0 of this test suit against the five Liquid engines with runners included in this repository.
+This table summarizes the results of running version 0.12.0 of this test suit against the five Liquid engines with runners included in this repository.
 
 | Engine                                                | Version | Passed | Failed |
 | ----------------------------------------------------- | ------- | ------ | ------ |
-| [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.4.0   | 768    | 0      |
-| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 9.42.0  | 543    | 225    |
-| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.7.5   | 372    | 396    |
-| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.3.1   | 763    | 5      |
-| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.4.5   | 768    | 0      |
+| [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.4.0   | 781    | 0      |
+| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 9.42.1  | 547    | 234    |
+| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.7.6   | 377    | 404    |
+| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.4.1   | 769    | 12     |
+| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.4.6   | 781    | 0      |
 
 \*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments.

@@ -1,4 +1,4 @@
-# LiquidJS Version 9.42.0
+# LiquidJS Version 9.42.1
 
 ```
 npm install
@@ -472,12 +472,36 @@ npx jest --noStackTrace
     Expected: ""
     Received: "                      "
 
+  ● liquid.golden.for_tag › limit is a non-number string
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.for_tag › limit is not a string or number
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
   ● liquid.golden.for_tag › loop over range with float start
 
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "2345"
     Received: "2.43.44.45.4"
+
+  ● liquid.golden.for_tag › offset is a non-number string
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.for_tag › offset is not a string or number
+
+    expect(received).toThrow()
+
+    Received function did not throw
 
   ● liquid.golden.for_tag › parent's parentloop
 
@@ -1240,6 +1264,80 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.tablerow_tag › cols is a float
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 4
+    + Received  + 1
+
+    - <tr class="row1">
+    - <td class="col1">1 true</td><td class="col2">2 false</td></tr>
+    - <tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
+    + <tr class="row1"><td class="col1">1 true</td><td class="col2">2 false</td><td class="col3">3 false</td><td class="col1.4">4 false</td></tr>
+    -
+
+  ● liquid.golden.tablerow_tag › cols is a string
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 4
+    + Received  + 1
+
+    - <tr class="row1">
+    - <td class="col1">1 true</td><td class="col2">2 false</td></tr>
+    - <tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
+    + <tr class="row1"><td class="col1">1 true</td><td class="col2">2 false</td></tr><tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
+    -
+
+  ● liquid.golden.tablerow_tag › limit is a string
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 3
+    + Received  + 1
+
+    - <tr class="row1">
+    - <td class="col1">1 true</td><td class="col2">2 false</td></tr>
+    + <tr class="row1"><td class="col1">1 true</td><td class="col2">2 false</td></tr>
+    -
+
+  ● liquid.golden.tablerow_tag › no cols param
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 3
+    + Received  + 1
+
+    @@ -1,7 +1,6 @@
+    - <tr class="row1">
+    - <td class="col1">
+    + <tr class="row1"><td class="col1">
+      col: 1
+      col0: 0
+      col_first: true
+      col_last: false
+      first: true
+    @@ -24,6 +23,5 @@
+      length: 2
+      rindex: 1
+      rindex0: 0
+      row: 1
+      </td></tr>
+    -
+
+  ● liquid.golden.tablerow_tag › offset is a string
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 3
+    + Received  + 1
+
+    - <tr class="row1">
+    - <td class="col1">3 true</td><td class="col2">4 false</td></tr>
+    + <tr class="row1"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
+    -
+
   ● liquid.golden.tablerow_tag › one row
 
     expect(received).toBe(expected) // Object.is equality
@@ -1288,6 +1386,20 @@ npx jest --noStackTrace
     - <tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
     - <tr class="row3"><td class="col1">5 true</td></tr>
     + <tr class="row1"><td class="col1">1 true</td><td class="col2">2 false</td></tr><tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr><tr class="row3"><td class="col1">5 true</td></tr>
+    -
+
+  ● liquid.golden.tablerow_tag › two column odd range row numbers
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 5
+    + Received  + 1
+
+    - <tr class="row1">
+    - <td class="col1">1 1</td><td class="col2">2 1</td></tr>
+    - <tr class="row2"><td class="col1">3 2</td><td class="col2">4 2</td></tr>
+    - <tr class="row3"><td class="col1">5 3</td></tr>
+    + <tr class="row1"><td class="col1">1 1</td><td class="col2">2 1</td></tr><tr class="row2"><td class="col1">3 2</td><td class="col2">4 2</td></tr><tr class="row3"><td class="col1">5 3</td></tr>
     -
 
   ● liquid.golden.tablerow_tag › two column range
@@ -1361,12 +1473,12 @@ npx jest --noStackTrace
     Expected: "Ground control to Ma"
     Received: "Ground control to..."
 
-  ● liquid.golden.truncatewords_filter › reference implementation test 5
+  ● liquid.golden.truncatewords_filter › all whitespace is clobbered
 
     expect(received).toBe(expected) // Object.is equality
 
-    Expected: "one..."
-    Received: "..."
+    Expected: "one two..."
+    Received: " one..."
 
   ● liquid.golden.truncatewords_filter › too many arguments
 
@@ -1386,12 +1498,6 @@ npx jest --noStackTrace
 
     Expected: "one two"
     Received: "one two..."
-
-  ● liquid.golden.truncatewords_filter › very big argument
-
-    expect(received).toThrow()
-
-    Received function did not throw
 
   ● liquid.golden.uniq_filter › array of objects with key property
 
@@ -1568,8 +1674,8 @@ npx jest --noStackTrace
     + !
 
 Test Suites: 1 failed, 1 total
-Tests:       225 failed, 543 passed, 768 total
+Tests:       234 failed, 547 passed, 781 total
 Snapshots:   0 total
-Time:        2.206 s
+Time:        1.922 s, estimated 3 s
 Ran all test suites.
 ```

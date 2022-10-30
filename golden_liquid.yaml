@@ -1,4 +1,4 @@
-version: 0.11.0
+version: 0.12.0
 test_groups:
 - name: liquid.golden.abs_filter
   tests:
@@ -2098,6 +2098,31 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: limit is a non-number string
+    template: '{% for i in (1..4) limit: ''foo'' %}{{ i }} {% endfor %}'
+    want: ''
+    context: {}
+    partials: {}
+    error: true
+    strict: false
+  - name: limit is a string
+    template: '{% for i in (1..4) limit: ''2'' %}{{ i }} {% endfor %}'
+    want: '1 2 '
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: limit is not a string or number
+    template: '{% for i in (1..4) limit: foo %}{{ i }} {% endfor %}'
+    want: ''
+    context:
+      foo:
+      - 1
+      - 2
+      - 3
+    partials: {}
+    error: true
+    strict: false
   - name: lookup a filter from an outer context
     template: '{% for tag in product.tags %}{{ tag | upcase }} {% endfor %}'
     want: 'SPORTS GARDEN '
@@ -2265,6 +2290,31 @@ test_groups:
       - 6
     partials: {}
     error: false
+    strict: false
+  - name: offset is a non-number string
+    template: '{% for i in (1..4) offset: ''foo'' %}{{ i }} {% endfor %}'
+    want: ''
+    context: {}
+    partials: {}
+    error: true
+    strict: false
+  - name: offset is a string
+    template: '{% for i in (1..4) offset: ''2'' %}{{ i }} {% endfor %}'
+    want: '3 4 '
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: offset is not a string or number
+    template: '{% for i in (1..4) offset: foo %}{{ i }} {% endfor %}'
+    want: ''
+    context:
+      foo:
+      - 1
+      - 2
+      - 3
+    partials: {}
+    error: true
     strict: false
   - name: parent's parentloop
     template: '{% for i in (1..2) %}{% for j in (1..2) %}{% for k in (1..2) %}i={{
@@ -2855,6 +2905,14 @@ test_groups:
     partials:
       assign-outer-scope: Hello, {{ customer.first_name }}{% assign last_name = 'Smith'
         %}
+    error: false
+    strict: false
+  - name: assign to a keyword argument
+    template: '{% include ''product-args'', foo: ''hello'' %} {{ foo }}'
+    want: hello hello goodbye
+    context: {}
+    partials:
+      product-args: '{{ foo }}{% assign foo = ''goodbye'' %} {{ foo }}'
     error: false
     strict: false
   - name: bound array variable
@@ -5750,6 +5808,147 @@ test_groups:
     strict: false
 - name: liquid.golden.tablerow_tag
   tests:
+  - name: cols is a float
+    template: '{% tablerow i in (1..4) cols:2.6 %}{{ i }} {{ tablerowloop.col_first
+      }}{% endtablerow %}'
+    want: '<tr class="row1">
+
+      <td class="col1">1 true</td><td class="col2">2 false</td></tr>
+
+      <tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
+
+      '
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: cols is a string
+    template: '{% tablerow i in (1..4) cols:''2'' %}{{ i }} {{ tablerowloop.col_first
+      }}{% endtablerow %}'
+    want: '<tr class="row1">
+
+      <td class="col1">1 true</td><td class="col2">2 false</td></tr>
+
+      <tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
+
+      '
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: limit is a string
+    template: '{% tablerow i in (1..4) limit:''2'' %}{{ i }} {{ tablerowloop.col_first
+      }}{% endtablerow %}'
+    want: '<tr class="row1">
+
+      <td class="col1">1 true</td><td class="col2">2 false</td></tr>
+
+      '
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: no cols param
+    template: '{% tablerow i in (1..2) %}
+
+      col: {{ tablerowloop.col }}
+
+      col0: {{ tablerowloop.col0 }}
+
+      col_first: {{ tablerowloop.col_first }}
+
+      col_last: {{ tablerowloop.col_last }}
+
+      first: {{ tablerowloop.first }}
+
+      index: {{ tablerowloop.index }}
+
+      index0: {{ tablerowloop.index0 }}
+
+      last: {{ tablerowloop.last }}
+
+      length: {{ tablerowloop.length }}
+
+      rindex: {{ tablerowloop.rindex }}
+
+      rindex0: {{ tablerowloop.rindex0 }}
+
+      row: {{ tablerowloop.row }}
+
+      {% endtablerow %}'
+    want: '<tr class="row1">
+
+      <td class="col1">
+
+      col: 1
+
+      col0: 0
+
+      col_first: true
+
+      col_last: false
+
+      first: true
+
+      index: 1
+
+      index0: 0
+
+      last: false
+
+      length: 2
+
+      rindex: 2
+
+      rindex0: 1
+
+      row: 1
+
+      </td><td class="col2">
+
+      col: 2
+
+      col0: 1
+
+      col_first: false
+
+      col_last: true
+
+      first: false
+
+      index: 2
+
+      index0: 1
+
+      last: true
+
+      length: 2
+
+      rindex: 1
+
+      rindex0: 0
+
+      row: 1
+
+      </td></tr>
+
+      '
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: offset is a string
+    template: '{% tablerow i in (1..4) offset:''2'' %}{{ i }} {{ tablerowloop.col_first
+      }}{% endtablerow %}'
+    want: '<tr class="row1">
+
+      <td class="col1">3 true</td><td class="col2">4 false</td></tr>
+
+      '
+    context: {}
+    partials: {}
+    error: false
+    strict: false
   - name: one row
     template: '{% tablerow tag in collection.tags %}{{ tag }}{% endtablerow %}'
     want: '<tr class="row1">
@@ -5814,6 +6013,22 @@ test_groups:
       <tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
 
       <tr class="row3"><td class="col1">5 true</td></tr>
+
+      '
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: two column odd range row numbers
+    template: '{% tablerow i in (1..5) cols:2 %}{{ i }} {{ tablerowloop.row }}{% endtablerow
+      %}'
+    want: '<tr class="row1">
+
+      <td class="col1">1 1</td><td class="col2">2 1</td></tr>
+
+      <tr class="row2"><td class="col1">3 2</td><td class="col2">4 2</td></tr>
+
+      <tr class="row3"><td class="col1">5 3</td></tr>
 
       '
     context: {}
@@ -5994,6 +6209,13 @@ test_groups:
     strict: false
 - name: liquid.golden.truncatewords_filter
   tests:
+  - name: all whitespace is clobbered
+    template: '{{ "    one    two three    four  " | truncatewords: 2 }}'
+    want: one two...
+    context: {}
+    partials: {}
+    error: false
+    strict: false
   - name: custom end
     template: '{{ "Ground control to Major Tom." | truncatewords: 3, "--" }}'
     want: Ground control to--
@@ -6099,13 +6321,6 @@ test_groups:
     context: {}
     partials: {}
     error: false
-    strict: false
-  - name: very big argument
-    template: '{{ "" | truncatewords: 100000000000000 }}'
-    want: ''
-    context: {}
-    partials: {}
-    error: true
     strict: false
 - name: liquid.golden.uniq_filter
   tests:

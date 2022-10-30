@@ -1,5 +1,19 @@
 # Golden Liquid Change Log
 
+## Version 0.12.0
+
+- Test `tablerowloop.row`.
+- Test `tablerowloop.col_last` with no `cols` parameter.
+- Test `for` and `tablerow` tag arguments given as string.
+- Test `include` tag scope with assignment to a keyword argument.
+- Test that the `truncatewords` filter removes all leading ans trailing whitespace.
+
+- Update Shopify/liquid from GitHub master.
+- Update Python Liquid to 1.4.6
+- Update LiquidJS to 9.42.1
+- Update LiquidScript to 1.4.1
+- Update Liquidpy to 0.7.6
+
 ## Version 0.11.0
 
 - Test that `0.0` is not falsy.
