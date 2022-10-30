@@ -4,9 +4,9 @@
 
 - Test `tablerowloop.row`.
 - Test `tablerowloop.col_last` with no `cols` parameter.
-- Test `for` and `tablerow` tag arguments given as string.
+- Test `for` and `tablerow` tag arguments given as strings.
 - Test `include` tag scope with assignment to a keyword argument.
-- Test that the `truncatewords` filter removes all leading ans trailing whitespace.
+- Test that the `truncatewords` filter removes all leading and trailing whitespace.
 
 - Update Shopify/liquid from GitHub master.
 - Update Python Liquid to 1.4.6
