@@ -1,5 +1,5 @@
 {
-    "version": "0.12.0",
+    "version": "0.13.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -798,12 +798,56 @@
                     "strict": false
                 },
                 {
+                    "name": "comma string literal",
+                    "template": "{% case foo %}{% when 'foo' %}bar{% when ',' %}comma{% endcase %}",
+                    "want": "comma",
+                    "context": {
+                        "foo": ","
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "empty when tag",
+                    "template": "{% case foo %}{% when %}bar{% endcase %}",
+                    "want": "",
+                    "context": {
+                        "foo": "bar"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
                     "name": "evaluate multiple matching blocks",
                     "template": "{% case title %}{% when 'Hello' %}foo{% when a, 'Hello' %}bar{% endcase %}",
                     "want": "foobarbar",
                     "context": {
                         "title": "Hello",
                         "a": "Hello"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "mix or and comma separated when expression",
+                    "template": "{% case title %}{% when 'foo' %}foo{% when 'bar' or 'Hello', 'Hello' %}bar{% endcase %}",
+                    "want": "barbar",
+                    "context": {
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "mix or and comma separated when expression",
+                    "template": "{% case title %}{% when 'foo' %}foo{% when 'bar' or 'Hello', 'Hello' %}bar{% endcase %}",
+                    "want": "barbar",
+                    "context": {
+                        "title": "Hello"
                     },
                     "partials": {},
                     "error": false,
@@ -852,6 +896,17 @@
                     "strict": false
                 },
                 {
+                    "name": "or separated when expression",
+                    "template": "{% case title %}{% when 'foo' %}foo{% when 'bar' or 'Hello' %}bar{% endcase %}",
+                    "want": "bar",
+                    "context": {
+                        "title": "Hello"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "simple case/when",
                     "template": "{% case title %}{% when 'foo' %}foo{% when 'Hello' %}bar{% endcase %}",
                     "want": "bar",
@@ -869,6 +924,17 @@
                     "context": {
                         "title": "Hello",
                         "other": "Hello"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "unexpected when token",
+                    "template": "{% case title %}{% when 'foo' %}foo{% when 'bar' and 'Hello', 'Hello' %}bar{% endcase %}",
+                    "want": "",
+                    "context": {
+                        "title": "Hello"
                     },
                     "partials": {},
                     "error": false,
@@ -2408,6 +2474,15 @@
                     "strict": false
                 },
                 {
+                    "name": "comma separated arguments",
+                    "template": "{% for i in (1..6), limit: 4, offset: 2 %}{{ i }} {% endfor %}",
+                    "want": "3 4 5 6 ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "continue",
                     "template": "{% for tag in product.tags %}{% if tag == 'sports' %}{% continue %}{% else %}{{ tag }} {% endif %}{% else %}no images{% endfor %}",
                     "want": "garden ",
@@ -3194,6 +3269,15 @@
                     "name": "simple range loop",
                     "template": "{% for i in (0..3) %}{{ i }} {% endfor %}",
                     "want": "0 1 2 3 ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "some comma separated arguments",
+                    "template": "{% for i in (1..6) limit: 4, offset: 2, %}{{ i }} {% endfor %}",
+                    "want": "3 4 5 6 ",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -5932,6 +6016,17 @@
         {
             "name": "liquid.golden.render_tag",
             "tests": [
+                {
+                    "name": "assign to keyword argument",
+                    "template": "{% render 'product-args', foo: 'hello' %}{{ foo }}",
+                    "want": "hello goodbye",
+                    "context": {},
+                    "partials": {
+                        "product-args": "{{ foo }}{% assign foo='goodbye' %} {{ foo }}"
+                    },
+                    "error": false,
+                    "strict": false
+                },
                 {
                     "name": "assigned variables do not leak into outer scope",
                     "template": "{% render 'assign-outer-scope', customer: customer %} {{ last_name }}",

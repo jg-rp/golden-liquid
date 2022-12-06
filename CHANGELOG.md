@@ -1,5 +1,18 @@
 # Golden Liquid Change Log
 
+## Version 0.13.0
+
+- Test `or` separated `when` tag expressions.
+- Test mixing `,` and `or` separated `when` tag expressions.
+- Test commas in string literals that appear in the `when` tag.
+- Test comma separated `for` tag arguments.
+- Test overwrite `render` tag keyword argument.
+
+- Update Shopify/liquid from GitHub master
+- Update LiquidJS to 10.2.0
+- Update LiquidScript to 1.5.0
+- Update Python Liquid to 1.5.1
+
 ## Version 0.12.0
 
 - Test `tablerowloop.row`.

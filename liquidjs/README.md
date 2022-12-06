@@ -1,4 +1,4 @@
-# LiquidJS Version 9.42.1
+# LiquidJS Version 10.2.0
 
 ```
 npm install
@@ -203,12 +203,46 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.case_tag › empty when tag
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
   ● liquid.golden.case_tag › evaluate multiple matching blocks
 
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "foobarbar"
-    Received: "foo"
+    Received: "foobar"
+
+  ● liquid.golden.case_tag › mix or and comma separated when expression
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "barbar"
+    Received: "bar"
+
+  ● liquid.golden.case_tag › mix or and comma separated when expression
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "barbar"
+    Received: "bar"
+
+  ● liquid.golden.case_tag › or separated when expression
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "bar"
+    Received: ""
+
+  ● liquid.golden.case_tag › unexpected when token
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "bar"
 
   ● liquid.golden.ceil_filter › not a string, int or float
 
@@ -276,12 +310,6 @@ npx jest --noStackTrace
     Received function did not throw
 
   ● liquid.golden.date_filter › missing argument
-
-    expect(received).toThrow()
-
-    Received function did not throw
-
-  ● liquid.golden.date_filter › too many arguments
 
     expect(received).toThrow()
 
@@ -889,35 +917,17 @@ npx jest --noStackTrace
 
     Received function did not throw
 
-  ● liquid.golden.remove_last_filter › argument not a string
+  ● liquid.golden.remove_last_filter › missing argument
 
-    undefined filter: remove_last, line:1, col:1
-    >> 1| {{ "hello" | remove_last: 5 }}
-    ParseError: undefined filter: remove_last, line:1, col:1
+    expect(received).toThrow()
 
-  ● liquid.golden.remove_last_filter › not a string
+    Received function did not throw
 
-    undefined filter: remove_last, line:1, col:1
-    >> 1| {{ 5 | remove_last: 'rain' }}
-    ParseError: undefined filter: remove_last, line:1, col:1
+  ● liquid.golden.remove_last_filter › too many arguments
 
-  ● liquid.golden.remove_last_filter › remove substrings
+    expect(received).toThrow()
 
-    undefined filter: remove_last, line:1, col:1
-    >> 1| {{ "I strained to see the train through the rain" | remove_last: "rain" }}
-    ParseError: undefined filter: remove_last, line:1, col:1
-
-  ● liquid.golden.remove_last_filter › undefined argument
-
-    undefined filter: remove_last, line:1, col:1
-    >> 1| {{ "hello" | remove_last: nosuchthing }}
-    ParseError: undefined filter: remove_last, line:1, col:1
-
-  ● liquid.golden.remove_last_filter › undefined left value
-
-    undefined filter: remove_last, line:1, col:1
-    >> 1| {{ nosuchthing | remove_last: "rain" }}
-    ParseError: undefined filter: remove_last, line:1, col:1
+    Received function did not throw
 
   ● liquid.golden.render_tag › bound array variable
 
@@ -1020,41 +1030,37 @@ npx jest --noStackTrace
     Expected: "Take  protein pills and put my helmet on"
     Received: "Take undefined protein pills and put my helmet on"
 
-  ● liquid.golden.replace_last_filter › argument not a string
+  ● liquid.golden.replace_last_filter › missing argument
 
-    undefined filter: replace_last, line:1, col:1
-    >> 1| {{ "hello5" | replace_last: 5, "your" }}
-    ParseError: undefined filter: replace_last, line:1, col:1
+    expect(received).toThrow()
 
-  ● liquid.golden.replace_last_filter › not a string
+    Received function did not throw
 
-    undefined filter: replace_last, line:1, col:1
-    >> 1| {{ 5 | replace_last: 'rain', 'foo' }}
-    ParseError: undefined filter: replace_last, line:1, col:1
+  ● liquid.golden.replace_last_filter › missing arguments
 
-  ● liquid.golden.replace_last_filter › replace substrings
+    expect(received).toThrow()
 
-    undefined filter: replace_last, line:1, col:1
-    >> 1| {{ "Take my protein pills and put my helmet on" | replace_last: "my", "your" }}
-    ParseError: undefined filter: replace_last, line:1, col:1
+    Received function did not throw
+
+  ● liquid.golden.replace_last_filter › too many arguments
+
+    expect(received).toThrow()
+
+    Received function did not throw
 
   ● liquid.golden.replace_last_filter › undefined first argument
 
-    undefined filter: replace_last, line:1, col:1
-    >> 1| {{ "Take my protein" | replace_last: nosuchthing, "#" }}
-    ParseError: undefined filter: replace_last, line:1, col:1
+    expect(received).toBe(expected) // Object.is equality
 
-  ● liquid.golden.replace_last_filter › undefined left value
-
-    undefined filter: replace_last, line:1, col:1
-    >> 1| {{ nosuchthing | replace_last: "my", "your" }}
-    ParseError: undefined filter: replace_last, line:1, col:1
+    Expected: "Take my protein#"
+    Received: "Take my protein"
 
   ● liquid.golden.replace_last_filter › undefined second argument
 
-    undefined filter: replace_last, line:1, col:1
-    >> 1| {{ "Take my protein pills and put my helmet on" | replace_last: "my", nosuchthing }}
-    ParseError: undefined filter: replace_last, line:1, col:1
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Take my protein pills and put  helmet on"
+    Received: "Take my protein pills and put undefined helmet on"
 
   ● liquid.golden.reverse_filter › array of things
 
@@ -1674,8 +1680,8 @@ npx jest --noStackTrace
     + !
 
 Test Suites: 1 failed, 1 total
-Tests:       234 failed, 547 passed, 781 total
+Tests:       234 failed, 556 passed, 790 total
 Snapshots:   0 total
-Time:        1.922 s, estimated 3 s
+Time:        1.936 s, estimated 3 s
 Ran all test suites.
 ```
