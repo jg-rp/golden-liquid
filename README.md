@@ -6,6 +6,11 @@ Intended for situations where template authors are untrusted and, perhaps, not s
 
 The tests defined in `golden_liquid.json` attempt to cover many of Liquid's limitations, as well as the behavior of all standard tags and filters.
 
+- [Standard Liquid](#standard-liquid)
+- [Test File Schema](#test-file-schema)
+- [More Information](#more-information)
+- [Results Summary](#results-summary)
+
 ## Standard Liquid
 
 For our purposes, "standard" Liquid is the one described [here](https://shopify.github.io/liquid/), with [Ruby Liquid](https://github.com/Shopify/liquid) being the reference implementation. Not to be confused with the extended variation of Liquid that is used for Shopify stores.
@@ -86,6 +91,12 @@ exception/error.
 
 **`strict`** is a boolean indicating if the test should be rendered in "strict mode",
 if the target environment has a strict mode.
+
+## More Information
+
+`golden_liquid.json` and `golden_liquid.yaml` are currently generated from [these files](https://github.com/jg-rp/liquid/tree/main/liquid/golden) in the [Python Liquid repository](https://github.com/jg-rp/liquid). The plan is to move these source files (or some equivalent files) to this repository, so we might add test cases for behavior that Python Liquid chooses not to implement.
+
+In the mean time, be sure to keep an eye on Python Liquid's [known issues page](https://jg-rp.github.io/liquid/known_issues) and [issue tracker](https://github.com/jg-rp/liquid/issues).
 
 ## Results Summary
 
