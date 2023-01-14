@@ -1,5 +1,20 @@
 # Golden Liquid Change Log
 
+## Version 0.14.0
+
+- Test undefined `cycle` tag group names.
+- Test named `cycle` tags with changing items.
+- Test named `cycle` tags with differing number of items.
+- Test loop over a string literal with the `for` tag.
+- Test loop over a variable resolving to a string with the `for` tag.
+- Test `round` filter argument edge cases.
+
+- Update Shopify/liquid from GitHub master
+- Update LiquidJS to 10.4.0
+- Update LiquidScript to 1.5.1
+- Update Python Liquid to 1.8.0 from GitHub main
+- Test against Python Liquid's `liquid.future.Environment`.
+
 ## Version 0.13.0
 
 - Test `or` separated `when` tag expressions.

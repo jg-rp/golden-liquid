@@ -3,7 +3,7 @@ import pytest
 
 from operator import attrgetter
 
-from liquid import Environment
+from liquid.future import Environment
 from liquid import Mode
 from liquid.exceptions import Error
 from liquid.loaders import DictLoader
@@ -34,7 +34,7 @@ def read_test_cases():
 
 @pytest.mark.parametrize("case", read_test_cases(), ids=attrgetter("description"))
 def test_render_liquid(case: Case):
-    mode = Mode.STRICT #if case.strict else Mode.LAX
+    mode = Mode.STRICT  # if case.strict else Mode.LAX
     env = Environment(loader=DictLoader(case.partials), tolerance=mode)
 
     if case.error:

@@ -1,5 +1,5 @@
 {
-    "version": "0.13.0",
+    "version": "0.14.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -1378,9 +1378,63 @@
                     "strict": false
                 },
                 {
+                    "name": "multiple undefined variable names",
+                    "template": "{% cycle a: 1, 2, 3 %}{% cycle b: 1, 2, 3 %}{% cycle a: 1, 2, 3 %}",
+                    "want": "123",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "named with different items",
+                    "template": "{% cycle 'a': 1, 2, 3 %}{% cycle 'a': 7, 8, 9 %}{% cycle 'a': 1, 2, 3 %}",
+                    "want": "183",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "named with different number of arguments",
+                    "template": "{% cycle a: '1', '2' %}{% cycle a: '1', '2', '3' %}{% cycle a: '1' %}",
+                    "want": "12",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "named with growing number of arguments",
+                    "template": "{% cycle a: '1' %}{% cycle a: '1', '2' %}{% cycle a: '1', '2', '3' %}",
+                    "want": "112",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "named with shrinking number of arguments",
+                    "template": "{% cycle a: '1', '2', '3' %}{% cycle a: '1', '2' %}{% cycle a: '1' %}",
+                    "want": "121",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "no identifier",
                     "template": "{% cycle 'some', 'other' %}{% cycle 'some', 'other' %}{% cycle 'some', 'other' %}",
                     "want": "someothersome",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined variable names mixed with no name",
+                    "template": "{% cycle a: 1, 2, 3 %}{% cycle b: 1, 2, 3 %}{% cycle 1, 2, 3 %}",
+                    "want": "121",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -2936,6 +2990,26 @@
                                 "garden"
                             ]
                         }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "loop over a string literal",
+                    "template": "{% for i in 'hello' %}{{ i }} {% endfor %}",
+                    "want": "hello ",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "loop over a string variable",
+                    "template": "{% for i in foo %}{{ i }} {% endfor %}",
+                    "want": "hello ",
+                    "context": {
+                        "foo": "hello"
                     },
                     "partials": {},
                     "error": false,
@@ -6636,6 +6710,60 @@
             "name": "liquid.golden.round_filter",
             "tests": [
                 {
+                    "name": "argument is a float",
+                    "template": "{{ 5.666 | round: 1.2 }}",
+                    "want": "5.7",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is a negative",
+                    "template": "{{ 5.666 | round: -2 }}",
+                    "want": "0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is a string",
+                    "template": "{{ 5.666 | round: 'foo' }}",
+                    "want": "6",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is a string representation of an integer",
+                    "template": "{{ 5.666 | round: '1' }}",
+                    "want": "5.7",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is a string representation of zero",
+                    "template": "{{ 5.666 | round: '1' }}",
+                    "want": "5.7",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is a zero",
+                    "template": "{{ 5.666 | round: 0 }}",
+                    "want": "6",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "decimal places",
                     "template": "{{ \"5.666666\" | round: 2 }}",
                     "want": "5.67",
@@ -6701,7 +6829,7 @@
                 {
                     "name": "undefined argument",
                     "template": "{{ 5.666 | round: nosuchthing }}",
-                    "want": "6.0",
+                    "want": "6",
                     "context": {},
                     "partials": {},
                     "error": false,

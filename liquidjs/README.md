@@ -1,4 +1,4 @@
-# LiquidJS Version 10.2.0
+# LiquidJS Version 10.4.0
 
 ```
 npm install
@@ -309,6 +309,34 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.cycle_tag › named with different number of arguments
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "12"
+    Received: "111"
+
+  ● liquid.golden.cycle_tag › named with growing number of arguments
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "112"
+    Received: "111"
+
+  ● liquid.golden.cycle_tag › named with shrinking number of arguments
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "121"
+    Received: "111"
+
+  ● liquid.golden.cycle_tag › undefined variable names mixed with no name
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "121"
+    Received: "123"
+
   ● liquid.golden.date_filter › missing argument
 
     expect(received).toThrow()
@@ -320,7 +348,7 @@ npx jest --noStackTrace
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "March 14, 2016"
-    Received: ""
+    Received: "Monday, March 14, 2016 at 12:00 am +0000"
 
   ● liquid.golden.default_filter › 0.0 is not falsy
 
@@ -562,12 +590,6 @@ npx jest --noStackTrace
 
     Received function did not throw
 
-  ● liquid.golden.if_tag › alternate not equal condition
-
-    unexpected token at "> 'foo'", line:1, col:1
-    >> 1| {% if product.title <> 'foo' %}baz{% endif %}
-    ParseError: unexpected token at "> 'foo'", line:1, col:1
-
   ● liquid.golden.if_tag › blocks that contain only whitespace and comments are not rendered
 
     expect(received).toBe(expected) // Object.is equality
@@ -625,6 +647,12 @@ npx jest --noStackTrace
     tag "ifchanged" not found, line:1, col:79, line:1, col:56
     >> 1| {% assign list = "1,3,2,1,3,1,2" | split: "," | sort %}{% for item in list -%}{%- ifchanged %} {{ item }}{% endifchanged -%}{%- endfor %}
     ParseError: tag "ifchanged" not found, line:1, col:79, line:1, col:56
+
+  ● liquid.golden.illegal › no subtraction operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
 
   ● liquid.golden.include_tag › bound array variable
 
@@ -821,9 +849,10 @@ npx jest --noStackTrace
 
   ● liquid.golden.output_statement › chained bracketed identifier index no dot
 
-    unexpected token at "title", line:1, col:1
-    >> 1| {{ products[0]title }}
-    ParseError: unexpected token at "title", line:1, col:1
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "shoe"
+    Received: "[object Object]"
 
   ● liquid.golden.output_statement › chained identifier dot separated index
 
@@ -1075,18 +1104,25 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.round_filter › argument is a float
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "5.7"
+    Received: "5.67861610032174"
+
+  ● liquid.golden.round_filter › argument is a string
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "6"
+    Received: "NaN"
+
   ● liquid.golden.round_filter › too many args
 
     expect(received).toThrow()
 
     Received function did not throw
-
-  ● liquid.golden.round_filter › undefined argument
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "6.0"
-    Received: "6"
 
   ● liquid.golden.round_filter › undefined left value
 
@@ -1680,8 +1716,8 @@ npx jest --noStackTrace
     + !
 
 Test Suites: 1 failed, 1 total
-Tests:       234 failed, 556 passed, 790 total
+Tests:       239 failed, 565 passed, 804 total
 Snapshots:   0 total
-Time:        1.936 s, estimated 3 s
+Time:        2.211 s
 Ran all test suites.
 ```
