@@ -11,7 +11,7 @@
 
 - Update Shopify/liquid from GitHub master
 - Update LiquidJS to 10.4.0
-- Update LiquidScript to 1.5.1
+- Update LiquidScript to 1.6.0
 - Update Python Liquid to 1.8.0 from GitHub main
 - Test against Python Liquid's `liquid.future.Environment`.
 
