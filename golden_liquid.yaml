@@ -1,4 +1,4 @@
-version: 0.14.0
+version: 0.15.0
 test_groups:
 - name: liquid.golden.abs_filter
   tests:
@@ -158,6 +158,42 @@ test_groups:
     template: '{% assign foo = (1..3) %}{{ foo | join: ''#'' }}'
     want: 1#2#3
     context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: assign an existing array
+    template: '{% assign foo = bar %}{{ foo[0] }}/{{ foo[1] }}'
+    want: a/b
+    context:
+      bar:
+      - a
+      - b
+      - c
+    partials: {}
+    error: false
+    strict: false
+  - name: assign an item from an existing object with quoted notation
+    template: '{% assign foo = bar[''baz''] %}{{ foo }}'
+    want: hello
+    context:
+      bar:
+        baz: hello
+    partials: {}
+    error: false
+    strict: false
+  - name: assign to variable with a hyphen
+    template: '{% assign some-thing = ''foo'' %}{{ some-thing }}'
+    want: foo
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: assign with quoted notation and extra whitespace
+    template: '{% assign foo = bar[ ''baz''  ] %}{{ foo }}'
+    want: hello
+    context:
+      bar:
+        baz: hello
     partials: {}
     error: false
     strict: false
@@ -4027,6 +4063,25 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: bracketed variable resolves to a string
+    template: '{{ foo[something] }}'
+    want: goodbye
+    context:
+      foo:
+        hello: goodbye
+      something: hello
+    partials: {}
+    error: false
+    strict: false
+  - name: bracketed variable resolves to a string without leading identifier
+    template: '{{ [something] }}'
+    want: goodbye
+    context:
+      something: hello
+      hello: goodbye
+    partials: {}
+    error: false
+    strict: false
   - name: chained bracketed identifier index
     template: '{{ products[0].title }}'
     want: shoe
@@ -4065,6 +4120,18 @@ test_groups:
         tags:
         - sports
         - garden
+    partials: {}
+    error: false
+    strict: false
+  - name: nested bracketed variable resolving to a string
+    template: '{{ [list[settings.zero]] }}'
+    want: bar
+    context:
+      list:
+      - foo
+      settings:
+        zero: 0
+      foo: bar
     partials: {}
     error: false
     strict: false
@@ -7037,6 +7104,17 @@ test_groups:
     context:
       customer:
         first_name: Holly
+    partials: {}
+    error: false
+    strict: false
+  - name: white space control with raw tags
+    template: '! {% raw %}{{ hello }}{% endraw %} !
+
+      ! {%- raw -%}{{ hello }}{%- endraw -%} !'
+    want: '! {{ hello }} !
+
+      !{{ hello }}!'
+    context: {}
     partials: {}
     error: false
     strict: false

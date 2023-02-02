@@ -1,5 +1,15 @@
 # Golden Liquid Change Log
 
+## Version 0.15.0
+
+- More `assign` tag test cases.
+- Test resolving bracketed variables without a leading identifier.
+- Test nested bracketed variables.
+- Test whitespace control with `raw` tags.
+
+- Update Shopify/liquid from GitHub master
+- Update Python Liquid from GitHub main
+
 ## Version 0.14.0
 
 - Test undefined `cycle` tag group names.

@@ -6,5 +6,5 @@ pipenv run pytest -q
 ```
 
 ```
-804 passed in 1.06s
+812 passed in 1.04s
 ```
