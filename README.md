@@ -74,7 +74,7 @@ For each test case:
 **`name`** is a descriptive name for the test case. Together with the group name, it
 should uniquely identify the test case.
 
-**`template`** is the Liquid template source as a string.
+**`template`** is the Liquid template source text as a string.
 
 **`want`** is the expected result of rendering the template with the associated
 context.
@@ -86,7 +86,7 @@ template should be rendered with.
 **`partials`** is a JSON object mapping strings to strings. You can think of it as a
 mock file system for testing `{% include %}` and `{% render %}`.
 
-**`error`** is a boolean indicating if the test case should raise/throw and
+**`error`** is a boolean indicating if the test case should raise/throw an
 exception/error.
 
 **`strict`** is a boolean indicating if the test should be rendered in "strict mode",
