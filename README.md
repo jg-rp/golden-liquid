@@ -29,7 +29,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 
 ```json
 {
-    "version": "0.14.0",
+    "version": "0.15.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -100,7 +100,7 @@ In the mean time, be sure to keep an eye on Python Liquid's [known issues page](
 
 ## Results Summary
 
-This table summarizes the results of running version 0.14.0 of this test suit against the five Liquid engines with runners included in this repository.
+This table summarizes the results of running version 0.15.0 of this test suit against the five Liquid engines with runners included in this repository.
 
 | Engine                                                | Version | Passed | Failed |
 | ----------------------------------------------------- | ------- | ------ | ------ |
