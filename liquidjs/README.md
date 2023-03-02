@@ -1,4 +1,4 @@
-# LiquidJS Version 10.4.0
+# LiquidJS Version 10.6.0
 
 ```
 npm install
@@ -235,6 +235,13 @@ npx jest --noStackTrace
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "bar"
+    Received: ""
+
+  ● liquid.golden.case_tag › switch on array
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "foo"
     Received: ""
 
   ● liquid.golden.case_tag › unexpected when token
@@ -590,6 +597,20 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.if_tag › array is equal to array
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "true"
+    Received: "false"
+
+  ● liquid.golden.if_tag › array is equal to array from context
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "true"
+    Received: "false"
+
   ● liquid.golden.if_tag › blocks that contain only whitespace and comments are not rendered
 
     expect(received).toBe(expected) // Object.is equality
@@ -847,6 +868,12 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.output_statement › bracketed variable resolves to a string without leading identifier
+
+    unexpected token at "something]", line:1, col:1
+    >> 1| {{ [something] }}
+    ParseError: unexpected token at "something]", line:1, col:1
+
   ● liquid.golden.output_statement › chained bracketed identifier index no dot
 
     expect(received).toBe(expected) // Object.is equality
@@ -859,6 +886,12 @@ npx jest --noStackTrace
     expect(received).toThrow()
 
     Received function did not throw
+
+  ● liquid.golden.output_statement › nested bracketed variable resolving to a string
+
+    unexpected token at "list[settings...", line:1, col:1
+    >> 1| {{ [list[settings.zero]] }}
+    ParseError: unexpected token at "list[settings...", line:1, col:1
 
   ● liquid.golden.output_statement › render a range object that uses a float
 
@@ -1574,6 +1607,20 @@ npx jest --noStackTrace
     Expected: "a#b#{}"
     Received: "a#b##[object Object]"
 
+  ● liquid.golden.unless_tag › array is equal to array
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "false"
+    Received: "true"
+
+  ● liquid.golden.unless_tag › array is equal to array from context
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "false"
+    Received: "true"
+
   ● liquid.golden.unless_tag › blocks that contain only whitespace are not rendered
 
     expect(received).toBe(expected) // Object.is equality
@@ -1715,9 +1762,16 @@ npx jest --noStackTrace
     +
     + !
 
+  ● liquid.golden.whitespace_control › white space control with raw tags
+
+    raw "{%- raw -%}{{..." not closed, line:2, col:14
+       1| ! {% raw %}{{ hello }}{% endraw %} !
+    >> 2| ! {%- raw -%}{{ hello }}{%- endraw -%} !
+    TokenizationError: raw "{%- raw -%}{{..." not closed, line:2, col:14
+
 Test Suites: 1 failed, 1 total
-Tests:       239 failed, 565 passed, 804 total
+Tests:       247 failed, 570 passed, 817 total
 Snapshots:   0 total
-Time:        2.211 s
+Time:        1.94 s, estimated 2 s
 Ran all test suites.
 ```

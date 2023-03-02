@@ -1,5 +1,13 @@
 # Golden Liquid Change Log
 
+## Version 0.16.0
+
+- Test array equality in `if`, `unless` and `case` tags.
+
+- Update LiquidJS to 10.6.0
+- Update LiquidScript to 1.7.0
+- Update Python Liquid from GitHub main
+
 ## Version 0.15.0
 
 - More `assign` tag test cases.

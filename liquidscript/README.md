@@ -1,4 +1,4 @@
-# LiquidScript Version 1.6.0
+# LiquidScript Version 1.7.0
 
 ```
 npm install
@@ -6,6 +6,13 @@ npx jest --noStackTrace
 ```
 
 ```
+  ● liquid.golden.case_tag › switch on array
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "foo"
+    Received: ""
+
   ● liquid.golden.date_filter › literal percent
 
     expect(received).toBe(expected) // Object.is equality
@@ -27,13 +34,19 @@ npx jest --noStackTrace
     Expected: "Mar 14, 16"
     Received: "Invalid DateTime"
 
-  ● liquid.golden.output_statement › bracketed variable resolves to a string without leading identifier
+  ● liquid.golden.if_tag › array is equal to array
 
-    LiquidSyntaxError: unexpected '[' (<string>:1)
+    expect(received).toBe(expected) // Object.is equality
 
-  ● liquid.golden.output_statement › nested bracketed variable resolving to a string
+    Expected: "true"
+    Received: "false"
 
-    LiquidSyntaxError: unexpected '[' (<string>:1)
+  ● liquid.golden.if_tag › array is equal to array from context
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "true"
+    Received: "false"
 
   ● liquid.golden.sort_natural_filter › incompatible types
 
@@ -42,19 +55,23 @@ npx jest --noStackTrace
     Expected: "14{}"
     Received: "41[object Object]"
 
-  ● liquid.golden.whitespace_control › white space control with raw tags
+  ● liquid.golden.unless_tag › array is equal to array
 
-    LiquidSyntaxError: unexpected tag 'raw' (<string>:2)
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "false"
+    Received: "true"
+
+  ● liquid.golden.unless_tag › array is equal to array from context
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "false"
+    Received: "true"
 
 Test Suites: 1 failed, 1 total
-Tests:       7 failed, 805 passed, 812 total
+Tests:       9 failed, 808 passed, 817 total
 Snapshots:   0 total
-Time:        2.504 s
-Ran all test suites.
-
-Test Suites: 1 failed, 1 total
-Tests:       4 failed, 800 passed, 804 total
-Snapshots:   0 total
-Time:        2.409 s
+Time:        2.178 s
 Ran all test suites.
 ```

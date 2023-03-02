@@ -1,5 +1,5 @@
 {
-    "version": "0.15.0",
+    "version": "0.16.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -962,6 +962,26 @@
                     "want": "bar",
                     "context": {
                         "title": "Hello"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "switch on array",
+                    "template": "{% case x %}{% when y %}foo{% endcase %}",
+                    "want": "foo",
+                    "context": {
+                        "x": [
+                            "a",
+                            "b",
+                            "c"
+                        ],
+                        "y": [
+                            "a",
+                            "b",
+                            "c"
+                        ]
                     },
                     "partials": {},
                     "error": false,
@@ -3748,6 +3768,30 @@
                         "product": {
                             "title": "foo"
                         }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array is equal to array",
+                    "template": "{% assign x = 'a,b,c' | split: ',' %}{% assign y = 'a,b,c' | split: ',' %}{% if x == y %}true{% else %}false{% endif %}",
+                    "want": "true",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array is equal to array from context",
+                    "template": "{% assign y = 'a,b,c' | split: ',' %}{% if x == y %}true{% else %}false{% endif %}",
+                    "want": "true",
+                    "context": {
+                        "x": [
+                            "a",
+                            "b",
+                            "c"
+                        ]
                     },
                     "partials": {},
                     "error": false,
@@ -8730,6 +8774,30 @@
                     "template": "{% unless true %}foo{% else %}bar{% endunless %}",
                     "want": "bar",
                     "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array is equal to array",
+                    "template": "{% assign x = 'a,b,c' | split: ',' %}{% assign y = 'a,b,c' | split: ',' %}{% unless x == y %}true{% else %}false{% endunless %}",
+                    "want": "false",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array is equal to array from context",
+                    "template": "{% assign y = 'a,b,c' | split: ',' %}{% unless x == y %}true{% else %}false{% endunless %}",
+                    "want": "false",
+                    "context": {
+                        "x": [
+                            "a",
+                            "b",
+                            "c"
+                        ]
+                    },
                     "partials": {},
                     "error": false,
                     "strict": false
