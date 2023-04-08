@@ -1,5 +1,13 @@
 # Golden Liquid Change Log
 
+## Version 0.17.0
+
+- Test conditional expression type coercion.
+
+- Update LiquidJS to 10.7.0
+- Fixed LiquidJS test runner import of `FS`.
+- Update Liquidpy to 0.8.0
+
 ## Version 0.16.0
 
 - Test array equality in `if`, `unless` and `case` tags.

@@ -1,7 +1,6 @@
 import fs from "node:fs";
 
-import { Liquid } from "liquidjs";
-import { FS } from "liquidjs/dist/fs/fs";
+import { FS, Liquid } from "liquidjs";
 
 /**
  * A mock file system.

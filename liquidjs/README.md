@@ -1,4 +1,4 @@
-# LiquidJS Version 10.6.0
+# LiquidJS Version 10.7.0
 
 ```
 npm install
@@ -597,20 +597,6 @@ npx jest --noStackTrace
 
     Received function did not throw
 
-  ● liquid.golden.if_tag › array is equal to array
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "true"
-    Received: "false"
-
-  ● liquid.golden.if_tag › array is equal to array from context
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "true"
-    Received: "false"
-
   ● liquid.golden.if_tag › blocks that contain only whitespace and comments are not rendered
 
     expect(received).toBe(expected) // Object.is equality
@@ -632,12 +618,11 @@ npx jest --noStackTrace
     Expected: "foo"
     Received: "bar"
 
-  ● liquid.golden.if_tag › range equals range
+  ● liquid.golden.if_tag › string greater than int
 
-    expect(received).toBe(expected) // Object.is equality
+    expect(received).toThrow()
 
-    Expected: "true"
-    Received: "false"
+    Received function did not throw
 
   ● liquid.golden.ifchanged_tag › change from assign
 
@@ -1308,17 +1293,6 @@ npx jest --noStackTrace
     + <div
     + class='multiline'>test
 
-  ● liquid.golden.strip_html_filter › html comment with newline
-
-    expect(received).toBe(expected) // Object.is equality
-
-    - Expected  - 1
-    + Received  + 2
-
-    - test
-    + <!-- foo bar
-    +  test -->test
-
   ● liquid.golden.strip_html_filter › unexpected argument
 
     expect(received).toThrow()
@@ -1607,20 +1581,6 @@ npx jest --noStackTrace
     Expected: "a#b#{}"
     Received: "a#b##[object Object]"
 
-  ● liquid.golden.unless_tag › array is equal to array
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "false"
-    Received: "true"
-
-  ● liquid.golden.unless_tag › array is equal to array from context
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "false"
-    Received: "true"
-
   ● liquid.golden.unless_tag › blocks that contain only whitespace are not rendered
 
     expect(received).toBe(expected) // Object.is equality
@@ -1770,8 +1730,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       247 failed, 570 passed, 817 total
+Tests:       242 failed, 579 passed, 821 total
 Snapshots:   0 total
-Time:        1.94 s, estimated 2 s
+Time:        1.993 s, estimated 3 s
 Ran all test suites.
 ```

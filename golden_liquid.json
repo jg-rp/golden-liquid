@@ -1,5 +1,5 @@
 {
-    "version": "0.16.0",
+    "version": "0.17.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -3893,6 +3893,24 @@
                     "strict": false
                 },
                 {
+                    "name": "int does not equal string",
+                    "template": "{% if 1 == '1' %}true{% else %}false{% endif %}",
+                    "want": "false",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "int equals float",
+                    "template": "{% if 1 == 1.0 %}true{% else %}false{% endif %}",
+                    "want": "true",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "literal false condition",
                     "template": "{% if false %}{% endif %}",
                     "want": "",
@@ -3989,6 +4007,24 @@
                     "context": {},
                     "partials": {},
                     "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string does not equal int",
+                    "template": "{% if '1' == 1 %}true{% else %}false{% endif %}",
+                    "want": "false",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string greater than int",
+                    "template": "{% if '2' > 1 %}true{% else %}false{% endif %}",
+                    "want": "false",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
                     "strict": false
                 },
                 {

@@ -29,7 +29,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 
 ```json
 {
-    "version": "0.16.0",
+    "version": "0.17.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -100,14 +100,14 @@ In the mean time, be sure to keep an eye on Python Liquid's [known issues page](
 
 ## Results Summary
 
-This table summarizes the results of running version 0.16.0 of this test suit against the five Liquid engines with runners included in this repository.
+This table summarizes the results of running version 0.17.0 of this test suit against the five Liquid engines with runners included in this repository.
 
 | Engine                                                | Version | Passed | Failed |
 | ----------------------------------------------------- | ------- | ------ | ------ |
-| [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.4.0   | 817    | 0      |
-| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 10.6.0  | 570    | 247    |
-| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.7.6   | 380    | 424    |
-| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.7.0   | 808    | 9      |
-| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.8.1   | 817    | 0      |
+| [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.4.0   | 821    | 0      |
+| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 10.7.0  | 579    | 242    |
+| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.7.6   | 394    | 427    |
+| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.7.0   | 812    | 9      |
+| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.8.1   | 821    | 0      |
 
 \*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments.
