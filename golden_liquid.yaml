@@ -1,4 +1,4 @@
-version: 0.17.0
+version: 0.18.0
 test_groups:
 - name: liquid.golden.abs_filter
   tests:
@@ -3368,6 +3368,48 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: comment with double quote
+    template: '{%# some "comment %}'
+    want: ''
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: comment with double quoted string
+    template: '{%# some "comment" %}'
+    want: ''
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: comment with single quote
+    template: '{%# some ''comment %}'
+    want: ''
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: comment with single quoted string
+    template: '{%# some ''comment'' %}'
+    want: ''
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: comment with u2018
+    template: "{%# some \u2018comment %}"
+    want: ''
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: comment with u201C
+    template: "{%# some \u201Ccomment %}"
+    want: ''
+    context: {}
+    partials: {}
+    error: false
+    strict: false
   - name: empty
     template: '{%#%}'
     want: ''
@@ -3616,6 +3658,13 @@ test_groups:
     strict: false
 - name: liquid.golden.liquid_tag
   tests:
+  - name: bare liquid tag in liquid tag
+    template: "{%- liquid\n  liquid\n  echo \"foo\"\n-%}"
+    want: foo
+    context: {}
+    partials: {}
+    error: false
+    strict: false
   - name: can't close nested blocks
     template: '{%- if true -%}
 
@@ -3656,6 +3705,13 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: liquid tag in liquid tag
+    template: "{%- liquid\n  liquid echo 'bar'\n  echo \"foo\"\n-%}"
+    want: barfoo
+    context: {}
+    partials: {}
+    error: false
+    strict: false
   - name: multi-line comment tag
     template: '{% liquid
 
@@ -3674,6 +3730,13 @@ test_groups:
   - name: nested liquid
     template: "{%- if true %}\n  {%- liquid\n    echo \"good\"\n  %}\n{%- endif -%}"
     want: good
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: nested liquid in liquid tag
+    template: '{%- liquid liquid liquid echo "foo" -%}'
+    want: foo
     context: {}
     partials: {}
     error: false
@@ -3821,6 +3884,16 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: input is a hash
+    template: '{{ a | map: ''title'' | join: ''#'' }}'
+    want: foo
+    context:
+      a:
+        title: foo
+        some: thing
+    partials: {}
+    error: false
+    strict: false
   - name: left value not an array
     template: '{{ a | map: ''title'' | join: ''#'' }}'
     want: ''
@@ -3837,6 +3910,17 @@ test_groups:
       - title: foo
       - title: bar
       - heading: baz
+    partials: {}
+    error: false
+    strict: false
+  - name: nested arrays get flattened
+    template: '{{ a | map: ''title'' | join: ''#'' }}'
+    want: foo#bar#baz
+    context:
+      a:
+      - title: foo
+      - - title: bar
+        - title: baz
     partials: {}
     error: false
     strict: false
@@ -4380,6 +4464,13 @@ test_groups:
   - name: integer value and integer arg
     template: '{{ 10 | plus: 2 }}'
     want: '12'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: integer value and negative integer arg
+    template: '{{ 10 | plus: -2 }}'
+    want: '8'
     context: {}
     partials: {}
     error: false
@@ -6111,6 +6202,137 @@ test_groups:
     template: '{{ "hello" | strip_newlines: 5 }}'
     want: ''
     context: {}
+    partials: {}
+    error: true
+    strict: false
+- name: liquid.golden.sum_filter
+  tests:
+  - name: empty sequence
+    template: '{{ a | sum }}'
+    want: '0'
+    context:
+      a: []
+    partials: {}
+    error: false
+    strict: false
+  - name: hashes with numeric strings and property argument
+    template: '{{ a | sum: ''k'' }}'
+    want: '6'
+    context:
+      a:
+      - k: '1'
+      - k: '2'
+      - k: '3'
+    partials: {}
+    error: false
+    strict: false
+  - name: hashes with property argument
+    template: '{{ a | sum: ''k'' }}'
+    want: '6'
+    context:
+      a:
+      - k: 1
+      - k: 2
+      - k: 3
+    partials: {}
+    error: false
+    strict: false
+  - name: hashes with some missing properties
+    template: '{{ a | sum: ''k'' }}'
+    want: '3'
+    context:
+      a:
+      - k: 1
+      - k: 2
+      - x: 3
+    partials: {}
+    error: false
+    strict: false
+  - name: hashes without property argument
+    template: '{{ a | sum }}'
+    want: '0'
+    context:
+      a:
+      - k: 1
+      - k: 2
+      - k: 3
+    partials: {}
+    error: false
+    strict: false
+  - name: ints
+    template: '{{ a | sum }}'
+    want: '6'
+    context:
+      a:
+      - 1
+      - 2
+      - 3
+    partials: {}
+    error: false
+    strict: false
+  - name: negative ints
+    template: '{{ a | sum }}'
+    want: '-6'
+    context:
+      a:
+      - -1
+      - -2
+      - -3
+    partials: {}
+    error: false
+    strict: false
+  - name: negative strings
+    template: '{{ a | sum }}'
+    want: '-6'
+    context:
+      a:
+      - '-1'
+      - '-2'
+      - '-3'
+    partials: {}
+    error: false
+    strict: false
+  - name: nested ints
+    template: '{{ a | sum }}'
+    want: '6'
+    context:
+      a:
+      - 1
+      - - 2
+        - - 3
+    partials: {}
+    error: false
+    strict: false
+  - name: only zeros
+    template: '{{ a | sum }}'
+    want: '0'
+    context:
+      a:
+      - 0
+      - 0
+      - 0
+    partials: {}
+    error: false
+    strict: false
+  - name: positive and negative ints
+    template: '{{ a | sum }}'
+    want: '5'
+    context:
+      a:
+      - -2
+      - -3
+      - 10
+    partials: {}
+    error: false
+    strict: false
+  - name: properties arguments with non-hash items
+    template: '{{ a | sum: ''k'' }}'
+    want: '3'
+    context:
+      a:
+      - 1
+      - 2
+      - 3
     partials: {}
     error: true
     strict: false

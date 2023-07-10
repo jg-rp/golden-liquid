@@ -1,5 +1,20 @@
 # Golden Liquid Change Log
 
+## Version 0.18.0
+
+- Fixed Shopify/Liquid test runner by adding `line_numbers: true` to `Liquid::Template.parse`. See [Shopify/Liquid#1734](https://github.com/Shopify/liquid/issues/1734).
+
+- Test shorthand comment tags with quotes and apostrophes.
+- Test `liquid` tags that contain `liquid` tags.
+- Test the `map` filter with a hash/mapping-like input.
+- Test that the `map` filter flattens its input when that input is a nested array-like object.
+- Test the new `sum` filter (excluding summation of float inputs).
+
+- Update Shopify/liquid from GitHub master
+- Update LiquidJS to 10.8.4
+- Update Liquidpy to 0.8.1
+- Update Python Liquid to 1.9.3
+
 ## Version 0.17.0
 
 - Test conditional expression type coercion.

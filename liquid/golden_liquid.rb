@@ -22,7 +22,7 @@ describe "Golden" do
               Liquid::Template.parse(t["template"], error_mode: mode).render!(context = t["context"])
             end
           else
-            template = Liquid::Template.parse(t["template"], error_mode: mode)
+            template = Liquid::Template.parse(t["template"], error_mode: mode, line_numbers: true)
             _(template.render(context = t["context"])).must_equal t["want"]
           end
         end

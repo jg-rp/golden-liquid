@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "577632e145166846b11ae160d3fb18cddbe618959bd3352ed5fa09ac949af317"
+            "sha256": "1f381fafc1043f01722b9118d2df9f40dcc5d2bcdafcc724a47e8f6c9140fed4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -73,9 +73,12 @@
             "version": "==2.8.2"
         },
         "python-liquid": {
-            "editable": true,
-            "git": "https://github.com/jg-rp/liquid.git",
-            "ref": "6dd060b8343742e87eca09b0dd7734160cc137dc"
+            "hashes": [
+                "sha256:5280f3319cacd21d0a50ed93c6c570073b2acb523271164abb301002bea9619e",
+                "sha256:6cc780527b8248a3a57bcda7db8303c3ba97142ed5d2c4be50fae7b81f32de25"
+            ],
+            "index": "pypi",
+            "version": "==1.9.3"
         },
         "six": {
             "hashes": [
@@ -95,11 +98,11 @@
         },
         "typing-extensions": {
             "hashes": [
-                "sha256:5cb5f4a79139d699607b3ef622a1dedafa84e115ab0024e0d9c044a9479ca7cb",
-                "sha256:fb33085c39dd998ac16d1431ebc293a8b3eedd00fd4a32de0ff79002c19511b4"
+                "sha256:440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36",
+                "sha256:b75ddc264f0ba5615db7ba217daeb99701ad295353c45f9e95963337ceeeffb2"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==4.5.0"
+            "version": "==4.7.1"
         }
     },
     "develop": {

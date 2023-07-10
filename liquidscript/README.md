@@ -48,12 +48,71 @@ npx jest --noStackTrace
     Expected: "true"
     Received: "false"
 
+  ● liquid.golden.liquid_tag › bare liquid tag in liquid tag
+
+    LiquidSyntaxError: missing tag expression (<string>:3)
+
+  ● liquid.golden.map_filter › input is a hash
+
+    LiquidFilterArgumentError: map: can't map non-iterable (<string>:1)
+
+  ● liquid.golden.map_filter › nested arrays get flattened
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "foo#bar#baz"
+    Received: "foo#"
+
   ● liquid.golden.sort_natural_filter › incompatible types
 
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "14{}"
     Received: "41[object Object]"
+
+  ● liquid.golden.sum_filter › empty sequence
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › hashes with numeric strings and property argument
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › hashes with property argument
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › hashes with some missing properties
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › hashes without property argument
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › ints
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › negative ints
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › negative strings
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › nested ints
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › only zeros
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
+
+  ● liquid.golden.sum_filter › positive and negative ints
+
+    NoSuchFilterError: unknown filter sum (<string>:1)
 
   ● liquid.golden.unless_tag › array is equal to array
 
@@ -70,8 +129,8 @@ npx jest --noStackTrace
     Received: "true"
 
 Test Suites: 1 failed, 1 total
-Tests:       9 failed, 812 passed, 821 total
+Tests:       23 failed, 822 passed, 845 total
 Snapshots:   0 total
-Time:        2.261 s
+Time:        1.999 s
 Ran all test suites.
 ```

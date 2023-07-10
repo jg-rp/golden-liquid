@@ -117,84 +117,98 @@ npx jest --noStackTrace
 
     undefined filter: base64_decode, line:1, col:1
     >> 1| {{ "XyMvLg==" | base64_decode }}
+          ^
     ParseError: undefined filter: base64_decode, line:1, col:1
 
   ● liquid.golden.base64_decode_filter › from string with URL unsafe
 
     undefined filter: base64_decode, line:1, col:1
     >> 1| {{ a | base64_decode }}
+          ^
     ParseError: undefined filter: base64_decode, line:1, col:1
 
   ● liquid.golden.base64_decode_filter › undefined left value
 
     undefined filter: base64_decode, line:1, col:1
     >> 1| {{ nosuchthing | base64_decode }}
+          ^
     ParseError: undefined filter: base64_decode, line:1, col:1
 
   ● liquid.golden.base64_encode_filter › from string
 
     undefined filter: base64_encode, line:1, col:1
     >> 1| {{ "_#/." | base64_encode }}
+          ^
     ParseError: undefined filter: base64_encode, line:1, col:1
 
   ● liquid.golden.base64_encode_filter › from string with URL unsafe
 
     undefined filter: base64_encode, line:1, col:1
     >> 1| {{ a | base64_encode }}
+          ^
     ParseError: undefined filter: base64_encode, line:1, col:1
 
   ● liquid.golden.base64_encode_filter › not a string
 
     undefined filter: base64_encode, line:1, col:1
     >> 1| {{ 5 | base64_encode }}
+          ^
     ParseError: undefined filter: base64_encode, line:1, col:1
 
   ● liquid.golden.base64_encode_filter › undefined left value
 
     undefined filter: base64_encode, line:1, col:1
     >> 1| {{ nosuchthing | base64_encode }}
+          ^
     ParseError: undefined filter: base64_encode, line:1, col:1
 
   ● liquid.golden.base64_url_safe_decode_filter › from string
 
     undefined filter: base64_url_safe_decode, line:1, col:1
     >> 1| {{ "XyMvLg==" | base64_url_safe_decode }}
+          ^
     ParseError: undefined filter: base64_url_safe_decode, line:1, col:1
 
   ● liquid.golden.base64_url_safe_decode_filter › from string with URL unsafe
 
     undefined filter: base64_url_safe_decode, line:1, col:1
     >> 1| {{ a | base64_url_safe_decode }}
+          ^
     ParseError: undefined filter: base64_url_safe_decode, line:1, col:1
 
   ● liquid.golden.base64_url_safe_decode_filter › undefined left value
 
     undefined filter: base64_url_safe_decode, line:1, col:1
     >> 1| {{ nosuchthing | base64_url_safe_decode }}
+          ^
     ParseError: undefined filter: base64_url_safe_decode, line:1, col:1
 
   ● liquid.golden.base64_url_safe_encode_filter › from string
 
     undefined filter: base64_url_safe_encode, line:1, col:1
     >> 1| {{ "_#/." | base64_url_safe_encode }}
+          ^
     ParseError: undefined filter: base64_url_safe_encode, line:1, col:1
 
   ● liquid.golden.base64_url_safe_encode_filter › from string with URL unsafe
 
     undefined filter: base64_url_safe_encode, line:1, col:1
     >> 1| {{ a | base64_url_safe_encode }}
+          ^
     ParseError: undefined filter: base64_url_safe_encode, line:1, col:1
 
   ● liquid.golden.base64_url_safe_encode_filter › not a string
 
     undefined filter: base64_url_safe_encode, line:1, col:1
     >> 1| {{ 5 | base64_url_safe_encode }}
+          ^
     ParseError: undefined filter: base64_url_safe_encode, line:1, col:1
 
   ● liquid.golden.base64_url_safe_encode_filter › undefined left value
 
     undefined filter: base64_url_safe_encode, line:1, col:1
     >> 1| {{ nosuchthing | base64_url_safe_encode }}
+          ^
     ParseError: undefined filter: base64_url_safe_encode, line:1, col:1
 
   ● liquid.golden.capitalize_filter › unexpected argument
@@ -375,6 +389,7 @@ npx jest --noStackTrace
 
     Iterator value bar is not an entry object, line:1, col:1
     >> 1| {{ false | default: allow_false: false, "bar" }}
+          ^
     RenderError: Iterator value bar is not an entry object, line:1, col:1
 
   ● liquid.golden.default_filter › too many arguments
@@ -387,6 +402,7 @@ npx jest --noStackTrace
 
     Iterator value bar is not an entry object, line:1, col:1
     >> 1| {{ false | default: allow_false: true, "bar" }}
+          ^
     RenderError: Iterator value bar is not an entry object, line:1, col:1
 
   ● liquid.golden.divided_by_filter › arg string not a number
@@ -628,31 +644,36 @@ npx jest --noStackTrace
 
     tag "ifchanged" not found, line:1, col:27
     >> 1| {% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}{% assign foo = 'goodbye' %}{% ifchanged %}{{ foo }}{% endifchanged %}
+                                    ^
     ParseError: tag "ifchanged" not found, line:1, col:27
 
   ● liquid.golden.ifchanged_tag › changed from initial state
 
     tag "ifchanged" not found, line:1, col:1
     >> 1| {% ifchanged %}hello{% endifchanged %}
+          ^
     ParseError: tag "ifchanged" not found, line:1, col:1
 
   ● liquid.golden.ifchanged_tag › no change from assign
 
     tag "ifchanged" not found, line:1, col:27
     >> 1| {% assign foo = 'hello' %}{% ifchanged %}{{ foo }}{% endifchanged %}{% ifchanged %}{{ foo }}{% endifchanged %}
+                                    ^
     ParseError: tag "ifchanged" not found, line:1, col:27
 
   ● liquid.golden.ifchanged_tag › not changed from initial state
 
     tag "ifchanged" not found, line:1, col:1
     >> 1| {% ifchanged %}{% endifchanged %}
+          ^
     ParseError: tag "ifchanged" not found, line:1, col:1
 
   ● liquid.golden.ifchanged_tag › within for loop
 
-    tag "ifchanged" not found, line:1, col:79, line:1, col:56
+    tag "ifchanged" not found, line:1, col:79
     >> 1| {% assign list = "1,3,2,1,3,1,2" | split: "," | sort %}{% for item in list -%}{%- ifchanged %} {{ item }}{% endifchanged -%}{%- endfor %}
-    ParseError: tag "ifchanged" not found, line:1, col:79, line:1, col:56
+                                                                                        ^
+    ParseError: tag "ifchanged" not found, line:1, col:79
 
   ● liquid.golden.illegal › no subtraction operator
 
@@ -711,6 +732,13 @@ npx jest --noStackTrace
     expect(received).toThrow()
 
     Received function did not throw
+
+  ● liquid.golden.map_filter › nested arrays get flattened
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "foo#bar#baz"
+    Received: "foo#"
 
   ● liquid.golden.minus_filter › arg string not a number
 
@@ -855,9 +883,10 @@ npx jest --noStackTrace
 
   ● liquid.golden.output_statement › bracketed variable resolves to a string without leading identifier
 
-    unexpected token at "something]", line:1, col:1
+    invalid value expression: "something]", line:1, col:5
     >> 1| {{ [something] }}
-    ParseError: unexpected token at "something]", line:1, col:1
+              ^
+    TokenizationError: invalid value expression: "something]", line:1, col:5
 
   ● liquid.golden.output_statement › chained bracketed identifier index no dot
 
@@ -874,9 +903,10 @@ npx jest --noStackTrace
 
   ● liquid.golden.output_statement › nested bracketed variable resolving to a string
 
-    unexpected token at "list[settings...", line:1, col:1
+    invalid value expression: "list[settings.zero]]", line:1, col:5
     >> 1| {{ [list[settings.zero]] }}
-    ParseError: unexpected token at "list[settings...", line:1, col:1
+              ^
+    TokenizationError: invalid value expression: "list[settings.zero]]", line:1, col:5
 
   ● liquid.golden.output_statement › render a range object that uses a float
 
@@ -1313,6 +1343,83 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.sum_filter › empty sequence
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › hashes with numeric strings and property argument
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum: 'k' }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › hashes with property argument
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum: 'k' }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › hashes with some missing properties
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum: 'k' }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › hashes without property argument
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › ints
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › negative ints
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › negative strings
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › nested ints
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › only zeros
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
+  ● liquid.golden.sum_filter › positive and negative ints
+
+    undefined filter: sum, line:1, col:1
+    >> 1| {{ a | sum }}
+          ^
+    ParseError: undefined filter: sum, line:1, col:1
+
   ● liquid.golden.tablerow_tag › cols is a float
 
     expect(received).toBe(expected) // Object.is equality
@@ -1566,6 +1673,7 @@ npx jest --noStackTrace
 
     (arr || []).filter is not a function, line:1, col:1
     >> 1| {{ a | uniq | join: '#' }}
+          ^
     RenderError: (arr || []).filter is not a function, line:1, col:1
 
   ● liquid.golden.uniq_filter › too many arguments
@@ -1647,7 +1755,7 @@ npx jest --noStackTrace
 
     - !!
     + !
-    +
+    +     
     +
     +
     + !
@@ -1666,7 +1774,7 @@ npx jest --noStackTrace
     +
     +
     +
-    +
+    +     
     +
     +
     +
@@ -1687,7 +1795,7 @@ npx jest --noStackTrace
     +
     +
     +
-    +
+    +     
     +
     +
     +
@@ -1724,14 +1832,15 @@ npx jest --noStackTrace
 
   ● liquid.golden.whitespace_control › white space control with raw tags
 
-    raw "{%- raw -%}{{..." not closed, line:2, col:14
+    raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
        1| ! {% raw %}{{ hello }}{% endraw %} !
     >> 2| ! {%- raw -%}{{ hello }}{%- endraw -%} !
-    TokenizationError: raw "{%- raw -%}{{..." not closed, line:2, col:14
+                       ^
+    TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       242 failed, 579 passed, 821 total
+Tests:       254 failed, 591 passed, 845 total
 Snapshots:   0 total
-Time:        1.993 s, estimated 3 s
+Time:        1.823 s, estimated 2 s
 Ran all test suites.
 ```
