@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "liquidscript": "^1.7.0"
+    "liquidscript": "^1.8.0"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",

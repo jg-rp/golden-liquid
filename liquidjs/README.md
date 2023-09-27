@@ -1,4 +1,4 @@
-# LiquidJS Version 10.7.0
+# LiquidJS Version 10.9.2
 
 ```
 npm install
@@ -244,26 +244,12 @@ npx jest --noStackTrace
     Expected: "barbar"
     Received: "bar"
 
-  ● liquid.golden.case_tag › or separated when expression
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "bar"
-    Received: ""
-
   ● liquid.golden.case_tag › switch on array
 
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "foo"
     Received: ""
-
-  ● liquid.golden.case_tag › unexpected when token
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: ""
-    Received: "bar"
 
   ● liquid.golden.ceil_filter › not a string, int or float
 
@@ -862,31 +848,11 @@ npx jest --noStackTrace
     Expected: "0"
     Received: "NaN"
 
-  ● liquid.golden.newline_to_br_filter › reference implementation test 2
-
-    expect(received).toBe(expected) // Object.is equality
-
-    - Expected  - 1
-    + Received  + 1
-
-    - a<br />
-    + a
-    <br />
-      b<br />
-      c
-
   ● liquid.golden.newline_to_br_filter › unexpected argument
 
     expect(received).toThrow()
 
     Received function did not throw
-
-  ● liquid.golden.output_statement › bracketed variable resolves to a string without leading identifier
-
-    invalid value expression: "something]", line:1, col:5
-    >> 1| {{ [something] }}
-              ^
-    TokenizationError: invalid value expression: "something]", line:1, col:5
 
   ● liquid.golden.output_statement › chained bracketed identifier index no dot
 
@@ -900,13 +866,6 @@ npx jest --noStackTrace
     expect(received).toThrow()
 
     Received function did not throw
-
-  ● liquid.golden.output_statement › nested bracketed variable resolving to a string
-
-    invalid value expression: "list[settings.zero]]", line:1, col:5
-    >> 1| {{ [list[settings.zero]] }}
-              ^
-    TokenizationError: invalid value expression: "list[settings.zero]]", line:1, col:5
 
   ● liquid.golden.output_statement › render a range object that uses a float
 
@@ -1329,14 +1288,6 @@ npx jest --noStackTrace
 
     Received function did not throw
 
-  ● liquid.golden.strip_newlines_filter › reference implementation test 2
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "abc"
-    Received: "a
-    bc"
-
   ● liquid.golden.strip_newlines_filter › unexpected argument
 
     expect(received).toThrow()
@@ -1755,7 +1706,7 @@ npx jest --noStackTrace
 
     - !!
     + !
-    +     
+    +
     +
     +
     + !
@@ -1774,7 +1725,7 @@ npx jest --noStackTrace
     +
     +
     +
-    +     
+    +
     +
     +
     +
@@ -1795,7 +1746,7 @@ npx jest --noStackTrace
     +
     +
     +
-    +     
+    +
     +
     +
     +
@@ -1839,8 +1790,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       254 failed, 591 passed, 845 total
+Tests:       248 failed, 601 passed, 849 total
 Snapshots:   0 total
-Time:        1.823 s, estimated 2 s
+Time:        2.159 s
 Ran all test suites.
 ```

@@ -74,11 +74,11 @@
         },
         "python-liquid": {
             "hashes": [
-                "sha256:5280f3319cacd21d0a50ed93c6c570073b2acb523271164abb301002bea9619e",
-                "sha256:6cc780527b8248a3a57bcda7db8303c3ba97142ed5d2c4be50fae7b81f32de25"
+                "sha256:4feedf91b53d81464fd9749598a94081499e7f55d2f0c6201555024f73ca1b34",
+                "sha256:ec7437547e3879867b937137f3ea13641c67304122fffb2cbb0c22460d88b5f7"
             ],
             "index": "pypi",
-            "version": "==1.9.3"
+            "version": "==1.10.0"
         },
         "six": {
             "hashes": [
@@ -98,11 +98,11 @@
         },
         "typing-extensions": {
             "hashes": [
-                "sha256:440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36",
-                "sha256:b75ddc264f0ba5615db7ba217daeb99701ad295353c45f9e95963337ceeeffb2"
+                "sha256:8f92fc8806f9a6b641eaa5318da32b44d401efaac0f6678c9bc448ba3605faa0",
+                "sha256:df8e4339e9cb77357558cbdbceca33c303714cf861d1eef15e1070055ae8b7ef"
             ],
-            "markers": "python_version >= '3.7'",
-            "version": "==4.7.1"
+            "markers": "python_version >= '3.8'",
+            "version": "==4.8.0"
         }
     },
     "develop": {

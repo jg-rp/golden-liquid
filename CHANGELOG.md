@@ -1,5 +1,13 @@
 # Golden Liquid Change Log
 
+## Version 0.19.0
+
+- Test top-level bracketed and quoted variable names.
+
+- Update LiquidJS to 10.9.2
+- Update LiquidScript to 1.8.0
+- Update Python Liquid to 1.10.0
+
 ## Version 0.18.0
 
 - Fixed Shopify/Liquid test runner by adding `line_numbers: true` to `Liquid::Template.parse`. See [Shopify/Liquid#1734](https://github.com/Shopify/liquid/issues/1734).

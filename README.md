@@ -8,12 +8,12 @@ The tests defined in `golden_liquid.json` attempt to cover many of Liquid's limi
 
 - [Standard Liquid](#standard-liquid)
 - [Test File Schema](#test-file-schema)
-- [More Information](#more-information)
 - [Results Summary](#results-summary)
+- [More Information](#more-information)
 
 ## Standard Liquid
 
-For our purposes, "standard" Liquid is the one described [here](https://shopify.github.io/liquid/), with [Ruby Liquid](https://github.com/Shopify/liquid) being the reference implementation. Not to be confused with the extended variation of Liquid that is used for Shopify stores.
+For our purposes, "standard" Liquid is the one described [here](https://shopify.github.io/liquid/), with [Shopify/Liquid](https://github.com/Shopify/liquid) being the reference implementation. Not to be confused with the extended variation of Liquid that is used for Shopify stores.
 
 All tests pass with Liquid version 5.4.0 and Ruby 3. Some `round` filter test cases fail with Ruby 2.7 due to some changes with Ruby's BigDecimal library (see issue [#1590](https://github.com/Shopify/liquid/issues/1590)). If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
 
@@ -29,7 +29,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 
 ```json
 {
-    "version": "0.18.0",
+    "version": "0.19.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -56,7 +56,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 `golden_liquid.yaml` is the same test suite in YAML format.
 
 ```yaml
-version: 0.18.0
+version: 0.19.0
 test_groups:
   - name: liquid.golden.abs_filter
     tests:
@@ -71,43 +71,36 @@ test_groups:
 
 For each test case:
 
-**`name`** is a descriptive name for the test case. Together with the group name, it
-should uniquely identify the test case.
+**`name`** - A descriptive name for the test case. Together with the group name, it should uniquely identify the test case.
 
-**`template`** is the Liquid template source text as a string.
+**`template`** - The Liquid template source text as a string.
 
-**`want`** is the expected result of rendering the template with the associated
-context.
+**`want`** - The expected result of rendering the template with the associated context.
 
-**`context`** is a JSON object mapping strings to arbitrary, possibly nested, strings,
-numbers, arrays, objects and booleans. These are the variables that the associated
-template should be rendered with.
+**`context`** - A JSON object mapping strings to arbitrary, possibly nested, strings, numbers, arrays, objects and booleans. These are the variables that the associated template should be rendered with.
 
-**`partials`** is a JSON object mapping strings to strings. You can think of it as a
-mock file system for testing `{% include %}` and `{% render %}`.
+**`partials`** - A JSON object mapping strings to strings. You can think of it as a mock file system for testing `{% include %}` and `{% render %}`.
 
-**`error`** is a boolean indicating if the test case should raise/throw an
-exception/error.
+**`error`** - A boolean indicating if the test case should raise/throw an exception/error.
 
-**`strict`** is a boolean indicating if the test should be rendered in "strict mode",
-if the target environment has a strict mode.
+**`strict`** A boolean indicating if the test should be rendered in "strict mode", if the target environment has a strict mode.
+
+## Results Summary
+
+This table summarizes the results of running version 0.19.0 of this test suit against the five Liquid engines with runners included in this repository.
+
+| Engine                                                | Version | Passed | Failed |
+| ----------------------------------------------------- | ------- | ------ | ------ |
+| [Shopify/Liquid](https://github.com/Shopify/liquid)   | 5.4.0   | 849    | 0      |
+| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 10.9.2  | 601    | 248    |
+| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.8.1   | 404    | 445    |
+| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.8.0   | 845    | 4      |
+| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.10.0  | 849    | 0      |
+
+\*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments, and its lack of distinct float and int types.
 
 ## More Information
 
 `golden_liquid.json` and `golden_liquid.yaml` are currently generated from [these files](https://github.com/jg-rp/liquid/tree/main/liquid/golden) in the [Python Liquid repository](https://github.com/jg-rp/liquid). The plan is to move these source files (or some equivalent files) to this repository, so we might add test cases for behavior that Python Liquid chooses not to implement.
 
 In the mean time, be sure to keep an eye on Python Liquid's [known issues page](https://jg-rp.github.io/liquid/known_issues) and [issue tracker](https://github.com/jg-rp/liquid/issues).
-
-## Results Summary
-
-This table summarizes the results of running version 0.18.0 of this test suit against the five Liquid engines with runners included in this repository.
-
-| Engine                                                | Version | Passed | Failed |
-| ----------------------------------------------------- | ------- | ------ | ------ |
-| [Ruby Liquid](https://github.com/Shopify/liquid)      | 5.4.0   | 845    | 0      |
-| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 10.8.4  | 591    | 254    |
-| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.8.1   | 402    | 443    |
-| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.7.0   | 822    | 23     |
-| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.9.3   | 845    | 0      |
-
-\*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments.

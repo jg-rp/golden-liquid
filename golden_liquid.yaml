@@ -1,4 +1,4 @@
-version: 0.18.0
+version: 0.19.0
 test_groups:
 - name: liquid.golden.abs_filter
   tests:
@@ -4282,6 +4282,24 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: quoted, bracketed variable name
+    template: '{{ foo[''bar''] }}'
+    want: '42'
+    context:
+      foo:
+        bar: 42
+    partials: {}
+    error: false
+    strict: false
+  - name: quoted, bracketed variable name with whitespace
+    template: '{{ foo[''bar baz''] }}'
+    want: '42'
+    context:
+      foo:
+        bar baz: 42
+    partials: {}
+    error: false
+    strict: false
   - name: render a default given a literal false
     template: '{{ false | default: ''bar'' }}'
     want: bar
@@ -4413,6 +4431,24 @@ test_groups:
     want: 5#4#3#2
     context:
       foo: 2
+    partials: {}
+    error: false
+    strict: false
+  - name: top-level quoted, bracketed variable name with whitespace
+    template: '{{ [''bar baz''] }}'
+    want: '42'
+    context:
+      bar baz: 42
+    partials: {}
+    error: false
+    strict: false
+  - name: top-level quoted, bracketed variable name with whitespace followed by dot
+      notation
+    template: '{{ [''bar baz''].qux }}'
+    want: '42'
+    context:
+      bar baz:
+        qux: 42
     partials: {}
     error: false
     strict: false

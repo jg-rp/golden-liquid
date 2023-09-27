@@ -274,6 +274,8 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement 
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a default given a literal false with 'allow false' equal to true]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a range object that uses a float]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render nil]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > top-level quoted, bracketed variable name with whitespace]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > top-level quoted, bracketed variable name with whitespace followed by dot notation]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > unexpected left value for the `join` filter passes through]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.plus_filter > arg string not a number]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.plus_filter > not a string, int or float]
@@ -449,5 +451,5 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_contro
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > suppress whitespace surrounding an empty capture block]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with  carriage return, newline and spaces]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with carriage return and spaces]
-443 failed, 402 passed in 1.54s
+445 failed, 404 passed in 1.67s
 ```
