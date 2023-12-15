@@ -1,5 +1,15 @@
 # Golden Liquid Change Log
 
+## Version 0.20.0
+
+- Test formatting dates with the `date` filter and `%s`.
+- Test the `split` filter when the string to be split and the delimiter are equal.
+- Test the `split` filter when the string to be split is empty.
+
+- Update Shopify/liquid from GutHub main
+- Update LiquidJS to 10.9.4
+- Update Python Liquid to 1.10.2
+
 ## Version 0.19.0
 
 - Test top-level bracketed and quoted variable names.

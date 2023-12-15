@@ -1,4 +1,4 @@
-# LiquidJS Version 10.9.2
+# LiquidJS Version 10.9.4
 
 ```
 npm install
@@ -1790,8 +1790,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       248 failed, 601 passed, 849 total
+Tests:       248 failed, 608 passed, 856 total
 Snapshots:   0 total
-Time:        2.159 s
+Time:        2.234 s
 Ran all test suites.
 ```

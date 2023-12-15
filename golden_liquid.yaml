@@ -1,4 +1,4 @@
-version: 0.19.0
+version: 0.20.0
 test_groups:
 - name: liquid.golden.abs_filter
   tests:
@@ -1165,6 +1165,13 @@ test_groups:
   - name: negative timestamp string
     template: '{{ ''-1152098955'' | date: ''%m/%d/%Y'' }}'
     want: '-1152098955'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: seconds since epoch format directive
+    template: '{{ ''March 14, 2016'' | date: ''%s'' }}'
+    want: '1457913600'
     context: {}
     partials: {}
     error: false
@@ -6009,9 +6016,57 @@ test_groups:
     strict: false
 - name: liquid.golden.split_filter
   tests:
+  - name: argument does not appear in string
+    template: '{% assign a = "abc" | split: "," %}{% for i in a %}#{{ forloop.index0
+      }}{{ i }}{% endfor %}'
+    want: '#0abc'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
   - name: argument not a string
     template: '{{ "hello th1ere" | split: 1 | join: "#" }}'
     want: hello th#ere
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: empty string and empty argument
+    template: '{% assign a = "" | split: "" %}{% for i in a %}{{ forloop.index0 }}{{
+      i }}{% endfor %}'
+    want: ''
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: empty string and single char argument
+    template: '{% assign a = "" | split: "," %}{% for i in a %}{{ forloop.index0 }}{{
+      i }}{% endfor %}'
+    want: ''
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: empty string argument
+    template: '{% assign a = "abc" | split: "" %}{% for i in a %}#{{ forloop.index0
+      }}{{ i }}{% endfor %}'
+    want: '#0a#1b#2c'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: left matches argument
+    template: '{% assign a = "," | split: "," %}{% for i in a %}{{ forloop.index0
+      }}{{ i }}{% endfor %}'
+    want: ''
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: left matches string repr of argument
+    template: '{% assign a = "1" | split: 1 %}{% for i in a %}{{ forloop.index0 }}{{
+      i }}{% endfor %}'
+    want: ''
     context: {}
     partials: {}
     error: false

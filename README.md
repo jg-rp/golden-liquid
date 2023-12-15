@@ -29,7 +29,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 
 ```json
 {
-    "version": "0.19.0",
+    "version": "0.20.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -56,7 +56,7 @@ In `golden_liquid.json`, tests are grouped. Each group has a name and an array o
 `golden_liquid.yaml` is the same test suite in YAML format.
 
 ```yaml
-version: 0.19.0
+version: 0.20.0
 test_groups:
   - name: liquid.golden.abs_filter
     tests:
@@ -87,15 +87,15 @@ For each test case:
 
 ## Results Summary
 
-This table summarizes the results of running version 0.19.0 of this test suit against the five Liquid engines with runners included in this repository.
+This table summarizes the results of running version 0.20.0 of this test suit against the five Liquid engines with runners included in this repository.
 
 | Engine                                                | Version | Passed | Failed |
 | ----------------------------------------------------- | ------- | ------ | ------ |
-| [Shopify/Liquid](https://github.com/Shopify/liquid)   | 5.4.0   | 849    | 0      |
-| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 10.9.2  | 601    | 248    |
-| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.8.1   | 404    | 445    |
-| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.8.0   | 845    | 4      |
-| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.10.0  | 849    | 0      |
+| [Shopify/Liquid](https://github.com/Shopify/liquid)   | 5.4.0   | 856    | 0      |
+| [LiquidJS](https://github.com/harttle/liquidjs)\*\*   | 10.9.2  | 608    | 248    |
+| [liquidpy](https://github.com/pwwang/liquidpy)        | 0.8.1   | 408    | 448    |
+| [LiquidScript](https://github.com/jg-rp/liquidscript) | 1.8.0   | 848    | 8      |
+| [Python Liquid](https://github.com/jg-rp/liquid)      | 1.10.0  | 856    | 0      |
 
 \*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments, and its lack of distinct float and int types.
 
