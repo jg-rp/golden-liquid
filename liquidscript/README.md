@@ -1,4 +1,4 @@
-# LiquidScript Version 1.8.0
+# LiquidScript Version 1.8.1
 
 ```
 npm install
@@ -6,7 +6,7 @@ npx jest --noStackTrace
 ```
 
 ```
- ● liquid.golden.date_filter › literal percent
+  ● liquid.golden.date_filter › literal percent
 
     expect(received).toBe(expected) // Object.is equality
 
@@ -34,6 +34,52 @@ npx jest --noStackTrace
     Expected: "Mar 14, 16"
     Received: "Invalid DateTime"
 
+  ● liquid.golden.if_tag › string is greater than or equal to string
+
+    LiquidTypeError: invalid comparison operator 'abc >= acb' (<string>:1)
+
+  ● liquid.golden.if_tag › string is greater than string
+
+    LiquidTypeError: invalid comparison operator 'abc > acb' (<string>:1)
+
+  ● liquid.golden.if_tag › string is less than or equal to string
+
+    LiquidTypeError: invalid comparison operator 'abc <= acb' (<string>:1)
+
+  ● liquid.golden.if_tag › string is less than string
+
+    LiquidTypeError: invalid comparison operator 'abc < acb' (<string>:1)
+
+  ● liquid.golden.if_tag › string is not greater than or equal to string
+
+    LiquidTypeError: invalid comparison operator 'bbb >= aaa' (<string>:1)
+
+  ● liquid.golden.if_tag › string is not greater than string
+
+    LiquidTypeError: invalid comparison operator 'bbb > aaa' (<string>:1)
+
+  ● liquid.golden.if_tag › string is not less than or equal to string
+
+    LiquidTypeError: invalid comparison operator 'bbb <= aaa' (<string>:1)
+
+  ● liquid.golden.if_tag › string is not less than string
+
+    LiquidTypeError: invalid comparison operator 'bbb < aaa' (<string>:1)
+
+  ● liquid.golden.if_tag › undefined is equal to nil
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "TRUE"
+    Received: "FALSE"
+
+  ● liquid.golden.if_tag › undefined is equal to null
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "TRUE"
+    Received: "FALSE"
+
   ● liquid.golden.sort_natural_filter › incompatible types
 
     expect(received).toBe(expected) // Object.is equality
@@ -41,30 +87,9 @@ npx jest --noStackTrace
     Expected: "14{}"
     Received: "41[object Object]"
 
-  ● liquid.golden.split_filter › empty string and single char argument
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: ""
-    Received: "0"
-
-  ● liquid.golden.split_filter › left matches argument
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: ""
-    Received: "01"
-
-  ● liquid.golden.split_filter › left matches string repr of argument
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: ""
-    Received: "01"
-
 Test Suites: 1 failed, 1 total
-Tests:       8 failed, 848 passed, 856 total
+Tests:       15 failed, 857 passed, 872 total
 Snapshots:   0 total
-Time:        2.151 s
+Time:        1.969 s
 Ran all test suites.
 ```

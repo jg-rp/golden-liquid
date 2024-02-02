@@ -24,6 +24,14 @@
             "markers": "python_version < '3.11'",
             "version": "==1.2.0"
         },
+        "importlib-resources": {
+            "hashes": [
+                "sha256:3893a00122eafde6894c59914446a512f728a0c1a45f9bb9b63721b6bacf0b4a",
+                "sha256:e8bf90d8213b486f428c9c39714b920041cb02c184686a3dee24905aaa8105d6"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==6.1.1"
+        },
         "iniconfig": {
             "hashes": [
                 "sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3",
@@ -66,11 +74,11 @@
         },
         "python-liquid": {
             "hashes": [
-                "sha256:28266c0022855bce2fb37705bced1cfa96c72fda65ae9818786fe630a2ee6afb",
-                "sha256:61259d0fe329599c2d9b40f20f42268f740e51fb46d123741d57ad6f080d1426"
+                "sha256:168a45d9d78cfd3f6cbe256824cd4ccd751be2b9e953f47a092985f9e2cebba0",
+                "sha256:8523a8afa20da993520e744d5250514bcaf43fa7cdfb99a7f73ddfbc16f0de07"
             ],
             "index": "pypi",
-            "version": "==1.10.2"
+            "version": "==1.11.0"
         },
         "six": {
             "hashes": [
@@ -95,6 +103,14 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==4.9.0"
+        },
+        "zipp": {
+            "hashes": [
+                "sha256:0e923e726174922dce09c53c59ad483ff7bbb8e572e00c7f7c46b88556409f31",
+                "sha256:84e64a1c28cf7e91ed2078bb8cc8c259cb19b76942096c8d7b84947690cabaf0"
+            ],
+            "markers": "python_version < '3.10'",
+            "version": "==3.17.0"
         }
     },
     "develop": {

@@ -1,5 +1,19 @@
 # Golden Liquid Change Log
 
+## Version 0.21.0
+
+- Test the truthiness of empty arrays and objects and strings.
+- Test comparing empty arrays and objects to the special `empty` keyword.
+- Test implicit string conversion with the `contains` membership operator.
+- Test comparing strings with `>`, `<`, `<=` and `>=`.
+- Test comparing undefined variables to `nil` and `null`.
+
+- Update Shopify/liquid from GutHub main
+- Update LiquidJS to 10.10.0
+- Update Liquidpy to 0.8.2
+- Update LiquidScript to 1.8.1
+- Update Python Liquid to 1.11.0
+
 ## Version 0.20.0
 
 - Test formatting dates with the `date` filter and `%s`.

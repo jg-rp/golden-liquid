@@ -1,4 +1,4 @@
-# Liquidpy Version 0.8.1
+# Liquidpy Version 0.8.2
 
 ```
 pipenv install
@@ -173,15 +173,22 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > 0.0 is t
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > alternate not equal condition] - jinja2.exceptions.TemplateSyntaxError: unexpected '>'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > blocks that contain only whitespace and comments are not rendered] - AssertionError: assert '  ' == ''
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > blocks that contain only whitespace are not rendered] - AssertionError: assert '  ' == ''
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > empty array equals special empty] - AssertionError: assert 'FALSE' == 'TRUE'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > empty array is truthy] - AssertionError: assert 'FALSE' == 'TRUE'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > empty object equals special empty] - AssertionError: assert 'FALSE' == 'TRUE'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > empty object is truthy] - AssertionError: assert 'FALSE' == 'TRUE'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > empty string is truthy] - AssertionError: assert 'FALSE' == 'TRUE'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > logical operators are right associative] - AssertionError: assert 'hello' == ''
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > one is not equal to true] - AssertionError: assert 'Hello' == 'Goodbye'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > string contains int] - TypeError: 'in <string>' requires string as left operand, not int
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > undefined is equal to nil] - AssertionError: assert 'FALSE' == 'TRUE'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > zero is not equal to false] - AssertionError: assert 'Hello' == 'Goodbye'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.if_tag > zero is truthy] - AssertionError: assert 'Goodbye' == 'Hello'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > change from assign] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > changed from initial state] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > no change from assign] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > not changed from initial state] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > within for loop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'. Jinja was looking for the following tags: 'endfor' or 'else'. The innermost block that needs to be closed is ...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ifchanged_tag > within for loop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'ifchanged'. Jinja was looking for the...
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.illegal > no addition operator] - Failed: DID NOT RAISE <class 'Exception'>
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.illegal > no multiplication operator] - Failed: DID NOT RAISE <class 'Exception'>
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.illegal > no subtraction operator] - Failed: DID NOT RAISE <class 'Exception'>
@@ -229,7 +236,7 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > carr
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > empty liquid tag] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > liquid tag in liquid tag] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > multi-line comment tag] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > nested liquid] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'. Jinja was looking for the following tags: 'elif' or 'elsif' or 'else' or 'endif'. The innermost block that needs...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > nested liquid] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'. Jinja was looking for the fo...
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > nested liquid in liquid tag] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > newline terminated tags] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > only whitespace] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'liquid'.
@@ -243,7 +250,7 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.lstrip_filter > n
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.lstrip_filter > right padded] - AssertionError: assert 'hello \t\n  ' == 'hello \t\r\n  '
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.lstrip_filter > undefined left value] - TypeError: descriptor 'lstrip' for 'str' objects doesn't apply to a 'Undefined' object
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.map_filter > array containing a non object] - Failed: DID NOT RAISE <class 'Exception'>
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.map_filter > input is a hash] - AssertionError: assert '<built-in me...7f7678626bb0>' == 'foo'
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.map_filter > input is a hash] - AssertionError: assert '<built-in me...7ffb8577ae70>' == 'foo'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.map_filter > missing property] - AssertionError: assert 'foo#bar#None' == 'foo#bar#'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.map_filter > nested arrays get flattened] - AssertionError: assert 'foo#None' == 'foo#bar#baz'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.map_filter > undefined argument] - TypeError: getattr(): attribute name must be string
@@ -305,11 +312,11 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > boun
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > bound variable does not exist] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > bound variable with alias] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > decrement is isolated between renders] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > for loop variables go out of scope] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'. Jinja was looking for the following tags: 'endfor' or 'else'. The innermost block that needs to be closed is 'for'.
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > for loop variables go out of scope] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'. Jinja was looking for the fo...
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > forloop helper] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > increment is isolated between renders] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > parent variables go out of scope] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > render loops can't access parentloop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'. Jinja was looking for the following tags: 'endfor' or 'else'. The innermost block that needs to be closed is 'for'.
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > render loops can't access parentloop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'. Jinja was looking for the fo...
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > render loops don't add parentloop] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > some keyword arguments] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.render_tag > some keyword arguments including a range literal] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'render'.
@@ -446,7 +453,7 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > le
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > second argument is undefined] - TypeError: 'EmptyDrop' object is not iterable
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > value is explicit nil] - AssertionError: assert '(b,)' == '(b,bar)'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.where_filter > value is false] - AssertionError: assert '(b,)' == '(b,false)'
-FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > don't suppress whitespace only blocks containing echo] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'. Jinja was looking for the following tags: 'elif' or 'elsif' or 'else' or 'endif'. The innermost block that needs t...
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > don't suppress whitespace only blocks containing echo] - jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'echo'. Jinja was looking for the foll...
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > suppress whitespace only case blocks] - AssertionError: assert '!\n    \n\n\n!' == '!!'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > suppress whitespace only if blocks] - AssertionError: assert '!\n\n\n\n\n\n    \n\n\n\n\n!' == '!!'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > suppress whitespace only unless blocks] - AssertionError: assert '!\n\n\n\n\n\n    \n\n\n\n\n!' == '!!'
@@ -454,5 +461,5 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_contro
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > suppress whitespace surrounding an empty capture block] - AssertionError: assert '!\n\n\n\n!' == '!!'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with  carriage return, newline and spaces] - AssertionError: assert '\nWelcome back,  Holly!' == '\r\nWelcome back,  Holly!'
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with carriage return and spaces] - AssertionError: assert '\nWelcome back,  Holly!' == '\rWelcome back,  Holly!'
-448 failed, 408 passed in 2.02s
+455 failed, 417 passed in 1.79s
 ```

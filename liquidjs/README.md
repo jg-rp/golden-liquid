@@ -1,4 +1,4 @@
-# LiquidJS Version 10.9.4
+# LiquidJS Version 10.10.0
 
 ```
 npm install
@@ -1294,82 +1294,18 @@ npx jest --noStackTrace
 
     Received function did not throw
 
-  ● liquid.golden.sum_filter › empty sequence
-
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
-
-  ● liquid.golden.sum_filter › hashes with numeric strings and property argument
-
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum: 'k' }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
-
-  ● liquid.golden.sum_filter › hashes with property argument
-
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum: 'k' }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
-
-  ● liquid.golden.sum_filter › hashes with some missing properties
-
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum: 'k' }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
-
-  ● liquid.golden.sum_filter › hashes without property argument
-
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
-
-  ● liquid.golden.sum_filter › ints
-
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
-
-  ● liquid.golden.sum_filter › negative ints
-
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
-
-  ● liquid.golden.sum_filter › negative strings
-
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
-
   ● liquid.golden.sum_filter › nested ints
 
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
+    expect(received).toBe(expected) // Object.is equality
 
-  ● liquid.golden.sum_filter › only zeros
+    Expected: "6"
+    Received: "1"
 
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
+  ● liquid.golden.sum_filter › properties arguments with non-hash items
 
-  ● liquid.golden.sum_filter › positive and negative ints
+    expect(received).toThrow()
 
-    undefined filter: sum, line:1, col:1
-    >> 1| {{ a | sum }}
-          ^
-    ParseError: undefined filter: sum, line:1, col:1
+    Received function did not throw
 
   ● liquid.golden.tablerow_tag › cols is a float
 
@@ -1790,8 +1726,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       248 failed, 608 passed, 856 total
+Tests:       239 failed, 633 passed, 872 total
 Snapshots:   0 total
-Time:        2.234 s
+Time:        1.846 s, estimated 3 s
 Ran all test suites.
 ```

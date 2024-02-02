@@ -1,4 +1,4 @@
-version: 0.20.0
+version: 0.21.0
 test_groups:
 - name: liquid.golden.abs_filter
   tests:
@@ -2933,6 +2933,45 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: empty array equals special empty
+    template: '{% if x == empty %}TRUE{% else %}FALSE{% endif %}'
+    want: 'TRUE'
+    context:
+      x: []
+    partials: {}
+    error: false
+    strict: false
+  - name: empty array is truthy
+    template: '{% if x %}TRUE{% else %}FALSE{% endif %}'
+    want: 'TRUE'
+    context:
+      x: []
+    partials: {}
+    error: false
+    strict: false
+  - name: empty object equals special empty
+    template: '{% if x == empty %}TRUE{% else %}FALSE{% endif %}'
+    want: 'TRUE'
+    context:
+      x: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: empty object is truthy
+    template: '{% if x %}TRUE{% else %}FALSE{% endif %}'
+    want: 'TRUE'
+    context:
+      x: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: empty string is truthy
+    template: '{% if '''' %}TRUE{% else %}FALSE{% endif %}'
+    want: 'TRUE'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
   - name: int does not equal string
     template: '{% if 1 == ''1'' %}true{% else %}false{% endif %}'
     want: 'false'
@@ -3022,6 +3061,14 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: string contains int
+    template: '{% if ''hel9lo'' contains 9 %}TRUE{% else %}FALSE{% endif %}'
+    want: 'TRUE'
+    context:
+      x: {}
+    partials: {}
+    error: false
+    strict: false
   - name: string does not equal int
     template: '{% if ''1'' == 1 %}true{% else %}false{% endif %}'
     want: 'false'
@@ -3035,6 +3082,76 @@ test_groups:
     context: {}
     partials: {}
     error: true
+    strict: false
+  - name: string is greater than or equal to string
+    template: '{% if ''abc'' >= ''acb'' %}true{% else %}false{% endif %}'
+    want: 'false'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: string is greater than string
+    template: '{% if ''abc'' > ''acb'' %}true{% else %}false{% endif %}'
+    want: 'false'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: string is less than or equal to string
+    template: '{% if ''abc'' <= ''acb'' %}true{% else %}false{% endif %}'
+    want: 'true'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: string is less than string
+    template: '{% if ''abc'' < ''acb'' %}true{% else %}false{% endif %}'
+    want: 'true'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: string is not greater than or equal to string
+    template: '{% if ''bbb'' >= ''aaa'' %}true{% else %}false{% endif %}'
+    want: 'true'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: string is not greater than string
+    template: '{% if ''bbb'' > ''aaa'' %}true{% else %}false{% endif %}'
+    want: 'true'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: string is not less than or equal to string
+    template: '{% if ''bbb'' <= ''aaa'' %}true{% else %}false{% endif %}'
+    want: 'false'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: string is not less than string
+    template: '{% if ''bbb'' < ''aaa'' %}true{% else %}false{% endif %}'
+    want: 'false'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: undefined is equal to nil
+    template: '{% if nosuchthing == nil %}TRUE{% else %}FALSE{% endif %}'
+    want: 'TRUE'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: undefined is equal to null
+    template: '{% if nosuchthing == null %}TRUE{% else %}FALSE{% endif %}'
+    want: 'TRUE'
+    context: {}
+    partials: {}
+    error: false
     strict: false
   - name: undefined variables are falsy
     template: '{% if nosuchthing %}bar{% else %}foo{% endif %}'
