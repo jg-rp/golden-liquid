@@ -1,5 +1,14 @@
 # Golden Liquid Change Log
 
+## Version 0.22.0
+
+- Test `{% else %}` tag expressions (anything between `else` and `%}`).
+- Test extra `{% else %}` and `{% elsif %}` blocks after the first `{% else %}` tag.
+
+- Update Shopify/Liquid from Github main
+- Update LiquidScript to 1.8.2
+- Update Python Liquid to 1.12.1
+
 ## Version 0.21.0
 
 - Test the truthiness of empty arrays, objects and strings.

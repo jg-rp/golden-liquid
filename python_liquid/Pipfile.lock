@@ -74,11 +74,12 @@
         },
         "python-liquid": {
             "hashes": [
-                "sha256:168a45d9d78cfd3f6cbe256824cd4ccd751be2b9e953f47a092985f9e2cebba0",
-                "sha256:8523a8afa20da993520e744d5250514bcaf43fa7cdfb99a7f73ddfbc16f0de07"
+                "sha256:2224312944be16c1a44406398eb8a07c7e57398d5c0ef15ff950946dbefe7c33",
+                "sha256:7367e979125859fb4116f360f224a89a52ecb455fb26843c43e4d800b389d325"
             ],
             "index": "pypi",
-            "version": "==1.11.0"
+            "markers": "python_version >= '3.7'",
+            "version": "==1.12.1"
         },
         "six": {
             "hashes": [

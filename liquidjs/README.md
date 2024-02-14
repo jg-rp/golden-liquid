@@ -613,6 +613,20 @@ npx jest --noStackTrace
     Expected: ""
     Received: "  "
 
+  ● liquid.golden.if_tag › extra else blocks are ignored
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "2"
+    Received: "23"
+
+  ● liquid.golden.if_tag › extra elsif blocks are ignored
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "2"
+    Received: "3"
+
   ● liquid.golden.if_tag › literal nil is falsy
 
     expect(received).toBe(expected) // Object.is equality
@@ -1583,6 +1597,20 @@ npx jest --noStackTrace
     Expected: ""
     Received: "  "
 
+  ● liquid.golden.unless_tag › extra else blocks are ignored
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "2"
+    Received: "23"
+
+  ● liquid.golden.unless_tag › extra elsif blocks are ignored
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "2"
+    Received: "3"
+
   ● liquid.golden.upcase_filter › unexpected argument
 
     expect(received).toThrow()
@@ -1726,8 +1754,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       239 failed, 633 passed, 872 total
+Tests:       243 failed, 635 passed, 878 total
 Snapshots:   0 total
-Time:        1.846 s, estimated 3 s
+Time:        2.694 s, estimated 4 s
 Ran all test suites.
 ```

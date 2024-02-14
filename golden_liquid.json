@@ -1,5 +1,5 @@
 {
-    "version": "0.21.0",
+    "version": "0.22.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -3902,6 +3902,15 @@
                     "strict": false
                 },
                 {
+                    "name": "else tag expressions are ignored",
+                    "template": "{% if false %}1{% else nonsense %}2{% endif %}",
+                    "want": "2",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
                     "name": "empty array equals special empty",
                     "template": "{% if x == empty %}TRUE{% else %}FALSE{% endif %}",
                     "want": "TRUE",
@@ -3953,6 +3962,24 @@
                     "partials": {},
                     "error": false,
                     "strict": false
+                },
+                {
+                    "name": "extra else blocks are ignored",
+                    "template": "{% if false %}1{% else %}2{% else %}3{% endif %}",
+                    "want": "2",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "extra elsif blocks are ignored",
+                    "template": "{% if false %}1{% else %}2{% elsif true %}3{% endif %}",
+                    "want": "2",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
                 },
                 {
                     "name": "int does not equal string",
@@ -9467,6 +9494,33 @@
                     "partials": {},
                     "error": false,
                     "strict": false
+                },
+                {
+                    "name": "else tag expressions are ignored",
+                    "template": "{% unless true %}1{% else nonsense %}2{% endunless %}",
+                    "want": "2",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "extra else blocks are ignored",
+                    "template": "{% unless true %}1{% else %}2{% else %}3{% endunless %}",
+                    "want": "2",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "extra elsif blocks are ignored",
+                    "template": "{% unless true %}1{% else %}2{% elsif true %}3{% endunless %}",
+                    "want": "2",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
                 },
                 {
                     "name": "literal false condition",

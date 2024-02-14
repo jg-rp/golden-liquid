@@ -1,4 +1,4 @@
-# LiquidScript Version 1.8.1
+# LiquidScript Version 1.8.2
 
 ```
 npm install
@@ -34,52 +34,6 @@ npx jest --noStackTrace
     Expected: "Mar 14, 16"
     Received: "Invalid DateTime"
 
-  ● liquid.golden.if_tag › string is greater than or equal to string
-
-    LiquidTypeError: invalid comparison operator 'abc >= acb' (<string>:1)
-
-  ● liquid.golden.if_tag › string is greater than string
-
-    LiquidTypeError: invalid comparison operator 'abc > acb' (<string>:1)
-
-  ● liquid.golden.if_tag › string is less than or equal to string
-
-    LiquidTypeError: invalid comparison operator 'abc <= acb' (<string>:1)
-
-  ● liquid.golden.if_tag › string is less than string
-
-    LiquidTypeError: invalid comparison operator 'abc < acb' (<string>:1)
-
-  ● liquid.golden.if_tag › string is not greater than or equal to string
-
-    LiquidTypeError: invalid comparison operator 'bbb >= aaa' (<string>:1)
-
-  ● liquid.golden.if_tag › string is not greater than string
-
-    LiquidTypeError: invalid comparison operator 'bbb > aaa' (<string>:1)
-
-  ● liquid.golden.if_tag › string is not less than or equal to string
-
-    LiquidTypeError: invalid comparison operator 'bbb <= aaa' (<string>:1)
-
-  ● liquid.golden.if_tag › string is not less than string
-
-    LiquidTypeError: invalid comparison operator 'bbb < aaa' (<string>:1)
-
-  ● liquid.golden.if_tag › undefined is equal to nil
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "TRUE"
-    Received: "FALSE"
-
-  ● liquid.golden.if_tag › undefined is equal to null
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "TRUE"
-    Received: "FALSE"
-
   ● liquid.golden.sort_natural_filter › incompatible types
 
     expect(received).toBe(expected) // Object.is equality
@@ -88,8 +42,8 @@ npx jest --noStackTrace
     Received: "41[object Object]"
 
 Test Suites: 1 failed, 1 total
-Tests:       15 failed, 857 passed, 872 total
+Tests:       5 failed, 873 passed, 878 total
 Snapshots:   0 total
-Time:        1.969 s
+Time:        3.107 s
 Ran all test suites.
 ```
