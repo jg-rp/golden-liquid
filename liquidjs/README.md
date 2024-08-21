@@ -1,4 +1,4 @@
-# LiquidJS Version 10.10.0
+# LiquidJS Version 10.16.3
 
 ```
 npm install
@@ -230,11 +230,11 @@ npx jest --noStackTrace
     Expected: "foobarbar"
     Received: "foobar"
 
-  ● liquid.golden.case_tag › mix or and comma separated when expression
+  ● liquid.golden.case_tag › falsy when before and truthy when after multiple else blocks
 
     expect(received).toBe(expected) // Object.is equality
 
-    Expected: "barbar"
+    Expected: "barbazqux"
     Received: "bar"
 
   ● liquid.golden.case_tag › mix or and comma separated when expression
@@ -244,12 +244,19 @@ npx jest --noStackTrace
     Expected: "barbar"
     Received: "bar"
 
-  ● liquid.golden.case_tag › switch on array
+  ● liquid.golden.case_tag › multiple else blocks
 
     expect(received).toBe(expected) // Object.is equality
 
-    Expected: "foo"
-    Received: ""
+    Expected: "barbaz"
+    Received: "bar"
+
+  ● liquid.golden.case_tag › truthy when before and after else
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "foobaz"
+    Received: "foo"
 
   ● liquid.golden.ceil_filter › not a string, int or float
 
@@ -613,26 +620,26 @@ npx jest --noStackTrace
     Expected: ""
     Received: "  "
 
+  ● liquid.golden.if_tag › else tag expressions are ignored
+
+    unexpected "nonsense", line:1, col:1
+    >> 1| {% if false %}1{% else nonsense %}2{% endif %}
+          ^
+    ParseError: unexpected "nonsense", line:1, col:1
+
   ● liquid.golden.if_tag › extra else blocks are ignored
 
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "2"
-    Received: "23"
+    duplicated else, line:1, col:1
+    >> 1| {% if false %}1{% else %}2{% else %}3{% endif %}
+          ^
+    ParseError: duplicated else, line:1, col:1
 
   ● liquid.golden.if_tag › extra elsif blocks are ignored
 
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "2"
-    Received: "3"
-
-  ● liquid.golden.if_tag › literal nil is falsy
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "foo"
-    Received: "bar"
+    unexpected elsif after else, line:1, col:1
+    >> 1| {% if false %}1{% else %}2{% elsif true %}3{% endif %}
+          ^
+    ParseError: unexpected elsif after else, line:1, col:1
 
   ● liquid.golden.if_tag › string greater than int
 
@@ -694,6 +701,13 @@ npx jest --noStackTrace
 
     Expected: "car"
     Received: ""
+
+  ● liquid.golden.join_filter › argument is not a string
+
+    memory alloc limit exceeded, line:1, col:1
+    >> 1| {{ arr | join: 5 }}
+          ^
+    RenderError: memory alloc limit exceeded, line:1, col:1
 
   ● liquid.golden.join_filter › too many arguments
 
@@ -1038,7 +1052,7 @@ npx jest --noStackTrace
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "#T#a#k#e# #m#y# #p#r#o#t#e#i#n#"
-    Received: "Take my protein"
+    Received: "T#a#k#e# #m#y# #p#r#o#t#e#i#n"
 
   ● liquid.golden.replace_filter › undefined second argument
 
@@ -1066,13 +1080,6 @@ npx jest --noStackTrace
 
     Received function did not throw
 
-  ● liquid.golden.replace_first_filter › undefined first argument
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "#Take my protein"
-    Received: "Take my protein"
-
   ● liquid.golden.replace_first_filter › undefined second argument
 
     expect(received).toBe(expected) // Object.is equality
@@ -1097,20 +1104,6 @@ npx jest --noStackTrace
     expect(received).toThrow()
 
     Received function did not throw
-
-  ● liquid.golden.replace_last_filter › undefined first argument
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "Take my protein#"
-    Received: "Take my protein"
-
-  ● liquid.golden.replace_last_filter › undefined second argument
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "Take my protein pills and put  helmet on"
-    Received: "Take my protein pills and put undefined helmet on"
 
   ● liquid.golden.reverse_filter › array of things
 
@@ -1202,12 +1195,6 @@ npx jest --noStackTrace
 
     Received function did not throw
 
-  ● liquid.golden.slice_filter › second argument not an integer
-
-    expect(received).toThrow()
-
-    Received function did not throw
-
   ● liquid.golden.slice_filter › too many arguments
 
     expect(received).toThrow()
@@ -1272,13 +1259,6 @@ npx jest --noStackTrace
 
     Received function did not throw
 
-  ● liquid.golden.split_filter › undefined argument
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "H#e#l#l#o# #t#h#e#r#e"
-    Received: "Hello there"
-
   ● liquid.golden.strip_filter › unexpected argument
 
     expect(received).toThrow()
@@ -1321,6 +1301,36 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.tablerow_tag › break from a tablerow loop
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 3
+    + Received  + 1
+
+    - <tr class="row1">
+    - <td class="col1">1</td></tr>
+    -
+    + <tr class="row1"><td class="col1">1</td><td class="col2">2</td></tr><tr class="row2"><td class="col1">3</td></tr>
+
+  ● liquid.golden.tablerow_tag › break from a tablerow loop inside a for loop
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 9
+    + Received  + 1
+
+    - \n\n<tr class="row1">
+    - <td class="col1"></td></tr>
+    - \nloop j=1\n\n<tr class="row1">
+    - <td class="col1"></td></tr>
+    - \nloop j=2\n\nloop i=1\n\n\n<tr class="row1">
+    - <td class="col1"></td></tr>
+    - \nloop j=1\n\n<tr class="row1">
+    - <td class="col1"></td></tr>
+    - \nloop j=2\n\nloop i=2\n\nafter loop\n
+    + \n\n<tr class="row1"><td class="col1"></td><td class="col2"></td><td class="col3"></td></tr>\nloop i=1\n\n\n<tr class="row1"><td class="col1"></td><td class="col2"></td><td class="col3"></td></tr>\nloop i=2\n\nafter loop\n
+
   ● liquid.golden.tablerow_tag › cols is a float
 
     expect(received).toBe(expected) // Object.is equality
@@ -1345,6 +1355,19 @@ npx jest --noStackTrace
     - <td class="col1">1 true</td><td class="col2">2 false</td></tr>
     - <tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
     + <tr class="row1"><td class="col1">1 true</td><td class="col2">2 false</td></tr><tr class="row2"><td class="col1">3 true</td><td class="col2">4 false</td></tr>
+    -
+
+  ● liquid.golden.tablerow_tag › continue from a tablerow loop
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 4
+    + Received  + 1
+
+    - <tr class="row1">
+    - <td class="col1">1</td><td class="col2">2</td></tr>
+    - <tr class="row2"><td class="col1">3</td></tr>
+    + <tr class="row1"><td class="col1">1</td><td class="col2">2</td></tr><tr class="row2"><td class="col1">3</td></tr>
     -
 
   ● liquid.golden.tablerow_tag › limit is a string
@@ -1572,16 +1595,17 @@ npx jest --noStackTrace
 
   ● liquid.golden.uniq_filter › left value is not an array
 
-    (arr || []).filter is not a function, line:1, col:1
+    memory alloc limit exceeded, line:1, col:1
     >> 1| {{ a | uniq | join: '#' }}
           ^
-    RenderError: (arr || []).filter is not a function, line:1, col:1
+    RenderError: memory alloc limit exceeded, line:1, col:1
 
-  ● liquid.golden.uniq_filter › too many arguments
+  ● liquid.golden.uniq_filter › left value is undefined
 
-    expect(received).toThrow()
-
-    Received function did not throw
+    Cannot read properties of undefined (reading 'length'), line:1, col:1
+    >> 1| {{ nosuchthing | uniq | join: '#' }}
+          ^
+    RenderError: Cannot read properties of undefined (reading 'length'), line:1, col:1
 
   ● liquid.golden.uniq_filter › unhashable items
 
@@ -1596,20 +1620,6 @@ npx jest --noStackTrace
 
     Expected: ""
     Received: "  "
-
-  ● liquid.golden.unless_tag › extra else blocks are ignored
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "2"
-    Received: "23"
-
-  ● liquid.golden.unless_tag › extra elsif blocks are ignored
-
-    expect(received).toBe(expected) // Object.is equality
-
-    Expected: "2"
-    Received: "3"
 
   ● liquid.golden.upcase_filter › unexpected argument
 
@@ -1754,8 +1764,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       243 failed, 635 passed, 878 total
+Tests:       241 failed, 647 passed, 888 total
 Snapshots:   0 total
-Time:        2.694 s, estimated 4 s
+Time:        2.871 s, estimated 4 s
 Ran all test suites.
 ```

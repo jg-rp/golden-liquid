@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 pytest = "*"
-python-liquid = "*"
+python-liquid = {editable = true, ref = "main", git = "git+https://github.com/jg-rp/liquid.git"}
 
 [dev-packages]
 black = "*"

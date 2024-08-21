@@ -1,5 +1,17 @@
 # Golden Liquid Change Log
 
+## Version 0.23.0
+
+- Test `{% when %}` tags after `{% else %}` when using `{% case %}`.
+- Test multiple `{% else %}` blocks following a `{% case %}` tag.
+- Test string membership with the `contains` operator.
+- Test `{% break %}` and `{% continue %}` from a `{% tablerow %}` block.
+
+- Updated Shopify/Liquid from GitHub main
+- Updated Shopify/Liquid runner to use its new `Environment` for configuring our in-memory file system.
+- Updated LiquidJS to 10.16.3
+- Updated Python Liquid from GitHub main
+
 ## Version 0.22.0
 
 - Test `{% else %}` tag expressions (anything between `else` and `%}`).

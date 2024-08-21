@@ -6,6 +6,22 @@ npx jest --noStackTrace
 ```
 
 ```
+  ● liquid.golden.case_tag › falsy when before and truthy when after else
+
+    LiquidSyntaxError: unexpected tag 'when' (<string>:1)
+
+  ● liquid.golden.case_tag › falsy when before and truthy when after multiple else blocks
+
+    LiquidSyntaxError: unexpected tag 'else' (<string>:1)
+
+  ● liquid.golden.case_tag › multiple else blocks
+
+    LiquidSyntaxError: unexpected tag 'else' (<string>:1)
+
+  ● liquid.golden.case_tag › truthy when before and after else
+
+    LiquidSyntaxError: unexpected tag 'when' (<string>:1)
+
   ● liquid.golden.date_filter › literal percent
 
     expect(received).toBe(expected) // Object.is equality
@@ -41,9 +57,36 @@ npx jest --noStackTrace
     Expected: "14{}"
     Received: "41[object Object]"
 
+  ● liquid.golden.tablerow_tag › break from a tablerow loop
+
+    LiquidSyntaxError: unexpected 'break' (<string>:1)
+
+  ● liquid.golden.tablerow_tag › break from a tablerow loop inside a for loop
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 8
+    + Received  + 2
+
+      \n\n<tr class="row1">
+    - <td class="col1"></td></tr>
+    - \nloop j=1\n\n<tr class="row1">
+    - <td class="col1"></td></tr>
+    - \nloop j=2\n\nloop i=1\n\n\n<tr class="row1">
+    - <td class="col1"></td></tr>
+    - \nloop j=1\n\n<tr class="row1">
+    + <td class="col1">\nloop i=1\n\n\n<tr class="row1">
+    - <td class="col1"></td></tr>
+    - \nloop j=2\n\nloop i=2\n\nafter loop\n
+    + <td class="col1">\nloop i=2\n\nafter loop\n
+
+  ● liquid.golden.tablerow_tag › continue from a tablerow loop
+
+    LiquidSyntaxError: unexpected 'continue' (<string>:1)
+
 Test Suites: 1 failed, 1 total
-Tests:       5 failed, 873 passed, 878 total
+Tests:       12 failed, 876 passed, 888 total
 Snapshots:   0 total
-Time:        3.107 s
+Time:        4.301 s
 Ran all test suites.
 ```
