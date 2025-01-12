@@ -1,5 +1,12 @@
 # Golden Liquid Change Log
 
+## Version 0.23.1
+
+- Moved folder `liquid` to `shopify_liquid`.
+- Updated Shopify/Liquid from GitHub main.
+- Updated LiquidJS to 10.20.1
+- Added Python Liquid2
+
 ## Version 0.23.0
 
 - Test `{% when %}` tags after `{% else %}` when using `{% case %}`.

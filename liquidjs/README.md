@@ -1,4 +1,4 @@
-# LiquidJS Version 10.16.3
+# LiquidJS Version 10.20.1
 
 ```
 npm install
@@ -503,6 +503,13 @@ npx jest --noStackTrace
     Expected: "(b,1)"
     Received: "(,)"
 
+  ● liquid.golden.first_filter › first of a string
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "h"
+
   ● liquid.golden.floor_filter › not a string, int or float
 
     expect(received).toBe(expected) // Object.is equality
@@ -702,13 +709,6 @@ npx jest --noStackTrace
     Expected: "car"
     Received: ""
 
-  ● liquid.golden.join_filter › argument is not a string
-
-    memory alloc limit exceeded, line:1, col:1
-    >> 1| {{ arr | join: 5 }}
-          ^
-    RenderError: memory alloc limit exceeded, line:1, col:1
-
   ● liquid.golden.join_filter › too many arguments
 
     expect(received).toThrow()
@@ -728,6 +728,13 @@ npx jest --noStackTrace
 
     Expected: "{}"
     Received: "[object Object]"
+
+  ● liquid.golden.last_filter › last of a string
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "o"
 
   ● liquid.golden.lstrip_filter › unexpected argument
 
@@ -1195,6 +1202,12 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.slice_filter › second argument not an integer
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
   ● liquid.golden.slice_filter › too many arguments
 
     expect(received).toThrow()
@@ -1584,35 +1597,27 @@ npx jest --noStackTrace
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "(title,foo)(name,a)(title,bar)(name,c)"
-    Received: "(title,foo)(name,a)"
+    Received: "(title,foo)(name,a)(title,foo)(name,b)(title,bar)(name,c)"
 
   ● liquid.golden.uniq_filter › array of objects with missing key property
 
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "(title,foo)(name,a)(title,bar)(name,c)(heading,bar)(name,c)"
-    Received: "(title,foo)(name,a)"
+    Received: "(title,foo)(name,a)(title,foo)(name,b)(title,bar)(name,c)(heading,bar)(name,c)(heading,baz)(name,d)"
 
-  ● liquid.golden.uniq_filter › left value is not an array
+  ● liquid.golden.uniq_filter › too many arguments
 
-    memory alloc limit exceeded, line:1, col:1
-    >> 1| {{ a | uniq | join: '#' }}
-          ^
-    RenderError: memory alloc limit exceeded, line:1, col:1
+    expect(received).toThrow()
 
-  ● liquid.golden.uniq_filter › left value is undefined
-
-    Cannot read properties of undefined (reading 'length'), line:1, col:1
-    >> 1| {{ nosuchthing | uniq | join: '#' }}
-          ^
-    RenderError: Cannot read properties of undefined (reading 'length'), line:1, col:1
+    Received function did not throw
 
   ● liquid.golden.uniq_filter › unhashable items
 
     expect(received).toBe(expected) // Object.is equality
 
     Expected: "a#b#{}"
-    Received: "a#b##[object Object]"
+    Received: "a#b##[object Object]#[object Object]"
 
   ● liquid.golden.unless_tag › blocks that contain only whitespace are not rendered
 
@@ -1764,8 +1769,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       241 failed, 647 passed, 888 total
+Tests:       242 failed, 646 passed, 888 total
 Snapshots:   0 total
-Time:        2.871 s, estimated 4 s
+Time:        3.106 s, estimated 7 s
 Ran all test suites.
 ```
