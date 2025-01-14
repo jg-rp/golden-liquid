@@ -13,9 +13,9 @@ The tests defined in `golden_liquid.json` attempt to cover many of Liquid's limi
 
 ## Standard Liquid
 
-For our purposes, "standard" Liquid is the one described [here](https://shopify.github.io/liquid/), with [Shopify/Liquid](https://github.com/Shopify/liquid) being the reference implementation. Not to be confused with the extended variation of Liquid that is used for Shopify stores.
+For our purposes "standard" Liquid is the one described [here](https://shopify.github.io/liquid/) with [Shopify/Liquid](https://github.com/Shopify/liquid) being the reference implementation. Not to be confused with the extended variation of Liquid used for Shopify stores.
 
-All tests pass with Liquid version 5.6.0.alpha and Ruby 3. Some `round` filter test cases fail with Ruby 2.7 due to some changes with Ruby's BigDecimal library (see issue [#1590](https://github.com/Shopify/liquid/issues/1590)). If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
+All tests pass with Liquid version 5.6.1 and Ruby 3. Some `round` filter test cases fail with Ruby 2.7 due to changes with Ruby's BigDecimal library (see issue [#1590](https://github.com/Shopify/liquid/issues/1590)). If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
 
 ```
 cd liquid
@@ -25,7 +25,7 @@ bundle exec ruby golden_liquid.rb
 
 ## Test File Schema
 
-In `golden_liquid.json`, tests are grouped. Each group has a name and an array of test cases. Including a version number, `golden_liquid.json` looks like this.
+In `golden_liquid.json` tests are grouped. Each group has a name and an array of test cases. Including a version number, `golden_liquid.json` looks like this.
 
 ```json
 {
@@ -71,19 +71,13 @@ test_groups:
 
 For each test case:
 
-**`name`** - A descriptive name for the test case. Together with the group name, it should uniquely identify the test case.
-
-**`template`** - The Liquid template source text as a string.
-
-**`want`** - The expected result of rendering the template with the associated context.
-
-**`context`** - A JSON object mapping strings to arbitrary, possibly nested, strings, numbers, arrays, objects and booleans. These are the variables that the associated template should be rendered with.
-
-**`partials`** - A JSON object mapping strings to strings. You can think of it as a mock file system for testing `{% include %}` and `{% render %}`.
-
-**`error`** - A boolean indicating if the test case should raise/throw an exception/error.
-
-**`strict`** A boolean indicating if the test should be rendered in "strict mode", if the target environment has a strict mode.
+- **`name`** is descriptive name for the test case. Together with the group name it should uniquely identify the test case.
+- **`template`** is Liquid source text as a string.
+- **`want`** is the expected result of rendering the template with the associated context.
+- **`context`** is a JSON object mapping strings to arbitrary, possibly nested, strings, numbers, arrays, objects and booleans. These are the variables that the associated template should be rendered with.
+- **`partials`** is a JSON object mapping strings to strings. You can think of it as a mock file system for testing `{% include %}` and `{% render %}`.
+- **`error`** is a Boolean indicating if the test case should raise/throw an exception/error.
+- **`strict`** is a Boolean indicating if the test should be rendered in "strict mode", if the target environment has a strict mode.
 
 ## Results Summary
 
@@ -104,4 +98,4 @@ This table summarizes the results of running version 0.23.0 of this test suit ag
 
 `golden_liquid.json` and `golden_liquid.yaml` are currently generated from [these files](https://github.com/jg-rp/liquid/tree/main/liquid/golden) in the [Python Liquid repository](https://github.com/jg-rp/liquid). The plan is to move these source files (or some equivalent files) to this repository, so we might add test cases for behavior that Python Liquid chooses not to implement.
 
-In the mean time, be sure to keep an eye on Python Liquid's [known issues page](https://jg-rp.github.io/liquid/known_issues) and [issue tracker](https://github.com/jg-rp/liquid/issues).
+In the mean time, be sure to keep an eye on Python Liquid's [known issues page](https://jg-rp.github.io/liquid/introduction/known-issues) and [issue tracker](https://github.com/jg-rp/liquid/issues).
