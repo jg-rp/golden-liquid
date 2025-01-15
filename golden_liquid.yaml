@@ -1,4 +1,4 @@
-version: 0.23.0
+version: 0.24.0
 test_groups:
 - name: liquid.golden.abs_filter
   tests:
@@ -5948,6 +5948,182 @@ test_groups:
     template: '{{ nosuchthing | sort | join: ''#'' }}'
     want: ''
     context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: property with a bracketed index, silently does not sort
+    template: '{% assign sorted = a | sort: ''foo[1]'' -%}
+
+      {% for item in sorted -%}
+
+      {% for pair in item -%}
+
+      ({{ pair[0] }}, {{ pair[1] | join: ''#'' }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: '(foo, 3#4#5)
+
+      (foo, 3#2#5)
+
+      (foo, 3#9#5)
+
+      (foo, 3#-1#5)
+
+      '
+    context:
+      a:
+      - foo:
+        - 3
+        - 4
+        - 5
+      - foo:
+        - 3
+        - 2
+        - 5
+      - foo:
+        - 3
+        - 9
+        - 5
+      - foo:
+        - 3
+        - -1
+        - 5
+    partials: {}
+    error: false
+    strict: false
+  - name: property with a dot, path match
+    template: '{% assign sorted = a | sort: ''foo.bar'' -%}
+
+      {% for item in sorted -%}
+
+      {% for pair in item.foo -%}
+
+      ({{ pair[0] }}, {{ pair[1] }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: '(bar, -1)
+
+      (bar, 2)
+
+      (bar, 4)
+
+      (bar, 9)
+
+      '
+    context:
+      a:
+      - foo:
+          bar: 4
+      - foo:
+          bar: 2
+      - foo:
+          bar: 9
+      - foo:
+          bar: -1
+    partials: {}
+    error: false
+    strict: false
+  - name: property with a dot, string and path match
+    template: "{% assign sorted = a | sort: 'foo.bar' -%}\n{% for item in sorted -%}\n\
+      {% for pair in item -%}\n({{ pair[0] }}, \n{%- if pair[1].bar -%}\n{{ pair[1].bar\
+      \ }}{%else%}{{ pair[1] -}}\n{% endif %})\n{% endfor -%}\n{% endfor %}"
+    want: '(foo,-1)
+
+      (foo,2)
+
+      (foo.bar,4)
+
+      (foo,9)
+
+      '
+    context:
+      a:
+      - foo.bar: 4
+      - foo:
+          bar: 2
+      - foo:
+          bar: 9
+      - foo:
+          bar: -1
+    partials: {}
+    error: false
+    strict: false
+  - name: property with a dot, string match
+    template: '{% assign sorted = a | sort: ''foo.bar'' -%}
+
+      {% for item in sorted -%}
+
+      {% for pair in item -%}
+
+      ({{ pair[0] }}, {{ pair[1] }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: '(foo.bar, -1)
+
+      (foo.bar, 2)
+
+      (foo.bar, 4)
+
+      (foo.bar, 9)
+
+      '
+    context:
+      a:
+      - foo.bar: 4
+      - foo.bar: 2
+      - foo.bar: 9
+      - foo.bar: -1
+    partials: {}
+    error: false
+    strict: false
+  - name: property, array contains array
+    template: '{% assign sorted = a | sort: ''foo'' -%}
+
+      {% for item in sorted -%}
+
+      {% for pair in item -%}
+
+      ({{ pair[0] }}, {{ pair[1] }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: ''
+    context:
+      a:
+      - foo: 4
+      - foo: 2
+      - foo: 9
+      - - 42
+        - 7
+    partials: {}
+    error: false
+    strict: false
+  - name: property, array contains primitive
+    template: '{% assign sorted = a | sort: ''foo'' -%}
+
+      {% for item in sorted -%}
+
+      {% for pair in item -%}
+
+      ({{ pair[0] }}, {{ pair[1] }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: ''
+    context:
+      a:
+      - foo: 4
+      - foo: 2
+      - foo: 9
+      - false
     partials: {}
     error: false
     strict: false

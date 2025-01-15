@@ -1,5 +1,5 @@
 {
-    "version": "0.23.0",
+    "version": "0.24.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -7926,6 +7926,179 @@
                     "template": "{{ nosuchthing | sort | join: '#' }}",
                     "want": "",
                     "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a bracketed index, silently does not sort",
+                    "template": "{% assign sorted = a | sort: 'foo[1]' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] | join: '#' }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo, 3#4#5)\n(foo, 3#2#5)\n(foo, 3#9#5)\n(foo, 3#-1#5)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": [
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    2,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    9,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    -1,
+                                    5
+                                ]
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a dot, path match",
+                    "template": "{% assign sorted = a | sort: 'foo.bar' -%}\n{% for item in sorted -%}\n{% for pair in item.foo -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(bar, -1)\n(bar, 2)\n(bar, 4)\n(bar, 9)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": {
+                                    "bar": 4
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": 2
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": 9
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": -1
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a dot, string and path match",
+                    "template": "{% assign sorted = a | sort: 'foo.bar' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, \n{%- if pair[1].bar -%}\n{{ pair[1].bar }}{%else%}{{ pair[1] -}}\n{% endif %})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo,-1)\n(foo,2)\n(foo.bar,4)\n(foo,9)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo.bar": 4
+                            },
+                            {
+                                "foo": {
+                                    "bar": 2
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": 9
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": -1
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a dot, string match",
+                    "template": "{% assign sorted = a | sort: 'foo.bar' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo.bar, -1)\n(foo.bar, 2)\n(foo.bar, 4)\n(foo.bar, 9)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo.bar": 4
+                            },
+                            {
+                                "foo.bar": 2
+                            },
+                            {
+                                "foo.bar": 9
+                            },
+                            {
+                                "foo.bar": -1
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array contains array",
+                    "template": "{% assign sorted = a | sort: 'foo' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": 4
+                            },
+                            {
+                                "foo": 2
+                            },
+                            {
+                                "foo": 9
+                            },
+                            [
+                                42,
+                                7
+                            ]
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array contains primitive",
+                    "template": "{% assign sorted = a | sort: 'foo' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": 4
+                            },
+                            {
+                                "foo": 2
+                            },
+                            {
+                                "foo": 9
+                            },
+                            false
+                        ]
+                    },
                     "partials": {},
                     "error": false,
                     "strict": false
