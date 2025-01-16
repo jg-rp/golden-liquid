@@ -915,21 +915,6 @@ test_groups:
     strict: false
 - name: liquid.golden.compact_filter
   tests:
-  - name: array of objects with key property
-    template: '{% assign x = a | compact: ''title'' %}{% for obj in x %}{% for i in
-      obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}'
-    want: (title,foo)(name,a)(title,bar)(name,c)
-    context:
-      a:
-      - title: foo
-        name: a
-      - title: null
-        name: b
-      - title: bar
-        name: c
-    partials: {}
-    error: false
-    strict: false
   - name: array with a nil
     template: '{{ a | compact | join: ''#'' }}'
     want: b#a#A
@@ -939,6 +924,40 @@ test_groups:
       - a
       - null
       - A
+    partials: {}
+    error: false
+    strict: false
+  - name: dotted property, path match
+    template: '{% assign x = a | compact: ''user.title'' %}{% for obj in x %}{% for
+      i in obj %}({{ i[0] }},{{ i[1].title }},{{ i[1].name }}){% endfor %}{% endfor
+      %}'
+    want: (user,foo,a)(user,bar,c)
+    context:
+      a:
+      - user:
+          title: foo
+          name: a
+      - user:
+          title: null
+          name: b
+      - user:
+          title: bar
+          name: c
+    partials: {}
+    error: false
+    strict: false
+  - name: dotted property, string match
+    template: '{% assign x = a | compact: ''user.title'' %}{% for obj in x %}{% for
+      i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}'
+    want: (user.title,foo)(name,a)(user.title,bar)(name,c)
+    context:
+      a:
+      - user.title: foo
+        name: a
+      - user.title: null
+        name: b
+      - user.title: bar
+        name: c
     partials: {}
     error: false
     strict: false
@@ -962,6 +981,21 @@ test_groups:
     template: '{{ nosuchthing | compact }}'
     want: ''
     context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: property, array of objects
+    template: '{% assign x = a | compact: ''title'' %}{% for obj in x %}{% for i in
+      obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}'
+    want: (title,foo)(name,a)(title,bar)(name,c)
+    context:
+      a:
+      - title: foo
+        name: a
+      - title: null
+        name: b
+      - title: bar
+        name: c
     partials: {}
     error: false
     strict: false
@@ -4082,6 +4116,69 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: dotted property, path and string match
+    template: '{{ a | map: ''user.title'' | join: ''#'' }}'
+    want: foo#bar#baz
+    context:
+      a:
+      - user.title: foo
+      - user:
+          title: bar
+      - user:
+          title: baz
+    partials: {}
+    error: false
+    strict: false
+  - name: dotted property, path match
+    template: '{{ a | map: ''user.title'' | join: ''#'' }}'
+    want: foo#bar#baz
+    context:
+      a:
+      - user:
+          title: foo
+      - user:
+          title: bar
+      - user:
+          title: baz
+    partials: {}
+    error: false
+    strict: false
+  - name: dotted property, path match, missing property
+    template: '{{ a | map: ''user.title'' | join: ''#'' }}'
+    want: foo##baz
+    context:
+      a:
+      - user:
+          title: foo
+      - user:
+          firstname: bar
+      - user:
+          title: baz
+    partials: {}
+    error: false
+    strict: false
+  - name: dotted property, string match
+    template: '{{ a | map: ''user.title'' | join: ''#'' }}'
+    want: foo#bar#baz
+    context:
+      a:
+      - user.title: foo
+      - user.title: bar
+      - user.title: baz
+    partials: {}
+    error: false
+    strict: false
+  - name: dotted property, string match, missing property
+    template: '{{ a | map: ''user.title'' | join: ''#'' }}'
+    want: foo##baz
+    context:
+      a:
+      - user.title: foo
+      - user.firstname: bar
+      - user.title: baz
+    partials: {}
+    error: false
+    strict: false
   - name: input is a hash
     template: '{{ a | map: ''title'' | join: ''#'' }}'
     want: foo
@@ -4119,6 +4216,26 @@ test_groups:
       - title: foo
       - - title: bar
         - title: baz
+    partials: {}
+    error: false
+    strict: false
+  - name: property with bracketed index
+    template: '{{ a | map: ''user[1]'' | join: ''#'' }}'
+    want: '##'
+    context:
+      a:
+      - user:
+        - 1
+        - 2
+        - 3
+      - user:
+        - 4
+        - 5
+        - 6
+      - user:
+        - 7
+        - 8
+        - 9
     partials: {}
     error: false
     strict: false
@@ -6345,7 +6462,7 @@ test_groups:
 
       (foo.bar, B)
 
-      (foo.bar, c)
+      (foo.bar, C)
 
       '
     context:
@@ -6820,6 +6937,31 @@ test_groups:
     want: '0'
     context:
       a: []
+    partials: {}
+    error: false
+    strict: false
+  - name: hashes with dotted property argument, path match
+    template: '{{ a | sum: ''k.foo'' }}'
+    want: '6'
+    context:
+      a:
+      - k:
+          foo: 1
+      - k:
+          foo: 2
+      - k:
+          foo: 3
+    partials: {}
+    error: false
+    strict: false
+  - name: hashes with dotted property argument, string match
+    template: '{{ a | sum: ''k.foo'' }}'
+    want: '6'
+    context:
+      a:
+      - k.foo: 1
+      - k.foo: 2
+      - k.foo: 3
     partials: {}
     error: false
     strict: false
@@ -7594,6 +7736,130 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: property with a dot, string match
+    template: '{% assign x = a | uniq: ''user.title'' %}{% for obj in x %}{% for i
+      in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}'
+    want: (user.title,foo)(name,a)(user.title,bar)(name,c)
+    context:
+      a:
+      - user.title: foo
+        name: a
+      - user.title: foo
+        name: b
+      - user.title: bar
+        name: c
+    partials: {}
+    error: false
+    strict: false
+  - name: property with bracketed index
+    template: '{% assign x = a | uniq: ''foo[1]'' -%}
+
+      {% for item in x -%}
+
+      {% for pair in item -%}
+
+      ({{ pair[0] }}, {{ pair[1] | join: ''#'' }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: '(foo, 3#4#5)
+
+      '
+    context:
+      a:
+      - foo:
+        - 3
+        - 4
+        - 5
+      - foo:
+        - 3
+        - 2
+        - 5
+      - foo:
+        - 3
+        - 4
+        - 5
+      - foo:
+        - 3
+        - -1
+        - 5
+    partials: {}
+    error: false
+    strict: false
+  - name: property, array contains a primitive
+    template: '{% assign x = a | uniq: ''title'' %}{% for obj in x %}{% for i in obj
+      %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}'
+    want: ''
+    context:
+      a:
+      - title: foo
+        name: a
+      - title: foo
+        name: b
+      - title: bar
+        name: c
+      - false
+    partials: {}
+    error: false
+    strict: false
+  - name: property, array contains an array
+    template: '{% assign x = a | uniq: ''title'' %}{% for obj in x %}{% for i in obj
+      %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}'
+    want: (title,foo)(name,a)(title,bar)(name,c)(,)
+    context:
+      a:
+      - title: foo
+        name: a
+      - title: foo
+        name: b
+      - title: bar
+        name: c
+      - - foo
+        - bar
+    partials: {}
+    error: false
+    strict: false
+  - name: property, arrays
+    template: '{% assign x = a | uniq: ''foo'' -%}
+
+      {% for item in x -%}
+
+      {% for pair in item -%}
+
+      ({{ pair[0] }}, {{ pair[1] | join: ''#'' }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: '(foo, 3#4#5)
+
+      (foo, 3#2#5)
+
+      (foo, 3#-1#5)
+
+      '
+    context:
+      a:
+      - foo:
+        - 3
+        - 4
+        - 5
+      - foo:
+        - 3
+        - 2
+        - 5
+      - foo:
+        - 3
+        - 4
+        - 5
+      - foo:
+        - 3
+        - -1
+        - 5
+    partials: {}
+    error: false
+    strict: false
   - name: too many arguments
     template: '{{ nosuchthing | uniq: ''foo'', ''bar'' }}'
     want: ''
@@ -7834,6 +8100,33 @@ test_groups:
       - heading: foo
       - title: bar
       - title: null
+    partials: {}
+    error: false
+    strict: false
+  - name: array of hashes with dotted property, path match
+    template: '{% assign x = a | where: ''user.title'', ''bar'' %}{% for obj in x
+      %}{% for i in obj %}({{ i[0] }},{{ i[1].title }}){% endfor %}{% endfor %}'
+    want: (user,bar)
+    context:
+      a:
+      - user:
+          title: foo
+      - user:
+          title: bar
+      - user:
+          title: null
+    partials: {}
+    error: false
+    strict: false
+  - name: array of hashes with dotted property, string match
+    template: '{% assign x = a | where: ''user.title'', ''bar'' %}{% for obj in x
+      %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}'
+    want: (user.title,bar)
+    context:
+      a:
+      - user.title: foo
+      - user.title: bar
+      - user.title: null
     partials: {}
     error: false
     strict: false

@@ -1210,30 +1210,6 @@
             "name": "liquid.golden.compact_filter",
             "tests": [
                 {
-                    "name": "array of objects with key property",
-                    "template": "{% assign x = a | compact: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
-                    "want": "(title,foo)(name,a)(title,bar)(name,c)",
-                    "context": {
-                        "a": [
-                            {
-                                "title": "foo",
-                                "name": "a"
-                            },
-                            {
-                                "title": null,
-                                "name": "b"
-                            },
-                            {
-                                "title": "bar",
-                                "name": "c"
-                            }
-                        ]
-                    },
-                    "partials": {},
-                    "error": false,
-                    "strict": false
-                },
-                {
                     "name": "array with a nil",
                     "template": "{{ a | compact | join: '#' }}",
                     "want": "b#a#A",
@@ -1243,6 +1219,60 @@
                             "a",
                             null,
                             "A"
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, path match",
+                    "template": "{% assign x = a | compact: 'user.title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1].title }},{{ i[1].name }}){% endfor %}{% endfor %}",
+                    "want": "(user,foo,a)(user,bar,c)",
+                    "context": {
+                        "a": [
+                            {
+                                "user": {
+                                    "title": "foo",
+                                    "name": "a"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": null,
+                                    "name": "b"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "bar",
+                                    "name": "c"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, string match",
+                    "template": "{% assign x = a | compact: 'user.title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(user.title,foo)(name,a)(user.title,bar)(name,c)",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo",
+                                "name": "a"
+                            },
+                            {
+                                "user.title": null,
+                                "name": "b"
+                            },
+                            {
+                                "user.title": "bar",
+                                "name": "c"
+                            }
                         ]
                     },
                     "partials": {},
@@ -1276,6 +1306,30 @@
                     "template": "{{ nosuchthing | compact }}",
                     "want": "",
                     "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array of objects",
+                    "template": "{% assign x = a | compact: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(title,foo)(name,a)(title,bar)(name,c)",
+                    "context": {
+                        "a": [
+                            {
+                                "title": "foo",
+                                "name": "a"
+                            },
+                            {
+                                "title": null,
+                                "name": "b"
+                            },
+                            {
+                                "title": "bar",
+                                "name": "c"
+                            }
+                        ]
+                    },
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -5390,6 +5444,127 @@
                     "strict": false
                 },
                 {
+                    "name": "dotted property, path and string match",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo#bar#baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo"
+                            },
+                            {
+                                "user": {
+                                    "title": "bar"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "baz"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, path match",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo#bar#baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user": {
+                                    "title": "foo"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "bar"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "baz"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, path match, missing property",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo##baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user": {
+                                    "title": "foo"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "firstname": "bar"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "baz"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, string match",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo#bar#baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo"
+                            },
+                            {
+                                "user.title": "bar"
+                            },
+                            {
+                                "user.title": "baz"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, string match, missing property",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo##baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo"
+                            },
+                            {
+                                "user.firstname": "bar"
+                            },
+                            {
+                                "user.title": "baz"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "input is a hash",
                     "template": "{{ a | map: 'title' | join: '#' }}",
                     "want": "foo",
@@ -5452,6 +5627,39 @@
                                     "title": "baz"
                                 }
                             ]
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with bracketed index",
+                    "template": "{{ a | map: 'user[1]' | join: '#' }}",
+                    "want": "##",
+                    "context": {
+                        "a": [
+                            {
+                                "user": [
+                                    1,
+                                    2,
+                                    3
+                                ]
+                            },
+                            {
+                                "user": [
+                                    4,
+                                    5,
+                                    6
+                                ]
+                            },
+                            {
+                                "user": [
+                                    7,
+                                    8,
+                                    9
+                                ]
+                            }
                         ]
                     },
                     "partials": {},
@@ -9004,6 +9212,54 @@
                     "strict": false
                 },
                 {
+                    "name": "hashes with dotted property argument, path match",
+                    "template": "{{ a | sum: 'k.foo' }}",
+                    "want": "6",
+                    "context": {
+                        "a": [
+                            {
+                                "k": {
+                                    "foo": 1
+                                }
+                            },
+                            {
+                                "k": {
+                                    "foo": 2
+                                }
+                            },
+                            {
+                                "k": {
+                                    "foo": 3
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "hashes with dotted property argument, string match",
+                    "template": "{{ a | sum: 'k.foo' }}",
+                    "want": "6",
+                    "context": {
+                        "a": [
+                            {
+                                "k.foo": 1
+                            },
+                            {
+                                "k.foo": 2
+                            },
+                            {
+                                "k.foo": 3
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "hashes with numeric strings and property argument",
                     "template": "{{ a | sum: 'k' }}",
                     "want": "6",
@@ -9873,7 +10129,7 @@
                             {
                                 "foo": [
                                     3,
-                                    9,
+                                    4,
                                     5
                                 ]
                             },
@@ -9944,7 +10200,7 @@
                     "strict": false
                 },
                 {
-                    "name": "property, uniq arrays is a no op",
+                    "name": "property, arrays",
                     "template": "{% assign x = a | uniq: 'foo' -%}\n{% for item in x -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] | join: '#' }})\n{% endfor -%}\n{% endfor %}",
                     "want": "(foo, 3#4#5)\n(foo, 3#2#5)\n(foo, 3#-1#5)\n",
                     "context": {
@@ -10309,6 +10565,54 @@
                             },
                             {
                                 "title": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes with dotted property, path match",
+                    "template": "{% assign x = a | where: 'user.title', 'bar' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1].title }}){% endfor %}{% endfor %}",
+                    "want": "(user,bar)",
+                    "context": {
+                        "a": [
+                            {
+                                "user": {
+                                    "title": "foo"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "bar"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": null
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes with dotted property, string match",
+                    "template": "{% assign x = a | where: 'user.title', 'bar' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(user.title,bar)",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo"
+                            },
+                            {
+                                "user.title": "bar"
+                            },
+                            {
+                                "user.title": null
                             }
                         ]
                     },
