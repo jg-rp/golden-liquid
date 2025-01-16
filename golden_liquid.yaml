@@ -6257,6 +6257,156 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: property with a dot, path match
+    template: '{% assign sorted = a | sort_natural: ''foo.bar'' -%}
+
+      {% for item in sorted -%}
+
+      {% for pair in item.foo -%}
+
+      ({{ pair[0] }}, {{ pair[1] }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: '(bar, a)
+
+      (bar, A)
+
+      (bar, b)
+
+      (bar, B)
+
+      (bar, C)
+
+      '
+    context:
+      a:
+      - foo:
+          bar: b
+      - foo:
+          bar: a
+      - foo:
+          bar: C
+      - foo:
+          bar: B
+      - foo:
+          bar: A
+    partials: {}
+    error: false
+    strict: false
+  - name: property with a dot, string and path match
+    template: "{% assign sorted = a | sort_natural: 'foo.bar' -%}\n{% for item in\
+      \ sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, \n{%- if pair[1].bar\
+      \ -%}\n{{ pair[1].bar }}{%else%}{{ pair[1] -}}\n{% endif %})\n{% endfor -%}\n\
+      {% endfor %}"
+    want: '(foo,a)
+
+      (foo,A)
+
+      (foo.bar,b)
+
+      (foo,B)
+
+      (foo,C)
+
+      '
+    context:
+      a:
+      - foo.bar: b
+      - foo:
+          bar: a
+      - foo:
+          bar: C
+      - foo:
+          bar: B
+      - foo:
+          bar: A
+    partials: {}
+    error: false
+    strict: false
+  - name: property with a dot, string match
+    template: '{% assign sorted = a | sort_natural: ''foo.bar'' -%}
+
+      {% for item in sorted -%}
+
+      {% for pair in item -%}
+
+      ({{ pair[0] }}, {{ pair[1] }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: '(foo.bar, a)
+
+      (foo.bar, A)
+
+      (foo.bar, b)
+
+      (foo.bar, B)
+
+      (foo.bar, c)
+
+      '
+    context:
+      a:
+      - foo.bar: b
+      - foo.bar: a
+      - foo.bar: C
+      - foo.bar: B
+      - foo.bar: A
+    partials: {}
+    error: false
+    strict: false
+  - name: property, array contains array
+    template: '{% assign sorted = a | sort_natural: ''foo'' -%}
+
+      {% for item in sorted -%}
+
+      {% for pair in item -%}
+
+      ({{ pair[0] }}, {{ pair[1] }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: ''
+    context:
+      a:
+      - foo: b
+      - foo: a
+      - foo: C
+      - foo: B
+      - foo: A
+      - - 42
+        - 7
+    partials: {}
+    error: false
+    strict: false
+  - name: property, array contains primitive
+    template: '{% assign sorted = a | sort_natural: ''foo'' -%}
+
+      {% for item in sorted -%}
+
+      {% for pair in item -%}
+
+      ({{ pair[0] }}, {{ pair[1] }})
+
+      {% endfor -%}
+
+      {% endfor %}'
+    want: ''
+    context:
+      a:
+      - foo: b
+      - foo: a
+      - foo: C
+      - foo: B
+      - foo: A
+      - false
+    partials: {}
+    error: false
+    strict: false
 - name: liquid.golden.special
   tests:
   - name: first of a string
