@@ -1,5 +1,5 @@
 {
-    "version": "0.23.0",
+    "version": "0.24.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -1210,30 +1210,6 @@
             "name": "liquid.golden.compact_filter",
             "tests": [
                 {
-                    "name": "array of objects with key property",
-                    "template": "{% assign x = a | compact: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
-                    "want": "(title,foo)(name,a)(title,bar)(name,c)",
-                    "context": {
-                        "a": [
-                            {
-                                "title": "foo",
-                                "name": "a"
-                            },
-                            {
-                                "title": null,
-                                "name": "b"
-                            },
-                            {
-                                "title": "bar",
-                                "name": "c"
-                            }
-                        ]
-                    },
-                    "partials": {},
-                    "error": false,
-                    "strict": false
-                },
-                {
                     "name": "array with a nil",
                     "template": "{{ a | compact | join: '#' }}",
                     "want": "b#a#A",
@@ -1243,6 +1219,60 @@
                             "a",
                             null,
                             "A"
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, path match",
+                    "template": "{% assign x = a | compact: 'user.title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1].title }},{{ i[1].name }}){% endfor %}{% endfor %}",
+                    "want": "(user,foo,a)(user,bar,c)",
+                    "context": {
+                        "a": [
+                            {
+                                "user": {
+                                    "title": "foo",
+                                    "name": "a"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": null,
+                                    "name": "b"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "bar",
+                                    "name": "c"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, string match",
+                    "template": "{% assign x = a | compact: 'user.title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(user.title,foo)(name,a)(user.title,bar)(name,c)",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo",
+                                "name": "a"
+                            },
+                            {
+                                "user.title": null,
+                                "name": "b"
+                            },
+                            {
+                                "user.title": "bar",
+                                "name": "c"
+                            }
                         ]
                     },
                     "partials": {},
@@ -1276,6 +1306,30 @@
                     "template": "{{ nosuchthing | compact }}",
                     "want": "",
                     "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array of objects",
+                    "template": "{% assign x = a | compact: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(title,foo)(name,a)(title,bar)(name,c)",
+                    "context": {
+                        "a": [
+                            {
+                                "title": "foo",
+                                "name": "a"
+                            },
+                            {
+                                "title": null,
+                                "name": "b"
+                            },
+                            {
+                                "title": "bar",
+                                "name": "c"
+                            }
+                        ]
+                    },
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -5390,6 +5444,127 @@
                     "strict": false
                 },
                 {
+                    "name": "dotted property, path and string match",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo#bar#baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo"
+                            },
+                            {
+                                "user": {
+                                    "title": "bar"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "baz"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, path match",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo#bar#baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user": {
+                                    "title": "foo"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "bar"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "baz"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, path match, missing property",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo##baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user": {
+                                    "title": "foo"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "firstname": "bar"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "baz"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, string match",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo#bar#baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo"
+                            },
+                            {
+                                "user.title": "bar"
+                            },
+                            {
+                                "user.title": "baz"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "dotted property, string match, missing property",
+                    "template": "{{ a | map: 'user.title' | join: '#' }}",
+                    "want": "foo##baz",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo"
+                            },
+                            {
+                                "user.firstname": "bar"
+                            },
+                            {
+                                "user.title": "baz"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "input is a hash",
                     "template": "{{ a | map: 'title' | join: '#' }}",
                     "want": "foo",
@@ -5452,6 +5627,39 @@
                                     "title": "baz"
                                 }
                             ]
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with bracketed index",
+                    "template": "{{ a | map: 'user[1]' | join: '#' }}",
+                    "want": "##",
+                    "context": {
+                        "a": [
+                            {
+                                "user": [
+                                    1,
+                                    2,
+                                    3
+                                ]
+                            },
+                            {
+                                "user": [
+                                    4,
+                                    5,
+                                    6
+                                ]
+                            },
+                            {
+                                "user": [
+                                    7,
+                                    8,
+                                    9
+                                ]
+                            }
                         ]
                     },
                     "partials": {},
@@ -7931,6 +8139,179 @@
                     "strict": false
                 },
                 {
+                    "name": "property with a bracketed index, silently does not sort",
+                    "template": "{% assign sorted = a | sort: 'foo[1]' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] | join: '#' }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo, 3#4#5)\n(foo, 3#2#5)\n(foo, 3#9#5)\n(foo, 3#-1#5)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": [
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    2,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    9,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    -1,
+                                    5
+                                ]
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a dot, path match",
+                    "template": "{% assign sorted = a | sort: 'foo.bar' -%}\n{% for item in sorted -%}\n{% for pair in item.foo -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(bar, -1)\n(bar, 2)\n(bar, 4)\n(bar, 9)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": {
+                                    "bar": 4
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": 2
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": 9
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": -1
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a dot, string and path match",
+                    "template": "{% assign sorted = a | sort: 'foo.bar' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, \n{%- if pair[1].bar -%}\n{{ pair[1].bar }}{%else%}{{ pair[1] -}}\n{% endif %})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo,-1)\n(foo,2)\n(foo.bar,4)\n(foo,9)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo.bar": 4
+                            },
+                            {
+                                "foo": {
+                                    "bar": 2
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": 9
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": -1
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a dot, string match",
+                    "template": "{% assign sorted = a | sort: 'foo.bar' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo.bar, -1)\n(foo.bar, 2)\n(foo.bar, 4)\n(foo.bar, 9)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo.bar": 4
+                            },
+                            {
+                                "foo.bar": 2
+                            },
+                            {
+                                "foo.bar": 9
+                            },
+                            {
+                                "foo.bar": -1
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array contains array",
+                    "template": "{% assign sorted = a | sort: 'foo' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": 4
+                            },
+                            {
+                                "foo": 2
+                            },
+                            {
+                                "foo": 9
+                            },
+                            [
+                                42,
+                                7
+                            ]
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array contains primitive",
+                    "template": "{% assign sorted = a | sort: 'foo' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": 4
+                            },
+                            {
+                                "foo": 2
+                            },
+                            {
+                                "foo": 9
+                            },
+                            false
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "sort a string",
                     "template": "{{ 'BzAa4' | sort | join: '#' }}",
                     "want": "BzAa4",
@@ -8119,6 +8500,164 @@
                     "template": "{{ nosuchthing | sort_natural }}",
                     "want": "",
                     "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a dot, path match",
+                    "template": "{% assign sorted = a | sort_natural: 'foo.bar' -%}\n{% for item in sorted -%}\n{% for pair in item.foo -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(bar, a)\n(bar, A)\n(bar, b)\n(bar, B)\n(bar, C)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": {
+                                    "bar": "b"
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": "a"
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": "C"
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": "B"
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": "A"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a dot, string and path match",
+                    "template": "{% assign sorted = a | sort_natural: 'foo.bar' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, \n{%- if pair[1].bar -%}\n{{ pair[1].bar }}{%else%}{{ pair[1] -}}\n{% endif %})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo,a)\n(foo,A)\n(foo.bar,b)\n(foo,B)\n(foo,C)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo.bar": "b"
+                            },
+                            {
+                                "foo": {
+                                    "bar": "a"
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": "C"
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": "B"
+                                }
+                            },
+                            {
+                                "foo": {
+                                    "bar": "A"
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with a dot, string match",
+                    "template": "{% assign sorted = a | sort_natural: 'foo.bar' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo.bar, a)\n(foo.bar, A)\n(foo.bar, b)\n(foo.bar, B)\n(foo.bar, C)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo.bar": "b"
+                            },
+                            {
+                                "foo.bar": "a"
+                            },
+                            {
+                                "foo.bar": "C"
+                            },
+                            {
+                                "foo.bar": "B"
+                            },
+                            {
+                                "foo.bar": "A"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array contains array",
+                    "template": "{% assign sorted = a | sort_natural: 'foo' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": "b"
+                            },
+                            {
+                                "foo": "a"
+                            },
+                            {
+                                "foo": "C"
+                            },
+                            {
+                                "foo": "B"
+                            },
+                            {
+                                "foo": "A"
+                            },
+                            [
+                                42,
+                                7
+                            ]
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array contains primitive",
+                    "template": "{% assign sorted = a | sort_natural: 'foo' -%}\n{% for item in sorted -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": "b"
+                            },
+                            {
+                                "foo": "a"
+                            },
+                            {
+                                "foo": "C"
+                            },
+                            {
+                                "foo": "B"
+                            },
+                            {
+                                "foo": "A"
+                            },
+                            false
+                        ]
+                    },
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -8667,6 +9206,54 @@
                     "want": "0",
                     "context": {
                         "a": []
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "hashes with dotted property argument, path match",
+                    "template": "{{ a | sum: 'k.foo' }}",
+                    "want": "6",
+                    "context": {
+                        "a": [
+                            {
+                                "k": {
+                                    "foo": 1
+                                }
+                            },
+                            {
+                                "k": {
+                                    "foo": 2
+                                }
+                            },
+                            {
+                                "k": {
+                                    "foo": 3
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "hashes with dotted property argument, string match",
+                    "template": "{{ a | sum: 'k.foo' }}",
+                    "want": "6",
+                    "context": {
+                        "a": [
+                            {
+                                "k.foo": 1
+                            },
+                            {
+                                "k.foo": 2
+                            },
+                            {
+                                "k.foo": 3
+                            }
+                        ]
                     },
                     "partials": {},
                     "error": false,
@@ -9496,6 +10083,163 @@
                     "strict": false
                 },
                 {
+                    "name": "property with a dot, string match",
+                    "template": "{% assign x = a | uniq: 'user.title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(user.title,foo)(name,a)(user.title,bar)(name,c)",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo",
+                                "name": "a"
+                            },
+                            {
+                                "user.title": "foo",
+                                "name": "b"
+                            },
+                            {
+                                "user.title": "bar",
+                                "name": "c"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property with bracketed index",
+                    "template": "{% assign x = a | uniq: 'foo[1]' -%}\n{% for item in x -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] | join: '#' }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo, 3#4#5)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": [
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    2,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    -1,
+                                    5
+                                ]
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array contains a primitive",
+                    "template": "{% assign x = a | uniq: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            {
+                                "title": "foo",
+                                "name": "a"
+                            },
+                            {
+                                "title": "foo",
+                                "name": "b"
+                            },
+                            {
+                                "title": "bar",
+                                "name": "c"
+                            },
+                            false
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, array contains an array",
+                    "template": "{% assign x = a | uniq: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(title,foo)(name,a)(title,bar)(name,c)(,)",
+                    "context": {
+                        "a": [
+                            {
+                                "title": "foo",
+                                "name": "a"
+                            },
+                            {
+                                "title": "foo",
+                                "name": "b"
+                            },
+                            {
+                                "title": "bar",
+                                "name": "c"
+                            },
+                            [
+                                "foo",
+                                "bar"
+                            ]
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "property, arrays",
+                    "template": "{% assign x = a | uniq: 'foo' -%}\n{% for item in x -%}\n{% for pair in item -%}\n({{ pair[0] }}, {{ pair[1] | join: '#' }})\n{% endfor -%}\n{% endfor %}",
+                    "want": "(foo, 3#4#5)\n(foo, 3#2#5)\n(foo, 3#-1#5)\n",
+                    "context": {
+                        "a": [
+                            {
+                                "foo": [
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    2,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            },
+                            {
+                                "foo": [
+                                    3,
+                                    -1,
+                                    5
+                                ]
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "too many arguments",
                     "template": "{{ nosuchthing | uniq: 'foo', 'bar' }}",
                     "want": "",
@@ -9821,6 +10565,54 @@
                             },
                             {
                                 "title": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes with dotted property, path match",
+                    "template": "{% assign x = a | where: 'user.title', 'bar' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1].title }}){% endfor %}{% endfor %}",
+                    "want": "(user,bar)",
+                    "context": {
+                        "a": [
+                            {
+                                "user": {
+                                    "title": "foo"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": "bar"
+                                }
+                            },
+                            {
+                                "user": {
+                                    "title": null
+                                }
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes with dotted property, string match",
+                    "template": "{% assign x = a | where: 'user.title', 'bar' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
+                    "want": "(user.title,bar)",
+                    "context": {
+                        "a": [
+                            {
+                                "user.title": "foo"
+                            },
+                            {
+                                "user.title": "bar"
+                            },
+                            {
+                                "user.title": null
                             }
                         ]
                     },
