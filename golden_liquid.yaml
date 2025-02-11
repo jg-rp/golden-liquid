@@ -4918,36 +4918,39 @@ test_groups:
   - name: array of hashes, default value
     template: '{% assign b = a | reject: ''title'' %}{% for obj in b %}{% for itm
       in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}'
-    want: '(title,), '
+    want: '(title,false), (title,), (heading,baz), '
     context:
       a:
       - title: foo
-      - title: bar
+      - title: false
       - title: null
+      - heading: baz
     partials: {}
     error: false
     strict: false
   - name: array of hashes, explicit false
     template: '{% assign b = a | reject: ''title'', false %}{% for obj in b %}{% for
       itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}'
-    want: '(title,bar), (title,), '
+    want: '(title,bar), (title,), (heading,baz), '
     context:
       a:
       - title: false
       - title: bar
       - title: null
+      - heading: baz
     partials: {}
     error: false
     strict: false
   - name: array of hashes, explicit nil
     template: '{% assign b = a | reject: ''title'', nil %}{% for obj in b %}{% for
       itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}'
-    want: '(title,), '
+    want: '(title,false), (title,), (heading,baz), '
     context:
       a:
       - title: foo
-      - title: bar
+      - title: false
       - title: null
+      - heading: baz
     partials: {}
     error: false
     strict: false
@@ -4978,12 +4981,13 @@ test_groups:
   - name: array of hashes, string value
     template: '{% assign b = a | reject: ''title'', ''bar'' %}{% for obj in b %}{%
       for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}'
-    want: '(title,foo), (title,), '
+    want: '(title,foo), (title,), (heading,baz), '
     context:
       a:
       - title: foo
       - title: bar
       - title: null
+      - heading: baz
     partials: {}
     error: false
     strict: false
@@ -5019,6 +5023,42 @@ test_groups:
       h:
         foo: 1
         bar: 2
+        baz: 3
+    partials: {}
+    error: false
+    strict: false
+  - name: input is a hash, default value, nil match
+    template: '{% assign b = h | reject: ''bar'' %}{% for obj in b %}{% for itm in
+      obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}'
+    want: '(foo,1), (bar,), (baz,3), '
+    context:
+      h:
+        foo: 1
+        bar: null
+        baz: 3
+    partials: {}
+    error: false
+    strict: false
+  - name: input is a hash, default value, no match
+    template: '{% assign b = h | reject: ''barbar'' %}{% for obj in b %}{% for itm
+      in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}'
+    want: '(foo,1), (bar,2), (baz,3), '
+    context:
+      h:
+        foo: 1
+        bar: 2
+        baz: 3
+    partials: {}
+    error: false
+    strict: false
+  - name: input is a hash, explicit nil match
+    template: '{% assign b = h | reject: ''bar'', nil %}{% for obj in b %}{% for itm
+      in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}'
+    want: '(foo,1), (bar,), (baz,3), '
+    context:
+      h:
+        foo: 1
+        bar: null
         baz: 3
     partials: {}
     error: false
