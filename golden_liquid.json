@@ -1,5 +1,5 @@
 {
-    "version": "0.23.0",
+    "version": "0.24.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -6483,6 +6483,347 @@
                     "context": {},
                     "partials": {},
                     "error": false,
+                    "strict": false
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.reject_filter",
+            "tests": [
+                {
+                    "name": "array containing an int, default value",
+                    "template": "{% assign b = a | reject: 'c' %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            "x",
+                            "y",
+                            "cat",
+                            1
+                        ]
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "array containing null, default value",
+                    "template": "{% assign b = a | reject: 'c' %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            "x",
+                            "y",
+                            "cat",
+                            null
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes, default value",
+                    "template": "{% assign b = a | reject: 'title' %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "(title,), ",
+                    "context": {
+                        "a": [
+                            {
+                                "title": "foo"
+                            },
+                            {
+                                "title": "bar"
+                            },
+                            {
+                                "title": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes, explicit false",
+                    "template": "{% assign b = a | reject: 'title', false %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "(title,bar), (title,), ",
+                    "context": {
+                        "a": [
+                            {
+                                "title": false
+                            },
+                            {
+                                "title": "bar"
+                            },
+                            {
+                                "title": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes, explicit nil",
+                    "template": "{% assign b = a | reject: 'title', nil %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "(title,), ",
+                    "context": {
+                        "a": [
+                            {
+                                "title": "foo"
+                            },
+                            {
+                                "title": "bar"
+                            },
+                            {
+                                "title": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes, explicit true",
+                    "template": "{% assign b = a | reject: 'title', true %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "(title,bar), (title,), ",
+                    "context": {
+                        "a": [
+                            {
+                                "title": true
+                            },
+                            {
+                                "title": "bar"
+                            },
+                            {
+                                "title": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes, missing property",
+                    "template": "{% assign b = a | reject: 'title', 'bar' %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "(heading,foo), (title,), ",
+                    "context": {
+                        "a": [
+                            {
+                                "heading": "foo"
+                            },
+                            {
+                                "title": "bar"
+                            },
+                            {
+                                "title": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes, string value",
+                    "template": "{% assign b = a | reject: 'title', 'bar' %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "(title,foo), (title,), ",
+                    "context": {
+                        "a": [
+                            {
+                                "title": "foo"
+                            },
+                            {
+                                "title": "bar"
+                            },
+                            {
+                                "title": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of strings, default value",
+                    "template": "{% assign b = a | reject: 'c' %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "x, y, ",
+                    "context": {
+                        "a": [
+                            "x",
+                            "y",
+                            "cat"
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "first argument is undefined",
+                    "template": "{% assign b = a | reject: nosuchthing %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            "x",
+                            "y",
+                            "cat"
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "input is a hash, default value",
+                    "template": "{% assign b = h | reject: 'bar' %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "",
+                    "context": {
+                        "h": {
+                            "foo": 1,
+                            "bar": 2,
+                            "baz": 3
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "input is a hash, int value, match",
+                    "template": "{% assign b = h | reject: 'bar', 2 %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "",
+                    "context": {
+                        "h": {
+                            "foo": 1,
+                            "bar": 2,
+                            "baz": 3
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "input is a hash, int value, no match",
+                    "template": "{% assign b = h | reject: 'bar', 1 %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "(foo,1), (bar,2), (baz,3), ",
+                    "context": {
+                        "h": {
+                            "foo": 1,
+                            "bar": 2,
+                            "baz": 3
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "input is undefined",
+                    "template": "{% assign b = nosuchthing | reject: 'c' %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "missing argument",
+                    "template": "{% assign b = a | reject %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            "x",
+                            "y",
+                            "cat"
+                        ]
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "nested array of hashes gets flattened",
+                    "template": "{% assign b = a | reject: 'title', 'bar' %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "(title,foo), (title,), ",
+                    "context": {
+                        "a": [
+                            [
+                                {
+                                    "title": "foo"
+                                },
+                                {
+                                    "title": "bar"
+                                }
+                            ],
+                            [
+                                [
+                                    {
+                                        "title": null
+                                    }
+                                ]
+                            ]
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "second argument is undefined",
+                    "template": "{% assign b = a | reject: 'title', nosuchthing %}{% for obj in b %}{% for itm in obj %}({{ itm[0] }},{{ itm[1] }}), {% endfor %}{% endfor %}",
+                    "want": "(title,), ",
+                    "context": {
+                        "a": [
+                            {
+                                "title": "foo"
+                            },
+                            {
+                                "title": "bar"
+                            },
+                            {
+                                "title": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string input becomes a single element array, no match",
+                    "template": "{% assign b = s | reject: 'xx' %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "foobar, ",
+                    "context": {
+                        "s": "foobar"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string input becomes a single element array, substring match",
+                    "template": "{% assign b = s | reject: 'oo' %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "",
+                    "context": {
+                        "s": "foobar"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "too many arguments",
+                    "template": "{% assign b = a | reject: 'x', 'y', 'z' %}{% for obj in b %}{{ obj }}, {% endfor %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
                     "strict": false
                 }
             ]
