@@ -2686,6 +2686,17 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: array of strings, default value, substring match
+    template: '{{ a | has: ''z'' }}'
+    want: 'true'
+    context:
+      a:
+      - x
+      - y
+      - zoo
+    partials: {}
+    error: false
+    strict: false
   - name: hash input, default value, match
     template: '{{ a | has: ''z'' }}'
     want: 'true'
@@ -2719,6 +2730,15 @@ test_groups:
     context:
       a:
         z: 42
+    partials: {}
+    error: false
+    strict: false
+  - name: hash input, false value, match
+    template: '{{ a | has: ''z'', false }}'
+    want: 'true'
+    context:
+      a:
+        z: false
     partials: {}
     error: false
     strict: false
