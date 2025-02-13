@@ -2426,7 +2426,7 @@
                 },
                 {
                     "name": "array of ints, default value",
-                    "template": "{{ a | find: 3 }}",
+                    "template": "{{ a | find: 2 }}",
                     "want": "1",
                     "context": {
                         "a": [
@@ -2578,6 +2578,229 @@
                 {
                     "name": "string input, string value, no match",
                     "template": "{{ a | find: 'z', 'y' }}",
+                    "want": "",
+                    "context": {
+                        "a": "zoo"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.find_index_filter",
+            "tests": [
+                {
+                    "name": "array of hashes, explicit nil, match",
+                    "template": "{{ a | find_index: 'z', nil }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            "foo",
+                            "bar",
+                            {
+                                "z": null
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes, int value, match",
+                    "template": "{{ a | find_index: 'z', 42 }}",
+                    "want": "1",
+                    "context": {
+                        "a": [
+                            {
+                                "x": 99
+                            },
+                            {
+                                "z": 42,
+                                "foo": "bar"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of hashes, with a nil",
+                    "template": "{% assign b = a | find_index: 'z', 42 %}{{ b.foo }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            {
+                                "x": 99
+                            },
+                            null,
+                            {
+                                "z": 42,
+                                "foo": "bar"
+                            }
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of ints, default value",
+                    "template": "{{ a | find_index: 3 }}",
+                    "want": "0",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of strings, default value",
+                    "template": "{{ a | find_index: 'z' }}",
+                    "want": "2",
+                    "context": {
+                        "a": [
+                            "x",
+                            "y",
+                            "z"
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of strings, default value, no match",
+                    "template": "{{ a | find_index: 'foo' }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            "x",
+                            "y",
+                            "zoo"
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array of strings, substring match, default value",
+                    "template": "{{ a | find_index: 'oo' }}",
+                    "want": "2",
+                    "context": {
+                        "a": [
+                            "x",
+                            "y",
+                            "zoo"
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "hash input, default value, match",
+                    "template": "{{ a | find_index: 'z' }}",
+                    "want": "0",
+                    "context": {
+                        "a": {
+                            "z": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "hash input, default value, no match",
+                    "template": "{{ a | find_index: 'foo' }}",
+                    "want": "",
+                    "context": {
+                        "a": {
+                            "z": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "hash input, explicit nil, match",
+                    "template": "{{ a | find_index: 'z', nil }}",
+                    "want": "",
+                    "context": {
+                        "a": {
+                            "z": null
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "hash input, int value, match",
+                    "template": "{{ a | find_index: 'z', 42 }}",
+                    "want": "0",
+                    "context": {
+                        "a": {
+                            "z": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "mixed array, default value",
+                    "template": "{{ a | find_index: 'z' }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            "x",
+                            null,
+                            "z",
+                            false,
+                            true
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string input, default value, match",
+                    "template": "{{ a | find_index: 'z' }}",
+                    "want": "0",
+                    "context": {
+                        "a": "zoo"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string input, string value, match",
+                    "template": "{{ a | find_index: 'z', 'z' }}",
+                    "want": "0",
+                    "context": {
+                        "a": "zoo"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string input, string value, no match",
+                    "template": "{{ a | find_index: 'z', 'y' }}",
                     "want": "",
                     "context": {
                         "a": "zoo"
