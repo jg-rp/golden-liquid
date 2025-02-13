@@ -2782,6 +2782,22 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: string input, default value, match
+    template: '{{ a | has: ''z'' }}'
+    want: 'true'
+    context:
+      a: zoo
+    partials: {}
+    error: false
+    strict: false
+  - name: string input, default value, no match
+    template: '{{ a | has: ''z'' }}'
+    want: 'false'
+    context:
+      a: foo
+    partials: {}
+    error: false
+    strict: false
 - name: liquid.golden.identifiers
   tests:
   - name: ascii lowercase
