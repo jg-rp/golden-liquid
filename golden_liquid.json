@@ -9568,6 +9568,26 @@
                     "strict": false
                 },
                 {
+                    "name": "argument is a newline",
+                    "template": "{% assign a = \"a b\nc\" | split: x %}{% for i in a %}#{{ forloop.index0 }}{{ i }}{% endfor %}",
+                    "want": "#0a b#1c",
+                    "context": {
+                        "x": "\n"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is a single space",
+                    "template": "{% assign a = \"a b\nc\" | split: \" \" %}{% for i in a %}#{{ forloop.index0 }}{{ i }}{% endfor %}",
+                    "want": "#0a#1b#2c",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "argument not a string",
                     "template": "{{ \"hello th1ere\" | split: 1 | join: \"#\" }}",
                     "want": "hello th#ere",
