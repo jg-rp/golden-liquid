@@ -5077,8 +5077,8 @@ test_groups:
       - title: shoe
       - title: hat
     partials: {}
-    error: false
-    strict: false
+    error: true
+    strict: true
   - name: chained identifier dot separated index
     template: '{{ products.0.title }}'
     want: ''
@@ -5086,6 +5086,15 @@ test_groups:
       products:
       - title: shoe
       - title: hat
+    partials: {}
+    error: true
+    strict: true
+  - name: dot followed by bracket
+    template: '{{ product.[''title''] }}'
+    want: shoe
+    context:
+      product:
+        title: shoe
     partials: {}
     error: true
     strict: true
