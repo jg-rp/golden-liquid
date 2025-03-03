@@ -1,4 +1,4 @@
-# Python Liquid2 - Version 0.1.0
+# Python Liquid2 - Version 0.3.0
 
 Create a new Python environment and install dependencies from `requirements.txt`.
 
@@ -28,9 +28,36 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.cycle_tag > named
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.cycle_tag > named with shrinking number of arguments]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.cycle_tag > undefined variable names mixed with no name]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > nothing to echo]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_filter > array of hashes, with a nil]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_filter > array of strings, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_filter > array of strings, default value, no match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_filter > array of strings, substring match, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_filter > hash input, default value, no match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_filter > mixed array, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_filter > string input, default value, match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_filter > string input, string value, match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_index_filter > array of hashes, explicit nil, match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_index_filter > array of hashes, with a nil]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_index_filter > array of strings, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_index_filter > array of strings, default value, no match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_index_filter > array of strings, substring match, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_index_filter > hash input, default value, no match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_index_filter > hash input, explicit nil, match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_index_filter > mixed array, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.find_index_filter > string input, string value, match]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > loop over a string literal]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > loop over a string variable]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.for_tag > loop over range with float start]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > array of hashes, false property]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > array of hashes, int property]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > array of hashes, nil property]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > array of hashes, with a nil]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > array of ints, string argument, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > array of strings, default value, no match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > hash input, default value, no match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > hash input, explicit nil, match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > mixed array, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.has_filter > string input, default value, no match]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.identifiers > capture only digits]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.identifiers > only digits]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.identifiers > trailing question mark in for loop target]
@@ -50,6 +77,11 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > liqu
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.liquid_tag > nested liquid in liquid tag]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > chained bracketed identifier index no dot]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.output_statement > render a range object that uses a float]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.reject_filter > array containing null, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.reject_filter > array of strings, default value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.reject_filter > first argument is undefined]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.reject_filter > string input becomes a single element array, no match]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.reject_filter > string input becomes a single element array, substring match]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.sort_filter > sort a string]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.special > first of a string]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.special > last of a string]
@@ -57,5 +89,5 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.unless_tag > extr
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.unless_tag > extra elsif blocks are ignored]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > don't suppress whitespace only blocks containing output in unreachable blocks]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > don't suppress whitespace only case blocks containing output]
-46 failed, 842 passed in 2.11ss
+78 failed, 882 passed in 1.47s
 ```

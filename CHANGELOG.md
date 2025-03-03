@@ -1,5 +1,18 @@
 # Golden Liquid Change Log
 
+## Version 0.24.0
+
+- Updated Shopify/Liquid from GitHub main.
+- Updated Python Liquid from GitHub main.
+- Updated LiquidJS to 10.21.0.
+- Updated liquidpy to 0.8.3.
+- Updated Python Liquid2 to 0.3.0.
+
+- Test the new `find` filter.
+- Test the new `find_index` filter.
+- Test the new `has` filter.
+- Test the new `reject` filter.
+
 ## Version 0.23.1
 
 - Moved folder `liquid` to `shopify_liquid`.

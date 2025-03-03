@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-python-liquid = "1.12.2"
 pytest = "*"
+python-liquid = {editable = true, git = "https://github.com/jg-rp/liquid.git"}
 
 [dev-packages]
 black = "*"

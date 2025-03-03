@@ -1,4 +1,4 @@
-# LiquidJS Version 10.20.1
+# LiquidJS Version 10.21.0
 
 ```
 npm install
@@ -496,6 +496,83 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.find_filter › array of hashes, with a nil
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "bar"
+
+  ● liquid.golden.find_filter › array of strings, default value
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "z"
+    Received: ""
+
+  ● liquid.golden.find_filter › array of strings, substring match, default value
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "zoo"
+    Received: ""
+
+  ● liquid.golden.find_filter › string input, default value, match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "zoo"
+    Received: ""
+
+  ● liquid.golden.find_filter › string input, string value, match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "zoo"
+    Received: ""
+
+  ● liquid.golden.find_index_filter › array of hashes, explicit nil, match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "0"
+
+  ● liquid.golden.find_index_filter › array of strings, default value
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "2"
+    Received: ""
+
+  ● liquid.golden.find_index_filter › array of strings, substring match, default value
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "2"
+    Received: ""
+
+  ● liquid.golden.find_index_filter › hash input, explicit nil, match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "0"
+
+  ● liquid.golden.find_index_filter › string input, default value, match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "0"
+    Received: ""
+
+  ● liquid.golden.find_index_filter › string input, string value, match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "0"
+    Received: ""
+
   ● liquid.golden.first_filter › first of a hash
 
     expect(received).toBe(expected) // Object.is equality
@@ -588,6 +665,68 @@ npx jest --noStackTrace
 
     Expected: "i=1 j=1 k=1 i=1 j=1 k=2 i=1 j=2 k=1 i=1 j=2 k=2 i=2 j=1 k=1 i=2 j=1 k=2 i=2 j=2 k=1 i=2 j=2 k=2 "
     Received: "i= j= k=1 i= j= k=2 i= j= k=1 i= j= k=2 i= j= k=1 i= j= k=2 i= j= k=1 i= j= k=2 "
+
+  ● liquid.golden.has_filter › array of hashes, with a nil
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "true"
+
+  ● liquid.golden.has_filter › array of ints, default value
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "true"
+    Received: "false"
+
+  ● liquid.golden.has_filter › array of ints, string argument, default value
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.has_filter › array of strings, default value
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "true"
+    Received: "false"
+
+  ● liquid.golden.has_filter › array of strings, default value, substring match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "true"
+    Received: "false"
+
+  ● liquid.golden.has_filter › hash input, explicit nil, match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "false"
+    Received: "true"
+
+  ● liquid.golden.has_filter › hash input, explicit nil, no match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "true"
+    Received: "false"
+
+  ● liquid.golden.has_filter › mixed array, default value
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "false"
+
+  ● liquid.golden.has_filter › string input, default value, match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "true"
+    Received: "false"
 
   ● liquid.golden.identifiers › capture leading hyphen
 
@@ -963,6 +1102,73 @@ npx jest --noStackTrace
 
     Expected: "0#1#2#3#4#5"
     Received: ""
+
+  ● liquid.golden.reject_filter › array containing an int, default value
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.reject_filter › array containing null, default value
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "xycat"
+
+  ● liquid.golden.reject_filter › array of hashes, explicit nil
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "(title,false), (title,), (heading,baz), "
+    Received: "(title,foo), (title,false), "
+
+  ● liquid.golden.reject_filter › array of strings, default value
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "x, y, "
+    Received: "x, y, cat, "
+
+  ● liquid.golden.reject_filter › first argument is undefined
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "x, y, cat, "
+
+  ● liquid.golden.reject_filter › input is a hash, explicit nil match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "(foo,1), (bar,), (baz,3), "
+    Received: ""
+
+  ● liquid.golden.reject_filter › missing argument
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.reject_filter › nested array of hashes gets flattened
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "(title,foo), (title,), "
+    Received: "(,), (,), ([object Object],), "
+
+  ● liquid.golden.reject_filter › string input becomes a single element array, substring match
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: ""
+    Received: "foobar, "
+
+  ● liquid.golden.reject_filter › too many arguments
+
+    expect(received).toThrow()
+
+    Received function did not throw
 
   ● liquid.golden.remove_filter › missing argument
 
@@ -1769,8 +1975,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       242 failed, 646 passed, 888 total
+Tests:       272 failed, 688 passed, 960 total
 Snapshots:   0 total
-Time:        3.106 s, estimated 7 s
+Time:        3.219 s
 Ran all test suites.
 ```
