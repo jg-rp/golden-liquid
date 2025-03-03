@@ -752,6 +752,20 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.if_tag › array contains false
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "FALSE"
+    Received: "TRUE"
+
+  ● liquid.golden.if_tag › array contains nil
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "FALSE"
+    Received: "TRUE"
+
   ● liquid.golden.if_tag › blocks that contain only whitespace and comments are not rendered
 
     expect(received).toBe(expected) // Object.is equality
@@ -773,6 +787,12 @@ npx jest --noStackTrace
           ^
     ParseError: unexpected "nonsense", line:1, col:1
 
+  ● liquid.golden.if_tag › endswith is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
   ● liquid.golden.if_tag › extra else blocks are ignored
 
     duplicated else, line:1, col:1
@@ -786,6 +806,24 @@ npx jest --noStackTrace
     >> 1| {% if false %}1{% else %}2{% elsif true %}3{% endif %}
           ^
     ParseError: unexpected elsif after else, line:1, col:1
+
+  ● liquid.golden.if_tag › haskey is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.if_tag › in is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.if_tag › startswith is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
 
   ● liquid.golden.if_tag › string greater than int
 
@@ -1030,12 +1068,17 @@ npx jest --noStackTrace
 
   ● liquid.golden.output_statement › chained bracketed identifier index no dot
 
-    expect(received).toBe(expected) // Object.is equality
+    expect(received).toThrow()
 
-    Expected: "shoe"
-    Received: "[object Object]"
+    Received function did not throw
 
   ● liquid.golden.output_statement › chained identifier dot separated index
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.output_statement › dot followed by bracket
 
     expect(received).toThrow()
 
@@ -1047,6 +1090,26 @@ npx jest --noStackTrace
 
     Expected: "1#2#3#4#5"
     Received: "1.4#2.4#3.4#4.4#5.4"
+
+  ● liquid.golden.output_statement › whitespace between bracket notation
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "42"
+    Received: "[object Object]"
+
+  ● liquid.golden.output_statement › whitespace between word and dot
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "42"
+    Received: "[object Object]"
+
+  ● liquid.golden.output_statement › whitespace between words
+
+    expect(received).toThrow()
+
+    Received function did not throw
 
   ● liquid.golden.plus_filter › arg string not a number
 
@@ -1465,6 +1528,17 @@ npx jest --noStackTrace
 
     Expected: "a#1"
     Received: ""
+
+  ● liquid.golden.split_filter › argument is a single space
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 1
+    + Received  + 2
+
+    - #0a#1b#2c
+    + #0a#1b
+    + c
 
   ● liquid.golden.split_filter › missing argument
 
@@ -1975,8 +2049,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       272 failed, 688 passed, 960 total
+Tests:       283 failed, 711 passed, 994 total
 Snapshots:   0 total
-Time:        3.219 s
+Time:        3.462 s, estimated 4 s
 Ran all test suites.
 ```

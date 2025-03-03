@@ -3364,6 +3364,18 @@ test_groups:
     partials: {}
     error: false
     strict: false
+  - name: array contains false
+    template: '{% if a contains false %}TRUE{% else %}FALSE{% endif %}'
+    want: 'FALSE'
+    context:
+      a:
+      - 1
+      - 2
+      - 3
+      - false
+    partials: {}
+    error: false
+    strict: false
   - name: array contains nil
     template: '{% if a contains nil %}TRUE{% else %}FALSE{% endif %}'
     want: 'FALSE'
@@ -7245,6 +7257,20 @@ test_groups:
 
       c" | split: " " %}{% for i in a %}#{{ forloop.index0 }}{{ i }}{% endfor %}'
     want: '#0a#1b#2c'
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: argument is false
+    template: '{{ "Hello there" | split: false | join: "#" }}'
+    want: Hello there
+    context: {}
+    partials: {}
+    error: false
+    strict: false
+  - name: argument is nil
+    template: '{{ "Hello there" | split: nil | join: "#" }}'
+    want: 'H#e#l#l#o# #t#h#e#r#e'
     context: {}
     partials: {}
     error: false

@@ -242,6 +242,83 @@ npx jest --noStackTrace
 
     NoSuchFilterError: unknown filter has (<string>:1)
 
+  ● liquid.golden.if_tag › array contains false
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "FALSE"
+    Received: "TRUE"
+
+  ● liquid.golden.if_tag › array contains nil
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "FALSE"
+    Received: "TRUE"
+
+  ● liquid.golden.if_tag › endswith is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.if_tag › haskey is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.if_tag › in is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.if_tag › object contains nil
+
+    LiquidTypeError: invalid comparison operator '[object Object] contains ' (<string>:1)
+
+  ● liquid.golden.if_tag › object contains undefined
+
+    LiquidTypeError: invalid comparison operator '[object Object] contains ' (<string>:1)
+
+  ● liquid.golden.if_tag › startswith is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.if_tag › string contains undefined
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "FALSE"
+    Received: "TRUE"
+
+  ● liquid.golden.output_statement › chained bracketed identifier index no dot
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.output_statement › dot followed by bracket
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.output_statement › double dot
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.output_statement › whitespace between words
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
   ● liquid.golden.reject_filter › array containing null, default value
 
     NoSuchFilterError: unknown filter reject (<string>:1)
@@ -329,6 +406,17 @@ npx jest --noStackTrace
     Expected: "14{}"
     Received: "41[object Object]"
 
+  ● liquid.golden.split_filter › argument is a single space
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 1
+    + Received  + 2
+
+    - #0a#1b#2c
+    + #0a#1b
+    + c
+
   ● liquid.golden.tablerow_tag › break from a tablerow loop
 
     LiquidSyntaxError: unexpected 'break' (<string>:1)
@@ -357,8 +445,8 @@ npx jest --noStackTrace
     LiquidSyntaxError: unexpected 'continue' (<string>:1)
 
 Test Suites: 1 failed, 1 total
-Tests:       80 failed, 880 passed, 960 total
+Tests:       94 failed, 900 passed, 994 total
 Snapshots:   0 total
-Time:        2.568 s, estimated 3 s
+Time:        3.42 s
 Ran all test suites.
 ```

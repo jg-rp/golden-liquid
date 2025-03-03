@@ -85,12 +85,12 @@ This table summarizes the results of running version 0.24.0 of this test suit ag
 
 | Engine                                                    | Version            | Passed | Failed |
 | --------------------------------------------------------- | ------------------ | ------ | ------ |
-| [Shopify/Liquid](https://github.com/Shopify/liquid)       | 5.8.1              | 960    | 0      |
-| [LiquidJS](https://github.com/harttle/liquidjs)\*\*       | 10.21.0            | 688    | 272    |
-| [liquidpy](https://github.com/pwwang/liquidpy)            | 0.8.2              | 423    | 537    |
-| [LiquidScript](https://github.com/jg-rp/liquidscript)     | 1.8.2              | 880    | 80     |
-| [Python Liquid](https://github.com/jg-rp/liquid)          | 2.0.0 (unreleased) | 960    | 0      |
-| [Python Liquid2](https://github.com/jg-rp/python-liquid2) | 0.3.0              | 882    | 78     |
+| [Shopify/Liquid](https://github.com/Shopify/liquid)       | 5.8.1              | 994    | 0      |
+| [LiquidJS](https://github.com/harttle/liquidjs)\*\*       | 10.21.0            | 711    | 283    |
+| [liquidpy](https://github.com/pwwang/liquidpy)            | 0.8.2              | 446    | 548    |
+| [LiquidScript](https://github.com/jg-rp/liquidscript)     | 1.8.2              | 900    | 94     |
+| [Python Liquid](https://github.com/jg-rp/liquid)          | 2.0.0 (unreleased) | 994    | 0      |
+| [Python Liquid2](https://github.com/jg-rp/python-liquid2) | 0.3.0              | 908    | 86     |
 
 \*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments, and its lack of distinct float and int types.
 
