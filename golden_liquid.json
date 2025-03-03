@@ -1,5 +1,5 @@
 {
-    "version": "0.24.0",
+    "version": "0.25.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -7196,6 +7196,15 @@
                     "strict": false
                 },
                 {
+                    "name": "integer literals",
+                    "template": "{{ (1..5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "start and end are negative",
                     "template": "{{ (start..end) | join: '#' }}",
                     "want": "-5#-4#-3#-2",
@@ -7227,6 +7236,60 @@
                         "start": "foo",
                         "end": 5
                     },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace after dots",
+                    "template": "{{ (1.. \n\t5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace after stop",
+                    "template": "{{ (1..5 \n\t) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace before and after dots",
+                    "template": "{{ (1 .. 5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace before and after dots, for loop",
+                    "template": "{% for x in (1 .. 5) %}{{ x }},{% endfor %}",
+                    "want": "1,2,3,4,5,",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "whitespace before dots",
+                    "template": "{{ (1 \n\t..5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace before start",
+                    "template": "{{ ( \n\t1..5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
                     "partials": {},
                     "error": false,
                     "strict": false
