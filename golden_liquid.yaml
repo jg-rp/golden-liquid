@@ -1806,17 +1806,6 @@ test_groups:
     partials: {}
     error: false
     strict: false
-  - name: array of ints, default value
-    template: '{{ a | find: 2 }}'
-    want: '1'
-    context:
-      a:
-      - 1
-      - 2
-      - 3
-    partials: {}
-    error: false
-    strict: false
   - name: array of strings, default value
     template: '{{ a | find: ''z'' }}'
     want: z
@@ -1956,17 +1945,6 @@ test_groups:
       - null
       - z: 42
         foo: bar
-    partials: {}
-    error: false
-    strict: false
-  - name: array of ints, default value
-    template: '{{ a | find_index: 3 }}'
-    want: '0'
-    context:
-      a:
-      - 1
-      - 2
-      - 3
     partials: {}
     error: false
     strict: false
@@ -5404,8 +5382,7 @@ test_groups:
 - name: liquid.golden.reject_filter
   tests:
   - name: array containing an int, default value
-    template: '{% assign b = a | reject: ''c'' %}{% for obj in b %}{{ obj }}, {% endfor
-      %}'
+    template: '{{ a | reject: ''c'' }}'
     want: ''
     context:
       a:
@@ -5417,8 +5394,7 @@ test_groups:
     error: true
     strict: false
   - name: array containing null, default value
-    template: '{% assign b = a | reject: ''c'' %}{% for obj in b %}{{ obj }}, {% endfor
-      %}'
+    template: '{{ a | reject: ''c'' }}'
     want: ''
     context:
       a:

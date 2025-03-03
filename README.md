@@ -15,7 +15,7 @@ The tests defined in `golden_liquid.json` attempt to cover many of Liquid's limi
 
 For our purposes "standard" Liquid is the one described [here](https://shopify.github.io/liquid/) with [Shopify/Liquid](https://github.com/Shopify/liquid) being the reference implementation. Not to be confused with the extended variation of Liquid used for Shopify stores.
 
-All tests pass with Liquid version 5.6.1 and Ruby 3. Some `round` filter test cases fail with Ruby 2.7 due to changes with Ruby's BigDecimal library (see issue [#1590](https://github.com/Shopify/liquid/issues/1590)). If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
+All tests pass with Liquid version 5.8.1 and Ruby 3. Some `round` filter test cases fail with Ruby 2.7 due to changes with Ruby's BigDecimal library (see issue [#1590](https://github.com/Shopify/liquid/issues/1590)). If you have Ruby installed, you can run the test suite against the reference implementation by cloning this repository and running the following commands.
 
 ```
 cd liquid
@@ -29,7 +29,7 @@ In `golden_liquid.json` tests are grouped. Each group has a name and an array of
 
 ```json
 {
-    "version": "0.23.0",
+    "version": "0.24.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -81,16 +81,16 @@ For each test case:
 
 ## Results Summary
 
-This table summarizes the results of running version 0.23.0 of this test suit against the five Liquid engines with runners included in this repository.
+This table summarizes the results of running version 0.24.0 of this test suit against the five Liquid engines with runners included in this repository.
 
-| Engine                                                    | Version | Passed | Failed |
-| --------------------------------------------------------- | ------- | ------ | ------ |
-| [Shopify/Liquid](https://github.com/Shopify/liquid)       | 5.6.1   | 888    | 0      |
-| [LiquidJS](https://github.com/harttle/liquidjs)\*\*       | 10.20.1 | 646    | 242    |
-| [liquidpy](https://github.com/pwwang/liquidpy)            | 0.8.2   | 467    | 421    |
-| [LiquidScript](https://github.com/jg-rp/liquidscript)     | 1.8.2   | 876    | 12     |
-| [Python Liquid](https://github.com/jg-rp/liquid)          | 1.12.2  | 888    | 0      |
-| [Python Liquid2](https://github.com/jg-rp/python-liquid2) | 0.1.0   | 842    | 46     |
+| Engine                                                    | Version            | Passed | Failed |
+| --------------------------------------------------------- | ------------------ | ------ | ------ |
+| [Shopify/Liquid](https://github.com/Shopify/liquid)       | 5.8.1              | 960    | 0      |
+| [LiquidJS](https://github.com/harttle/liquidjs)\*\*       | 10.21.0            | 688    | 272    |
+| [liquidpy](https://github.com/pwwang/liquidpy)            | 0.8.2              | 423    | 537    |
+| [LiquidScript](https://github.com/jg-rp/liquidscript)     | 1.8.2              | 880    | 80     |
+| [Python Liquid](https://github.com/jg-rp/liquid)          | 2.0.0 (unreleased) | 960    | 0      |
+| [Python Liquid2](https://github.com/jg-rp/python-liquid2) | 0.3.0              | 882    | 78     |
 
 \*\* It's worth noting that many, but not all, of the failed test cases for LiquidJS are due to the way it handles excess and/or unexpected filter arguments, and its lack of distinct float and int types.
 
