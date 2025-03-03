@@ -6635,6 +6635,19 @@
                     "strict": true
                 },
                 {
+                    "name": "double dot",
+                    "template": "{{ foo..bar }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": true
+                },
+                {
                     "name": "dump an array from the global context",
                     "template": "{{ product.tags | join: '#' }}",
                     "want": "sports#garden",
@@ -6926,6 +6939,58 @@
                     "partials": {},
                     "error": false,
                     "strict": false
+                },
+                {
+                    "name": "whitespace between bracket notation",
+                    "template": "{{ ['foo'] \n\t['bar'] }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace between dot and word",
+                    "template": "{{ foo. \n\tbar }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace between word and dot",
+                    "template": "{{ foo \n\t.bar }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace between words",
+                    "template": "{{ foo \n\tbar }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": true
                 }
             ]
         },

@@ -1,5 +1,9 @@
 # Golden Liquid Change Log
 
+## Version 0.25.0
+
+- Test whitespace in variables (aka paths to data)
+
 ## Version 0.24.0
 
 - Updated Shopify/Liquid from GitHub main.
