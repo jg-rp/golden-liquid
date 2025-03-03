@@ -4548,6 +4548,37 @@
                     "strict": false
                 },
                 {
+                    "name": "array contains nil",
+                    "template": "{% if a contains nil %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            null
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array contains undefined",
+                    "template": "{% if a contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3,
+                            null
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "array is equal to array",
                     "template": "{% assign x = 'a,b,c' | split: ',' %}{% assign y = 'a,b,c' | split: ',' %}{% if x == y %}true{% else %}false{% endif %}",
                     "want": "true",
@@ -4741,6 +4772,18 @@
                     "strict": false
                 },
                 {
+                    "name": "endswith is not a valid operator",
+                    "template": "{% if s endswith t %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "",
+                    "context": {
+                        "s": "hello",
+                        "t": "lo"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
                     "name": "extra else blocks are ignored",
                     "template": "{% if false %}1{% else %}2{% else %}3{% endif %}",
                     "want": "2",
@@ -4757,6 +4800,32 @@
                     "partials": {},
                     "error": false,
                     "strict": true
+                },
+                {
+                    "name": "haskey is not a valid operator",
+                    "template": "{% if obj haskey x %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "",
+                    "context": {
+                        "obj": {
+                            "foo": "bar"
+                        },
+                        "x": "foo"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "in is not a valid operator",
+                    "template": "{% if t in s %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "",
+                    "context": {
+                        "s": "hello",
+                        "t": "lo"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
                 },
                 {
                     "name": "int does not equal string",
@@ -4858,6 +4927,32 @@
                     "strict": false
                 },
                 {
+                    "name": "object contains nil",
+                    "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "obj": {
+                            "foo": "bar"
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "object contains undefined",
+                    "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "obj": {
+                            "foo": "bar"
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "one is not equal to true",
                     "template": "{% if 1 == true %}Hello{% else %}Goodbye{% endif %}",
                     "want": "Goodbye",
@@ -4876,10 +4971,33 @@
                     "strict": false
                 },
                 {
+                    "name": "startswith is not a valid operator",
+                    "template": "{% if s startswith t %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "",
+                    "context": {
+                        "s": "hello",
+                        "t": "hell"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
                     "name": "string contains int",
                     "template": "{% if 'hel9lo' contains 9 %}TRUE{% else %}FALSE{% endif %}",
                     "want": "TRUE",
                     "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string contains nil",
+                    "template": "{% if s contains nil %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "s": "hello"
+                    },
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -4899,6 +5017,17 @@
                     "want": "TRUE",
                     "context": {
                         "s": "llo"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string contains undefined",
+                    "template": "{% if s contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "s": "hello"
                     },
                     "partials": {},
                     "error": false,
@@ -4989,6 +5118,54 @@
                     "name": "string is not less than string",
                     "template": "{% if 'bbb' < 'aaa' %}true{% else %}false{% endif %}",
                     "want": "false",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined contains array",
+                    "template": "{% if undefined contains a %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined contains object",
+                    "template": "{% if undefined contains obj %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "obj": {
+                            "foo": "bar"
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined contains string",
+                    "template": "{% if undefined contains s %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "s": "hello"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined contains undefined",
+                    "template": "{% if undefined contains thing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -6546,6 +6723,21 @@
                     "strict": false
                 },
                 {
+                    "name": "array index out of bounds",
+                    "template": "{{ a[3] }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "assign a variable the value of an existing variable",
                     "template": "{% capture some %}hello{% endcapture %}{% assign other = some %}{% assign some = 'foo' %}{{ some }}-{{ other }}",
                     "want": "foo-hello",
@@ -6658,6 +6850,21 @@
                                 "garden"
                             ]
                         }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "negative array index out of bounds",
+                    "template": "{{ a[-4] }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3
+                        ]
                     },
                     "partials": {},
                     "error": false,
