@@ -1178,6 +1178,24 @@
             "name": "liquid.golden.comment_tag",
             "tests": [
                 {
+                    "name": "comment inside liquid tag",
+                    "template": "{% liquid\n    if 1 != 1\n    comment\n    else\n    echo 123\n    endcomment\n    endif\n%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "commented tags are not parsed",
+                    "template": "{% comment %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "don't render comments",
                     "template": "{% comment %}foo{% endcomment %}",
                     "want": "",
@@ -1196,12 +1214,66 @@
                     "strict": false
                 },
                 {
+                    "name": "incomplete tags are not parsed",
+                    "template": "{% comment %}{% {{ {%- endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "malformed tags are not parsed",
+                    "template": "{% comment %}{% assign foo = '1'{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "nested comment blocks",
+                    "template": "{% comment %}    {% comment %}    {% comment %}{%    endcomment     %}    {% endcomment %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "nested comment blocks, with nested tags",
+                    "template": "{% comment %}    {% comment %}    {% comment %}{% if true %}hello{%endif%}{%    endcomment     %}    {% endcomment %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "raw inside comment block",
+                    "template": "{% comment %}    {% raw %}    {% endcomment %}    {% endraw %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "respect whitespace control in comments",
                     "template": "\n{%- comment %}foo{% endcomment -%}\t \r",
                     "want": "",
                     "context": {},
                     "partials": {},
                     "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "unclosed nested comment blocks",
+                    "template": "{% comment %}    {% comment %}    {% comment %}    {% endcomment %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
                     "strict": false
                 }
             ]
@@ -2040,6 +2112,83 @@
                     "name": "zero divided by integer",
                     "template": "{{ 0 | divided_by: 1 }}",
                     "want": "0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.doc_tag",
+            "tests": [
+                {
+                    "name": "doc arguments is an error",
+                    "template": "{% doc hello %}don't render me{% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "doc tag block must be closed",
+                    "template": "{% doc %}don't render me",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "doc text is not parsed",
+                    "template": "{% doc %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}    {% raw %}{% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "docs containing unclosed output are ok",
+                    "template": "{% doc %}{{ foo {% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "docs containing unclosed tags are ok",
+                    "template": "{% doc %}{% assign x = y {% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "don't render docs",
+                    "template": "{% doc %}don't render me{% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "nested docs are not allowed",
+                    "template": "{% doc hello %}Hello{% doc %}{% enddoc %}{% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace control",
+                    "template": "foo\n {%- doc %}I'm a doc comment{% enddoc -%}  \tbar",
+                    "want": "foobar",
                     "context": {},
                     "partials": {},
                     "error": false,
