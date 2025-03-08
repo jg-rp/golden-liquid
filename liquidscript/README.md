@@ -22,6 +22,26 @@ npx jest --noStackTrace
 
     LiquidSyntaxError: unexpected tag 'when' (<string>:1)
 
+  ● liquid.golden.comment_tag › incomplete tags are not parsed
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.comment_tag › malformed tags are not parsed
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.comment_tag › nested comment blocks
+
+    LiquidSyntaxError: unexpected tag 'endcomment' (<string>:1)
+
+  ● liquid.golden.comment_tag › nested comment blocks, with nested tags
+
+    LiquidSyntaxError: unexpected tag 'endcomment' (<string>:1)
+
   ● liquid.golden.date_filter › literal percent
 
     expect(received).toBe(expected) // Object.is equality
@@ -49,6 +69,26 @@ npx jest --noStackTrace
 
     Expected: "Mar 14, 16"
     Received: "Invalid DateTime"
+
+  ● liquid.golden.doc_tag › doc text is not parsed
+
+    LiquidSyntaxError: unexpected tag 'doc' (<string>:1)
+
+  ● liquid.golden.doc_tag › docs containing unclosed output are ok
+
+    LiquidSyntaxError: expected '}}', found 'eof' (<string>:1)
+
+  ● liquid.golden.doc_tag › docs containing unclosed tags are ok
+
+    LiquidSyntaxError: unexpected tag 'doc' (<string>:1)
+
+  ● liquid.golden.doc_tag › don't render docs
+
+    LiquidSyntaxError: unexpected tag 'doc' (<string>:1)
+
+  ● liquid.golden.doc_tag › whitespace control
+
+    LiquidSyntaxError: unexpected tag 'doc' (<string>:2)
 
   ● liquid.golden.find_filter › array of hashes, int value, match
 
@@ -445,8 +485,8 @@ npx jest --noStackTrace
     LiquidSyntaxError: unexpected 'continue' (<string>:1)
 
 Test Suites: 1 failed, 1 total
-Tests:       94 failed, 900 passed, 994 total
+Tests:       103 failed, 907 passed, 1010 total
 Snapshots:   0 total
-Time:        3.42 s
+Time:        2.901 s
 Ran all test suites.
 ```

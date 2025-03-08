@@ -2178,7 +2178,7 @@
                 },
                 {
                     "name": "nested docs are not allowed",
-                    "template": "{% doc hello %}Hello{% doc %}{% enddoc %}{% enddoc %}",
+                    "template": "{% doc hello %}Hello{% doc %}{% enddoc %}",
                     "want": "",
                     "context": {},
                     "partials": {},

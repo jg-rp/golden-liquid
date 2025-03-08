@@ -6,7 +6,7 @@ from operator import attrgetter
 from liquid.future import Environment
 from liquid import Mode
 from liquid.exceptions import Error
-from liquid.loaders import DictLoader
+from liquid.builtin import DictLoader
 from liquid.golden.case import Case
 
 

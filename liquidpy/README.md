@@ -54,6 +54,12 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.case_tag > truthy
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ceil_filter > not a string, int or float]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ceil_filter > string not a number]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.ceil_filter > undefined left value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.comment_tag > comment inside liquid tag]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.comment_tag > incomplete tags are not parsed]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.comment_tag > malformed tags are not parsed]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.comment_tag > nested comment blocks]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.comment_tag > nested comment blocks, with nested tags]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.comment_tag > raw inside comment block]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.compact_filter > array of objects with key property]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.compact_filter > empty array]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.compact_filter > left value is not an array]
@@ -94,6 +100,11 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.divided_by_filter
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.divided_by_filter > string not a number]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.divided_by_filter > string value and argument]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.divided_by_filter > undefined left value]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.doc_tag > doc text is not parsed]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.doc_tag > docs containing unclosed output are ok]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.doc_tag > docs containing unclosed tags are ok]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.doc_tag > don't render docs]
+FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.doc_tag > whitespace control]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.downcase_filter > not a string]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.downcase_filter > undefined left value]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.echo_tag > access an array item by index]
@@ -554,5 +565,5 @@ FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_contro
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > suppress whitespace surrounding an empty capture block]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with  carriage return, newline and spaces]
 FAILED test_golden_liquid.py::test_render_liquid[liquid.golden.whitespace_control > white space control with carriage return and spaces]
-548 failed, 446 passed in 2.71s
+559 failed, 451 passed in 2.77s
 ```

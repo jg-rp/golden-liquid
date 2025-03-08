@@ -285,6 +285,20 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.comment_tag › nested comment blocks
+
+    tag "endcomment" not found, line:1, col:75
+    >> 1| {% comment %}    {% comment %}    {% comment %}{%    endcomment     %}    {% endcomment %}{% endcomment %}
+                                                                                    ^
+    ParseError: tag "endcomment" not found, line:1, col:75
+
+  ● liquid.golden.comment_tag › nested comment blocks, with nested tags
+
+    tag "endcomment" not found, line:1, col:102
+    >> 1| {% comment %}    {% comment %}    {% comment %}{% if true %}hello{%endif%}{%    endcomment     %}    {% endcomment %}{% endcomment %}
+                                                                                                               ^
+    ParseError: tag "endcomment" not found, line:1, col:102
+
   ● liquid.golden.compact_filter › array of objects with key property
 
     expect(received).toBe(expected) // Object.is equality
@@ -477,6 +491,42 @@ npx jest --noStackTrace
 
     Expected: "0.0"
     Received: "0"
+
+  ● liquid.golden.doc_tag › doc text is not parsed
+
+    raw "{% raw %}{% enddoc %}" not closed, line:1, col:135
+    >> 1| {% doc %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}    {% raw %}{% enddoc %}
+                                                                                                                                                ^
+    TokenizationError: raw "{% raw %}{% enddoc %}" not closed, line:1, col:135
+
+  ● liquid.golden.doc_tag › docs containing unclosed output are ok
+
+    output "{{ foo {% enddoc %}" not closed, line:1, col:10
+    >> 1| {% doc %}{{ foo {% enddoc %}
+                   ^
+    TokenizationError: output "{{ foo {% enddoc %}" not closed, line:1, col:10
+
+  ● liquid.golden.doc_tag › docs containing unclosed tags are ok
+
+    tag "doc" not found, line:1, col:1
+    >> 1| {% doc %}{% assign x = y {% enddoc %}
+          ^
+    ParseError: tag "doc" not found, line:1, col:1
+
+  ● liquid.golden.doc_tag › don't render docs
+
+    tag "doc" not found, line:1, col:1
+    >> 1| {% doc %}don't render me{% enddoc %}
+          ^
+    ParseError: tag "doc" not found, line:1, col:1
+
+  ● liquid.golden.doc_tag › whitespace control
+
+    tag "doc" not found, line:2, col:2
+       1| foo
+    >> 2|  {%- doc %}I'm a doc comment{% enddoc -%}  	bar
+           ^
+    ParseError: tag "doc" not found, line:2, col:2
 
   ● liquid.golden.downcase_filter › unexpected argument
 
@@ -2049,8 +2099,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       283 failed, 711 passed, 994 total
+Tests:       290 failed, 720 passed, 1010 total
 Snapshots:   0 total
-Time:        3.462 s, estimated 4 s
+Time:        3.288 s
 Ran all test suites.
 ```

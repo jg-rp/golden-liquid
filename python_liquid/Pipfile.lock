@@ -144,7 +144,7 @@
             "editable": true,
             "git": "https://github.com/jg-rp/liquid.git",
             "markers": "python_version >= '3.7'",
-            "ref": "6a1fc8377bcc78adf8699c5c2d334d0a5b680e15"
+            "ref": "e594c2d3259ce345fb3b7ff80b0183e14da1b9e9"
         },
         "six": {
             "hashes": [
