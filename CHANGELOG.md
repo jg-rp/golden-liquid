@@ -1,5 +1,18 @@
 # Golden Liquid Change Log
 
+## Version 0.25.0
+
+- Changed output test "chained bracketed identifier index no dot" to be strict and to raise/throw and error.
+- Test the new `docs` tag.
+- Test array index bounds.
+- Test whitespace in range expressions.
+- Test whitespace in variables (paths to data).
+- Test whitespace as argument to the `split` filter.
+- Test the `contains` operator when undefined/nil/null are involved.
+- Test the lack of `startswith`, `endswith`, `haskey` and `in` operators.
+
+And change output test "chained bracketed identifier index no dot" to be strict and to raise/throw and error.
+
 ## Version 0.24.0
 
 - Updated Shopify/Liquid from GitHub main.

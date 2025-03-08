@@ -285,6 +285,20 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.comment_tag › nested comment blocks
+
+    tag "endcomment" not found, line:1, col:75
+    >> 1| {% comment %}    {% comment %}    {% comment %}{%    endcomment     %}    {% endcomment %}{% endcomment %}
+                                                                                    ^
+    ParseError: tag "endcomment" not found, line:1, col:75
+
+  ● liquid.golden.comment_tag › nested comment blocks, with nested tags
+
+    tag "endcomment" not found, line:1, col:102
+    >> 1| {% comment %}    {% comment %}    {% comment %}{% if true %}hello{%endif%}{%    endcomment     %}    {% endcomment %}{% endcomment %}
+                                                                                                               ^
+    ParseError: tag "endcomment" not found, line:1, col:102
+
   ● liquid.golden.compact_filter › array of objects with key property
 
     expect(received).toBe(expected) // Object.is equality
@@ -477,6 +491,42 @@ npx jest --noStackTrace
 
     Expected: "0.0"
     Received: "0"
+
+  ● liquid.golden.doc_tag › doc text is not parsed
+
+    raw "{% raw %}{% enddoc %}" not closed, line:1, col:135
+    >> 1| {% doc %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}    {% raw %}{% enddoc %}
+                                                                                                                                                ^
+    TokenizationError: raw "{% raw %}{% enddoc %}" not closed, line:1, col:135
+
+  ● liquid.golden.doc_tag › docs containing unclosed output are ok
+
+    output "{{ foo {% enddoc %}" not closed, line:1, col:10
+    >> 1| {% doc %}{{ foo {% enddoc %}
+                   ^
+    TokenizationError: output "{{ foo {% enddoc %}" not closed, line:1, col:10
+
+  ● liquid.golden.doc_tag › docs containing unclosed tags are ok
+
+    tag "doc" not found, line:1, col:1
+    >> 1| {% doc %}{% assign x = y {% enddoc %}
+          ^
+    ParseError: tag "doc" not found, line:1, col:1
+
+  ● liquid.golden.doc_tag › don't render docs
+
+    tag "doc" not found, line:1, col:1
+    >> 1| {% doc %}don't render me{% enddoc %}
+          ^
+    ParseError: tag "doc" not found, line:1, col:1
+
+  ● liquid.golden.doc_tag › whitespace control
+
+    tag "doc" not found, line:2, col:2
+       1| foo
+    >> 2|  {%- doc %}I'm a doc comment{% enddoc -%}  	bar
+           ^
+    ParseError: tag "doc" not found, line:2, col:2
 
   ● liquid.golden.downcase_filter › unexpected argument
 
@@ -752,6 +802,20 @@ npx jest --noStackTrace
 
     Received function did not throw
 
+  ● liquid.golden.if_tag › array contains false
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "FALSE"
+    Received: "TRUE"
+
+  ● liquid.golden.if_tag › array contains nil
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "FALSE"
+    Received: "TRUE"
+
   ● liquid.golden.if_tag › blocks that contain only whitespace and comments are not rendered
 
     expect(received).toBe(expected) // Object.is equality
@@ -773,6 +837,12 @@ npx jest --noStackTrace
           ^
     ParseError: unexpected "nonsense", line:1, col:1
 
+  ● liquid.golden.if_tag › endswith is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
   ● liquid.golden.if_tag › extra else blocks are ignored
 
     duplicated else, line:1, col:1
@@ -786,6 +856,24 @@ npx jest --noStackTrace
     >> 1| {% if false %}1{% else %}2{% elsif true %}3{% endif %}
           ^
     ParseError: unexpected elsif after else, line:1, col:1
+
+  ● liquid.golden.if_tag › haskey is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.if_tag › in is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.if_tag › startswith is not a valid operator
+
+    expect(received).toThrow()
+
+    Received function did not throw
 
   ● liquid.golden.if_tag › string greater than int
 
@@ -1030,12 +1118,17 @@ npx jest --noStackTrace
 
   ● liquid.golden.output_statement › chained bracketed identifier index no dot
 
-    expect(received).toBe(expected) // Object.is equality
+    expect(received).toThrow()
 
-    Expected: "shoe"
-    Received: "[object Object]"
+    Received function did not throw
 
   ● liquid.golden.output_statement › chained identifier dot separated index
+
+    expect(received).toThrow()
+
+    Received function did not throw
+
+  ● liquid.golden.output_statement › dot followed by bracket
 
     expect(received).toThrow()
 
@@ -1047,6 +1140,26 @@ npx jest --noStackTrace
 
     Expected: "1#2#3#4#5"
     Received: "1.4#2.4#3.4#4.4#5.4"
+
+  ● liquid.golden.output_statement › whitespace between bracket notation
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "42"
+    Received: "[object Object]"
+
+  ● liquid.golden.output_statement › whitespace between word and dot
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "42"
+    Received: "[object Object]"
+
+  ● liquid.golden.output_statement › whitespace between words
+
+    expect(received).toThrow()
+
+    Received function did not throw
 
   ● liquid.golden.plus_filter › arg string not a number
 
@@ -1465,6 +1578,17 @@ npx jest --noStackTrace
 
     Expected: "a#1"
     Received: ""
+
+  ● liquid.golden.split_filter › argument is a single space
+
+    expect(received).toBe(expected) // Object.is equality
+
+    - Expected  - 1
+    + Received  + 2
+
+    - #0a#1b#2c
+    + #0a#1b
+    + c
 
   ● liquid.golden.split_filter › missing argument
 
@@ -1975,8 +2099,8 @@ npx jest --noStackTrace
     TokenizationError: raw "{%- raw -%}{{ hello }}{%- end..." not closed, line:2, col:14
 
 Test Suites: 1 failed, 1 total
-Tests:       272 failed, 688 passed, 960 total
+Tests:       290 failed, 720 passed, 1010 total
 Snapshots:   0 total
-Time:        3.219 s
+Time:        3.288 s
 Ran all test suites.
 ```

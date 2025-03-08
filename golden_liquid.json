@@ -1,5 +1,5 @@
 {
-    "version": "0.24.0",
+    "version": "0.25.0",
     "test_groups": [
         {
             "name": "liquid.golden.abs_filter",
@@ -1178,6 +1178,24 @@
             "name": "liquid.golden.comment_tag",
             "tests": [
                 {
+                    "name": "comment inside liquid tag",
+                    "template": "{% liquid\n    if 1 != 1\n    comment\n    else\n    echo 123\n    endcomment\n    endif\n%}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "commented tags are not parsed",
+                    "template": "{% comment %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "don't render comments",
                     "template": "{% comment %}foo{% endcomment %}",
                     "want": "",
@@ -1196,12 +1214,66 @@
                     "strict": false
                 },
                 {
+                    "name": "incomplete tags are not parsed",
+                    "template": "{% comment %}{% {{ {%- endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "malformed tags are not parsed",
+                    "template": "{% comment %}{% assign foo = '1'{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "nested comment blocks",
+                    "template": "{% comment %}    {% comment %}    {% comment %}{%    endcomment     %}    {% endcomment %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "nested comment blocks, with nested tags",
+                    "template": "{% comment %}    {% comment %}    {% comment %}{% if true %}hello{%endif%}{%    endcomment     %}    {% endcomment %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "raw inside comment block",
+                    "template": "{% comment %}    {% raw %}    {% endcomment %}    {% endraw %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "respect whitespace control in comments",
                     "template": "\n{%- comment %}foo{% endcomment -%}\t \r",
                     "want": "",
                     "context": {},
                     "partials": {},
                     "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "unclosed nested comment blocks",
+                    "template": "{% comment %}    {% comment %}    {% comment %}    {% endcomment %}{% endcomment %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
                     "strict": false
                 }
             ]
@@ -2040,6 +2112,83 @@
                     "name": "zero divided by integer",
                     "template": "{{ 0 | divided_by: 1 }}",
                     "want": "0",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                }
+            ]
+        },
+        {
+            "name": "liquid.golden.doc_tag",
+            "tests": [
+                {
+                    "name": "doc arguments is an error",
+                    "template": "{% doc hello %}don't render me{% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "doc tag block must be closed",
+                    "template": "{% doc %}don't render me",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "doc text is not parsed",
+                    "template": "{% doc %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}    {% raw %}{% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "docs containing unclosed output are ok",
+                    "template": "{% doc %}{{ foo {% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "docs containing unclosed tags are ok",
+                    "template": "{% doc %}{% assign x = y {% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "don't render docs",
+                    "template": "{% doc %}don't render me{% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "nested docs are not allowed",
+                    "template": "{% doc hello %}Hello{% doc %}{% enddoc %}",
+                    "want": "",
+                    "context": {},
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace control",
+                    "template": "foo\n {%- doc %}I'm a doc comment{% enddoc -%}  \tbar",
+                    "want": "foobar",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -4548,6 +4697,53 @@
                     "strict": false
                 },
                 {
+                    "name": "array contains false",
+                    "template": "{% if a contains false %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3,
+                            false
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array contains nil",
+                    "template": "{% if a contains nil %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            null
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "array contains undefined",
+                    "template": "{% if a contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3,
+                            null
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "array is equal to array",
                     "template": "{% assign x = 'a,b,c' | split: ',' %}{% assign y = 'a,b,c' | split: ',' %}{% if x == y %}true{% else %}false{% endif %}",
                     "want": "true",
@@ -4741,6 +4937,18 @@
                     "strict": false
                 },
                 {
+                    "name": "endswith is not a valid operator",
+                    "template": "{% if s endswith t %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "",
+                    "context": {
+                        "s": "hello",
+                        "t": "lo"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
                     "name": "extra else blocks are ignored",
                     "template": "{% if false %}1{% else %}2{% else %}3{% endif %}",
                     "want": "2",
@@ -4757,6 +4965,32 @@
                     "partials": {},
                     "error": false,
                     "strict": true
+                },
+                {
+                    "name": "haskey is not a valid operator",
+                    "template": "{% if obj haskey x %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "",
+                    "context": {
+                        "obj": {
+                            "foo": "bar"
+                        },
+                        "x": "foo"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
+                    "name": "in is not a valid operator",
+                    "template": "{% if t in s %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "",
+                    "context": {
+                        "s": "hello",
+                        "t": "lo"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
                 },
                 {
                     "name": "int does not equal string",
@@ -4858,6 +5092,32 @@
                     "strict": false
                 },
                 {
+                    "name": "object contains nil",
+                    "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "obj": {
+                            "foo": "bar"
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "object contains undefined",
+                    "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "obj": {
+                            "foo": "bar"
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "one is not equal to true",
                     "template": "{% if 1 == true %}Hello{% else %}Goodbye{% endif %}",
                     "want": "Goodbye",
@@ -4876,10 +5136,33 @@
                     "strict": false
                 },
                 {
+                    "name": "startswith is not a valid operator",
+                    "template": "{% if s startswith t %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "",
+                    "context": {
+                        "s": "hello",
+                        "t": "hell"
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": false
+                },
+                {
                     "name": "string contains int",
                     "template": "{% if 'hel9lo' contains 9 %}TRUE{% else %}FALSE{% endif %}",
                     "want": "TRUE",
                     "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string contains nil",
+                    "template": "{% if s contains nil %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "s": "hello"
+                    },
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -4899,6 +5182,17 @@
                     "want": "TRUE",
                     "context": {
                         "s": "llo"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "string contains undefined",
+                    "template": "{% if s contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "s": "hello"
                     },
                     "partials": {},
                     "error": false,
@@ -4989,6 +5283,54 @@
                     "name": "string is not less than string",
                     "template": "{% if 'bbb' < 'aaa' %}true{% else %}false{% endif %}",
                     "want": "false",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined contains array",
+                    "template": "{% if undefined contains a %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined contains object",
+                    "template": "{% if undefined contains obj %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "obj": {
+                            "foo": "bar"
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined contains string",
+                    "template": "{% if undefined contains s %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
+                    "context": {
+                        "s": "hello"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "undefined contains undefined",
+                    "template": "{% if undefined contains thing %}TRUE{% else %}FALSE{% endif %}",
+                    "want": "FALSE",
                     "context": {},
                     "partials": {},
                     "error": false,
@@ -6546,6 +6888,21 @@
                     "strict": false
                 },
                 {
+                    "name": "array index out of bounds",
+                    "template": "{{ a[3] }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3
+                        ]
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "assign a variable the value of an existing variable",
                     "template": "{% capture some %}hello{% endcapture %}{% assign other = some %}{% assign some = 'foo' %}{{ some }}-{{ other }}",
                     "want": "foo-hello",
@@ -6613,8 +6970,8 @@
                         ]
                     },
                     "partials": {},
-                    "error": false,
-                    "strict": false
+                    "error": true,
+                    "strict": true
                 },
                 {
                     "name": "chained identifier dot separated index",
@@ -6635,6 +6992,32 @@
                     "strict": true
                 },
                 {
+                    "name": "dot followed by bracket",
+                    "template": "{{ product.['title'] }}",
+                    "want": "shoe",
+                    "context": {
+                        "product": {
+                            "title": "shoe"
+                        }
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": true
+                },
+                {
+                    "name": "double dot",
+                    "template": "{{ foo..bar }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": true
+                },
+                {
                     "name": "dump an array from the global context",
                     "template": "{{ product.tags | join: '#' }}",
                     "want": "sports#garden",
@@ -6645,6 +7028,21 @@
                                 "garden"
                             ]
                         }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "negative array index out of bounds",
+                    "template": "{{ a[-4] }}",
+                    "want": "",
+                    "context": {
+                        "a": [
+                            1,
+                            2,
+                            3
+                        ]
                     },
                     "partials": {},
                     "error": false,
@@ -6926,6 +7324,58 @@
                     "partials": {},
                     "error": false,
                     "strict": false
+                },
+                {
+                    "name": "whitespace between bracket notation",
+                    "template": "{{ ['foo'] \n\t['bar'] }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace between dot and word",
+                    "template": "{{ foo. \n\tbar }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace between word and dot",
+                    "template": "{{ foo \n\t.bar }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace between words",
+                    "template": "{{ foo \n\tbar }}",
+                    "want": "42",
+                    "context": {
+                        "foo": {
+                            "bar": 42
+                        }
+                    },
+                    "partials": {},
+                    "error": true,
+                    "strict": true
                 }
             ]
         },
@@ -7131,6 +7581,15 @@
                     "strict": false
                 },
                 {
+                    "name": "integer literals",
+                    "template": "{{ (1..5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
                     "name": "start and end are negative",
                     "template": "{{ (start..end) | join: '#' }}",
                     "want": "-5#-4#-3#-2",
@@ -7162,6 +7621,60 @@
                         "start": "foo",
                         "end": 5
                     },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace after dots",
+                    "template": "{{ (1.. \n\t5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace after stop",
+                    "template": "{{ (1..5 \n\t) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace before and after dots",
+                    "template": "{{ (1 .. 5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace before and after dots, for loop",
+                    "template": "{% for x in (1 .. 5) %}{{ x }},{% endfor %}",
+                    "want": "1,2,3,4,5,",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": true
+                },
+                {
+                    "name": "whitespace before dots",
+                    "template": "{{ (1 \n\t..5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "whitespace before start",
+                    "template": "{{ ( \n\t1..5) | join: '#' }}",
+                    "want": "1#2#3#4#5",
+                    "context": {},
                     "partials": {},
                     "error": false,
                     "strict": false
@@ -9434,6 +9947,44 @@
                     "name": "argument does not appear in string",
                     "template": "{% assign a = \"abc\" | split: \",\" %}{% for i in a %}#{{ forloop.index0 }}{{ i }}{% endfor %}",
                     "want": "#0abc",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is a newline",
+                    "template": "{% assign a = \"a b\nc\" | split: x %}{% for i in a %}#{{ forloop.index0 }}{{ i }}{% endfor %}",
+                    "want": "#0a b#1c",
+                    "context": {
+                        "x": "\n"
+                    },
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is a single space",
+                    "template": "{% assign a = \"a b\nc\" | split: \" \" %}{% for i in a %}#{{ forloop.index0 }}{{ i }}{% endfor %}",
+                    "want": "#0a#1b#2c",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is false",
+                    "template": "{{ \"Hello there\" | split: false | join: \"#\" }}",
+                    "want": "Hello there",
+                    "context": {},
+                    "partials": {},
+                    "error": false,
+                    "strict": false
+                },
+                {
+                    "name": "argument is nil",
+                    "template": "{{ \"Hello there\" | split: nil | join: \"#\" }}",
+                    "want": "H#e#l#l#o# #t#h#e#r#e",
                     "context": {},
                     "partials": {},
                     "error": false,
