@@ -1,0 +1,113 @@
+{
+  "tests": [
+    {
+      "name": "newline terminated tags",
+      "template": "{% liquid\nif product.title\n   echo product.title | upcase\nelse\n   echo 'product-1' | upcase \nendif\n\nfor i in (0..5)\n   echo i\nendfor %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "result": "FOO012345"
+    },
+    {
+      "name": "carriage return and newline terminated tags",
+      "template": "{% liquid\r\nif product.title\r\n   echo product.title | upcase\r\nelse\r\n   echo 'product-1' | upcase \r\nendif\r\n\r\nfor i in (0..5)\r\n   echo i\r\nendfor %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "result": "FOO012345"
+    },
+    {
+      "name": "carriage return terminated tags",
+      "template": "{% liquid\rif product.title\r   echo product.title | upcase\relse\r   echo 'product-1' | upcase \rendif\r\rfor i in (0..5)\r   echo i\rendfor %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "invalid": true
+    },
+    {
+      "name": "empty liquid tag",
+      "template": "{% liquid %}",
+      "result": ""
+    },
+    {
+      "name": "only whitespace",
+      "template": "{% liquid\n   \n\n   \t \n\t\n  %}",
+      "result": ""
+    },
+    {
+      "name": "single line comment tag",
+      "template": "{% liquid\ncomment this is a comment\nendcomment\n%}",
+      "result": ""
+    },
+    {
+      "name": "multi-line comment tag",
+      "template": "{% liquid\ncomment this is a comment\nsplit over two lines\nendcomment\n%}",
+      "result": ""
+    },
+    {
+      "name": "whitespace control",
+      "template": "Hello,     \n{%- liquid\n  echo ' World! '\n-%}\n   Goodbye.",
+      "result": "Hello, World! Goodbye."
+    },
+    {
+      "name": "reference test #2",
+      "template": "{%- liquid\n  for value in array\n    echo value\n    unless forloop.last\n      echo '#'\n    endunless\n  endfor\n-%}",
+      "data": {
+        "array": [
+          1,
+          2,
+          3
+        ]
+      },
+      "result": "1#2#3"
+    },
+    {
+      "name": "reference test #3",
+      "template": "{%- liquid\n  for value in array\n    assign double_value = value | times: 2\n    echo double_value | times: 2\n    unless forloop.last\n      echo '#'\n    endunless\n  endfor\n\n  echo '#'\n  echo double_value\n-%}",
+      "data": {
+        "array": [
+          1,
+          2,
+          3
+        ]
+      },
+      "result": "4#8#12#6"
+    },
+    {
+      "name": "reference test #4",
+      "template": "{%- liquid echo 'a' -%}\nb\n{%- liquid echo 'c' -%}",
+      "result": "abc"
+    },
+    {
+      "name": "nested liquid",
+      "template": "{%- if true %}\n  {%- liquid\n    echo \"good\"\n  %}\n{%- endif -%}",
+      "result": "good"
+    },
+    {
+      "name": "can't close nested blocks",
+      "template": "{%- if true -%}\n42\n{%- liquid endif -%}",
+      "invalid": true
+    },
+    {
+      "name": "bare liquid tag in liquid tag",
+      "template": "{%- liquid\n  liquid\n  echo \"foo\"\n-%}",
+      "result": "foo"
+    },
+    {
+      "name": "liquid tag in liquid tag",
+      "template": "{%- liquid\n  liquid echo 'bar'\n  echo \"foo\"\n-%}",
+      "result": "barfoo"
+    },
+    {
+      "name": "nested liquid in liquid tag",
+      "template": "{%- liquid liquid liquid echo \"foo\" -%}",
+      "result": "foo"
+    }
+  ]
+}

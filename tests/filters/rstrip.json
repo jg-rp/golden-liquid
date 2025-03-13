@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "left padded",
+      "template": "{{ \" \t\r\n  hello\" | rstrip }}",
+      "result": " \t\r\n  hello"
+    },
+    {
+      "name": "right padded",
+      "template": "{{ \"hello \t\r\n  \" | rstrip }}",
+      "result": "hello"
+    },
+    {
+      "name": "left and right padded",
+      "template": "{{ \" \t\r\n  hello  \t\r\n \" | rstrip }}",
+      "result": " \t\r\n  hello"
+    },
+    {
+      "name": "not a string",
+      "template": "{{ 5 | rstrip }}",
+      "result": "5"
+    },
+    {
+      "name": "unexpected argument",
+      "template": "{{ \"hello\" | rstrip: 5 }}",
+      "invalid": true
+    },
+    {
+      "name": "undefined left value",
+      "template": "{{ nosuchthing | rstrip }}",
+      "result": ""
+    }
+  ]
+}

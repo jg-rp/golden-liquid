@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "named counter",
+      "template": "{% increment foo %} {% increment foo %} {% increment foo %}",
+      "result": "0 1 2"
+    },
+    {
+      "name": "incrementing counter renders before incrementing",
+      "template": "{% increment foo %} {{ foo }}",
+      "result": "0 1"
+    },
+    {
+      "name": "multiple named counters",
+      "template": "{% increment foo %} {% increment bar %} {% increment foo %} {% increment bar %}",
+      "result": "0 0 1 1"
+    },
+    {
+      "name": "assign and increment",
+      "template": "{% assign foo = 5 %}{{ foo }} {% increment foo %} {% increment foo %} {{ foo }}",
+      "result": "5 0 1 5"
+    },
+    {
+      "name": "named counters are in scope for subsequent expressions",
+      "template": "{% increment foo %} {% increment foo %} {% if foo > 0 %}{{ foo }}{% endif %}",
+      "result": "0 1 2"
+    }
+  ]
+}

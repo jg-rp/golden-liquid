@@ -1,0 +1,491 @@
+{
+  "tests": [
+    {
+      "name": "condition with literal consequence",
+      "template": "{% if product.title == 'foo' %}bar{% endif %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "result": "bar"
+    },
+    {
+      "name": "condition with literal consequence and literal alternative",
+      "template": "{% if product.title == 'hello' %}bar{% else %}baz{% endif %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "result": "baz"
+    },
+    {
+      "name": "condition with conditional alternative",
+      "template": "{% if product.title == 'hello' %}foo{% elsif product.title == 'foo' %}bar{% endif %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "result": "bar"
+    },
+    {
+      "name": "condition with conditional alternative and final alternative",
+      "template": "{% if product.title == 'hello' %}foo{% elsif product.title == 'goodbye' %}bar{% else %}baz{% endif %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "result": "baz"
+    },
+    {
+      "name": "non-empty hash is truthy",
+      "template": "{% if product %}bar{% else %}foo{% endif %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "result": "bar"
+    },
+    {
+      "name": "literal nil is falsy",
+      "template": "{% if nil %}bar{% else %}foo{% endif %}",
+      "result": "foo"
+    },
+    {
+      "name": "undefined variables are falsy",
+      "template": "{% if nosuchthing %}bar{% else %}foo{% endif %}",
+      "result": "foo"
+    },
+    {
+      "name": "nested condition in the consequence block",
+      "template": "{% if product %}{% if title == 'Hello' %}baz{% endif %}{% endif %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        },
+        "title": "Hello"
+      },
+      "result": "baz"
+    },
+    {
+      "name": "nested condition, alternative in the consequence block",
+      "template": "{% if product %}{% if title == 'goodbye' %}baz{% else %}hello{% endif %}{% endif %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        },
+        "title": "Hello"
+      },
+      "result": "hello"
+    },
+    {
+      "name": "literal false condition",
+      "template": "{% if false %}{% endif %}",
+      "result": ""
+    },
+    {
+      "name": "contains condition",
+      "template": "{% if product.tags contains 'garden' %}baz{% endif %}",
+      "data": {
+        "product": {
+          "tags": [
+            "sports",
+            "garden"
+          ]
+        }
+      },
+      "result": "baz"
+    },
+    {
+      "name": "not equal condition",
+      "template": "{% if product.title != 'foo' %}baz{% endif %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "result": ""
+    },
+    {
+      "name": "alternate not equal condition",
+      "template": "{% if product.title <> 'foo' %}baz{% endif %}",
+      "data": {
+        "product": {
+          "title": "foo"
+        }
+      },
+      "result": ""
+    },
+    {
+      "name": "blocks that contain only whitespace are not rendered",
+      "template": "{% if true %}  {% elsif false %} {% else %} {% endif %}",
+      "result": ""
+    },
+    {
+      "name": "blocks that contain only whitespace and comments are not rendered",
+      "template": "{% if true %} {% comment %} this is blank {% endcomment %} {% endif %}",
+      "result": ""
+    },
+    {
+      "name": "conditional alternative with default",
+      "template": "{% if false %}foo{% elsif false %}bar{% else %}hello{% endif %}",
+      "result": "hello"
+    },
+    {
+      "name": "range equals range",
+      "template": "{% assign foo = (1..3) %}{% if foo == (1..3) %}true{% else %}false{% endif %}",
+      "result": "true"
+    },
+    {
+      "name": "logical operators are right associative",
+      "template": "{% if true and false and false or true %}hello{% endif %}",
+      "result": ""
+    },
+    {
+      "name": "zero is not equal to false",
+      "template": "{% if 0 == false %}Hello{% else %}Goodbye{% endif %}",
+      "result": "Goodbye"
+    },
+    {
+      "name": "zero is truthy",
+      "template": "{% if 0 %}Hello{% else %}Goodbye{% endif %}",
+      "result": "Hello"
+    },
+    {
+      "name": "0.0 is truthy",
+      "template": "{% if 0.0 %}Hello{% else %}Goodbye{% endif %}",
+      "result": "Hello"
+    },
+    {
+      "name": "one is not equal to true",
+      "template": "{% if 1 == true %}Hello{% else %}Goodbye{% endif %}",
+      "result": "Goodbye"
+    },
+    {
+      "name": "array is equal to array",
+      "template": "{% assign x = 'a,b,c' | split: ',' %}{% assign y = 'a,b,c' | split: ',' %}{% if x == y %}true{% else %}false{% endif %}",
+      "result": "true"
+    },
+    {
+      "name": "array is equal to array from context",
+      "template": "{% assign y = 'a,b,c' | split: ',' %}{% if x == y %}true{% else %}false{% endif %}",
+      "data": {
+        "x": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "result": "true"
+    },
+    {
+      "name": "string does not equal int",
+      "template": "{% if '1' == 1 %}true{% else %}false{% endif %}",
+      "result": "false"
+    },
+    {
+      "name": "int does not equal string",
+      "template": "{% if 1 == '1' %}true{% else %}false{% endif %}",
+      "result": "false"
+    },
+    {
+      "name": "int equals float",
+      "template": "{% if 1 == 1.0 %}true{% else %}false{% endif %}",
+      "result": "true"
+    },
+    {
+      "name": "string greater than int",
+      "template": "{% if '2' > 1 %}true{% else %}false{% endif %}",
+      "invalid": true
+    },
+    {
+      "name": "string is less than string",
+      "template": "{% if 'abc' < 'acb' %}true{% else %}false{% endif %}",
+      "result": "true"
+    },
+    {
+      "name": "string is not less than string",
+      "template": "{% if 'bbb' < 'aaa' %}true{% else %}false{% endif %}",
+      "result": "false"
+    },
+    {
+      "name": "string is less than or equal to string",
+      "template": "{% if 'abc' <= 'acb' %}true{% else %}false{% endif %}",
+      "result": "true"
+    },
+    {
+      "name": "string is not less than or equal to string",
+      "template": "{% if 'bbb' <= 'aaa' %}true{% else %}false{% endif %}",
+      "result": "false"
+    },
+    {
+      "name": "string is greater than string",
+      "template": "{% if 'abc' > 'acb' %}true{% else %}false{% endif %}",
+      "result": "false"
+    },
+    {
+      "name": "string is not greater than string",
+      "template": "{% if 'bbb' > 'aaa' %}true{% else %}false{% endif %}",
+      "result": "true"
+    },
+    {
+      "name": "string is greater than or equal to string",
+      "template": "{% if 'abc' >= 'acb' %}true{% else %}false{% endif %}",
+      "result": "false"
+    },
+    {
+      "name": "string is not greater than or equal to string",
+      "template": "{% if 'bbb' >= 'aaa' %}true{% else %}false{% endif %}",
+      "result": "true"
+    },
+    {
+      "name": "else tag expressions are ignored",
+      "template": "{% if false %}1{% else nonsense %}2{% endif %}",
+      "tags": [
+        "strict"
+      ],
+      "result": "2"
+    },
+    {
+      "name": "extra else blocks are ignored",
+      "template": "{% if false %}1{% else %}2{% else %}3{% endif %}",
+      "tags": [
+        "strict"
+      ],
+      "result": "2"
+    },
+    {
+      "name": "extra elsif blocks are ignored",
+      "template": "{% if false %}1{% else %}2{% elsif true %}3{% endif %}",
+      "tags": [
+        "strict"
+      ],
+      "result": "2"
+    },
+    {
+      "name": "empty array equals special empty",
+      "template": "{% if x == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "x": []
+      },
+      "result": "TRUE"
+    },
+    {
+      "name": "empty array is truthy",
+      "template": "{% if x %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "x": []
+      },
+      "result": "TRUE"
+    },
+    {
+      "name": "empty object equals special empty",
+      "template": "{% if x == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "x": {}
+      },
+      "result": "TRUE"
+    },
+    {
+      "name": "empty object is truthy",
+      "template": "{% if x %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "x": {}
+      },
+      "result": "TRUE"
+    },
+    {
+      "name": "empty string is truthy",
+      "template": "{% if '' %}TRUE{% else %}FALSE{% endif %}",
+      "result": "TRUE"
+    },
+    {
+      "name": "string contains string",
+      "template": "{% if 'hello' contains 'llo' %}TRUE{% else %}FALSE{% endif %}",
+      "result": "TRUE"
+    },
+    {
+      "name": "string contains int",
+      "template": "{% if 'hel9lo' contains 9 %}TRUE{% else %}FALSE{% endif %}",
+      "result": "TRUE"
+    },
+    {
+      "name": "string contains string from context",
+      "template": "{% if 'hello' contains s %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "s": "llo"
+      },
+      "result": "TRUE"
+    },
+    {
+      "name": "context string contains string from context",
+      "template": "{% if t contains s %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "s": "llo",
+        "t": "hello"
+      },
+      "result": "TRUE"
+    },
+    {
+      "name": "undefined is equal to nil",
+      "template": "{% if nosuchthing == nil %}TRUE{% else %}FALSE{% endif %}",
+      "result": "TRUE"
+    },
+    {
+      "name": "undefined is equal to null",
+      "template": "{% if nosuchthing == null %}TRUE{% else %}FALSE{% endif %}",
+      "result": "TRUE"
+    },
+    {
+      "name": "string contains undefined",
+      "template": "{% if s contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "s": "hello"
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "array contains undefined",
+      "template": "{% if a contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "a": [
+          1,
+          2,
+          3,
+          null
+        ]
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "array contains false",
+      "template": "{% if a contains false %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "a": [
+          1,
+          2,
+          3,
+          false
+        ]
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "object contains undefined",
+      "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        }
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "string contains nil",
+      "template": "{% if s contains nil %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "s": "hello"
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "array contains nil",
+      "template": "{% if a contains nil %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "a": [
+          1,
+          2,
+          null
+        ]
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "object contains nil",
+      "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        }
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "undefined contains string",
+      "template": "{% if undefined contains s %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "s": "hello"
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "undefined contains array",
+      "template": "{% if undefined contains a %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "a": [
+          1,
+          2,
+          3
+        ]
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "undefined contains object",
+      "template": "{% if undefined contains obj %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        }
+      },
+      "result": "FALSE"
+    },
+    {
+      "name": "undefined contains undefined",
+      "template": "{% if undefined contains thing %}TRUE{% else %}FALSE{% endif %}",
+      "result": "FALSE"
+    },
+    {
+      "name": "startswith is not a valid operator",
+      "template": "{% if s startswith t %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "s": "hello",
+        "t": "hell"
+      },
+      "invalid": true
+    },
+    {
+      "name": "endswith is not a valid operator",
+      "template": "{% if s endswith t %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "s": "hello",
+        "t": "lo"
+      },
+      "invalid": true
+    },
+    {
+      "name": "haskey is not a valid operator",
+      "template": "{% if obj haskey x %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        },
+        "x": "foo"
+      },
+      "invalid": true
+    },
+    {
+      "name": "in is not a valid operator",
+      "template": "{% if t in s %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "s": "hello",
+        "t": "lo"
+      },
+      "invalid": true
+    }
+  ]
+}

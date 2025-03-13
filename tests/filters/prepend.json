@@ -1,0 +1,39 @@
+{
+  "tests": [
+    {
+      "name": "concat",
+      "template": "{{ \"hello\" | prepend: \"there\" }}",
+      "result": "therehello"
+    },
+    {
+      "name": "not a string",
+      "template": "{{ 5 | prepend: 'there' }}",
+      "result": "there5"
+    },
+    {
+      "name": "argument not a string",
+      "template": "{{ \"hello\" | prepend: 5 }}",
+      "result": "5hello"
+    },
+    {
+      "name": "missing argument",
+      "template": "{{ \"hello\" | prepend }}",
+      "invalid": true
+    },
+    {
+      "name": "too many arguments",
+      "template": "{{ \"hello\" | prepend: \"how\", \"are\", \"you\" }}",
+      "invalid": true
+    },
+    {
+      "name": "undefined left value",
+      "template": "{{ nosuchthing | prepend: \"hi\" }}",
+      "result": "hi"
+    },
+    {
+      "name": "undefined argument",
+      "template": "{{ \"hi\" | prepend: nosuchthing }}",
+      "result": "hi"
+    }
+  ]
+}
