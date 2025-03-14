@@ -1,7 +1,7 @@
 GIT
   remote: git@github.com:Shopify/liquid.git
-  revision: fe61d1527a89458114ee22fc05ac9153c6b3feb8
-  branch: better-bools-than-ghouls
+  revision: c5711c095f4269038b411dc960280e4f5981609f
+  branch: main
   specs:
     liquid (5.8.1)
       bigdecimal

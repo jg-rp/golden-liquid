@@ -9,8 +9,6 @@ from pathlib import Path
 from typing import Any
 
 from jsonschema import validate
-from yaml import Dumper
-from yaml import dump
 
 ROOT = Path(__file__).parent / "tests"
 SCHEMA_PATH = Path(__file__).parent / "schema.json"
@@ -21,8 +19,6 @@ with open(SCHEMA_PATH, encoding="utf-8") as fd:
 
 def build() -> None:
     # Sort files, with files before folders
-    # NOTE: This is OK for one level of nesting, but might not be great with more
-    # sub folders.
     files = sorted(ROOT.rglob("*.json"), key=lambda p: (len(p.parts), str(p)))
     tests = list(itertools.chain.from_iterable(load_tests(f) for f in files))
 
@@ -32,12 +28,7 @@ def build() -> None:
     }
 
     validate(instance=cts, schema=SCHEMA)
-
-    with (Path(__file__).parent / "golden_liquid.json").open("w") as fd:
-        json.dump(cts, fd, indent=2)
-
-    with (Path(__file__).parent / "golden_liquid.yaml").open("w") as fd:
-        fd.write(dump(cts, Dumper=Dumper, sort_keys=False))
+    json.dump(cts, sys.stdout, indent=2)
 
 
 def load_tests(path: Path) -> list[dict[str, Any]]:
@@ -72,3 +63,6 @@ def add_prefix(prefix: str, test: dict[str, Any]) -> dict[str, Any]:
 
 if __name__ == "__main__":
     build()
+
+# TODO: report tags
+# TODO: CLI for targeting select tags only
