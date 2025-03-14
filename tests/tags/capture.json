@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "capture template literal and global variable",
+      "template": "{% capture greeting %}Hello, {{ customer.first_name }}.{% endcapture %}{{ greeting }}",
+      "data": {
+        "customer": {
+          "first_name": "Holly"
+        }
+      },
+      "result": "Hello, Holly."
+    },
+    {
+      "name": "capture into a variable with a hyphen",
+      "template": "{% capture this-thing %}Hello, {{ customer.first_name }}.{% endcapture %}{{ this-thing }}",
+      "data": {
+        "customer": {
+          "first_name": "Holly"
+        }
+      },
+      "result": "Hello, Holly."
+    },
+    {
+      "name": "assign to a variable from a captured variable",
+      "template": "{% capture some %}hello{% endcapture %}{% assign other = some %}{{ some }}-{{ other }}",
+      "result": "hello-hello"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "tests": [
+    {
+      "name": "start is not a number",
+      "template": "{{ (start..end) | join: '#' }}",
+      "data": {
+        "start": "foo",
+        "end": 5
+      },
+      "result": "0#1#2#3#4#5"
+    },
+    {
+      "name": "end is not a number",
+      "template": "{{ (start..end) | join: '#' }}",
+      "data": {
+        "start": "1",
+        "end": "foo"
+      },
+      "result": ""
+    },
+    {
+      "name": "end is less than start",
+      "template": "{{ (start..end) | join: '#' }}",
+      "data": {
+        "start": 5,
+        "end": 1
+      },
+      "result": ""
+    },
+    {
+      "name": "start is negative",
+      "template": "{{ (start..end) | join: '#' }}",
+      "data": {
+        "start": -5,
+        "end": 1
+      },
+      "result": "-5#-4#-3#-2#-1#0#1"
+    },
+    {
+      "name": "start and end are negative",
+      "template": "{{ (start..end) | join: '#' }}",
+      "data": {
+        "start": -5,
+        "end": -2
+      },
+      "result": "-5#-4#-3#-2"
+    },
+    {
+      "name": "integer literals",
+      "template": "{{ (1..5) | join: '#' }}",
+      "result": "1#2#3#4#5"
+    },
+    {
+      "name": "whitespace before start",
+      "template": "{{ ( \n\t1..5) | join: '#' }}",
+      "result": "1#2#3#4#5"
+    },
+    {
+      "name": "whitespace after stop",
+      "template": "{{ (1..5 \n\t) | join: '#' }}",
+      "result": "1#2#3#4#5"
+    },
+    {
+      "name": "whitespace before dots",
+      "template": "{{ (1 \n\t..5) | join: '#' }}",
+      "result": "1#2#3#4#5"
+    },
+    {
+      "name": "whitespace after dots",
+      "template": "{{ (1.. \n\t5) | join: '#' }}",
+      "result": "1#2#3#4#5"
+    },
+    {
+      "name": "whitespace before and after dots",
+      "template": "{{ (1 .. 5) | join: '#' }}",
+      "result": "1#2#3#4#5"
+    },
+    {
+      "name": "whitespace before and after dots, for loop",
+      "template": "{% for x in (1 .. 5) %}{{ x }},{% endfor %}",
+      "tags": [
+        "strict"
+      ],
+      "result": "1,2,3,4,5,"
+    }
+  ]
+}

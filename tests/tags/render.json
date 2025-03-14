@@ -1,0 +1,226 @@
+{
+  "tests": [
+    {
+      "name": "string literal name",
+      "template": "{% render 'product-hero', product: product %}",
+      "data": {
+        "product": {
+          "title": "foo",
+          "tags": [
+            "sports",
+            "garden"
+          ]
+        }
+      },
+      "templates": {
+        "product-hero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }} {% endfor %}"
+      },
+      "result": "foo\n- sports - garden "
+    },
+    {
+      "name": "bound variable",
+      "template": "{% render 'product-title' with collection.products[1] %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "bike"
+            },
+            {
+              "title": "car"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "product-title": "{{ product-title.title }}"
+      },
+      "result": "car"
+    },
+    {
+      "name": "bound variable does not exist",
+      "template": "{% render 'product-title' with no.such.thing %}",
+      "templates": {
+        "product-title": "{{ product-title.title }}"
+      },
+      "result": ""
+    },
+    {
+      "name": "bound array variable",
+      "template": "{% render 'prod' for collection.products %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "bike"
+            },
+            {
+              "title": "car"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "prod": "{{ prod.title }}"
+      },
+      "result": "bikecar"
+    },
+    {
+      "name": "bound variable with alias",
+      "template": "{% render 'product-alias' with collection.products[1] as product %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "bike"
+            },
+            {
+              "title": "car"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "product-alias": "{{ product.title }}"
+      },
+      "result": "car"
+    },
+    {
+      "name": "some keyword arguments",
+      "template": "{% render 'product-args', foo: 'hello', bar: 'there' %}",
+      "templates": {
+        "product-args": "{{ foo }} {{ bar }}"
+      },
+      "result": "hello there"
+    },
+    {
+      "name": "some keyword arguments including a range literal",
+      "template": "{% render 'product-args', foo: (1..3), bar: 'there' %}",
+      "templates": {
+        "product-args": "{{ foo | join: '#' }} {{ bar }}"
+      },
+      "result": "1#2#3 there"
+    },
+    {
+      "name": "some keyword arguments no leading coma",
+      "template": "{% render 'product-args' foo: 'hello', bar: 'there' %}",
+      "templates": {
+        "product-args": "{{ foo }} {{ bar }}"
+      },
+      "result": "hello there"
+    },
+    {
+      "name": "parent variables go out of scope",
+      "template": "{% assign greeting = 'good morning' %}{{ greeting }} {% render 'outer-scope' %}{{ greeting }}",
+      "templates": {
+        "outer-scope": "{{ greeting }}"
+      },
+      "result": "good morning good morning"
+    },
+    {
+      "name": "for loop variables go out of scope",
+      "template": "{% for i in (1..3) %}{{ i }}{% render 'loop-scope' %}{{ i }}{% endfor %}{{ i }}",
+      "templates": {
+        "loop-scope": "{{ i }}"
+      },
+      "result": "112233"
+    },
+    {
+      "name": "assigned variables do not leak into outer scope",
+      "template": "{% render 'assign-outer-scope', customer: customer %} {{ last_name }}",
+      "data": {
+        "customer": {
+          "first_name": "Holly"
+        }
+      },
+      "templates": {
+        "assign-outer-scope": "Hello, {{ customer.first_name }}{% assign last_name = 'Smith' %}"
+      },
+      "result": "Hello, Holly "
+    },
+    {
+      "name": "increment is isolated between renders",
+      "template": "{% increment foo %} {% render 'increment' %} {% increment foo %}",
+      "templates": {
+        "increment": "{% increment foo %}"
+      },
+      "result": "0 0 1"
+    },
+    {
+      "name": "decrement is isolated between renders",
+      "template": "{% decrement foo %} {% render 'decrement' %} {% decrement foo %}",
+      "templates": {
+        "decrement": "{% decrement foo %}"
+      },
+      "result": "-1 -1 -2"
+    },
+    {
+      "name": "forloop helper",
+      "template": "{% render 'product' for collection.products %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "bike"
+            },
+            {
+              "title": "car"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "product": "Product: {{ product.title }} {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %} index:{{ forloop.index }} "
+      },
+      "result": "Product: bike first index:1 Product: car last index:2 "
+    },
+    {
+      "name": "render loops don't add parentloop",
+      "template": "{% render 'product' for collection.products %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "bike"
+            },
+            {
+              "title": "car"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "product": "{{ product.title }}-{{ forloop.index0 }} {% for x in (1..3) %}{{ forloop.index0 }}{{ forloop.parentloop.index0 }} {% endfor %}"
+      },
+      "result": "bike-0 0 1 2 car-1 0 1 2 "
+    },
+    {
+      "name": "render loops can't access parentloop",
+      "template": "{% for x in (1..3) %}{% render 'product' for collection.products %}{% endfor %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "bike"
+            },
+            {
+              "title": "car"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "product": "{{ product.title }}-{{ forloop.index0 }} {{ forloop.parentloop.index0 }}"
+      },
+      "result": "bike-0 car-1 bike-0 car-1 bike-0 car-1 "
+    },
+    {
+      "name": "assign to keyword argument",
+      "template": "{% render 'product-args', foo: 'hello' %}{{ foo }}",
+      "templates": {
+        "product-args": "{{ foo }}{% assign foo='goodbye' %} {{ foo }}"
+      },
+      "result": "hello goodbye"
+    }
+  ]
+}

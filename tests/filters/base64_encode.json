@@ -1,0 +1,32 @@
+{
+  "tests": [
+    {
+      "name": "from string",
+      "template": "{{ \"_#/.\" | base64_encode }}",
+      "result": "XyMvLg=="
+    },
+    {
+      "name": "from string with URL unsafe",
+      "template": "{{ a | base64_encode }}",
+      "data": {
+        "a": "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 !@#$%^&*()-=_+/?.:;[]{}\\|"
+      },
+      "result": "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXogQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVogMTIzNDU2Nzg5MCAhQCMkJV4mKigpLT1fKy8/Ljo7W117fVx8"
+    },
+    {
+      "name": "not a string",
+      "template": "{{ 5 | base64_encode }}",
+      "result": "NQ=="
+    },
+    {
+      "name": "unexpected argument",
+      "template": "{{ \"hello\" | base64_encode: 5 }}",
+      "invalid": true
+    },
+    {
+      "name": "undefined left value",
+      "template": "{{ nosuchthing | base64_encode }}",
+      "result": ""
+    }
+  ]
+}

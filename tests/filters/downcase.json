@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "make lower case",
+      "template": "{{ \"HELLO\" | downcase }}",
+      "result": "hello"
+    },
+    {
+      "name": "not a string",
+      "template": "{{ 5 | downcase }}",
+      "result": "5"
+    },
+    {
+      "name": "unexpected argument",
+      "template": "{{ \"HELLO\" | downcase: 5 }}",
+      "invalid": true
+    },
+    {
+      "name": "undefined left value",
+      "template": "{{ nosuchthing | downcase }}",
+      "result": ""
+    }
+  ]
+}

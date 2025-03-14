@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "literal",
+      "template": "{% raw %}foo{% endraw %}",
+      "result": "foo"
+    },
+    {
+      "name": "output statement",
+      "template": "{% raw %}{{ foo }}{% endraw %}",
+      "result": "{{ foo }}"
+    },
+    {
+      "name": "tag",
+      "template": "{% raw %}{% assign x = 1 %}{% endraw %}",
+      "result": "{% assign x = 1 %}"
+    },
+    {
+      "name": "partial tag",
+      "template": "{% raw %} %} {% }} {{ {% endraw %}",
+      "result": " %} {% }} {{ "
+    },
+    {
+      "name": "continue after raw",
+      "template": "{% raw %} {% some raw content %} {% endraw %}a literal",
+      "result": " {% some raw content %} a literal"
+    }
+  ]
+}

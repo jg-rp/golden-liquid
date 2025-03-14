@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "named counter",
+      "template": "{% decrement foo %}{{ foo }} {% decrement foo %}{{ foo }}",
+      "result": "-1-1 -2-2"
+    },
+    {
+      "name": "increment and decrement named counter",
+      "template": "{% decrement foo %} {% decrement foo %} {% increment foo %}",
+      "result": "-1 -2 -2"
+    }
+  ]
+}
