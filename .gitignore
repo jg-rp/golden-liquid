@@ -80,3 +80,4 @@ node_modules/
 bin/
 obj/
 .ruby-version
+.DS_Store

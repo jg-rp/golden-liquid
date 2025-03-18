@@ -50,7 +50,7 @@ bundle exec ruby golden_liquid.rb
 
 Individual test files and `golden_liquid.json` are validated against `golden_liquid.schema.json`. Each object in the `tests` array can include the following fields.
 
-| Field       | Description                                                                                                                                                                                |
+| Field Name  | Description                                                                                                                                                                                |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `name`      | A descriptive name that uniquely identifies the test case.                                                                                                                                 |
 | `template`  | Liquid source text as a string.                                                                                                                                                            |
