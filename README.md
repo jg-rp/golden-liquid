@@ -50,21 +50,18 @@ bundle exec ruby golden_liquid.rb
 
 Individual test files and `golden_liquid.json` are validated against `golden_liquid.schema.json`. Each object in the `tests` array can include the following fields.
 
-| Field Name  | Description                                                                                                                                                                                |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `name`      | A descriptive name that uniquely identifies the test case.                                                                                                                                 |
-| `template`  | Liquid source text as a string.                                                                                                                                                            |
-| `result`    | The expected result of rendering the template with the associated context data.                                                                                                            |
-| `data`      | A JSON object mapping strings to arbitrary, possibly nested, strings, numbers, arrays, objects and booleans. These are the variables that the associated template should be rendered with. |
-| `templates` | A JSON object mapping strings to strings. You can think of it as a mock file system for testing `{% include %}` and `{% render %}`.                                                        |
-| `invalid`   | A Boolean indicating if the test case should raise/throw an exception/error.                                                                                                               |
-| `tags`      | An array of strings used to categorize the test case.                                                                                                                                      |
+- `name` - A descriptive name that uniquely identifies the test.
+- `template` - Liquid source text as a string.
+- `data` - A JSON object mapping strings to arbitrary, possibly nested, strings, numbers, arrays, objects and booleans. These are the variables that the associated template should be rendered with.
+- `result` - The expected result of rendering the template with the associated context data.
+- `templates` - A JSON object mapping strings to strings. You can think of it as a mock file system for testing `{% include %}` and `{% render %}`.
+- `invalid` - A Boolean indicating if the test case should raise/throw an exception/error.
+- `tags` - An array of strings used to categorize the test case.
 
 ## Tags
 
 Tags are used to categorize test cases. This allows consumers of this test suite to easily exclude or target entire categories of tests, or enable/disable features in certain cases.
 
-| Tag      | Description                                                                                                                |
-| -------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `strict` | Indicates that the test case should be parsed and rendered in strict mode, if a strict mode is available.                  |
-| `absent` | Indicates that the test cases is asserting the absence of a feature. For example, the absence of a logical `not` operator. |
+- `strict` - Indicates that the test case should be parsed and rendered in strict mode, if a strict mode is available.
+- `absent` - Indicates that the test cases is asserting the absence of a feature. For example, the absence of a logical `not` operator.
+- `utc` - The test case assumes the host timezone is set to UTC
