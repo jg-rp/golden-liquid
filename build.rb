@@ -4,7 +4,7 @@ require "optparse"
 require "pathname"
 require "json_schemer"
 
-GOLDEN_SCHEMA = JSON.parse(File.read("golden_liquid.schema.json"))
+GOLDEN_SCHEMA = JSON.load_file("golden_liquid.schema.json")
 unless JSONSchemer.valid_schema?(GOLDEN_SCHEMA)
   raise StandardError "schema is not valid"
 end
@@ -17,8 +17,13 @@ ROOT = "tests/"
 # @param require_all_tags [bool] If true, require all _tags_ to be present for a test.
 # @param exclude_tags [bool] If true, exclude tests matching _tags_ instead of
 #   including them
-# @return The number of test cases written to stdout.
+# @return [Hash] The validated test suite.
 def build(tags, require_all_tags, exclude_tags)
+  warn "Building test suite from ./tests"
+  warn "Filtering by tags (#{tags.length}): #{tags.inspect}"
+  warn "Require all tags: #{require_all_tags}"
+  warn "Exclude tags: #{exclude_tags}"
+
   # Sort files, with files before folders
   files = Dir["#{ROOT}**/*.json"].sort_by { |path| [path.count("/"), path] }
   test_cases = files.flat_map { |path| load_tests(Pathname.new(path)) }
@@ -40,8 +45,7 @@ def build(tags, require_all_tags, exclude_tags)
   }
 
   validate_schema(test_suite)
-  puts JSON.pretty_generate(test_suite)
-  test_cases.length
+  test_suite
 end
 
 # Read, transform and validate tests cases in _path_.
@@ -54,7 +58,7 @@ def load_tests(path)
   end
   prefix = parts.join(", ")
 
-  warn("Processing #{rel_path} with prefix #{prefix.inspect}")
+  # warn("Processing #{rel_path} with prefix #{prefix.inspect}")
 
   data = JSON.parse(path.read)
   validate_schema(data)
@@ -95,47 +99,53 @@ end
 
 def cli
   options = {
-    "tags" => [],
-    "require_all" => false,
-    "exclude" => false,
-    "list_tags" => false
+    tags: [],
+    require_all: false,
+    exclude: false,
+    list_tags: false
   }
 
   OptionParser.new do |parser|
     parser.banner = <<~BANNER
       Build the Golden Liquid test suite and write it to stdout.
-      Usage: build.rb [options]"
+      Usage: build.rb [options]
     BANNER
 
     parser.on("-t TAG", "--tag TAG",
               "Select tests by tag. Can be used multiple times.") do |value|
-      options["tags"] << value
+      options[:tags] << value
     end
 
     parser.on("-a", "--require-all",
               "Require all tags provided by -t or --tag to be present.") do |value|
-      options["require_all"] = value
+      options[:require_all] = value
     end
 
     parser.on("-e", "--exclude",
               "Exclude tests with tags provided by -t or --tag.") do |value|
-      options["exclude"] = value
+      options[:exclude] = value
     end
 
     parser.on("--list-tags",
               "Print a list of known tags to stdout") do |value|
-      options["list_tags"] = value
+      options[:list_tags] = value
     end
 
     parser.parse!
   end
 
-  if options["list_tags"]
+  if options[:list_tags]
     dump_tags
   else
-    build(options["tags"],
-          options["require_all"],
-          options["exclude"])
+    test_suite = build(options[:tags],
+                       options[:require_all],
+                       options[:exclude])
+
+    puts JSON.pretty_generate(test_suite)
+
+    all_tags = test_suite["tests"].flat_map { |t| t.fetch("tags", []) }.to_set.sort
+    warn "Wrote #{test_suite["tests"].length} to stdout."
+    warn "Tags (#{all_tags.length}): #{all_tags.join(", ")}"
   end
 end
 

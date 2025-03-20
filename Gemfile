@@ -11,3 +11,9 @@ gem "rubocop"
 gem "json_schemer", "~> 2.4"
 
 gem "base64", "~> 0.2.0"
+
+gem "rubocop-minitest", "~> 0.37.1"
+
+gem "rubocop-rake", "~> 0.7.1"
+
+gem "rake", "~> 13.2"
