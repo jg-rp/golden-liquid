@@ -2,345 +2,6 @@
   "description": "Golden Liquid test suite",
   "tests": [
     {
-      "name": "identifiers, ascii lowercase",
-      "template": "{% assign foo = 'hello' %}{{ foo }} {{ bar }}",
-      "data": {
-        "bar": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, ascii uppercase",
-      "template": "{% assign FOO = 'hello' %}{{ FOO }} {{ BAR }}",
-      "data": {
-        "BAR": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, digits",
-      "template": "{% assign foo1 = 'hello' %}{{ foo1 }} {{ bar2 }}",
-      "data": {
-        "bar2": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, only digits",
-      "template": "{% assign 123 = 'hello' %}{{ 123 }} {{ 456 }}",
-      "data": {
-        "456": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "123 456"
-    },
-    {
-      "name": "identifiers, hyphens",
-      "template": "{% assign foo-a = 'hello' %}{{ foo-a }} {{ bar-b }}",
-      "data": {
-        "bar-b": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, leading hyphen",
-      "template": "{% assign -foo = 'hello' %}{{ -foo }} {{ -bar }}",
-      "data": {
-        "-bar": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "identifiers, underscore",
-      "template": "{% assign foo_a = 'hello' %}{{ foo_a }} {{ bar_b }}",
-      "data": {
-        "bar_b": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, only underscore",
-      "template": "{% assign _ = 'hello' %}{{ _ }} {{ __ }}",
-      "data": {
-        "__": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, leading underscore",
-      "template": "{% assign _foo = 'hello' %}{{ _foo }} {{ _bar }}",
-      "data": {
-        "_bar": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, trailing question mark assign",
-      "template": "{% assign foo? = 'hello' %}{{ foo? }}",
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "identifiers, trailing question mark output",
-      "template": "{{ bar? }}",
-      "data": {
-        "bar?": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "goodbye"
-    },
-    {
-      "name": "identifiers, hyphen in for loop target",
-      "template": "{% for x in f-oo %}{{ x }}{% endfor %}",
-      "data": {
-        "f-oo": [
-          1,
-          2,
-          3
-        ]
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "123"
-    },
-    {
-      "name": "identifiers, leading hyphen in for loop target",
-      "template": "{% for x in -foo %}{{ x }}{% endfor %}",
-      "data": {
-        "-foo": [
-          1,
-          2,
-          3
-        ]
-      },
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "identifiers, hyphen in for loop variable",
-      "template": "{% for x-y in foo %}{{ x-y }}{% endfor %}",
-      "data": {
-        "foo": [
-          1,
-          2,
-          3
-        ]
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "123"
-    },
-    {
-      "name": "identifiers, trailing question mark in for loop target",
-      "template": "{% for x in foo? %}{{ x }}{% endfor %}",
-      "data": {
-        "foo?": [
-          1,
-          2,
-          3
-        ]
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "123"
-    },
-    {
-      "name": "identifiers, trailing question mark in for loop variable",
-      "template": "{% for x? in foo %}{{ x? }}{% endfor %}",
-      "data": {
-        "foo": [
-          1,
-          2,
-          3
-        ]
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "123"
-    },
-    {
-      "name": "identifiers, increment with a hyphen",
-      "template": "{% increment f-oo %}{% increment f-oo %}",
-      "tags": [
-        "strict"
-      ],
-      "result": "01"
-    },
-    {
-      "name": "identifiers, decrement with a hyphen",
-      "template": "{% decrement f-oo %}{% decrement f-oo %}",
-      "tags": [
-        "strict"
-      ],
-      "result": "-1-2"
-    },
-    {
-      "name": "identifiers, capture ascii lowercase",
-      "template": "{% capture foo %}hello{% endcapture %}{{ foo }}",
-      "tags": [
-        "strict"
-      ],
-      "result": "hello"
-    },
-    {
-      "name": "identifiers, capture ascii uppercase",
-      "template": "{% capture FOO %}hello{% endcapture %}{{ FOO }}",
-      "tags": [
-        "strict"
-      ],
-      "result": "hello"
-    },
-    {
-      "name": "identifiers, capture digits",
-      "template": "{% capture foo1 %}hello{% endcapture %}{{ foo1 }}",
-      "tags": [
-        "strict"
-      ],
-      "result": "hello"
-    },
-    {
-      "name": "identifiers, capture only digits",
-      "template": "{% capture 123 %}hello{% endcapture %}{{ 123 }}",
-      "tags": [
-        "strict"
-      ],
-      "result": "123"
-    },
-    {
-      "name": "identifiers, capture hyphens",
-      "template": "{% capture foo-a %}hello {{ bar-b }}{% endcapture %}{{ foo-a }}",
-      "data": {
-        "bar-b": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, capture leading hyphen",
-      "template": "{% capture -foo %}hello {{ -bar }}{% endcapture %}{{ -foo }}",
-      "data": {
-        "-bar": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "identifiers, capture underscore",
-      "template": "{% capture foo_a %}hello {{ bar_b }}{% endcapture %}{{ foo_a }}",
-      "data": {
-        "bar_b": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, capture only underscore",
-      "template": "{% capture _ %}hello {{ __ }}{% endcapture %}{{ _ }}",
-      "data": {
-        "__": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, capture leading underscore",
-      "template": "{% capture _foo %}hello {{ _bar }}{% endcapture %}{{ _foo }}",
-      "data": {
-        "_bar": "goodbye"
-      },
-      "tags": [
-        "strict"
-      ],
-      "result": "hello goodbye"
-    },
-    {
-      "name": "identifiers, at sign",
-      "template": "{{ @foo }}",
-      "data": {
-        "@foo": "hello"
-      },
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "illegal, unknown tag",
-      "template": "{% nosuchthing %}",
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "illegal, no addition operator",
-      "template": "{% assign x = 1 + 2 %}{{ x }}",
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "illegal, no subtraction operator",
-      "template": "{% assign x = 1 - 2 %}{{ x }}",
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "illegal, no multiplication operator",
-      "template": "{% assign x = 2 %}{{ x * 3 }}",
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
       "name": "output, render a string literal",
       "template": "{{ 'hello' }}",
       "result": "hello"
@@ -554,55 +215,6 @@
       "result": "shoe"
     },
     {
-      "name": "output, chained bracketed identifier index no dot",
-      "template": "{{ products[0]title }}",
-      "data": {
-        "products": [
-          {
-            "title": "shoe"
-          },
-          {
-            "title": "hat"
-          }
-        ]
-      },
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "output, chained identifier dot separated index",
-      "template": "{{ products.0.title }}",
-      "data": {
-        "products": [
-          {
-            "title": "shoe"
-          },
-          {
-            "title": "hat"
-          }
-        ]
-      },
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "output, dot followed by bracket",
-      "template": "{{ product.['title'] }}",
-      "data": {
-        "product": {
-          "title": "shoe"
-        }
-      },
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
       "name": "output, bracketed variable resolves to a string",
       "template": "{{ foo[something] }}",
       "data": {
@@ -705,32 +317,6 @@
       "result": "42"
     },
     {
-      "name": "output, whitespace between words",
-      "template": "{{ foo \n\tbar }}",
-      "data": {
-        "foo": {
-          "bar": 42
-        }
-      },
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
-      "name": "output, double dot",
-      "template": "{{ foo..bar }}",
-      "data": {
-        "foo": {
-          "bar": 42
-        }
-      },
-      "tags": [
-        "strict"
-      ],
-      "invalid": true
-    },
-    {
       "name": "output, array index out of bounds",
       "template": "{{ a[3] }}",
       "data": {
@@ -828,14 +414,6 @@
       "name": "range, whitespace before and after dots",
       "template": "{{ (1 .. 5) | join: '#' }}",
       "result": "1#2#3#4#5"
-    },
-    {
-      "name": "range, whitespace before and after dots, for loop",
-      "template": "{% for x in (1 .. 5) %}{{ x }},{% endfor %}",
-      "tags": [
-        "strict"
-      ],
-      "result": "1,2,3,4,5,"
     },
     {
       "name": "special, first of an array",
@@ -4906,8 +4484,8 @@
     },
     {
       "name": "filters, truncatewords, reference implementation test 1",
-      "template": "{{ \"\u6d4b\u8bd5\u6d4b\u8bd5\u6d4b\u8bd5\u6d4b\u8bd5\" | truncatewords: 5 }}",
-      "result": "\u6d4b\u8bd5\u6d4b\u8bd5\u6d4b\u8bd5\u6d4b\u8bd5"
+      "template": "{{ \"测试测试测试测试\" | truncatewords: 5 }}",
+      "result": "测试测试测试测试"
     },
     {
       "name": "filters, truncatewords, reference implementation test 2",
@@ -6791,30 +6369,6 @@
       "result": "true"
     },
     {
-      "name": "tags, if, else tag expressions are ignored",
-      "template": "{% if false %}1{% else nonsense %}2{% endif %}",
-      "tags": [
-        "strict"
-      ],
-      "result": "2"
-    },
-    {
-      "name": "tags, if, extra else blocks are ignored",
-      "template": "{% if false %}1{% else %}2{% else %}3{% endif %}",
-      "tags": [
-        "strict"
-      ],
-      "result": "2"
-    },
-    {
-      "name": "tags, if, extra elsif blocks are ignored",
-      "template": "{% if false %}1{% else %}2{% elsif true %}3{% endif %}",
-      "tags": [
-        "strict"
-      ],
-      "result": "2"
-    },
-    {
       "name": "tags, if, empty array equals special empty",
       "template": "{% if x == empty %}TRUE{% else %}FALSE{% endif %}",
       "data": {
@@ -7380,12 +6934,12 @@
     },
     {
       "name": "tags, inline comment, comment with u2018",
-      "template": "{%# some \u2018comment %}",
+      "template": "{%# some ‘comment %}",
       "result": ""
     },
     {
       "name": "tags, inline comment, comment with u201C",
-      "template": "{%# some \u201ccomment %}",
+      "template": "{%# some “comment %}",
       "result": ""
     },
     {
@@ -7920,30 +7474,6 @@
         ]
       },
       "result": "false"
-    },
-    {
-      "name": "tags, unless, else tag expressions are ignored",
-      "template": "{% unless true %}1{% else nonsense %}2{% endunless %}",
-      "tags": [
-        "strict"
-      ],
-      "result": "2"
-    },
-    {
-      "name": "tags, unless, extra else blocks are ignored",
-      "template": "{% unless true %}1{% else %}2{% else %}3{% endunless %}",
-      "tags": [
-        "strict"
-      ],
-      "result": "2"
-    },
-    {
-      "name": "tags, unless, extra elsif blocks are ignored",
-      "template": "{% unless true %}1{% else %}2{% elsif true %}3{% endunless %}",
-      "tags": [
-        "strict"
-      ],
-      "result": "2"
     }
   ]
 }

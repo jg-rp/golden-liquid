@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "json"
 require "minitest/autorun"
 require "liquid"
@@ -28,16 +30,17 @@ describe "Golden" do
             environment: test_env,
             error_mode: mode,
             line_numbers: true
-          ).render!(context = t["data"])
+          ).render!(t["data"])
         end
       else
         template = Liquid::Template.parse(
           t["template"],
           environment: test_env,
           error_mode: mode,
-          line_numbers: true)
+          line_numbers: true
+        )
 
-        _(template.render(context = t["data"])).must_equal t["result"]
+        _(template.render(t["data"])).must_equal t["result"]
       end
     end
   end
