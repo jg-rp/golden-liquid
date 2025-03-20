@@ -51,7 +51,7 @@
         "s": "hello"
       },
       "results": [
-        "hello",
+        "h",
         ""
       ]
     },
@@ -80,7 +80,10 @@
       "data": {
         "s": "hello"
       },
-      "result": ""
+      "results": [
+        "o",
+        ""
+      ]
     },
     {
       "name": "last of a object",

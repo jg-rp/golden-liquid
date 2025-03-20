@@ -54,7 +54,10 @@
     {
       "name": "first of a string",
       "template": "{{ 'hello' | first }}",
-      "result": ""
+      "results": [
+        "",
+        "h"
+      ]
     },
     {
       "name": "first of a hash",

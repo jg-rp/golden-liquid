@@ -54,7 +54,10 @@
     {
       "name": "last of a string",
       "template": "{{ 'hello' | last }}",
-      "result": ""
+      "results": [
+        "",
+        "o"
+      ]
     },
     {
       "name": "last of a hash",
