@@ -46,7 +46,7 @@
           3
         ]
       },
-      "result": "true"
+      "invalid": true
     },
     {
       "name": "array of ints, string argument, default value",

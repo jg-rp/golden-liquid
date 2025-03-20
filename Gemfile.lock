@@ -1,9 +1,9 @@
 GIT
-  remote: git@github.com:Shopify/liquid.git
-  revision: c5711c095f4269038b411dc960280e4f5981609f
+  remote: https://github.com/Shopify/liquid.git
+  revision: aa1640035f172bcbd064959d8e7d00aac07243d7
   branch: main
   specs:
-    liquid (5.8.1)
+    liquid (5.8.2)
       bigdecimal
       strscan (>= 3.1.1)
 

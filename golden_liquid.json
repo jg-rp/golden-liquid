@@ -2479,7 +2479,7 @@
           3
         ]
       },
-      "result": "true"
+      "invalid": true
     },
     {
       "name": "filters, has, array of ints, string argument, default value",
