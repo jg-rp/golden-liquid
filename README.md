@@ -54,6 +54,7 @@ Individual test files and `golden_liquid.json` are validated against `golden_liq
 - `template` - Liquid source text as a string.
 - `data` - A JSON object mapping strings to arbitrary, possibly nested, strings, numbers, arrays, objects and booleans. These are the variables that the associated template should be rendered with.
 - `result` - The expected result of rendering the template with the associated context data.
+- `results` - An array of possible expected results from rendering the template with the given context data.
 - `templates` - A JSON object mapping strings to strings. You can think of it as a mock file system for testing `{% include %}` and `{% render %}`.
 - `invalid` - A Boolean indicating if the test case should raise/throw an exception/error.
 - `tags` - An array of strings used to categorize the test case.

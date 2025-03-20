@@ -40,7 +40,11 @@ describe "Golden" do
           line_numbers: true
         )
 
-        _(template.render(t["data"])).must_equal t["result"]
+        if t["result"]
+          _(template.render(t["data"])).must_equal t["result"]
+        else
+          _(t["results"]).must_include template.render(t["data"])
+        end
       end
     end
   end

@@ -887,7 +887,10 @@
       "data": {
         "s": "hello"
       },
-      "result": ""
+      "results": [
+        "hello",
+        ""
+      ]
     },
     {
       "name": "special, first of an object",

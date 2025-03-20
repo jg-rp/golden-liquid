@@ -32,6 +32,9 @@
         "result": {
           "$ref": "#/$defs/test_case_result"
         },
+        "results": {
+          "$ref": "#/$defs/test_case_results"
+        },
         "invalid": {
           "$ref": "#/$defs/invalid"
         },
@@ -44,13 +47,22 @@
         {
           "required": ["result"],
           "properties": {
-            "invalid": false
+            "invalid": false,
+            "results": false
+          }
+        },
+        {
+          "required": ["results"],
+          "properties": {
+            "invalid": false,
+            "result": false
           }
         },
         {
           "required": ["invalid"],
           "properties": {
-            "result": false
+            "result": false,
+            "results": false
           }
         }
       ]
@@ -63,6 +75,12 @@
     "test_case_result": {
       "type": "string",
       "description": "The expected result of rendering the template with the given context data"
+    },
+    "test_case_results": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/test_case_result" },
+      "minItems": 2,
+      "description": "An array of possible expected results of rendering the template with the given context data"
     },
     "template": {
       "description": "The Liquid template",
