@@ -1,0 +1,59 @@
+{
+  "tests": [
+    {
+      "name": "don't render comments",
+      "template": "{% comment %}foo{% endcomment %}",
+      "result": ""
+    },
+    {
+      "name": "respect whitespace control in comments",
+      "template": "\n{%- comment %}foo{% endcomment -%}\t \r",
+      "result": ""
+    },
+    {
+      "name": "don't render comments with tags",
+      "template": "{% comment %}{% if true %}{{ title }}{% endif %}{% endcomment %}",
+      "result": ""
+    },
+    {
+      "name": "comment inside liquid tag",
+      "template": "{% liquid\n    if 1 != 1\n    comment\n    else\n    echo 123\n    endcomment\n    endif\n%}",
+      "result": ""
+    },
+    {
+      "name": "commented tags are not parsed",
+      "template": "{% comment %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}{% endcomment %}",
+      "result": ""
+    },
+    {
+      "name": "malformed tags are not parsed",
+      "template": "{% comment %}{% assign foo = '1'{% endcomment %}",
+      "invalid": true
+    },
+    {
+      "name": "incomplete tags are not parsed",
+      "template": "{% comment %}{% {{ {%- endcomment %}",
+      "invalid": true
+    },
+    {
+      "name": "nested comment blocks",
+      "template": "{% comment %}    {% comment %}    {% comment %}{%    endcomment     %}    {% endcomment %}{% endcomment %}",
+      "result": ""
+    },
+    {
+      "name": "nested comment blocks, with nested tags",
+      "template": "{% comment %}    {% comment %}    {% comment %}{% if true %}hello{%endif%}{%    endcomment     %}    {% endcomment %}{% endcomment %}",
+      "result": ""
+    },
+    {
+      "name": "unclosed nested comment blocks",
+      "template": "{% comment %}    {% comment %}    {% comment %}    {% endcomment %}{% endcomment %}",
+      "invalid": true
+    },
+    {
+      "name": "raw inside comment block",
+      "template": "{% comment %}    {% raw %}    {% endcomment %}    {% endraw %}{% endcomment %}",
+      "result": ""
+    }
+  ]
+}

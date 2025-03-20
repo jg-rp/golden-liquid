@@ -1,0 +1,44 @@
+{
+  "tests": [
+    {
+      "name": "don't render docs",
+      "template": "{% doc %}don't render me{% enddoc %}",
+      "result": ""
+    },
+    {
+      "name": "doc arguments is an error",
+      "template": "{% doc hello %}don't render me{% enddoc %}",
+      "invalid": true
+    },
+    {
+      "name": "doc tag block must be closed",
+      "template": "{% doc %}don't render me",
+      "invalid": true
+    },
+    {
+      "name": "doc text is not parsed",
+      "template": "{% doc %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}    {% raw %}{% enddoc %}",
+      "result": ""
+    },
+    {
+      "name": "nested docs are not allowed",
+      "template": "{% doc hello %}Hello{% doc %}{% enddoc %}",
+      "invalid": true
+    },
+    {
+      "name": "docs containing unclosed tags are ok",
+      "template": "{% doc %}{% assign x = y {% enddoc %}",
+      "result": ""
+    },
+    {
+      "name": "docs containing unclosed output are ok",
+      "template": "{% doc %}{{ foo {% enddoc %}",
+      "result": ""
+    },
+    {
+      "name": "whitespace control",
+      "template": "foo\n {%- doc %}I'm a doc comment{% enddoc -%}  \tbar",
+      "result": "foobar"
+    }
+  ]
+}

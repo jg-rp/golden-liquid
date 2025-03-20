@@ -1,0 +1,111 @@
+{
+  "tests": [
+    {
+      "name": "array of objects",
+      "template": "{{ a | map: 'title' | join: '#' }}",
+      "data": {
+        "a": [
+          {
+            "title": "foo"
+          },
+          {
+            "title": "bar"
+          },
+          {
+            "title": "baz"
+          }
+        ]
+      },
+      "result": "foo#bar#baz"
+    },
+    {
+      "name": "missing property",
+      "template": "{{ a | map: 'title' | join: '#' }}",
+      "data": {
+        "a": [
+          {
+            "title": "foo"
+          },
+          {
+            "title": "bar"
+          },
+          {
+            "heading": "baz"
+          }
+        ]
+      },
+      "result": "foo#bar#"
+    },
+    {
+      "name": "left value not an array",
+      "template": "{{ a | map: 'title' | join: '#' }}",
+      "data": {
+        "a": 123
+      },
+      "invalid": true
+    },
+    {
+      "name": "array containing a non object",
+      "template": "{{ a | map: 'title' | join: '#' }}",
+      "data": {
+        "a": [
+          {
+            "title": "foo"
+          },
+          {
+            "title": "bar"
+          },
+          5,
+          []
+        ]
+      },
+      "invalid": true
+    },
+    {
+      "name": "undefined argument",
+      "template": "{{ a | map: nosuchthing | join: '#' }}",
+      "data": {
+        "a": [
+          {
+            "title": "foo"
+          },
+          {
+            "title": "bar"
+          }
+        ]
+      },
+      "result": "#"
+    },
+    {
+      "name": "nested arrays get flattened",
+      "template": "{{ a | map: 'title' | join: '#' }}",
+      "data": {
+        "a": [
+          {
+            "title": "foo"
+          },
+          [
+            {
+              "title": "bar"
+            },
+            {
+              "title": "baz"
+            }
+          ]
+        ]
+      },
+      "result": "foo#bar#baz"
+    },
+    {
+      "name": "input is a hash",
+      "template": "{{ a | map: 'title' | join: '#' }}",
+      "data": {
+        "a": {
+          "title": "foo",
+          "some": "thing"
+        }
+      },
+      "result": "foo"
+    }
+  ]
+}

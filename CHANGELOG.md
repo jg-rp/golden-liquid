@@ -1,5 +1,16 @@
 # Golden Liquid Change Log
 
+## 2025-03-20
+
+**Breaking changes**
+
+- The schema for `golden_liquid.json` has changed. See `golden_liquid.schema.json` the README and [PR #11](https://github.com/jg-rp/golden-liquid/pull/11).
+- A YAML formatted version of the test suite is no longer included.
+- All but the Shopify/liquid test runners have been removed and we not longer include summary results.
+- Golden Liquid source files have been moved and transformed from the Python Liquid projects to this repository. See files in the `tests` directory.
+- We have a new build script called `build.rb`.
+- We have a new GitHub CI workflow that validates source files and builds, validates and tests the output file automatically.
+
 ## Version 0.25.0
 
 - Changed output test "chained bracketed identifier index no dot" to be strict and to raise/throw and error.

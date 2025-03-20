@@ -1,0 +1,222 @@
+{
+  "tests": [
+    {
+      "name": "string literal name",
+      "template": "{% include 'product-hero' %}",
+      "data": {
+        "product": {
+          "title": "foo",
+          "tags": [
+            "sports",
+            "garden"
+          ]
+        }
+      },
+      "templates": {
+        "product-hero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }}\n{% endfor %}"
+      },
+      "result": "foo\n- sports\n- garden\n"
+    },
+    {
+      "name": "name from identifier",
+      "template": "{% include snippet %}",
+      "data": {
+        "snippet": "product-hero",
+        "product": {
+          "title": "foo",
+          "tags": [
+            "sports",
+            "garden"
+          ]
+        }
+      },
+      "templates": {
+        "product-hero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }}\n{% endfor %}"
+      },
+      "result": "foo\n- sports\n- garden\n"
+    },
+    {
+      "name": "bound variable",
+      "template": "{% include 'product-title' with collection.products[1] %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "bike"
+            },
+            {
+              "title": "car"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "product-title": "{{ product-title.title }}"
+      },
+      "result": "car"
+    },
+    {
+      "name": "bound variable does not exist",
+      "template": "{% include 'product-title' with no.such.thing %}",
+      "templates": {
+        "product-title": "{{ product-title.title }}"
+      },
+      "result": ""
+    },
+    {
+      "name": "bound array variable",
+      "template": "{% include 'prod' for collection.products %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "bike"
+            },
+            {
+              "title": "car"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "prod": "{{ prod.title }}"
+      },
+      "result": "bikecar"
+    },
+    {
+      "name": "bound variable with alias",
+      "template": "{% include 'product-alias' with collection.products[1] as product %}",
+      "data": {
+        "collection": {
+          "products": [
+            {
+              "title": "bike"
+            },
+            {
+              "title": "car"
+            }
+          ]
+        }
+      },
+      "templates": {
+        "product-alias": "{{ product.title }}"
+      },
+      "result": "car"
+    },
+    {
+      "name": "some keyword arguments",
+      "template": "{% include 'product-args', foo: 'hello', bar: 'there' %}",
+      "templates": {
+        "product-args": "{{ foo }} {{ bar }}"
+      },
+      "result": "hello there"
+    },
+    {
+      "name": "some keyword arguments without leading comma",
+      "template": "{% include 'product-args' foo: 'hello', bar: 'there' %}",
+      "templates": {
+        "product-args": "{{ foo }} {{ bar }}"
+      },
+      "result": "hello there"
+    },
+    {
+      "name": "some keyword arguments with float literals",
+      "template": "{% include 'product-args' foo: 1.1, bar: 'there' %}",
+      "templates": {
+        "product-args": "{{ foo }} {{ bar }}"
+      },
+      "result": "1.1 there"
+    },
+    {
+      "name": "some keyword arguments with range literal",
+      "template": "{% include 'product-args' foo: (1..3), bar: 'there' %}",
+      "templates": {
+        "product-args": "{{ foo | join: '#' }} {{ bar }}"
+      },
+      "result": "1#2#3 there"
+    },
+    {
+      "name": "use globals from outer scope",
+      "template": "{% include 'outer-scope' %}",
+      "data": {
+        "customer": {
+          "first_name": "Holly"
+        }
+      },
+      "templates": {
+        "outer-scope": "Hello, {{ customer.first_name }}"
+      },
+      "result": "Hello, Holly"
+    },
+    {
+      "name": "assign persists in outer scope",
+      "template": "{% include 'assign-outer-scope' %} {{ last_name }}",
+      "data": {
+        "customer": {
+          "first_name": "Holly"
+        }
+      },
+      "templates": {
+        "assign-outer-scope": "Hello, {{ customer.first_name }}{% assign last_name = 'Smith' %}"
+      },
+      "result": "Hello, Holly Smith"
+    },
+    {
+      "name": "counter from outer scope",
+      "template": "{% increment foo %} {% include 'increment-outer-scope' %} {% increment foo %}",
+      "templates": {
+        "increment-outer-scope": "{% increment foo %}"
+      },
+      "result": "0 1 2"
+    },
+    {
+      "name": "break from include",
+      "template": "{% for tag in product.tags %}{% include 'tag-break' %}{% endfor %}",
+      "data": {
+        "product": {
+          "tags": [
+            "sports",
+            "garden"
+          ]
+        }
+      },
+      "templates": {
+        "tag-break": "{{ tag | upcase }}{% break %}"
+      },
+      "result": "SPORTS"
+    },
+    {
+      "name": "break from nested include",
+      "template": "{% for tag in product.tags %}{% include 'tag' %}{% endfor %}",
+      "data": {
+        "product": {
+          "tags": [
+            "sports",
+            "garden"
+          ]
+        }
+      },
+      "templates": {
+        "tag": "{{ tag | upcase }}{% include 'break' %}",
+        "break": " break!{% break %}"
+      },
+      "result": "SPORTS break!"
+    },
+    {
+      "name": "keyword arguments go out of scope",
+      "template": "{% include 'product-args', foo: 'hello', bar: 'there' %}{{ foo }}",
+      "templates": {
+        "product-args": "{{ foo }} {{ bar }}"
+      },
+      "result": "hello there"
+    },
+    {
+      "name": "assign to a keyword argument",
+      "template": "{% include 'product-args', foo: 'hello' %} {{ foo }}",
+      "templates": {
+        "product-args": "{{ foo }}{% assign foo = 'goodbye' %} {{ foo }}"
+      },
+      "result": "hello hello goodbye"
+    }
+  ]
+}

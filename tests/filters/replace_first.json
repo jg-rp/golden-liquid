@@ -1,0 +1,49 @@
+{
+  "tests": [
+    {
+      "name": "replace substrings",
+      "template": "{{ \"Take my protein pills and put my helmet on\" | replace_first: \"my\", \"your\" }}",
+      "result": "Take your protein pills and put my helmet on"
+    },
+    {
+      "name": "not a string",
+      "template": "{{ 5 | replace_first: 'rain', 'foo' }}",
+      "result": "5"
+    },
+    {
+      "name": "argument not a string",
+      "template": "{{ \"hello5\" | replace_first: 5, \"your\" }}",
+      "result": "helloyour"
+    },
+    {
+      "name": "missing argument",
+      "template": "{{ \"hello\" | replace_first: \"ll\" }}",
+      "result": "heo"
+    },
+    {
+      "name": "missing arguments",
+      "template": "{{ \"hello\" | replace_first }}",
+      "invalid": true
+    },
+    {
+      "name": "too many arguments",
+      "template": "{{ \"hello\" | replace_first: \"how\", \"are\", \"you\" }}",
+      "invalid": true
+    },
+    {
+      "name": "undefined left value",
+      "template": "{{ nosuchthing | replace_first: \"my\", \"your\" }}",
+      "result": ""
+    },
+    {
+      "name": "undefined first argument",
+      "template": "{{ \"Take my protein\" | replace_first: nosuchthing, \"#\" }}",
+      "result": "#Take my protein"
+    },
+    {
+      "name": "undefined second argument",
+      "template": "{{ \"Take my protein pills and put my helmet on\" | replace_first: \"my\", nosuchthing }}",
+      "result": "Take  protein pills and put my helmet on"
+    }
+  ]
+}

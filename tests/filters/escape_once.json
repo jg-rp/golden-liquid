@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "make HTML-safe",
+      "template": "{{ \"&lt;p&gt;test&lt;/p&gt;\" | escape_once }}",
+      "result": "&lt;p&gt;test&lt;/p&gt;"
+    },
+    {
+      "name": "make HTML-safe from mixed safe and markup.",
+      "template": "{{ \"&lt;p&gt;test&lt;/p&gt;<p>test</p>\" | escape_once }}",
+      "result": "&lt;p&gt;test&lt;/p&gt;&lt;p&gt;test&lt;/p&gt;"
+    },
+    {
+      "name": "not a string",
+      "template": "{{ 5 | escape_once }}",
+      "result": "5"
+    },
+    {
+      "name": "unexpected argument",
+      "template": "{{ \"HELLO\" | escape_once: 5 }}",
+      "invalid": true
+    },
+    {
+      "name": "undefined left value",
+      "template": "{{ nosuchthing | escape_once }}",
+      "result": ""
+    }
+  ]
+}
