@@ -94,7 +94,9 @@ end
 def dump_tags
   tests = Dir["#{ROOT}**/*.json"].flat_map { |f| JSON.parse(File.read(f))["tests"] }
   tags = tests.flat_map { |t| t.fetch("tags", []) }.to_set.sort
-  puts tags.join($INPUT_RECORD_SEPARATOR)
+  tags.each do |tag|
+    puts tag
+  end
 end
 
 def cli

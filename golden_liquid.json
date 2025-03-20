@@ -320,7 +320,8 @@
       "name": "illegal, no addition operator",
       "template": "{% assign x = 1 + 2 %}{{ x }}",
       "tags": [
-        "strict"
+        "strict",
+        "absent"
       ],
       "invalid": true
     },
@@ -328,7 +329,8 @@
       "name": "illegal, no subtraction operator",
       "template": "{% assign x = 1 - 2 %}{{ x }}",
       "tags": [
-        "strict"
+        "strict",
+        "absent"
       ],
       "invalid": true
     },
@@ -336,7 +338,8 @@
       "name": "illegal, no multiplication operator",
       "template": "{% assign x = 2 %}{{ x * 3 }}",
       "tags": [
-        "strict"
+        "strict",
+        "absent"
       ],
       "invalid": true
     },
@@ -7007,6 +7010,9 @@
         "s": "hello",
         "t": "hell"
       },
+      "tags": [
+        "absent"
+      ],
       "invalid": true
     },
     {
@@ -7016,6 +7022,9 @@
         "s": "hello",
         "t": "lo"
       },
+      "tags": [
+        "absent"
+      ],
       "invalid": true
     },
     {
@@ -7027,6 +7036,9 @@
         },
         "x": "foo"
       },
+      "tags": [
+        "absent"
+      ],
       "invalid": true
     },
     {
@@ -7036,6 +7048,9 @@
         "s": "hello",
         "t": "lo"
       },
+      "tags": [
+        "absent"
+      ],
       "invalid": true
     },
     {
