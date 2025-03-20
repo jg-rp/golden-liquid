@@ -456,6 +456,9 @@
         "s": "hello",
         "t": "hell"
       },
+      "tags": [
+        "absent"
+      ],
       "invalid": true
     },
     {
@@ -465,6 +468,9 @@
         "s": "hello",
         "t": "lo"
       },
+      "tags": [
+        "absent"
+      ],
       "invalid": true
     },
     {
@@ -476,6 +482,9 @@
         },
         "x": "foo"
       },
+      "tags": [
+        "absent"
+      ],
       "invalid": true
     },
     {
@@ -485,6 +494,9 @@
         "s": "hello",
         "t": "lo"
       },
+      "tags": [
+        "absent"
+      ],
       "invalid": true
     }
   ]

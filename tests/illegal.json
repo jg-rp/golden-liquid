@@ -12,7 +12,8 @@
       "name": "no addition operator",
       "template": "{% assign x = 1 + 2 %}{{ x }}",
       "tags": [
-        "strict"
+        "strict",
+        "absent"
       ],
       "invalid": true
     },
@@ -20,7 +21,8 @@
       "name": "no subtraction operator",
       "template": "{% assign x = 1 - 2 %}{{ x }}",
       "tags": [
-        "strict"
+        "strict",
+        "absent"
       ],
       "invalid": true
     },
@@ -28,7 +30,8 @@
       "name": "no multiplication operator",
       "template": "{% assign x = 2 %}{{ x * 3 }}",
       "tags": [
-        "strict"
+        "strict",
+        "absent"
       ],
       "invalid": true
     }
