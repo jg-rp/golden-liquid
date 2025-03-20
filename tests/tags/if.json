@@ -498,6 +498,14 @@
         "absent"
       ],
       "invalid": true
+    },
+    {
+      "name": "not is not a valid operator",
+      "template": "{% if not false %}TRUE{% else %}FALSE{% endif %}",
+      "tags": [
+        "absent"
+      ],
+      "invalid": true
     }
   ]
 }
