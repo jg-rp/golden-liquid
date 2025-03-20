@@ -7054,14 +7054,6 @@
       "invalid": true
     },
     {
-      "name": "tags, if, not is not a valid operator",
-      "template": "{% if not false %}TRUE{% else %}FALSE{% endif %}",
-      "tags": [
-        "absent"
-      ],
-      "invalid": true
-    },
-    {
       "name": "tags, ifchanged, changed from initial state",
       "template": "{% ifchanged %}hello{% endifchanged %}",
       "result": "hello"
