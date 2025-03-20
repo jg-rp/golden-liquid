@@ -66,3 +66,13 @@ Tags are used to categorize test cases. This allows consumers of this test suite
 - `strict` - Indicates that the test case should be parsed and rendered in strict mode, if a strict mode is available.
 - `absent` - Indicates that the test cases is asserting the absence of a feature. For example, the absence of a logical `not` operator.
 - `utc` - The test case assumes the host timezone is set to UTC
+
+## Benchmark fixtures
+
+The `benchmark_fixtures` folder contains Liquid templates and data useful for benchmarking Liquid engines. For each folder in `benchmark_fixtures`, the convention is that `data.json` contains render context data, and `templates/index.liquid` is the "base" template that might include/render other templates in the `templates` folder.
+
+Pull requests for more benchmark fixtures are welcome.
+
+# Contributing
+
+See [CONTRIBUTING.md](https://github.com/jg-rp/golden-liquid/blob/main/CONTRIBUTING.md)

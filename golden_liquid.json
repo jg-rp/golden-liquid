@@ -891,7 +891,7 @@
         "s": "hello"
       },
       "results": [
-        "hello",
+        "h",
         ""
       ]
     },
@@ -920,7 +920,10 @@
       "data": {
         "s": "hello"
       },
-      "result": ""
+      "results": [
+        "o",
+        ""
+      ]
     },
     {
       "name": "special, last of a object",
@@ -2368,7 +2371,10 @@
     {
       "name": "filters, first, first of a string",
       "template": "{{ 'hello' | first }}",
-      "result": ""
+      "results": [
+        "",
+        "h"
+      ]
     },
     {
       "name": "filters, first, first of a hash",
@@ -2852,7 +2858,10 @@
     {
       "name": "filters, last, last of a string",
       "template": "{{ 'hello' | last }}",
-      "result": ""
+      "results": [
+        "",
+        "o"
+      ]
     },
     {
       "name": "filters, last, last of a hash",
