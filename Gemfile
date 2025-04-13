@@ -17,3 +17,5 @@ gem "rubocop-minitest", "~> 0.37.1"
 gem "rubocop-rake", "~> 0.7.1"
 
 gem "rake", "~> 13.2"
+
+gem "benchmark-ips", "~> 2.14"
