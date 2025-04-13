@@ -63,7 +63,7 @@
     },
     {
       "name": "undefined argument",
-      "template": "{{ a | map: nosuchthing | join: '#' }}",
+      "template": "{% assign b = a | map: nosuchthing %}{% for x in b %}{% for y in x %}{{ y[0] }}:{{ y[1] }},{% endfor %}{% endfor %}",
       "data": {
         "a": [
           {
@@ -74,7 +74,22 @@
           }
         ]
       },
-      "result": "#"
+      "result": "title:foo,title:bar,"
+    },
+    {
+      "name": "argument is explicit nil",
+      "template": "{% assign b = a | map: nil %}{% for x in b %}{% for y in x %}{{ y[0] }}:{{ y[1] }},{% endfor %}{% endfor %}",
+      "data": {
+        "a": [
+          {
+            "title": "foo"
+          },
+          {
+            "title": "bar"
+          }
+        ]
+      },
+      "result": "title:foo,title:bar,"
     },
     {
       "name": "nested arrays get flattened",
