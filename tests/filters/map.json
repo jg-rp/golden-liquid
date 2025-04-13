@@ -16,7 +16,11 @@
           }
         ]
       },
-      "result": "foo#bar#baz"
+      "result": "foo#bar#baz",
+      "tags": [
+        "join filter",
+        "map filter"
+      ]
     },
     {
       "name": "missing property",
@@ -34,7 +38,11 @@
           }
         ]
       },
-      "result": "foo#bar#"
+      "result": "foo#bar#",
+      "tags": [
+        "join filter",
+        "map filter"
+      ]
     },
     {
       "name": "left value not an array",
@@ -74,7 +82,12 @@
           }
         ]
       },
-      "result": "title:foo,title:bar,"
+      "result": "title:foo,title:bar,",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "map filter"
+      ]
     },
     {
       "name": "argument is explicit nil",
@@ -89,7 +102,12 @@
           }
         ]
       },
-      "result": "title:foo,title:bar,"
+      "result": "title:foo,title:bar,",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "map filter"
+      ]
     },
     {
       "name": "nested arrays get flattened",
@@ -109,7 +127,11 @@
           ]
         ]
       },
-      "result": "foo#bar#baz"
+      "result": "foo#bar#baz",
+      "tags": [
+        "join filter",
+        "map filter"
+      ]
     },
     {
       "name": "input is a hash",
@@ -120,7 +142,11 @@
           "some": "thing"
         }
       },
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "join filter",
+        "map filter"
+      ]
     }
   ]
 }

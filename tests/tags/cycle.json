@@ -3,22 +3,34 @@
     {
       "name": "no identifier",
       "template": "{% cycle 'some', 'other' %}{% cycle 'some', 'other' %}{% cycle 'some', 'other' %}",
-      "result": "someothersome"
+      "result": "someothersome",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "with identifier",
       "template": "{% cycle 'foo': 'some', 'other' %}{% cycle 'some', 'other' %}{% cycle 'foo': 'some', 'other' %}",
-      "result": "somesomeother"
+      "result": "somesomeother",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "different items",
       "template": "{% cycle '1', '2', '3' %}{% cycle '1', '2' %}{% cycle '1', '2', '3' %}",
-      "result": "112"
+      "result": "112",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "integers",
       "template": "{% cycle 1, 2, 3 %}{% cycle 1, 2, 3 %}{% cycle 1, 2, 3 %}",
-      "result": "123"
+      "result": "123",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "variable name",
@@ -26,17 +38,26 @@
       "data": {
         "a": "foo"
       },
-      "result": "123"
+      "result": "123",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "multiple undefined variable names",
       "template": "{% cycle a: 1, 2, 3 %}{% cycle b: 1, 2, 3 %}{% cycle a: 1, 2, 3 %}",
-      "result": "123"
+      "result": "123",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "undefined variable names mixed with no name",
       "template": "{% cycle a: 1, 2, 3 %}{% cycle b: 1, 2, 3 %}{% cycle 1, 2, 3 %}",
-      "result": "121"
+      "result": "121",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "changing variable name",
@@ -44,27 +65,43 @@
       "data": {
         "a": "foo"
       },
-      "result": "112"
+      "result": "112",
+      "tags": [
+        "assign tag",
+        "cycle tag"
+      ]
     },
     {
       "name": "named with different items",
       "template": "{% cycle 'a': 1, 2, 3 %}{% cycle 'a': 7, 8, 9 %}{% cycle 'a': 1, 2, 3 %}",
-      "result": "183"
+      "result": "183",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "named with different number of arguments",
       "template": "{% cycle a: '1', '2' %}{% cycle a: '1', '2', '3' %}{% cycle a: '1' %}",
-      "result": "12"
+      "result": "12",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "named with shrinking number of arguments",
       "template": "{% cycle a: '1', '2', '3' %}{% cycle a: '1', '2' %}{% cycle a: '1' %}",
-      "result": "121"
+      "result": "121",
+      "tags": [
+        "cycle tag"
+      ]
     },
     {
       "name": "named with growing number of arguments",
       "template": "{% cycle a: '1' %}{% cycle a: '1', '2' %}{% cycle a: '1', '2', '3' %}",
-      "result": "112"
+      "result": "112",
+      "tags": [
+        "cycle tag"
+      ]
     }
   ]
 }

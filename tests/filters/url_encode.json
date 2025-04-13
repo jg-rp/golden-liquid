@@ -3,12 +3,18 @@
     {
       "name": "some special URL characters",
       "template": "{{ \"email address is bob@example.com!\" | url_encode }}",
-      "result": "email+address+is+bob%40example.com%21"
+      "result": "email+address+is+bob%40example.com%21",
+      "tags": [
+        "url_encode filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | url_encode }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "url_encode filter"
+      ]
     },
     {
       "name": "unexpected argument",
@@ -18,7 +24,10 @@
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | url_encode }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "url_encode filter"
+      ]
     }
   ]
 }

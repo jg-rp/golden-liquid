@@ -3,37 +3,58 @@
     {
       "name": "positive integer < arg",
       "template": "{{ 5 | at_least: 8 }}",
-      "result": "8"
+      "result": "8",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "positive integer > arg",
       "template": "{{ 8 | at_least: 5 }}",
-      "result": "8"
+      "result": "8",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "negative integer < arg",
       "template": "{{ -8 | at_least: 5 }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "positive integer == arg",
       "template": "{{ 5 | at_least: 5 }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "positive float < arg",
       "template": "{{ 5.4 | at_least: 8.9 }}",
-      "result": "8.9"
+      "result": "8.9",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "positive float > arg",
       "template": "{{ 8.4 | at_least: 5.9 }}",
-      "result": "8.4"
+      "result": "8.4",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "positive string > arg",
       "template": "{{ \"9\" | at_least: 8 }}",
-      "result": "9"
+      "result": "9",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "missing arg",
@@ -48,27 +69,42 @@
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | at_least: 5 }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "undefined argument",
       "template": "{{ 5 | at_least: nosuchthing }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "left value not a number",
       "template": "{{ \"abc\" | at_least: 2 }}",
-      "result": "2"
+      "result": "2",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "left value not a number negative argument",
       "template": "{{ \"abc\" | at_least: -2 }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "argument string not a number",
       "template": "{{ -1 | at_least: \"abc\" }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "at_least filter"
+      ]
     }
   ]
 }

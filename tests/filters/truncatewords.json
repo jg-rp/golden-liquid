@@ -3,27 +3,42 @@
     {
       "name": "default end",
       "template": "{{ \"Ground control to Major Tom.\" | truncatewords: 3 }}",
-      "result": "Ground control to..."
+      "result": "Ground control to...",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "custom end",
       "template": "{{ \"Ground control to Major Tom.\" | truncatewords: 3, \"--\" }}",
-      "result": "Ground control to--"
+      "result": "Ground control to--",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "no end",
       "template": "{{ \"Ground control to Major Tom.\" | truncatewords: 3, \"\" }}",
-      "result": "Ground control to"
+      "result": "Ground control to",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "fewer words than word count",
       "template": "{{ \"Ground control\" | truncatewords: 3 }}",
-      "result": "Ground control"
+      "result": "Ground control",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | truncatewords: 10 }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "too many arguments",
@@ -32,33 +47,51 @@
     },
     {
       "name": "reference implementation test 1",
-      "template": "{{ \"\u6d4b\u8bd5\u6d4b\u8bd5\u6d4b\u8bd5\u6d4b\u8bd5\" | truncatewords: 5 }}",
-      "result": "\u6d4b\u8bd5\u6d4b\u8bd5\u6d4b\u8bd5\u6d4b\u8bd5"
+      "template": "{{ \"测试测试测试测试\" | truncatewords: 5 }}",
+      "result": "测试测试测试测试",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "reference implementation test 2",
       "template": "{{ \"one two three\" | truncatewords: 2, 1 }}",
-      "result": "one two1"
+      "result": "one two1",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "reference implementation test 3",
       "template": "{{ \"one  two\tthree\nfour\" | truncatewords: 3 }}",
-      "result": "one two three..."
+      "result": "one two three...",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "reference implementation test 4",
       "template": "{{ \"one two three four\" | truncatewords: 2 }}",
-      "result": "one two..."
+      "result": "one two...",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "reference implementation test 5",
       "template": "{{ \"one two three four\" | truncatewords: 0 }}",
-      "result": "one..."
+      "result": "one...",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | truncatewords: 5 }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "undefined first argument",
@@ -68,17 +101,26 @@
     {
       "name": "undefined second argument",
       "template": "{{ \"one two three four\" | truncatewords: 2, nosuchthing }}",
-      "result": "one two"
+      "result": "one two",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "number of words defaults to 15",
       "template": "{{ \"a b c d e f g h i j k l m n o p q\" | truncatewords }}",
-      "result": "a b c d e f g h i j k l m n o..."
+      "result": "a b c d e f g h i j k l m n o...",
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "all whitespace is clobbered",
       "template": "{{ \"    one    two three    four  \" | truncatewords: 2 }}",
-      "result": "one two..."
+      "result": "one two...",
+      "tags": [
+        "truncatewords filter"
+      ]
     }
   ]
 }

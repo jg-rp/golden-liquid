@@ -8,7 +8,10 @@
           "first_name": "Holly"
         }
       },
-      "result": "Hello, Holly."
+      "result": "Hello, Holly.",
+      "tags": [
+        "capture tag"
+      ]
     },
     {
       "name": "capture into a variable with a hyphen",
@@ -18,12 +21,19 @@
           "first_name": "Holly"
         }
       },
-      "result": "Hello, Holly."
+      "result": "Hello, Holly.",
+      "tags": [
+        "capture tag"
+      ]
     },
     {
       "name": "assign to a variable from a captured variable",
       "template": "{% capture some %}hello{% endcapture %}{% assign other = some %}{{ some }}-{{ other }}",
-      "result": "hello-hello"
+      "result": "hello-hello",
+      "tags": [
+        "assign tag",
+        "capture tag"
+      ]
     }
   ]
 }

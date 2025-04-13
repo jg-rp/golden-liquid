@@ -11,7 +11,11 @@
           "A"
         ]
       },
-      "result": "b#a#A"
+      "result": "b#a#A",
+      "tags": [
+        "compact filter",
+        "join filter"
+      ]
     },
     {
       "name": "empty array",
@@ -19,7 +23,11 @@
       "data": {
         "a": []
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "compact filter",
+        "join filter"
+      ]
     },
     {
       "name": "too many arguments",
@@ -32,12 +40,19 @@
       "data": {
         "a": 123
       },
-      "result": "123"
+      "result": "123",
+      "tags": [
+        "compact filter",
+        "first filter"
+      ]
     },
     {
       "name": "left value is undefined",
       "template": "{{ nosuchthing | compact }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "compact filter"
+      ]
     },
     {
       "name": "array of objects with key property",
@@ -58,7 +73,12 @@
           }
         ]
       },
-      "result": "(title,foo)(name,a)(title,bar)(name,c)"
+      "result": "(title,foo)(name,a)(title,bar)(name,c)",
+      "tags": [
+        "assign tag",
+        "compact filter",
+        "for tag"
+      ]
     }
   ]
 }

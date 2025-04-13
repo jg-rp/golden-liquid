@@ -3,7 +3,10 @@
     {
       "name": "from string",
       "template": "{{ \"_#/.\" | base64_encode }}",
-      "result": "XyMvLg=="
+      "result": "XyMvLg==",
+      "tags": [
+        "base64_encode filter"
+      ]
     },
     {
       "name": "from string with URL unsafe",
@@ -11,12 +14,18 @@
       "data": {
         "a": "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 !@#$%^&*()-=_+/?.:;[]{}\\|"
       },
-      "result": "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXogQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVogMTIzNDU2Nzg5MCAhQCMkJV4mKigpLT1fKy8/Ljo7W117fVx8"
+      "result": "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXogQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVogMTIzNDU2Nzg5MCAhQCMkJV4mKigpLT1fKy8/Ljo7W117fVx8",
+      "tags": [
+        "base64_encode filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | base64_encode }}",
-      "result": "NQ=="
+      "result": "NQ==",
+      "tags": [
+        "base64_encode filter"
+      ]
     },
     {
       "name": "unexpected argument",
@@ -26,7 +35,10 @@
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | base64_encode }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "base64_encode filter"
+      ]
     }
   ]
 }

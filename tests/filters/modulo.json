@@ -3,27 +3,42 @@
     {
       "name": "integer value and integer arg",
       "template": "{{ 10 | modulo: 2 }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "integer value and float arg",
       "template": "{{ 10 | modulo: 2.0 }}",
-      "result": "0.0"
+      "result": "0.0",
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "float value and float arg",
       "template": "{{ 10.1 | modulo: 7.0 }}",
-      "result": "3.1"
+      "result": "3.1",
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "string value and argument",
       "template": "{{ \"10\" | modulo: \"2.0\" }}",
-      "result": "0.0"
+      "result": "0.0",
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "string not a number",
       "template": "{{ \"foo\" | modulo: \"2.0\" }}",
-      "result": "0.0"
+      "result": "0.0",
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "arg string not a number",
@@ -41,12 +56,18 @@
       "data": {
         "a": {}
       },
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | modulo: 2 }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "undefined argument",

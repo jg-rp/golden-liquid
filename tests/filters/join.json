@@ -3,17 +3,26 @@
     {
       "name": "range literal join filter left value",
       "template": "{{ (1..3) | join: '#' }}",
-      "result": "1#2#3"
+      "result": "1#2#3",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "joining a string is a noop",
       "template": "{{ 'a,b' | join: '#' }}",
-      "result": "a,b"
+      "result": "a,b",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "joining an int is a noop",
       "template": "{{ 123 | join: '#' }}",
-      "result": "123"
+      "result": "123",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "join an array of strings",
@@ -24,7 +33,10 @@
           "b"
         ]
       },
-      "result": "a#b"
+      "result": "a#b",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "join an array of integers",
@@ -35,7 +47,10 @@
           2
         ]
       },
-      "result": "1#2"
+      "result": "1#2",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "missing argument defaults to a space",
@@ -46,7 +61,10 @@
           "b"
         ]
       },
-      "result": "a b"
+      "result": "a b",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "argument is not a string",
@@ -57,7 +75,10 @@
           "b"
         ]
       },
-      "result": "a5b"
+      "result": "a5b",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "left value contains non string",
@@ -69,12 +90,18 @@
           1
         ]
       },
-      "result": "a#b#1"
+      "result": "a#b#1",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | join: '#' }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "undefined argument",
@@ -85,7 +112,10 @@
           "b"
         ]
       },
-      "result": "ab"
+      "result": "ab",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "too many arguments",

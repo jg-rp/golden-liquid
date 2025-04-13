@@ -3,12 +3,18 @@
     {
       "name": "lower case string",
       "template": "{{ \"hello\" | capitalize }}",
-      "result": "Hello"
+      "result": "Hello",
+      "tags": [
+        "capitalize filter"
+      ]
     },
     {
       "name": "already capitalized string",
       "template": "{{ \"Hello\" | capitalize }}",
-      "result": "Hello"
+      "result": "Hello",
+      "tags": [
+        "capitalize filter"
+      ]
     },
     {
       "name": "unexpected argument",
@@ -18,7 +24,10 @@
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | capitalize }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "capitalize filter"
+      ]
     }
   ]
 }

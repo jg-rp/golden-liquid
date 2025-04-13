@@ -3,32 +3,50 @@
     {
       "name": "integer value and integer arg",
       "template": "{{ 10 | plus: 2 }}",
-      "result": "12"
+      "result": "12",
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "integer value and float arg",
       "template": "{{ 10 | plus: 2.0 }}",
-      "result": "12.0"
+      "result": "12.0",
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "float value and float arg",
       "template": "{{ 10.1 | plus: 2.2 }}",
-      "result": "12.3"
+      "result": "12.3",
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "string value and string arg",
       "template": "{{ \"10.1\" | plus: \"2.2\" }}",
-      "result": "12.3"
+      "result": "12.3",
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "string not a number",
       "template": "{{ \"foo\" | plus: \"2.0\" }}",
-      "result": "2.0"
+      "result": "2.0",
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "arg string not a number",
       "template": "{{ \"10\" | plus: \"foo\" }}",
-      "result": "10"
+      "result": "10",
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "too many args",
@@ -41,22 +59,34 @@
       "data": {
         "a": {}
       },
-      "result": "1"
+      "result": "1",
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | plus: 2 }}",
-      "result": "2"
+      "result": "2",
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "undefined argument",
       "template": "{{ 10 | plus: nosuchthing }}",
-      "result": "10"
+      "result": "10",
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "integer value and negative integer arg",
       "template": "{{ 10 | plus: -2 }}",
-      "result": "8"
+      "result": "8",
+      "tags": [
+        "plus filter"
+      ]
     }
   ]
 }

@@ -15,7 +15,10 @@
       "templates": {
         "product-hero": "{{ product.title }}\n{% for tag in product.tags %}- {{ tag }} {% endfor %}"
       },
-      "result": "foo\n- sports - garden "
+      "result": "foo\n- sports - garden ",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "bound variable",
@@ -35,7 +38,10 @@
       "templates": {
         "product-title": "{{ product-title.title }}"
       },
-      "result": "car"
+      "result": "car",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "bound variable does not exist",
@@ -43,7 +49,10 @@
       "templates": {
         "product-title": "{{ product-title.title }}"
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "bound array variable",
@@ -63,7 +72,10 @@
       "templates": {
         "prod": "{{ prod.title }}"
       },
-      "result": "bikecar"
+      "result": "bikecar",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "bound variable with alias",
@@ -83,7 +95,10 @@
       "templates": {
         "product-alias": "{{ product.title }}"
       },
-      "result": "car"
+      "result": "car",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "some keyword arguments",
@@ -91,7 +106,10 @@
       "templates": {
         "product-args": "{{ foo }} {{ bar }}"
       },
-      "result": "hello there"
+      "result": "hello there",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "some keyword arguments including a range literal",
@@ -99,7 +117,10 @@
       "templates": {
         "product-args": "{{ foo | join: '#' }} {{ bar }}"
       },
-      "result": "1#2#3 there"
+      "result": "1#2#3 there",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "some keyword arguments no leading coma",
@@ -107,7 +128,10 @@
       "templates": {
         "product-args": "{{ foo }} {{ bar }}"
       },
-      "result": "hello there"
+      "result": "hello there",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "parent variables go out of scope",
@@ -115,7 +139,11 @@
       "templates": {
         "outer-scope": "{{ greeting }}"
       },
-      "result": "good morning good morning"
+      "result": "good morning good morning",
+      "tags": [
+        "assign tag",
+        "render tag"
+      ]
     },
     {
       "name": "for loop variables go out of scope",
@@ -123,7 +151,11 @@
       "templates": {
         "loop-scope": "{{ i }}"
       },
-      "result": "112233"
+      "result": "112233",
+      "tags": [
+        "for tag",
+        "render tag"
+      ]
     },
     {
       "name": "assigned variables do not leak into outer scope",
@@ -136,7 +168,10 @@
       "templates": {
         "assign-outer-scope": "Hello, {{ customer.first_name }}{% assign last_name = 'Smith' %}"
       },
-      "result": "Hello, Holly "
+      "result": "Hello, Holly ",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "increment is isolated between renders",
@@ -144,7 +179,11 @@
       "templates": {
         "increment": "{% increment foo %}"
       },
-      "result": "0 0 1"
+      "result": "0 0 1",
+      "tags": [
+        "increment tag",
+        "render tag"
+      ]
     },
     {
       "name": "decrement is isolated between renders",
@@ -152,7 +191,11 @@
       "templates": {
         "decrement": "{% decrement foo %}"
       },
-      "result": "-1 -1 -2"
+      "result": "-1 -1 -2",
+      "tags": [
+        "decrement tag",
+        "render tag"
+      ]
     },
     {
       "name": "forloop helper",
@@ -172,7 +215,10 @@
       "templates": {
         "product": "Product: {{ product.title }} {% if forloop.first %}first{% endif %}{% if forloop.last %}last{% endif %} index:{{ forloop.index }} "
       },
-      "result": "Product: bike first index:1 Product: car last index:2 "
+      "result": "Product: bike first index:1 Product: car last index:2 ",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "render loops don't add parentloop",
@@ -192,7 +238,10 @@
       "templates": {
         "product": "{{ product.title }}-{{ forloop.index0 }} {% for x in (1..3) %}{{ forloop.index0 }}{{ forloop.parentloop.index0 }} {% endfor %}"
       },
-      "result": "bike-0 0 1 2 car-1 0 1 2 "
+      "result": "bike-0 0 1 2 car-1 0 1 2 ",
+      "tags": [
+        "render tag"
+      ]
     },
     {
       "name": "render loops can't access parentloop",
@@ -212,7 +261,11 @@
       "templates": {
         "product": "{{ product.title }}-{{ forloop.index0 }} {{ forloop.parentloop.index0 }}"
       },
-      "result": "bike-0 car-1 bike-0 car-1 bike-0 car-1 "
+      "result": "bike-0 car-1 bike-0 car-1 bike-0 car-1 ",
+      "tags": [
+        "for tag",
+        "render tag"
+      ]
     },
     {
       "name": "assign to keyword argument",
@@ -220,7 +273,10 @@
       "templates": {
         "product-args": "{{ foo }}{% assign foo='goodbye' %} {{ foo }}"
       },
-      "result": "hello goodbye"
+      "result": "hello goodbye",
+      "tags": [
+        "render tag"
+      ]
     }
   ]
 }

@@ -64,7 +64,10 @@
           "b": 2
         }
       },
-      "result": "a#1"
+      "result": "a#1",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "first of an empty object",
@@ -72,7 +75,10 @@
       "data": {
         "obj": {}
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "last of a string",

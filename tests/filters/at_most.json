@@ -3,37 +3,58 @@
     {
       "name": "positive integer < arg",
       "template": "{{ 5 | at_most: 8 }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "positive integer > arg",
       "template": "{{ 8 | at_most: 5 }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "negative integer < arg",
       "template": "{{ -8 | at_most: 5 }}",
-      "result": "-8"
+      "result": "-8",
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "positive integer == arg",
       "template": "{{ 5 | at_most: 5 }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "positive float < arg",
       "template": "{{ 5.4 | at_most: 8.9 }}",
-      "result": "5.4"
+      "result": "5.4",
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "positive float > arg",
       "template": "{{ 8.4 | at_most: 5.9 }}",
-      "result": "5.9"
+      "result": "5.9",
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "positive string > arg",
       "template": "{{ \"9\" | at_most: 8 }}",
-      "result": "8"
+      "result": "8",
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "missing arg",
@@ -48,17 +69,26 @@
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | at_most: 5 }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "undefined argument",
       "template": "{{ 5 | at_most: nosuchthing }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "left value not a number",
       "template": "{{ \"abc\" | at_most: -2 }}",
-      "result": "-2"
+      "result": "-2",
+      "tags": [
+        "at_most filter"
+      ]
     }
   ]
 }

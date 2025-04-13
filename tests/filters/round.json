@@ -3,32 +3,50 @@
     {
       "name": "float round down",
       "template": "{{ 5.1 | round }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "float round up",
       "template": "{{ 5.6 | round }}",
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "float as a string",
       "template": "{{ \"5.6\" | round }}",
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "string argument",
       "template": "{{ 5.666 | round: \"1\" }}",
-      "result": "5.7"
+      "result": "5.7",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "decimal places",
       "template": "{{ \"5.666666\" | round: 2 }}",
-      "result": "5.67"
+      "result": "5.67",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "integer",
       "template": "{{ 5 | round }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "too many args",
@@ -38,42 +56,66 @@
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | round: 2 }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "undefined argument",
       "template": "{{ 5.666 | round: nosuchthing }}",
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "argument is a string",
       "template": "{{ 5.666 | round: 'foo' }}",
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "argument is a string representation of an integer",
       "template": "{{ 5.666 | round: '1' }}",
-      "result": "5.7"
+      "result": "5.7",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "argument is a string representation of zero",
       "template": "{{ 5.666 | round: '1' }}",
-      "result": "5.7"
+      "result": "5.7",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "argument is a negative",
       "template": "{{ 5.666 | round: -2 }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "argument is a float",
       "template": "{{ 5.666 | round: 1.2 }}",
-      "result": "5.7"
+      "result": "5.7",
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "argument is a zero",
       "template": "{{ 5.666 | round: 0 }}",
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "round filter"
+      ]
     }
   ]
 }

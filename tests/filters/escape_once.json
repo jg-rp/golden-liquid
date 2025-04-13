@@ -3,17 +3,26 @@
     {
       "name": "make HTML-safe",
       "template": "{{ \"&lt;p&gt;test&lt;/p&gt;\" | escape_once }}",
-      "result": "&lt;p&gt;test&lt;/p&gt;"
+      "result": "&lt;p&gt;test&lt;/p&gt;",
+      "tags": [
+        "escape_once filter"
+      ]
     },
     {
       "name": "make HTML-safe from mixed safe and markup.",
       "template": "{{ \"&lt;p&gt;test&lt;/p&gt;<p>test</p>\" | escape_once }}",
-      "result": "&lt;p&gt;test&lt;/p&gt;&lt;p&gt;test&lt;/p&gt;"
+      "result": "&lt;p&gt;test&lt;/p&gt;&lt;p&gt;test&lt;/p&gt;",
+      "tags": [
+        "escape_once filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | escape_once }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "escape_once filter"
+      ]
     },
     {
       "name": "unexpected argument",
@@ -23,7 +32,10 @@
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | escape_once }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "escape_once filter"
+      ]
     }
   ]
 }

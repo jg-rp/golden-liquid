@@ -3,17 +3,26 @@
     {
       "name": "nil",
       "template": "{{ nil | default: 'foo' }}",
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "false",
       "template": "{{ False | default: 'foo' }}",
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "empty string",
       "template": "{{ \"\" | default: \"foo\" }}",
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "empty array",
@@ -21,7 +30,10 @@
       "data": {
         "a": []
       },
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "empty object",
@@ -29,12 +41,18 @@
       "data": {
         "a": {}
       },
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "not empty string",
       "template": "{{ \"hello\" | default: \"foo\" }}",
-      "result": "hello"
+      "result": "hello",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "not empty list",
@@ -45,7 +63,11 @@
           "world"
         ]
       },
-      "result": "hello#world"
+      "result": "hello#world",
+      "tags": [
+        "default filter",
+        "join filter"
+      ]
     },
     {
       "name": "not empty object",
@@ -58,7 +80,12 @@
           "greeting": "goodbye"
         }
       },
-      "result": "(greeting,hello)"
+      "result": "(greeting,hello)",
+      "tags": [
+        "assign tag",
+        "default filter",
+        "for tag"
+      ]
     },
     {
       "name": "too many arguments",
@@ -68,17 +95,26 @@
     {
       "name": "missing argument",
       "template": "{{ false | default }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "empty",
       "template": "{{ empty | default: bar }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "allow false",
       "template": "{{ false | default: 'bar', allow_false:true }}",
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "allow false from context",
@@ -86,37 +122,58 @@
       "data": {
         "foo": true
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | default: \"bar\" }}",
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "true keyword argument before positional",
       "template": "{{ false | default: allow_false: true, \"bar\" }}",
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "false keyword argument before positional",
       "template": "{{ false | default: allow_false: false, \"bar\" }}",
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "zero is not falsy",
       "template": "{{ 0 | default: \"bar\" }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "zero is not falsy with allow_false",
       "template": "{{ 0 | default: \"bar\", allow_false: true }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "0.0 is not falsy",
       "template": "{{ 0.0 | default: \"bar\" }}",
-      "result": "0.0"
+      "result": "0.0",
+      "tags": [
+        "default filter"
+      ]
     }
   ]
 }

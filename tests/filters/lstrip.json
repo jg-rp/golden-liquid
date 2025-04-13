@@ -3,22 +3,34 @@
     {
       "name": "left padded",
       "template": "{{ \" \t\r\n  hello\" | lstrip }}",
-      "result": "hello"
+      "result": "hello",
+      "tags": [
+        "lstrip filter"
+      ]
     },
     {
       "name": "right padded",
       "template": "{{ \"hello \t\r\n  \" | lstrip }}",
-      "result": "hello \t\r\n  "
+      "result": "hello \t\r\n  ",
+      "tags": [
+        "lstrip filter"
+      ]
     },
     {
       "name": "left and right padded",
       "template": "{{ \" \t\r\n  hello  \t\r\n \" | lstrip }}",
-      "result": "hello  \t\r\n "
+      "result": "hello  \t\r\n ",
+      "tags": [
+        "lstrip filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | lstrip }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "lstrip filter"
+      ]
     },
     {
       "name": "unexpected argument",
@@ -28,7 +40,10 @@
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | lstrip }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "lstrip filter"
+      ]
     }
   ]
 }

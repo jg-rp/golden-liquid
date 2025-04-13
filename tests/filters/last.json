@@ -3,7 +3,10 @@
     {
       "name": "range literal last filter left value",
       "template": "{{ (1..3) | last }}",
-      "result": "3"
+      "result": "3",
+      "tags": [
+        "last filter"
+      ]
     },
     {
       "name": "array of strings",
@@ -14,7 +17,10 @@
           "b"
         ]
       },
-      "result": "b"
+      "result": "b",
+      "tags": [
+        "last filter"
+      ]
     },
     {
       "name": "array of things",
@@ -28,7 +34,10 @@
           {}
         ]
       },
-      "result": "{}"
+      "result": "{}",
+      "tags": [
+        "last filter"
+      ]
     },
     {
       "name": "empty array",
@@ -36,7 +45,10 @@
       "data": {
         "arr": []
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "last filter"
+      ]
     },
     {
       "name": "left value not an array",
@@ -44,12 +56,18 @@
       "data": {
         "arr": 12
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "last filter"
+      ]
     },
     {
       "name": "left value is undefined",
       "template": "{{ nosuchthing | last }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "last filter"
+      ]
     },
     {
       "name": "last of a string",
@@ -57,6 +75,9 @@
       "results": [
         "",
         "o"
+      ],
+      "tags": [
+        "last filter"
       ]
     },
     {
@@ -68,7 +89,10 @@
           "c": 2
         }
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "last filter"
+      ]
     }
   ]
 }

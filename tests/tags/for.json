@@ -3,7 +3,10 @@
     {
       "name": "simple range loop",
       "template": "{% for i in (0..3) %}{{ i }} {% endfor %}",
-      "result": "0 1 2 3 "
+      "result": "0 1 2 3 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "range loop using identifier",
@@ -17,7 +20,10 @@
           "end_range": 1
         }
       },
-      "result": "0 - sports 1 - garden "
+      "result": "0 - sports 1 - garden ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "simple array loop",
@@ -30,7 +36,10 @@
           ]
         }
       },
-      "result": "sports garden "
+      "result": "sports garden ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "loop over an array in reverse",
@@ -43,7 +52,10 @@
           ]
         }
       },
-      "result": "garden sports "
+      "result": "garden sports ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "simple hash loop",
@@ -54,7 +66,10 @@
           "description": "bar"
         }
       },
-      "result": "title foo description bar "
+      "result": "title foo description bar ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "empty array with default",
@@ -66,7 +81,10 @@
           "string": ""
         }
       },
-      "result": "no images"
+      "result": "no images",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "break",
@@ -79,7 +97,12 @@
           ]
         }
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "break tag",
+        "for tag",
+        "if tag"
+      ]
     },
     {
       "name": "continue",
@@ -92,7 +115,12 @@
           ]
         }
       },
-      "result": "garden "
+      "result": "garden ",
+      "tags": [
+        "continue tag",
+        "for tag",
+        "if tag"
+      ]
     },
     {
       "name": "limit",
@@ -105,7 +133,10 @@
           ]
         }
       },
-      "result": "sports "
+      "result": "sports ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "offset",
@@ -118,7 +149,10 @@
           ]
         }
       },
-      "result": "garden "
+      "result": "garden ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop length",
@@ -131,7 +165,10 @@
           ]
         }
       },
-      "result": "2 2 "
+      "result": "2 2 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop length with limit",
@@ -146,7 +183,10 @@
           "fashion"
         ]
       },
-      "result": "3 3 3 "
+      "result": "3 3 3 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop length with offset",
@@ -161,7 +201,10 @@
           "fashion"
         ]
       },
-      "result": "3 3 3 "
+      "result": "3 3 3 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop goes out of scope",
@@ -174,7 +217,10 @@
           ]
         }
       },
-      "result": "2 2 "
+      "result": "2 2 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop.first",
@@ -187,7 +233,10 @@
           ]
         }
       },
-      "result": "true false "
+      "result": "true false ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop.last",
@@ -200,7 +249,10 @@
           ]
         }
       },
-      "result": "false true "
+      "result": "false true ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop.index",
@@ -213,7 +265,10 @@
           ]
         }
       },
-      "result": "1 2 "
+      "result": "1 2 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop.index0",
@@ -226,7 +281,10 @@
           ]
         }
       },
-      "result": "0 1 "
+      "result": "0 1 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop.rindex",
@@ -239,7 +297,10 @@
           ]
         }
       },
-      "result": "2 1 "
+      "result": "2 1 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop.rindex0",
@@ -252,7 +313,10 @@
           ]
         }
       },
-      "result": "1 0 "
+      "result": "1 0 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop name",
@@ -265,12 +329,18 @@
           ]
         }
       },
-      "result": "tag-product.tags"
+      "result": "tag-product.tags",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop name of a range",
       "template": "{% for i in (1..3) limit:1 %}{{ forloop.name }}{% endfor %}",
-      "result": "i-(1..3)"
+      "result": "i-(1..3)",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "forloop no such attribute",
@@ -283,7 +353,10 @@
           ]
         }
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "iterate an empty array",
@@ -295,7 +368,10 @@
           "string": ""
         }
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "iterate an empty array with default",
@@ -307,7 +383,10 @@
           "string": ""
         }
       },
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "lookup a filter from an outer context",
@@ -320,7 +399,11 @@
           ]
         }
       },
-      "result": "SPORTS GARDEN "
+      "result": "SPORTS GARDEN ",
+      "tags": [
+        "for tag",
+        "upcase filter"
+      ]
     },
     {
       "name": "assign inside loop",
@@ -333,12 +416,19 @@
           ]
         }
       },
-      "result": "garden"
+      "result": "garden",
+      "tags": [
+        "assign tag",
+        "for tag"
+      ]
     },
     {
       "name": "blank empty loops",
       "template": "{% for i in (0..10) %}  {% endfor %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "loop over nested and chained object from context with trailing identifier",
@@ -358,12 +448,18 @@
           }
         }
       },
-      "result": "1 2 "
+      "result": "1 2 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "loop over undefined",
       "template": "{% for tag in nosuchthing %}{{ tag }}{% endfor %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "continue a loop",
@@ -378,17 +474,29 @@
           6
         ]
       },
-      "result": "a1 a2 a3 b4 b5 b6 "
+      "result": "a1 a2 a3 b4 b5 b6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "continue a loop over an assigned range",
       "template": "{% assign nums = (1..5) %}{% for item in nums limit: 3 %}a{{ item }} {% endfor %}{% for item in nums offset: continue %}b{{ item }} {% endfor %}",
-      "result": "a1 a2 a3 b4 b5 "
+      "result": "a1 a2 a3 b4 b5 ",
+      "tags": [
+        "assign tag",
+        "for tag"
+      ]
     },
     {
       "name": "continue a loop over a changing array",
       "template": "{% assign foo = '1,2,3,4,5,6' | split: ',' %}{% for item in foo limit: 3 %}{{ item }} {% endfor %}{% assign foo = 'u,v,w,x,y,z' | split: ',' %}{% for item in foo offset: continue %}{{ item }} {% endfor %}",
-      "result": "1 2 3 x y z "
+      "result": "1 2 3 x y z ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "split filter"
+      ]
     },
     {
       "name": "continue with changing loop var",
@@ -403,7 +511,10 @@
           6
         ]
       },
-      "result": "1 2 3 1 2 3 4 5 6 "
+      "result": "1 2 3 1 2 3 4 5 6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "nothing to continue from",
@@ -418,7 +529,10 @@
           6
         ]
       },
-      "result": "a1 a2 a3 a4 a5 a6 "
+      "result": "a1 a2 a3 a4 a5 a6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "offset continue without preceding loop",
@@ -433,7 +547,10 @@
           6
         ]
       },
-      "result": "1 2 3 4 5 6 "
+      "result": "1 2 3 4 5 6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "continue from a limit that is greater than length",
@@ -448,7 +565,10 @@
           6
         ]
       },
-      "result": "a1 a2 a3 a4 a5 a6 "
+      "result": "a1 a2 a3 a4 a5 a6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "continue from a range expression",
@@ -463,72 +583,122 @@
           6
         ]
       },
-      "result": "a1 a2 a3 b4 b5 b6 "
+      "result": "a1 a2 a3 b4 b5 b6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "offset continue twice with limit",
       "template": "{% for item in (1..6) limit: 2 %}a{{ item }} {% endfor %}{% for item in (1..6) limit: 2 offset: continue %}b{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}c{{ item }} {% endfor %}",
-      "result": "a1 a2 b3 b4 c5 c6 "
+      "result": "a1 a2 b3 b4 c5 c6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "offset continue twice with changing limit",
       "template": "{% for item in (1..6) limit: 2 %}a{{ item }} {% endfor %}{% for item in (1..6) limit: 3 offset: continue %}b{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}c{{ item }} {% endfor %}",
-      "result": "a1 a2 b3 b4 b5 c6 "
+      "result": "a1 a2 b3 b4 b5 c6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "offset continue twice with no second limit",
       "template": "{% for item in (1..6) limit: 2 %}a{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}b{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}c{{ item }} {% endfor %}",
-      "result": "a1 a2 b3 b4 b5 b6 "
+      "result": "a1 a2 b3 b4 b5 b6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "offset continue from a broken loop",
       "template": "{% for item in (1..6) limit: 4 %}{% if item == 3 %}{% break %}{% endif %}a{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}b{{ item }} {% endfor %}",
-      "result": "a1 a2 b5 b6 "
+      "result": "a1 a2 b5 b6 ",
+      "tags": [
+        "break tag",
+        "for tag",
+        "if tag"
+      ]
     },
     {
       "name": "offset continue from a broken loop with preceding limit",
       "template": "{% for item in (1..6) limit: 3 %}a{{ item }} {% endfor %}{% for item in (1..6) %}{% if item == 3 %}{% break %}{% endif %}b{{ item }} {% endfor %}{% for item in (1..6) offset: continue %}c{{ item }} {% endfor %}",
-      "result": "a1 a2 a3 b1 b2 "
+      "result": "a1 a2 a3 b1 b2 ",
+      "tags": [
+        "break tag",
+        "for tag",
+        "if tag"
+      ]
     },
     {
       "name": "offset continue forloop length",
       "template": "{% for item in (1..6) limit: 2 %}a{{ item }} - {{ forloop.length }}, {% endfor %}{% for item in (1..6) offset: continue %}b{{ item }} - {{ forloop.length }}, {% endfor %}",
-      "result": "a1 - 2, a2 - 2, b3 - 4, b4 - 4, b5 - 4, b6 - 4, "
+      "result": "a1 - 2, a2 - 2, b3 - 4, b4 - 4, b5 - 4, b6 - 4, ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "parentloop is normally undefined",
       "template": "{% for i in (1..2)%}{{ forloop.parentloop.index }}{% endfor %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "access parentloop",
       "template": "{% for i in (1..2)%}{% for j in (1..2) %}{{ i }} {{j}} {{ forloop.parentloop.index }} {{ forloop.index }} {% endfor %}{% endfor %}",
-      "result": "1 1 1 1 1 2 1 2 2 1 2 1 2 2 2 2 "
+      "result": "1 1 1 1 1 2 1 2 2 1 2 1 2 2 2 2 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "parentloop goes out of scope",
       "template": "{% for i in (1..2)%}{% for j in (1..2) %}{{ i }} {{ j }} {% endfor %}{{ forloop.parentloop.index }}{% endfor %}",
-      "result": "1 1 1 2 2 1 2 2 "
+      "result": "1 1 1 2 2 1 2 2 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "parent's parentloop",
       "template": "{% for i in (1..2) %}{% for j in (1..2) %}{% for k in (1..2) %}i={{ forloop.parentloop.parentloop.index }} j={{ forloop.parentloop.index }} k={{ forloop.index }} {% endfor %}{% endfor %}{% endfor %}",
-      "result": "i=1 j=1 k=1 i=1 j=1 k=2 i=1 j=2 k=1 i=1 j=2 k=2 i=2 j=1 k=1 i=2 j=1 k=2 i=2 j=2 k=1 i=2 j=2 k=2 "
+      "result": "i=1 j=1 k=1 i=1 j=1 k=2 i=1 j=2 k=1 i=1 j=2 k=2 i=2 j=1 k=1 i=2 j=1 k=2 i=2 j=2 k=1 i=2 j=2 k=2 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "loop over an existing range object",
       "template": "{% assign foo = (1..3) %}{{ foo | join: '#' }}{% for i in foo %}{{ i }}{% endfor %}{% for i in foo %}{{ i }}{% endfor %}",
-      "result": "1#2#3123123"
+      "result": "1#2#3123123",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "join filter"
+      ]
     },
     {
       "name": "loop over range with float start",
       "template": "{% assign x = (2.4..5) %}{% for i in x %}{{ i }}{% endfor %}",
-      "result": "2345"
+      "result": "2345",
+      "tags": [
+        "assign tag",
+        "for tag"
+      ]
     },
     {
       "name": "share outer scope",
       "template": "{% assign foo = 'hello' %}{% for x in (1..3) %}{% assign foo = x %}{% endfor %}{{ foo }}",
-      "result": "3"
+      "result": "3",
+      "tags": [
+        "assign tag",
+        "for tag"
+      ]
     },
     {
       "name": "offset and limit",
@@ -543,7 +713,10 @@
           "fashion"
         ]
       },
-      "result": "garden home diy "
+      "result": "garden home diy ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "first and last with an offset and limit",
@@ -558,7 +731,10 @@
           "fashion"
         ]
       },
-      "result": "garden true false home false true "
+      "result": "garden true false home false true ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "first and last with offset continue",
@@ -575,27 +751,42 @@
           ]
         }
       },
-      "result": "true false false false false false false false false true "
+      "result": "true false false false false false false false false true ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "range start and stop are the same",
       "template": "{% for i in (1..1) %}{{ i }} {% endfor %}",
-      "result": "1 "
+      "result": "1 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "range start and stop are zero",
       "template": "{% for i in (0..0) %}{{ i }} {% endfor %}",
-      "result": "0 "
+      "result": "0 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "limit is a string",
       "template": "{% for i in (1..4) limit: '2' %}{{ i }} {% endfor %}",
-      "result": "1 2 "
+      "result": "1 2 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "offset is a string",
       "template": "{% for i in (1..4) offset: '2' %}{{ i }} {% endfor %}",
-      "result": "3 4 "
+      "result": "3 4 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "limit is a non-number string",
@@ -634,17 +825,26 @@
     {
       "name": "comma separated arguments",
       "template": "{% for i in (1..6), limit: 4, offset: 2 %}{{ i }} {% endfor %}",
-      "result": "3 4 5 6 "
+      "result": "3 4 5 6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "some comma separated arguments",
       "template": "{% for i in (1..6) limit: 4, offset: 2, %}{{ i }} {% endfor %}",
-      "result": "3 4 5 6 "
+      "result": "3 4 5 6 ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "loop over a string literal",
       "template": "{% for i in 'hello' %}{{ i }} {% endfor %}",
-      "result": "hello "
+      "result": "hello ",
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "loop over a string variable",
@@ -652,7 +852,10 @@
       "data": {
         "foo": "hello"
       },
-      "result": "hello "
+      "result": "hello ",
+      "tags": [
+        "for tag"
+      ]
     }
   ]
 }

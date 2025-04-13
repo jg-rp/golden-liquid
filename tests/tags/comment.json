@@ -3,27 +3,44 @@
     {
       "name": "don't render comments",
       "template": "{% comment %}foo{% endcomment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "respect whitespace control in comments",
       "template": "\n{%- comment %}foo{% endcomment -%}\t \r",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "don't render comments with tags",
       "template": "{% comment %}{% if true %}{{ title }}{% endif %}{% endcomment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "comment inside liquid tag",
       "template": "{% liquid\n    if 1 != 1\n    comment\n    else\n    echo 123\n    endcomment\n    endif\n%}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag",
+        "if tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "commented tags are not parsed",
       "template": "{% comment %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}{% endcomment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "malformed tags are not parsed",
@@ -38,12 +55,18 @@
     {
       "name": "nested comment blocks",
       "template": "{% comment %}    {% comment %}    {% comment %}{%    endcomment     %}    {% endcomment %}{% endcomment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "nested comment blocks, with nested tags",
       "template": "{% comment %}    {% comment %}    {% comment %}{% if true %}hello{%endif%}{%    endcomment     %}    {% endcomment %}{% endcomment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "unclosed nested comment blocks",
@@ -53,7 +76,10 @@
     {
       "name": "raw inside comment block",
       "template": "{% comment %}    {% raw %}    {% endcomment %}    {% endraw %}{% endcomment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag"
+      ]
     }
   ]
 }

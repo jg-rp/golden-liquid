@@ -10,7 +10,12 @@
           "cat"
         ]
       },
-      "result": "x, y, "
+      "result": "x, y, ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "array containing null, default value",
@@ -23,7 +28,10 @@
           null
         ]
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "reject filter"
+      ]
     },
     {
       "name": "array containing an int, default value",
@@ -57,7 +65,12 @@
           }
         ]
       },
-      "result": "(title,false), (title,), (heading,baz), "
+      "result": "(title,false), (title,), (heading,baz), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "array of hashes, explicit nil",
@@ -78,7 +91,12 @@
           }
         ]
       },
-      "result": "(title,false), (title,), (heading,baz), "
+      "result": "(title,false), (title,), (heading,baz), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "array of hashes, explicit false",
@@ -99,7 +117,12 @@
           }
         ]
       },
-      "result": "(title,bar), (title,), (heading,baz), "
+      "result": "(title,bar), (title,), (heading,baz), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "array of hashes, explicit true",
@@ -117,7 +140,12 @@
           }
         ]
       },
-      "result": "(title,bar), (title,), "
+      "result": "(title,bar), (title,), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "array of hashes, string value",
@@ -138,7 +166,12 @@
           }
         ]
       },
-      "result": "(title,foo), (title,), (heading,baz), "
+      "result": "(title,foo), (title,), (heading,baz), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "array of hashes, missing property",
@@ -156,7 +189,12 @@
           }
         ]
       },
-      "result": "(heading,foo), (title,), "
+      "result": "(heading,foo), (title,), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "missing argument",
@@ -178,7 +216,12 @@
     {
       "name": "input is undefined",
       "template": "{% assign b = nosuchthing | reject: 'c' %}{% for obj in b %}{{ obj }}, {% endfor %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "first argument is undefined",
@@ -190,7 +233,12 @@
           "cat"
         ]
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "second argument is undefined",
@@ -208,7 +256,12 @@
           }
         ]
       },
-      "result": "(title,), "
+      "result": "(title,), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "input is a hash, default value",
@@ -220,7 +273,12 @@
           "baz": 3
         }
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "input is a hash, default value, no match",
@@ -232,7 +290,12 @@
           "baz": 3
         }
       },
-      "result": "(foo,1), (bar,2), (baz,3), "
+      "result": "(foo,1), (bar,2), (baz,3), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "input is a hash, default value, nil match",
@@ -244,7 +307,12 @@
           "baz": 3
         }
       },
-      "result": "(foo,1), (bar,), (baz,3), "
+      "result": "(foo,1), (bar,), (baz,3), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "input is a hash, explicit nil match",
@@ -256,7 +324,12 @@
           "baz": 3
         }
       },
-      "result": "(foo,1), (bar,), (baz,3), "
+      "result": "(foo,1), (bar,), (baz,3), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "input is a hash, int value, no match",
@@ -268,7 +341,12 @@
           "baz": 3
         }
       },
-      "result": "(foo,1), (bar,2), (baz,3), "
+      "result": "(foo,1), (bar,2), (baz,3), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "input is a hash, int value, match",
@@ -280,7 +358,12 @@
           "baz": 3
         }
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "nested array of hashes gets flattened",
@@ -304,7 +387,12 @@
           ]
         ]
       },
-      "result": "(title,foo), (title,), "
+      "result": "(title,foo), (title,), ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "string input becomes a single element array, substring match",
@@ -312,7 +400,12 @@
       "data": {
         "s": "foobar"
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "string input becomes a single element array, no match",
@@ -320,7 +413,12 @@
       "data": {
         "s": "foobar"
       },
-      "result": "foobar, "
+      "result": "foobar, ",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     }
   ]
 }

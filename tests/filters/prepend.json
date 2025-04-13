@@ -3,17 +3,26 @@
     {
       "name": "concat",
       "template": "{{ \"hello\" | prepend: \"there\" }}",
-      "result": "therehello"
+      "result": "therehello",
+      "tags": [
+        "prepend filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | prepend: 'there' }}",
-      "result": "there5"
+      "result": "there5",
+      "tags": [
+        "prepend filter"
+      ]
     },
     {
       "name": "argument not a string",
       "template": "{{ \"hello\" | prepend: 5 }}",
-      "result": "5hello"
+      "result": "5hello",
+      "tags": [
+        "prepend filter"
+      ]
     },
     {
       "name": "missing argument",
@@ -28,12 +37,18 @@
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | prepend: \"hi\" }}",
-      "result": "hi"
+      "result": "hi",
+      "tags": [
+        "prepend filter"
+      ]
     },
     {
       "name": "undefined argument",
       "template": "{{ \"hi\" | prepend: nosuchthing }}",
-      "result": "hi"
+      "result": "hi",
+      "tags": [
+        "prepend filter"
+      ]
     }
   ]
 }

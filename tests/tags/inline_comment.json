@@ -3,47 +3,77 @@
     {
       "name": "with whitespace control and padding",
       "template": "{%- # some comment -%}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "with whitespace control no padding",
       "template": "{%-# some comment -%}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "no whitespace control with padding",
       "template": "{% # some comment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "no whitespace control no padding",
       "template": "{%# some comment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "no padding after the hash",
       "template": "{%#some comment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "empty",
       "template": "{%#%}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "liquid tag",
       "template": "{% liquid \n  # first comment line\n  # second comment line\n\n  # another comment line\n  echo 'Hello '\n\n  # more comments\n  echo 'goodbye'\n-%}",
-      "result": "Hello goodbye"
+      "result": "Hello goodbye",
+      "tags": [
+        "# tag",
+        "echo tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "multiple lines",
       "template": "{%-\n  # spread inline comments\n  # over multiple lines\n-%}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "lots of hashes in a liquid tag",
       "template": "{% liquid\n  ##########################\n  # spread inline comments #\n  ##########################\n-%}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "enforce leading hash",
@@ -53,37 +83,58 @@
     {
       "name": "can't comment tags",
       "template": "{%- # {% echo 'hello world' %} -%}",
-      "result": " -%}"
+      "result": " -%}",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "comment with single quote",
       "template": "{%# some 'comment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "comment with single quoted string",
       "template": "{%# some 'comment' %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "comment with double quote",
       "template": "{%# some \"comment %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "comment with double quoted string",
       "template": "{%# some \"comment\" %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "comment with u2018",
-      "template": "{%# some \u2018comment %}",
-      "result": ""
+      "template": "{%# some ‘comment %}",
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "comment with u201C",
-      "template": "{%# some \u201ccomment %}",
-      "result": ""
+      "template": "{%# some “comment %}",
+      "result": "",
+      "tags": [
+        "# tag"
+      ]
     }
   ]
 }
