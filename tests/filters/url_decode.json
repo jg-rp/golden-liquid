@@ -3,22 +3,34 @@
     {
       "name": "some special URL characters",
       "template": "{{ \"email+address+is+bob%40example.com%21\" | url_decode }}",
-      "result": "email address is bob@example.com!"
+      "result": "email address is bob@example.com!",
+      "tags": [
+        "url_decode filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | url_decode }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "url_decode filter"
+      ]
     },
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | url_decode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "url_decode filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | url_decode }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "url_decode filter"
+      ]
     }
   ]
 }

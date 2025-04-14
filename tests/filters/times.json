@@ -3,47 +3,74 @@
     {
       "name": "int times int",
       "template": "{{ 5 | times: 2 }}",
-      "result": "10"
+      "result": "10",
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "int times float",
       "template": "{{ 5 | times: 2.1 }}",
-      "result": "10.5"
+      "result": "10.5",
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "float times float",
       "template": "{{ 5.0 | times: 2.1 }}",
-      "result": "10.5"
+      "result": "10.5",
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "string times string",
       "template": "{{ \"5.0\" | times: \"2.1\" }}",
-      "result": "10.5"
+      "result": "10.5",
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "negative multiplication",
       "template": "{{ -5 | times: 2 }}",
-      "result": "-10"
+      "result": "-10",
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "missing arg",
       "template": "{{ 5 | times }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "too many args",
       "template": "{{ 5 | times: 1, 2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | times: 2 }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "undefined argument",
       "template": "{{ 5 | times: nosuchthing }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "times filter"
+      ]
     }
   ]
 }

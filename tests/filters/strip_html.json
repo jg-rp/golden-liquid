@@ -6,7 +6,10 @@
       "data": {
         "s": "Have <em>you</em> read <strong>Ulysses</strong> &amp; &#20;?"
       },
-      "result": "Have you read Ulysses &amp; &#20;?"
+      "result": "Have you read Ulysses &amp; &#20;?",
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "some HTML markup with HTML comment",
@@ -14,22 +17,34 @@
       "data": {
         "s": "<!-- Have --><em>you</em> read <strong>Ulysses</strong> &amp; &#20;?"
       },
-      "result": "you read Ulysses &amp; &#20;?"
+      "result": "you read Ulysses &amp; &#20;?",
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | strip_html }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | strip_html: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | strip_html }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "html block",
@@ -37,7 +52,10 @@
       "data": {
         "s": "<div>test</div>"
       },
-      "result": "test"
+      "result": "test",
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "html block with id",
@@ -45,7 +63,10 @@
       "data": {
         "s": "<div id='test'>test</div>"
       },
-      "result": "test"
+      "result": "test",
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "script block",
@@ -53,7 +74,10 @@
       "data": {
         "s": "<script type='text/javascript'>document.write('some stuff');</script>"
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "style block",
@@ -61,7 +85,10 @@
       "data": {
         "s": "<style type='text/css'>foo bar</style>"
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "html block with newline",
@@ -69,7 +96,10 @@
       "data": {
         "s": "<div\nclass='multiline'>test</div>"
       },
-      "result": "test"
+      "result": "test",
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "html comment with newline",
@@ -77,7 +107,10 @@
       "data": {
         "s": "<!-- foo bar \n test -->test"
       },
-      "result": "test"
+      "result": "test",
+      "tags": [
+        "strip_html filter"
+      ]
     }
   ]
 }

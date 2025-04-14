@@ -3,27 +3,44 @@
     {
       "name": "named counter",
       "template": "{% increment foo %} {% increment foo %} {% increment foo %}",
-      "result": "0 1 2"
+      "result": "0 1 2",
+      "tags": [
+        "increment tag"
+      ]
     },
     {
       "name": "incrementing counter renders before incrementing",
       "template": "{% increment foo %} {{ foo }}",
-      "result": "0 1"
+      "result": "0 1",
+      "tags": [
+        "increment tag"
+      ]
     },
     {
       "name": "multiple named counters",
       "template": "{% increment foo %} {% increment bar %} {% increment foo %} {% increment bar %}",
-      "result": "0 0 1 1"
+      "result": "0 0 1 1",
+      "tags": [
+        "increment tag"
+      ]
     },
     {
       "name": "assign and increment",
       "template": "{% assign foo = 5 %}{{ foo }} {% increment foo %} {% increment foo %} {{ foo }}",
-      "result": "5 0 1 5"
+      "result": "5 0 1 5",
+      "tags": [
+        "assign tag",
+        "increment tag"
+      ]
     },
     {
       "name": "named counters are in scope for subsequent expressions",
       "template": "{% increment foo %} {% increment foo %} {% if foo > 0 %}{{ foo }}{% endif %}",
-      "result": "0 1 2"
+      "result": "0 1 2",
+      "tags": [
+        "if tag",
+        "increment tag"
+      ]
     }
   ]
 }

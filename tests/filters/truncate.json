@@ -3,52 +3,82 @@
     {
       "name": "default end",
       "template": "{{ \"Ground control to Major Tom.\" | truncate: 20 }}",
-      "result": "Ground control to..."
+      "result": "Ground control to...",
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "custom end",
       "template": "{{ \"Ground control to Major Tom.\" | truncate: 25, \", and so on\" }}",
-      "result": "Ground control, and so on"
+      "result": "Ground control, and so on",
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "no end",
       "template": "{{ \"Ground control to Major Tom.\" | truncate: 20, \"\" }}",
-      "result": "Ground control to Ma"
+      "result": "Ground control to Ma",
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "string is shorter than length",
       "template": "{{ \"Ground control\" | truncate: 20 }}",
-      "result": "Ground control"
+      "result": "Ground control",
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | truncate: 10 }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | truncate: 5, \"foo\", \"bar\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | truncate: 5 }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "undefined first argument",
       "template": "{{ \"Ground control to Major Tom.\" | truncate: nosuchthing }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "undefined second argument",
       "template": "{{ \"Ground control to Major Tom.\" | truncate: 20, nosuchthing }}",
-      "result": "Ground control to Ma"
+      "result": "Ground control to Ma",
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "default length is 50",
       "template": "{{ \"Ground control to Major Tom. Ground control to Major Tom.\" | truncate }}",
-      "result": "Ground control to Major Tom. Ground control to ..."
+      "result": "Ground control to Major Tom. Ground control to ...",
+      "tags": [
+        "truncate filter"
+      ]
     }
   ]
 }

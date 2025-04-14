@@ -10,7 +10,10 @@
           "c"
         ]
       },
-      "result": "3"
+      "result": "3",
+      "tags": [
+        "size filter"
+      ]
     },
     {
       "name": "size of a string",
@@ -18,7 +21,10 @@
       "data": {
         "a": "abc"
       },
-      "result": "3"
+      "result": "3",
+      "tags": [
+        "size filter"
+      ]
     },
     {
       "name": "size of an empty array",
@@ -26,7 +32,10 @@
       "data": {
         "a": []
       },
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "size filter"
+      ]
     },
     {
       "name": "size of a hash",
@@ -37,7 +46,10 @@
           "b": 2
         }
       },
-      "result": "2"
+      "result": "2",
+      "tags": [
+        "size filter"
+      ]
     },
     {
       "name": "unexpected argument",
@@ -49,12 +61,18 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "size filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | size }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "size filter"
+      ]
     }
   ]
 }

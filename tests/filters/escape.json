@@ -3,22 +3,34 @@
     {
       "name": "make HTML-safe",
       "template": "{{ \"<p>test</p>\" | escape }}",
-      "result": "&lt;p&gt;test&lt;/p&gt;"
+      "result": "&lt;p&gt;test&lt;/p&gt;",
+      "tags": [
+        "escape filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | escape }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "escape filter"
+      ]
     },
     {
       "name": "unexpected argument",
       "template": "{{ \"HELLO\" | escape: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "escape filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | escape }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "escape filter"
+      ]
     }
   ]
 }

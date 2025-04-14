@@ -10,7 +10,10 @@
           "z"
         ]
       },
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of strings, default value, substring match",
@@ -22,7 +25,10 @@
           "zoo"
         ]
       },
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of strings, default value, no match",
@@ -34,7 +40,10 @@
           "z"
         ]
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of ints, default value",
@@ -46,7 +55,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of ints, string argument, default value",
@@ -58,7 +70,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "mixed array, default value",
@@ -72,7 +87,10 @@
           true
         ]
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "string input, default value, match",
@@ -80,7 +98,10 @@
       "data": {
         "a": "zoo"
       },
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "string input, default value, no match",
@@ -88,7 +109,10 @@
       "data": {
         "a": "foo"
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "hash input, default value, match",
@@ -98,7 +122,10 @@
           "z": 42
         }
       },
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "hash input, default value, no match",
@@ -108,7 +135,10 @@
           "x": 42
         }
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "hash input, int value, match",
@@ -118,7 +148,10 @@
           "z": 42
         }
       },
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "hash input, int value, no match",
@@ -128,7 +161,10 @@
           "z": 42
         }
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "hash input, string value, no type coercion",
@@ -138,7 +174,10 @@
           "z": 42
         }
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "hash input, explicit nil, no match",
@@ -148,7 +187,10 @@
           "z": 42
         }
       },
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "hash input, explicit nil, match",
@@ -158,7 +200,10 @@
           "z": null
         }
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "hash input, false value, match",
@@ -168,7 +213,10 @@
           "z": false
         }
       },
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of hashes, int value, match",
@@ -183,7 +231,10 @@
           }
         ]
       },
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of hashes, int value, no match",
@@ -198,7 +249,10 @@
           }
         ]
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of hashes, with a nil",
@@ -214,7 +268,10 @@
           }
         ]
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of hashes, nil property",
@@ -229,7 +286,10 @@
           }
         ]
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of hashes, int property",
@@ -244,7 +304,10 @@
           }
         ]
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of hashes, false property",
@@ -259,7 +322,10 @@
           }
         ]
       },
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "has filter"
+      ]
     }
   ]
 }

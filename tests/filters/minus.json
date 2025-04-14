@@ -3,37 +3,58 @@
     {
       "name": "integer value and integer arg",
       "template": "{{ 10 | minus: 2 }}",
-      "result": "8"
+      "result": "8",
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "integer value and float arg",
       "template": "{{ 10 | minus: 2.0 }}",
-      "result": "8.0"
+      "result": "8.0",
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "float value and float arg",
       "template": "{{ 10.1 | minus: 2.2 }}",
-      "result": "7.9"
+      "result": "7.9",
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "string value and string arg",
       "template": "{{ \"10.1\" | minus: \"2.2\" }}",
-      "result": "7.9"
+      "result": "7.9",
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "string not a number",
       "template": "{{ \"foo\" | minus: \"2.0\" }}",
-      "result": "-2.0"
+      "result": "-2.0",
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "arg string not a number",
       "template": "{{ \"10\" | minus: \"foo\" }}",
-      "result": "10"
+      "result": "10",
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "too many args",
       "template": "{{ 5 | minus: 1, '5' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "not a string, int or float",
@@ -41,17 +62,26 @@
       "data": {
         "a": {}
       },
-      "result": "-1"
+      "result": "-1",
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | minus: 2 }}",
-      "result": "-2"
+      "result": "-2",
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "undefined argument",
       "template": "{{ 10 | minus: nosuchthing }}",
-      "result": "10"
+      "result": "10",
+      "tags": [
+        "minus filter"
+      ]
     }
   ]
 }

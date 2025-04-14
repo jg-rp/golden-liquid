@@ -6,7 +6,10 @@
       "data": {
         "a": []
       },
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "only zeros",
@@ -18,7 +21,10 @@
           0
         ]
       },
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "ints",
@@ -30,7 +36,10 @@
           3
         ]
       },
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "negative ints",
@@ -42,7 +51,10 @@
           -3
         ]
       },
-      "result": "-6"
+      "result": "-6",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "negative strings",
@@ -54,7 +66,10 @@
           "-3"
         ]
       },
-      "result": "-6"
+      "result": "-6",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "positive and negative ints",
@@ -66,7 +81,10 @@
           10
         ]
       },
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "nested ints",
@@ -82,7 +100,10 @@
           ]
         ]
       },
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "hashes with property argument",
@@ -100,7 +121,10 @@
           }
         ]
       },
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "hashes with numeric strings and property argument",
@@ -118,7 +142,10 @@
           }
         ]
       },
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "hashes without property argument",
@@ -136,7 +163,10 @@
           }
         ]
       },
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "hashes with some missing properties",
@@ -154,7 +184,10 @@
           }
         ]
       },
-      "result": "3"
+      "result": "3",
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "properties arguments with non-hash items",
@@ -166,7 +199,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "sum filter"
+      ]
     }
   ]
 }

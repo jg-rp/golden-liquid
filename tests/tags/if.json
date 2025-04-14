@@ -8,7 +8,10 @@
           "title": "foo"
         }
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "condition with literal consequence and literal alternative",
@@ -18,7 +21,10 @@
           "title": "foo"
         }
       },
-      "result": "baz"
+      "result": "baz",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "condition with conditional alternative",
@@ -28,7 +34,10 @@
           "title": "foo"
         }
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "condition with conditional alternative and final alternative",
@@ -38,7 +47,10 @@
           "title": "foo"
         }
       },
-      "result": "baz"
+      "result": "baz",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "non-empty hash is truthy",
@@ -48,17 +60,26 @@
           "title": "foo"
         }
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "literal nil is falsy",
       "template": "{% if nil %}bar{% else %}foo{% endif %}",
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "undefined variables are falsy",
       "template": "{% if nosuchthing %}bar{% else %}foo{% endif %}",
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "nested condition in the consequence block",
@@ -69,7 +90,10 @@
         },
         "title": "Hello"
       },
-      "result": "baz"
+      "result": "baz",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "nested condition, alternative in the consequence block",
@@ -80,12 +104,18 @@
         },
         "title": "Hello"
       },
-      "result": "hello"
+      "result": "hello",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "literal false condition",
       "template": "{% if false %}{% endif %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "contains condition",
@@ -98,7 +128,10 @@
           ]
         }
       },
-      "result": "baz"
+      "result": "baz",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "not equal condition",
@@ -108,7 +141,10 @@
           "title": "foo"
         }
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "alternate not equal condition",
@@ -118,57 +154,94 @@
           "title": "foo"
         }
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "blocks that contain only whitespace are not rendered",
       "template": "{% if true %}  {% elsif false %} {% else %} {% endif %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "blocks that contain only whitespace and comments are not rendered",
       "template": "{% if true %} {% comment %} this is blank {% endcomment %} {% endif %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag",
+        "if tag"
+      ]
     },
     {
       "name": "conditional alternative with default",
       "template": "{% if false %}foo{% elsif false %}bar{% else %}hello{% endif %}",
-      "result": "hello"
+      "result": "hello",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "range equals range",
       "template": "{% assign foo = (1..3) %}{% if foo == (1..3) %}true{% else %}false{% endif %}",
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "assign tag",
+        "if tag"
+      ]
     },
     {
       "name": "logical operators are right associative",
       "template": "{% if true and false and false or true %}hello{% endif %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "zero is not equal to false",
       "template": "{% if 0 == false %}Hello{% else %}Goodbye{% endif %}",
-      "result": "Goodbye"
+      "result": "Goodbye",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "zero is truthy",
       "template": "{% if 0 %}Hello{% else %}Goodbye{% endif %}",
-      "result": "Hello"
+      "result": "Hello",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "0.0 is truthy",
       "template": "{% if 0.0 %}Hello{% else %}Goodbye{% endif %}",
-      "result": "Hello"
+      "result": "Hello",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "one is not equal to true",
       "template": "{% if 1 == true %}Hello{% else %}Goodbye{% endif %}",
-      "result": "Goodbye"
+      "result": "Goodbye",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "array is equal to array",
       "template": "{% assign x = 'a,b,c' | split: ',' %}{% assign y = 'a,b,c' | split: ',' %}{% if x == y %}true{% else %}false{% endif %}",
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "assign tag",
+        "if tag",
+        "split filter"
+      ]
     },
     {
       "name": "array is equal to array from context",
@@ -180,72 +253,114 @@
           "c"
         ]
       },
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "assign tag",
+        "if tag",
+        "split filter"
+      ]
     },
     {
       "name": "string does not equal int",
       "template": "{% if '1' == 1 %}true{% else %}false{% endif %}",
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "int does not equal string",
       "template": "{% if 1 == '1' %}true{% else %}false{% endif %}",
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "int equals float",
       "template": "{% if 1 == 1.0 %}true{% else %}false{% endif %}",
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string greater than int",
       "template": "{% if '2' > 1 %}true{% else %}false{% endif %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string is less than string",
       "template": "{% if 'abc' < 'acb' %}true{% else %}false{% endif %}",
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string is not less than string",
       "template": "{% if 'bbb' < 'aaa' %}true{% else %}false{% endif %}",
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string is less than or equal to string",
       "template": "{% if 'abc' <= 'acb' %}true{% else %}false{% endif %}",
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string is not less than or equal to string",
       "template": "{% if 'bbb' <= 'aaa' %}true{% else %}false{% endif %}",
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string is greater than string",
       "template": "{% if 'abc' > 'acb' %}true{% else %}false{% endif %}",
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string is not greater than string",
       "template": "{% if 'bbb' > 'aaa' %}true{% else %}false{% endif %}",
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string is greater than or equal to string",
       "template": "{% if 'abc' >= 'acb' %}true{% else %}false{% endif %}",
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string is not greater than or equal to string",
       "template": "{% if 'bbb' >= 'aaa' %}true{% else %}false{% endif %}",
-      "result": "true"
+      "result": "true",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "else tag expressions are ignored",
       "template": "{% if false %}1{% else nonsense %}2{% endif %}",
       "tags": [
+        "if tag",
         "strict"
       ],
       "result": "2"
@@ -254,6 +369,7 @@
       "name": "extra else blocks are ignored",
       "template": "{% if false %}1{% else %}2{% else %}3{% endif %}",
       "tags": [
+        "if tag",
         "strict"
       ],
       "result": "2"
@@ -262,6 +378,7 @@
       "name": "extra elsif blocks are ignored",
       "template": "{% if false %}1{% else %}2{% elsif true %}3{% endif %}",
       "tags": [
+        "if tag",
         "strict"
       ],
       "result": "2"
@@ -272,7 +389,10 @@
       "data": {
         "x": []
       },
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "empty array is truthy",
@@ -280,7 +400,10 @@
       "data": {
         "x": []
       },
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "empty object equals special empty",
@@ -288,7 +411,10 @@
       "data": {
         "x": {}
       },
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "empty object is truthy",
@@ -296,22 +422,34 @@
       "data": {
         "x": {}
       },
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "empty string is truthy",
       "template": "{% if '' %}TRUE{% else %}FALSE{% endif %}",
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string contains string",
       "template": "{% if 'hello' contains 'llo' %}TRUE{% else %}FALSE{% endif %}",
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string contains int",
       "template": "{% if 'hel9lo' contains 9 %}TRUE{% else %}FALSE{% endif %}",
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string contains string from context",
@@ -319,7 +457,10 @@
       "data": {
         "s": "llo"
       },
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "context string contains string from context",
@@ -328,17 +469,26 @@
         "s": "llo",
         "t": "hello"
       },
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "undefined is equal to nil",
       "template": "{% if nosuchthing == nil %}TRUE{% else %}FALSE{% endif %}",
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "undefined is equal to null",
       "template": "{% if nosuchthing == null %}TRUE{% else %}FALSE{% endif %}",
-      "result": "TRUE"
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string contains undefined",
@@ -346,7 +496,10 @@
       "data": {
         "s": "hello"
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "array contains undefined",
@@ -359,7 +512,10 @@
           null
         ]
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "array contains false",
@@ -372,7 +528,10 @@
           false
         ]
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "object contains undefined",
@@ -382,7 +541,10 @@
           "foo": "bar"
         }
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string contains nil",
@@ -390,7 +552,10 @@
       "data": {
         "s": "hello"
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "array contains nil",
@@ -402,7 +567,10 @@
           null
         ]
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "object contains nil",
@@ -412,7 +580,10 @@
           "foo": "bar"
         }
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "undefined contains string",
@@ -420,7 +591,10 @@
       "data": {
         "s": "hello"
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "undefined contains array",
@@ -432,7 +606,10 @@
           3
         ]
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "undefined contains object",
@@ -442,12 +619,18 @@
           "foo": "bar"
         }
       },
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "undefined contains undefined",
       "template": "{% if undefined contains thing %}TRUE{% else %}FALSE{% endif %}",
-      "result": "FALSE"
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "startswith is not a valid operator",
@@ -457,7 +640,8 @@
         "t": "hell"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -469,7 +653,8 @@
         "t": "lo"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -483,7 +668,8 @@
         "x": "foo"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -495,7 +681,8 @@
         "t": "lo"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -503,7 +690,8 @@
       "name": "not is not a valid operator",
       "template": "{% if not false %}TRUE{% else %}FALSE{% endif %}",
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     }

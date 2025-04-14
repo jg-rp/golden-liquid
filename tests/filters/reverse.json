@@ -11,7 +11,11 @@
           "A"
         ]
       },
-      "result": "A#B#a#b"
+      "result": "A#B#a#b",
+      "tags": [
+        "join filter",
+        "reverse filter"
+      ]
     },
     {
       "name": "array of things",
@@ -25,7 +29,11 @@
           {}
         ]
       },
-      "result": "{}#1#b#a"
+      "result": "{}#1#b#a",
+      "tags": [
+        "join filter",
+        "reverse filter"
+      ]
     },
     {
       "name": "empty array",
@@ -33,7 +41,11 @@
       "data": {
         "a": []
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "join filter",
+        "reverse filter"
+      ]
     },
     {
       "name": "unexpected argument",
@@ -41,7 +53,11 @@
       "data": {
         "a": []
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter",
+        "reverse filter"
+      ]
     },
     {
       "name": "left value not an array",
@@ -49,12 +65,20 @@
       "data": {
         "a": 123
       },
-      "result": "123"
+      "result": "123",
+      "tags": [
+        "join filter",
+        "reverse filter"
+      ]
     },
     {
       "name": "left value is undefined",
       "template": "{{ nosuchthing | reverse | join: '#' }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "join filter",
+        "reverse filter"
+      ]
     }
   ]
 }

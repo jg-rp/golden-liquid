@@ -3,37 +3,58 @@
     {
       "name": "remove substrings",
       "template": "{{ \"I strained to see the train through the rain\" | remove_last: \"rain\" }}",
-      "result": "I strained to see the train through the "
+      "result": "I strained to see the train through the ",
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | remove_last: 'rain' }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "argument not a string",
       "template": "{{ \"hello\" | remove_last: 5 }}",
-      "result": "hello"
+      "result": "hello",
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "missing argument",
       "template": "{{ \"hello\" | remove_last }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | remove_last: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | remove_last: \"rain\" }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "undefined argument",
       "template": "{{ \"hello\" | remove_last: nosuchthing }}",
-      "result": "hello"
+      "result": "hello",
+      "tags": [
+        "remove_last filter"
+      ]
     }
   ]
 }

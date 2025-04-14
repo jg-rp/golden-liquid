@@ -8,7 +8,14 @@
           "title": "foo"
         }
       },
-      "result": "FOO012345"
+      "result": "FOO012345",
+      "tags": [
+        "echo tag",
+        "for tag",
+        "if tag",
+        "liquid tag",
+        "upcase filter"
+      ]
     },
     {
       "name": "carriage return and newline terminated tags",
@@ -18,7 +25,14 @@
           "title": "foo"
         }
       },
-      "result": "FOO012345"
+      "result": "FOO012345",
+      "tags": [
+        "echo tag",
+        "for tag",
+        "if tag",
+        "liquid tag",
+        "upcase filter"
+      ]
     },
     {
       "name": "carriage return terminated tags",
@@ -28,32 +42,57 @@
           "title": "foo"
         }
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "echo tag",
+        "for tag",
+        "if tag",
+        "liquid tag",
+        "upcase filter"
+      ]
     },
     {
       "name": "empty liquid tag",
       "template": "{% liquid %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "liquid tag"
+      ]
     },
     {
       "name": "only whitespace",
       "template": "{% liquid\n   \n\n   \t \n\t\n  %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "liquid tag"
+      ]
     },
     {
       "name": "single line comment tag",
       "template": "{% liquid\ncomment this is a comment\nendcomment\n%}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "multi-line comment tag",
       "template": "{% liquid\ncomment this is a comment\nsplit over two lines\nendcomment\n%}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "comment tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "whitespace control",
       "template": "Hello,     \n{%- liquid\n  echo ' World! '\n-%}\n   Goodbye.",
-      "result": "Hello, World! Goodbye."
+      "result": "Hello, World! Goodbye.",
+      "tags": [
+        "echo tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "reference test #2",
@@ -65,7 +104,13 @@
           3
         ]
       },
-      "result": "1#2#3"
+      "result": "1#2#3",
+      "tags": [
+        "echo tag",
+        "for tag",
+        "liquid tag",
+        "unless tag"
+      ]
     },
     {
       "name": "reference test #3",
@@ -77,37 +122,70 @@
           3
         ]
       },
-      "result": "4#8#12#6"
+      "result": "4#8#12#6",
+      "tags": [
+        "assign tag",
+        "echo tag",
+        "for tag",
+        "liquid tag",
+        "times filter",
+        "unless tag"
+      ]
     },
     {
       "name": "reference test #4",
       "template": "{%- liquid echo 'a' -%}\nb\n{%- liquid echo 'c' -%}",
-      "result": "abc"
+      "result": "abc",
+      "tags": [
+        "echo tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "nested liquid",
       "template": "{%- if true %}\n  {%- liquid\n    echo \"good\"\n  %}\n{%- endif -%}",
-      "result": "good"
+      "result": "good",
+      "tags": [
+        "echo tag",
+        "if tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "can't close nested blocks",
       "template": "{%- if true -%}\n42\n{%- liquid endif -%}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "if tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "bare liquid tag in liquid tag",
       "template": "{%- liquid\n  liquid\n  echo \"foo\"\n-%}",
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "echo tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "liquid tag in liquid tag",
       "template": "{%- liquid\n  liquid echo 'bar'\n  echo \"foo\"\n-%}",
-      "result": "barfoo"
+      "result": "barfoo",
+      "tags": [
+        "echo tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "nested liquid in liquid tag",
       "template": "{%- liquid liquid liquid echo \"foo\" -%}",
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "echo tag",
+        "liquid tag"
+      ]
     }
   ]
 }

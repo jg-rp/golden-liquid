@@ -5,9 +5,7 @@ require "pathname"
 require "json_schemer"
 
 GOLDEN_SCHEMA = JSON.load_file("golden_liquid.schema.json")
-unless JSONSchemer.valid_schema?(GOLDEN_SCHEMA)
-  raise StandardError "schema is not valid"
-end
+raise "schema is not valid" unless JSONSchemer.valid_schema?(GOLDEN_SCHEMA)
 
 SCHEMER = JSONSchemer.schema(GOLDEN_SCHEMA)
 ROOT = "tests/"
@@ -73,7 +71,7 @@ def validate_schema(data)
   errors = SCHEMER.validate(data).to_a
   return if errors.empty?
 
-  raise StandardError errors.first["error"]
+  raise errors.first["error"]
 end
 
 # Raise an error if _data_ contains duplicate test names.
@@ -88,7 +86,7 @@ def check_for_dupes(data)
     plural = count == 1 ? "s" : ""
     buf << "#{name.inspect} appears #{count} time#{plural} in #{rel_path}"
   end
-  raise StandardError buf.join($INPUT_RECORD_SEPARATOR)
+  raise buf.join($INPUT_RECORD_SEPARATOR)
 end
 
 def dump_tags

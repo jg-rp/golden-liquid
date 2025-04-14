@@ -3,32 +3,50 @@
     {
       "name": "string with newlines",
       "template": "{{ \"- apples\n- oranges\n\" | newline_to_br }}",
-      "result": "- apples<br />\n- oranges<br />\n"
+      "result": "- apples<br />\n- oranges<br />\n",
+      "tags": [
+        "newline_to_br filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | newline_to_br }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "newline_to_br filter"
+      ]
     },
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | newline_to_br: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "newline_to_br filter"
+      ]
     },
     {
       "name": "reference implementation test 1",
       "template": "{{ \"a\nb\nc\" | newline_to_br }}",
-      "result": "a<br />\nb<br />\nc"
+      "result": "a<br />\nb<br />\nc",
+      "tags": [
+        "newline_to_br filter"
+      ]
     },
     {
       "name": "reference implementation test 2",
       "template": "{{ \"a\r\nb\nc\" | newline_to_br }}",
-      "result": "a<br />\nb<br />\nc"
+      "result": "a<br />\nb<br />\nc",
+      "tags": [
+        "newline_to_br filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | newline_to_br }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "newline_to_br filter"
+      ]
     }
   ]
 }

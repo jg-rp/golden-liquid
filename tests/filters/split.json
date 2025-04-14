@@ -3,57 +3,100 @@
     {
       "name": "split string",
       "template": "{{ \"Hi, how are you today?\" | split: \" \" | join: \"#\" }}",
-      "result": "Hi,#how#are#you#today?"
+      "result": "Hi,#how#are#you#today?",
+      "tags": [
+        "join filter",
+        "split filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 56 | split: ' ' | first }}",
-      "result": "56"
+      "result": "56",
+      "tags": [
+        "first filter",
+        "split filter"
+      ]
     },
     {
       "name": "argument not a string",
       "template": "{{ \"hello th1ere\" | split: 1 | join: \"#\" }}",
-      "result": "hello th#ere"
+      "result": "hello th#ere",
+      "tags": [
+        "join filter",
+        "split filter"
+      ]
     },
     {
       "name": "missing argument",
       "template": "{{ \"hello there\" | split }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "split filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello there\" | split: \" \", \",\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "split filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | split: \" \" }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "split filter"
+      ]
     },
     {
       "name": "undefined argument",
       "template": "{{ \"Hello there\" | split: nosuchthing | join: \"#\" }}",
-      "result": "H#e#l#l#o# #t#h#e#r#e"
+      "result": "H#e#l#l#o# #t#h#e#r#e",
+      "tags": [
+        "join filter",
+        "split filter"
+      ]
     },
     {
       "name": "empty string argument",
       "template": "{% assign a = \"abc\" | split: \"\" %}{% for i in a %}#{{ forloop.index0 }}{{ i }}{% endfor %}",
-      "result": "#0a#1b#2c"
+      "result": "#0a#1b#2c",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "split filter"
+      ]
     },
     {
       "name": "argument is a single space",
       "template": "{% assign a = \"a b\nc\" | split: \" \" %}{% for i in a %}#{{ forloop.index0 }}{{ i }}{% endfor %}",
-      "result": "#0a#1b#2c"
+      "result": "#0a#1b#2c",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "split filter"
+      ]
     },
     {
       "name": "argument is nil",
       "template": "{{ \"Hello there\" | split: nil | join: \"#\" }}",
-      "result": "H#e#l#l#o# #t#h#e#r#e"
+      "result": "H#e#l#l#o# #t#h#e#r#e",
+      "tags": [
+        "join filter",
+        "split filter"
+      ]
     },
     {
       "name": "argument is false",
       "template": "{{ \"Hello there\" | split: false | join: \"#\" }}",
-      "result": "Hello there"
+      "result": "Hello there",
+      "tags": [
+        "join filter",
+        "split filter"
+      ]
     },
     {
       "name": "argument is a newline",
@@ -61,32 +104,62 @@
       "data": {
         "x": "\n"
       },
-      "result": "#0a b#1c"
+      "result": "#0a b#1c",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "split filter"
+      ]
     },
     {
       "name": "argument does not appear in string",
       "template": "{% assign a = \"abc\" | split: \",\" %}{% for i in a %}#{{ forloop.index0 }}{{ i }}{% endfor %}",
-      "result": "#0abc"
+      "result": "#0abc",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "split filter"
+      ]
     },
     {
       "name": "empty string and empty argument",
       "template": "{% assign a = \"\" | split: \"\" %}{% for i in a %}{{ forloop.index0 }}{{ i }}{% endfor %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "split filter"
+      ]
     },
     {
       "name": "empty string and single char argument",
       "template": "{% assign a = \"\" | split: \",\" %}{% for i in a %}{{ forloop.index0 }}{{ i }}{% endfor %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "split filter"
+      ]
     },
     {
       "name": "left matches argument",
       "template": "{% assign a = \",\" | split: \",\" %}{% for i in a %}{{ forloop.index0 }}{{ i }}{% endfor %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "split filter"
+      ]
     },
     {
       "name": "left matches string repr of argument",
       "template": "{% assign a = \"1\" | split: 1 %}{% for i in a %}{{ forloop.index0 }}{{ i }}{% endfor %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "split filter"
+      ]
     }
   ]
 }

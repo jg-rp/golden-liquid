@@ -6,7 +6,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "'when' expression using an identifier",
@@ -15,7 +18,10 @@
         "title": "Hello",
         "other": "Hello"
       },
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "tags inside when block",
@@ -24,7 +30,11 @@
         "title": "Hello",
         "other": "Hello"
       },
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "case tag",
+        "if tag"
+      ]
     },
     {
       "name": "'when' expression using an out of scope identifier",
@@ -32,12 +42,18 @@
       "data": {
         "title": "Hello"
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "name not in scope",
       "template": "{% case nosuchthing %}{% when 'foo' %}foo{% when 'bar' %}bar{% endcase %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "no match and no default",
@@ -45,7 +61,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "with default",
@@ -53,7 +72,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "no whens",
@@ -61,7 +83,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "no whens or default",
@@ -69,7 +94,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "whitespace",
@@ -77,7 +105,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "comma separated when expression",
@@ -85,7 +116,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "evaluate multiple matching blocks",
@@ -94,7 +128,10 @@
         "title": "Hello",
         "a": "Hello"
       },
-      "result": "foobarbar"
+      "result": "foobarbar",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "or separated when expression",
@@ -102,7 +139,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "mix or and comma separated when expression",
@@ -110,7 +150,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": "barbar"
+      "result": "barbar",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "unexpected when token",
@@ -118,7 +161,10 @@
       "data": {
         "title": "Hello"
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "comma string literal",
@@ -126,7 +172,10 @@
       "data": {
         "foo": ","
       },
-      "result": "comma"
+      "result": "comma",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "empty when tag",
@@ -134,7 +183,10 @@
       "data": {
         "foo": "bar"
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "switch on array",
@@ -151,32 +203,50 @@
           "c"
         ]
       },
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "multiple else blocks",
       "template": "{% case 'x' %}{% when 'y' %}foo{% else %}bar{% else %}baz{% endcase %}",
-      "result": "barbaz"
+      "result": "barbaz",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "falsy when before and truthy when after else",
       "template": "{% case 'x' %}{% when 'y' %}foo{% else %}bar{% when 'x' %}baz{% endcase %}",
-      "result": "barbaz"
+      "result": "barbaz",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "falsy when before and truthy when after multiple else blocks",
       "template": "{% case 'x' %}{% when 'y' %}foo{% else %}bar{% else %}baz{% when 'x' %}qux{% endcase %}",
-      "result": "barbazqux"
+      "result": "barbazqux",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "truthy when before and after else",
       "template": "{% case 'x' %}{% when 'x' %}foo{% else %}bar{% when 'x' %}baz{% endcase %}",
-      "result": "foobaz"
+      "result": "foobaz",
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "truthy and empty when block before else",
       "template": "{% case 'x' %}{% when 'x' %}{% else %}bar{% endcase %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "case tag"
+      ]
     }
   ]
 }

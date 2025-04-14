@@ -8,7 +8,10 @@
           "first_name": "Holly"
         }
       },
-      "result": "\nWelcome back,  Holly!"
+      "result": "\nWelcome back,  Holly!",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "white space control with carriage return and spaces",
@@ -18,7 +21,10 @@
           "first_name": "Holly"
         }
       },
-      "result": "\rWelcome back,  Holly!"
+      "result": "\rWelcome back,  Holly!",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "white space control with  carriage return, newline and spaces",
@@ -28,7 +34,10 @@
           "first_name": "Holly"
         }
       },
-      "result": "\r\nWelcome back,  Holly!"
+      "result": "\r\nWelcome back,  Holly!",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "white space control with newlines, tabs and spaces",
@@ -38,62 +47,110 @@
           "first_name": "Holly"
         }
       },
-      "result": "\n\tWelcome back,  Holly!"
+      "result": "\n\tWelcome back,  Holly!",
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "suppress whitespace only if blocks",
       "template": "!{% if true %}\n\n{% assign bar = 'foo' %}\n{% if true %}\n\n\n    {% assign foo = 'bar' %}\n\n{% endif %}\n\n\n{% endif %}!",
-      "result": "!!"
+      "result": "!!",
+      "tags": [
+        "assign tag",
+        "if tag"
+      ]
     },
     {
       "name": "suppress whitespace only unless blocks",
       "template": "!{% unless false %}\n\n{% assign bar = 'foo' %}\n{% unless false %}\n\n\n    {% assign foo = 'bar' %}\n\n{% endunless %}\n\n\n{% endunless %}!",
-      "result": "!!"
+      "result": "!!",
+      "tags": [
+        "assign tag",
+        "unless tag"
+      ]
     },
     {
       "name": "suppress whitespace only case blocks",
       "template": "!{% assign x = 1 %}{% case x %}\n\n  {% when 1 %}\n    {% assign foo = 'bar' %}\n\n\n{% endcase %}!",
-      "result": "!!"
+      "result": "!!",
+      "tags": [
+        "assign tag",
+        "case tag"
+      ]
     },
     {
       "name": "don't suppress whitespace only blocks containing output",
       "template": "!{% if true %}\n\n{% assign bar = 'foo' %}\n    {{ '' }}\n\n    {% assign foo = 'bar' %}\n\n\n\n{% endif %}!",
-      "result": "!\n\n\n    \n\n    \n\n\n\n!"
+      "result": "!\n\n\n    \n\n    \n\n\n\n!",
+      "tags": [
+        "assign tag",
+        "if tag"
+      ]
     },
     {
       "name": "don't suppress whitespace only blocks containing echo",
       "template": "!{% if true %}\n\n{% assign bar = 'foo' %}\n    {% echo '' %}\n\n    {% assign foo = 'bar' %}\n\n\n\n{% endif %}!",
-      "result": "!\n\n\n    \n\n    \n\n\n\n!"
+      "result": "!\n\n\n    \n\n    \n\n\n\n!",
+      "tags": [
+        "assign tag",
+        "echo tag",
+        "if tag"
+      ]
     },
     {
       "name": "don't suppress whitespace only blocks containing output in nested block",
       "template": "!{% if 1 %}\n\n{% assign bar = 'foo' %}\n{% if 2 %}\n    {{ '' }}\n\n    {% assign foo = 'bar' %}\n\n{% endif %}\n\n\n{% endif %}!",
-      "result": "!\n\n\n\n    \n\n    \n\n\n\n\n!"
+      "result": "!\n\n\n\n    \n\n    \n\n\n\n\n!",
+      "tags": [
+        "assign tag",
+        "if tag"
+      ]
     },
     {
       "name": "don't suppress whitespace only unless blocks containing output in nested blocks",
       "template": "!{% unless false %}\n\n{% assign bar = 'foo' %}\n{% unless false %}\n    {{ '' }}\n\n    {% assign foo = 'bar' %}\n\n{% endunless %}\n\n\n{% endunless %}!",
-      "result": "!\n\n\n\n    \n\n    \n\n\n\n\n!"
+      "result": "!\n\n\n\n    \n\n    \n\n\n\n\n!",
+      "tags": [
+        "assign tag",
+        "unless tag"
+      ]
     },
     {
       "name": "don't suppress whitespace only blocks containing output in unreachable blocks",
       "template": "!{% if 1 %}\n\n{% assign bar = 'foo' %}\n{% if true %}\n\n    {% assign foo = 'bar' %}\n\n{% else %}\n    {{ '' }}\n{% endif %}\n\n\n{% endif %}!",
-      "result": "!\n\n\n\n\n    \n\n\n\n\n!"
+      "result": "!\n\n\n\n\n    \n\n\n\n\n!",
+      "tags": [
+        "assign tag",
+        "if tag"
+      ]
     },
     {
       "name": "suppress whitespace surrounding an empty capture block",
       "template": "!{% if true %}\n\n{% capture foo %}{% endcapture %}\n\n{% endif %}!",
-      "result": "!!"
+      "result": "!!",
+      "tags": [
+        "capture tag",
+        "if tag"
+      ]
     },
     {
       "name": "suppress whitespace surrounding a capture block",
       "template": "!{% if true %}\n\n{% capture foo %}\n{{ '' }}\n{% endcapture %}\n\n{% endif %}!",
-      "result": "!!"
+      "result": "!!",
+      "tags": [
+        "capture tag",
+        "if tag"
+      ]
     },
     {
       "name": "don't suppress whitespace only case blocks containing output",
       "template": "!{% assign x = 1 %}{% case x %}\n\n  {% when 1 %}\n    {% assign foo = 'bar' %}\n\n  {% when 2 %}\n    {{ '' }}\n\n{% endcase %}!",
-      "result": "!\n    \n\n  !"
+      "result": "!\n    \n\n  !",
+      "tags": [
+        "assign tag",
+        "case tag"
+      ]
     },
     {
       "name": "white space control with raw tags",

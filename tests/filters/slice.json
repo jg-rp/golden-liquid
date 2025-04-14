@@ -3,72 +3,114 @@
     {
       "name": "zero",
       "template": "{{ \"hello\" | slice: 0 }}",
-      "result": "h"
+      "result": "h",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "one",
       "template": "{{ \"hello\" | slice: 1 }}",
-      "result": "e"
+      "result": "e",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "one length three",
       "template": "{{ \"hello\" | slice: 1, 3 }}",
-      "result": "ell"
+      "result": "ell",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "out of range",
       "template": "{{ \"hello\" | slice: 99 }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | slice: 1 }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "first argument is a string",
       "template": "{{ \"hello\" | slice: \"2\" }}",
-      "result": "l"
+      "result": "l",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "first argument not an integer",
       "template": "{{ \"hello\" | slice: \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "second argument not an integer",
       "template": "{{ \"hello\" | slice: 5, \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "second argument is a string",
       "template": "{{ \"hello\" | slice: 3, \"2\" }}",
-      "result": "lo"
+      "result": "lo",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "missing arguments",
       "template": "{{ \"hello\" | slice }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | slice: 1, 2, 3 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | slice: 1, 3 }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "undefined first argument",
       "template": "{{ \"hello\" | slice: nosuchthing, 3 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "undefined second argument",
       "template": "{{ \"hello\" | slice: 1, nosuchthing }}",
-      "result": "e"
+      "result": "e",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "slice an array of numbers",
@@ -82,37 +124,59 @@
           5
         ]
       },
-      "result": "3#4#5"
+      "result": "3#4#5",
+      "tags": [
+        "join filter",
+        "slice filter"
+      ]
     },
     {
       "name": "first argument is a float",
       "template": "{{ 'Liquid' | slice: 2.2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "second argument is a float",
       "template": "{{ 'Liquid' | slice: 1, 2.2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "negative first argument",
       "template": "{{ 'Liquid' | slice: -2 }}",
-      "result": "i"
+      "result": "i",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "negative first argument and positive length",
       "template": "{{ 'Liquid' | slice: -2, 2 }}",
-      "result": "id"
+      "result": "id",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "negative first argument and negative length",
       "template": "{{ 'Liquid' | slice: -2, -1 }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "negative first argument and length out of range",
       "template": "{{ 'Liquid' | slice: -2, 99 }}",
-      "result": "id"
+      "result": "id",
+      "tags": [
+        "slice filter"
+      ]
     }
   ]
 }

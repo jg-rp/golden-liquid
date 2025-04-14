@@ -7,6 +7,7 @@
         "bar": "goodbye"
       },
       "tags": [
+        "assign tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -18,6 +19,7 @@
         "BAR": "goodbye"
       },
       "tags": [
+        "assign tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -29,6 +31,7 @@
         "bar2": "goodbye"
       },
       "tags": [
+        "assign tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -40,6 +43,7 @@
         "456": "goodbye"
       },
       "tags": [
+        "assign tag",
         "strict"
       ],
       "result": "123 456"
@@ -51,6 +55,7 @@
         "bar-b": "goodbye"
       },
       "tags": [
+        "assign tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -62,7 +67,8 @@
         "-bar": "goodbye"
       },
       "tags": [
-        "strict"
+        "strict",
+        "assign tag"
       ],
       "invalid": true
     },
@@ -73,6 +79,7 @@
         "bar_b": "goodbye"
       },
       "tags": [
+        "assign tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -84,6 +91,7 @@
         "__": "goodbye"
       },
       "tags": [
+        "assign tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -95,6 +103,7 @@
         "_bar": "goodbye"
       },
       "tags": [
+        "assign tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -103,7 +112,8 @@
       "name": "trailing question mark assign",
       "template": "{% assign foo? = 'hello' %}{{ foo? }}",
       "tags": [
-        "strict"
+        "strict",
+        "assign tag"
       ],
       "invalid": true
     },
@@ -129,6 +139,7 @@
         ]
       },
       "tags": [
+        "for tag",
         "strict"
       ],
       "result": "123"
@@ -144,7 +155,8 @@
         ]
       },
       "tags": [
-        "strict"
+        "strict",
+        "for tag"
       ],
       "invalid": true
     },
@@ -159,6 +171,7 @@
         ]
       },
       "tags": [
+        "for tag",
         "strict"
       ],
       "result": "123"
@@ -174,6 +187,7 @@
         ]
       },
       "tags": [
+        "for tag",
         "strict"
       ],
       "result": "123"
@@ -189,6 +203,7 @@
         ]
       },
       "tags": [
+        "for tag",
         "strict"
       ],
       "result": "123"
@@ -197,6 +212,7 @@
       "name": "increment with a hyphen",
       "template": "{% increment f-oo %}{% increment f-oo %}",
       "tags": [
+        "increment tag",
         "strict"
       ],
       "result": "01"
@@ -205,6 +221,7 @@
       "name": "decrement with a hyphen",
       "template": "{% decrement f-oo %}{% decrement f-oo %}",
       "tags": [
+        "decrement tag",
         "strict"
       ],
       "result": "-1-2"
@@ -213,6 +230,7 @@
       "name": "capture ascii lowercase",
       "template": "{% capture foo %}hello{% endcapture %}{{ foo }}",
       "tags": [
+        "capture tag",
         "strict"
       ],
       "result": "hello"
@@ -221,6 +239,7 @@
       "name": "capture ascii uppercase",
       "template": "{% capture FOO %}hello{% endcapture %}{{ FOO }}",
       "tags": [
+        "capture tag",
         "strict"
       ],
       "result": "hello"
@@ -229,6 +248,7 @@
       "name": "capture digits",
       "template": "{% capture foo1 %}hello{% endcapture %}{{ foo1 }}",
       "tags": [
+        "capture tag",
         "strict"
       ],
       "result": "hello"
@@ -237,6 +257,7 @@
       "name": "capture only digits",
       "template": "{% capture 123 %}hello{% endcapture %}{{ 123 }}",
       "tags": [
+        "capture tag",
         "strict"
       ],
       "result": "123"
@@ -248,6 +269,7 @@
         "bar-b": "goodbye"
       },
       "tags": [
+        "capture tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -259,7 +281,8 @@
         "-bar": "goodbye"
       },
       "tags": [
-        "strict"
+        "strict",
+        "capture tag"
       ],
       "invalid": true
     },
@@ -270,6 +293,7 @@
         "bar_b": "goodbye"
       },
       "tags": [
+        "capture tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -281,6 +305,7 @@
         "__": "goodbye"
       },
       "tags": [
+        "capture tag",
         "strict"
       ],
       "result": "hello goodbye"
@@ -292,6 +317,7 @@
         "_bar": "goodbye"
       },
       "tags": [
+        "capture tag",
         "strict"
       ],
       "result": "hello goodbye"

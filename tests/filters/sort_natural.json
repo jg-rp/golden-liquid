@@ -12,7 +12,11 @@
           "A"
         ]
       },
-      "result": "a#A#b#B#C"
+      "result": "a#A#b#B#C",
+      "tags": [
+        "join filter",
+        "sort_natural filter"
+      ]
     },
     {
       "name": "array of strings with a nul",
@@ -27,7 +31,13 @@
           "A"
         ]
       },
-      "result": "a#A#b#B#C#"
+      "result": "a#A#b#B#C#",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "sort_natural filter",
+        "unless tag"
+      ]
     },
     {
       "name": "array of objects with a key",
@@ -45,7 +55,12 @@
           }
         ]
       },
-      "result": "(title,bar)(title,Baz)(title,foo)"
+      "result": "(title,bar)(title,Baz)(title,foo)",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "sort_natural filter"
+      ]
     },
     {
       "name": "array of objects with a key gets stringified",
@@ -63,7 +78,12 @@
           }
         ]
       },
-      "result": "(title,1111)(title,87)(title,9)"
+      "result": "(title,1111)(title,87)(title,9)",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "sort_natural filter"
+      ]
     },
     {
       "name": "array of objects with a missing key",
@@ -81,7 +101,12 @@
           }
         ]
       },
-      "result": "(title,bar)(title,foo)(heading,Baz)"
+      "result": "(title,bar)(title,foo)(heading,Baz)",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "sort_natural filter"
+      ]
     },
     {
       "name": "argument is undefined",
@@ -99,7 +124,12 @@
           }
         ]
       },
-      "result": "(title,bar)(title,Baz)(title,foo)"
+      "result": "(title,bar)(title,Baz)(title,foo)",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "sort_natural filter"
+      ]
     },
     {
       "name": "empty array",
@@ -107,7 +137,13 @@
       "data": {
         "a": []
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "sort_natural filter",
+        "unless tag"
+      ]
     },
     {
       "name": "left value is not an array",
@@ -115,12 +151,18 @@
       "data": {
         "a": 123
       },
-      "result": "123"
+      "result": "123",
+      "tags": [
+        "sort_natural filter"
+      ]
     },
     {
       "name": "left value is undefined",
       "template": "{{ nosuchthing | sort_natural }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "sort_natural filter"
+      ]
     },
     {
       "name": "incompatible types",
@@ -132,7 +174,10 @@
           "4"
         ]
       },
-      "result": "14{}"
+      "result": "14{}",
+      "tags": [
+        "sort_natural filter"
+      ]
     }
   ]
 }

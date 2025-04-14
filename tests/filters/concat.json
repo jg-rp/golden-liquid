@@ -10,7 +10,11 @@
           7
         ]
       },
-      "result": "1#2#3#5#6#7"
+      "result": "1#2#3#5#6#7",
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "two arrays of strings",
@@ -25,7 +29,11 @@
           "d"
         ]
       },
-      "result": "a#b#c#d"
+      "result": "a#b#c#d",
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "missing argument is an error",
@@ -36,7 +44,11 @@
           "b"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "non array-like argument is an error",
@@ -48,7 +60,11 @@
         ],
         "b": 5
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "left value is not array-like",
@@ -60,7 +76,11 @@
           "d"
         ]
       },
-      "result": "ab#c#d"
+      "result": "ab#c#d",
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "left value contains non string",
@@ -76,7 +96,11 @@
           "d"
         ]
       },
-      "result": "a#b#5#c#d"
+      "result": "a#b#5#c#d",
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "undefined left value",
@@ -87,7 +111,11 @@
           "d"
         ]
       },
-      "result": "c#d"
+      "result": "c#d",
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "undefined argument is an error",
@@ -98,7 +126,11 @@
           "b"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "nested left value gets flattened",
@@ -124,7 +156,11 @@
           "d"
         ]
       },
-      "result": "a#x#b#y#z#c#d"
+      "result": "a#x#b#y#z#c#d",
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     }
   ]
 }

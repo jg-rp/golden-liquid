@@ -3,22 +3,34 @@
     {
       "name": "make lower case",
       "template": "{{ \"hello\" | upcase }}",
-      "result": "HELLO"
+      "result": "HELLO",
+      "tags": [
+        "upcase filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | upcase }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "upcase filter"
+      ]
     },
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | upcase: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "upcase filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | upcase }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "upcase filter"
+      ]
     }
   ]
 }

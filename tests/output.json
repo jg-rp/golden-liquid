@@ -38,7 +38,10 @@
     {
       "name": "render a variable from the local namespace",
       "template": "{% assign name = 'Brian' %}{{ name }}",
-      "result": "Brian"
+      "result": "Brian",
+      "tags": [
+        "assign tag"
+      ]
     },
     {
       "name": "render an undefined variable",
@@ -60,7 +63,10 @@
       "template": "{{ product.tags[1] }}",
       "data": {
         "product": {
-          "tags": ["sports", "garden"]
+          "tags": [
+            "sports",
+            "garden"
+          ]
         }
       },
       "result": "garden"
@@ -70,7 +76,10 @@
       "template": "{{ product.tags[-2] }}",
       "data": {
         "product": {
-          "tags": ["sports", "garden"]
+          "tags": [
+            "sports",
+            "garden"
+          ]
         }
       },
       "result": "sports"
@@ -80,10 +89,16 @@
       "template": "{% assign i = 1 %}{{ product.tags[i] }}",
       "data": {
         "product": {
-          "tags": ["sports", "garden"]
+          "tags": [
+            "sports",
+            "garden"
+          ]
         }
       },
-      "result": "garden"
+      "result": "garden",
+      "tags": [
+        "assign tag"
+      ]
     },
     {
       "name": "render a global variable with a filter",
@@ -93,22 +108,35 @@
           "title": "foo"
         }
       },
-      "result": "FOO"
+      "result": "FOO",
+      "tags": [
+        "upcase filter"
+      ]
     },
     {
       "name": "dump an array from the global context",
       "template": "{{ product.tags | join: '#' }}",
       "data": {
         "product": {
-          "tags": ["sports", "garden"]
+          "tags": [
+            "sports",
+            "garden"
+          ]
         }
       },
-      "result": "sports#garden"
+      "result": "sports#garden",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "assign a variable the value of an existing variable",
       "template": "{% capture some %}hello{% endcapture %}{% assign other = some %}{% assign some = 'foo' %}{{ some }}-{{ other }}",
-      "result": "foo-hello"
+      "result": "foo-hello",
+      "tags": [
+        "assign tag",
+        "capture tag"
+      ]
     },
     {
       "name": "traverse variables with bracketed identifiers",
@@ -133,22 +161,34 @@
     {
       "name": "render a default given a literal false",
       "template": "{{ false | default: 'bar' }}",
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "render a default given a literal false with 'allow false' equal to true",
       "template": "{{ false | default: 'bar', allow_false: true }}",
-      "result": "false"
+      "result": "false",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "render a default given a literal false with 'allow false' equal to false",
       "template": "{{ false | default: 'bar', allow_false: false }}",
-      "result": "bar"
+      "result": "bar",
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "unexpected left value for the `join` filter passes through",
       "template": "{{ 12 | join: '#' }}",
-      "result": "12"
+      "result": "12",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "render an output start sequence as a string literal",
@@ -163,12 +203,18 @@
     {
       "name": "render a range object",
       "template": "{{ (1..5) | join: '#' }}",
-      "result": "1#2#3#4#5"
+      "result": "1#2#3#4#5",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "render a range object that uses a float",
       "template": "{{ (1.4..5) | join: '#' }}",
-      "result": "1#2#3#4#5"
+      "result": "1#2#3#4#5",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "render a range object that uses an identifier",
@@ -176,7 +222,10 @@
       "data": {
         "foo": 2
       },
-      "result": "2#3#4#5"
+      "result": "2#3#4#5",
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "reverse a range",
@@ -184,7 +233,11 @@
       "data": {
         "foo": 2
       },
-      "result": "5#4#3#2"
+      "result": "5#4#3#2",
+      "tags": [
+        "join filter",
+        "reverse filter"
+      ]
     },
     {
       "name": "chained bracketed identifier index",
@@ -214,7 +267,9 @@
           }
         ]
       },
-      "tags": ["strict"],
+      "tags": [
+        "strict"
+      ],
       "invalid": true
     },
     {
@@ -230,7 +285,9 @@
           }
         ]
       },
-      "tags": ["strict"],
+      "tags": [
+        "strict"
+      ],
       "invalid": true
     },
     {
@@ -241,7 +298,9 @@
           "title": "shoe"
         }
       },
-      "tags": ["strict"],
+      "tags": [
+        "strict"
+      ],
       "invalid": true
     },
     {
@@ -268,7 +327,9 @@
       "name": "nested bracketed variable resolving to a string",
       "template": "{{ [list[settings.zero]] }}",
       "data": {
-        "list": ["foo"],
+        "list": [
+          "foo"
+        ],
         "settings": {
           "zero": 0
         },
@@ -352,7 +413,9 @@
           "bar": 42
         }
       },
-      "tags": ["strict"],
+      "tags": [
+        "strict"
+      ],
       "invalid": true
     },
     {
@@ -363,14 +426,20 @@
           "bar": 42
         }
       },
-      "tags": ["strict"],
+      "tags": [
+        "strict"
+      ],
       "invalid": true
     },
     {
       "name": "array index out of bounds",
       "template": "{{ a[3] }}",
       "data": {
-        "a": [1, 2, 3]
+        "a": [
+          1,
+          2,
+          3
+        ]
       },
       "result": ""
     },
@@ -378,7 +447,11 @@
       "name": "negative array index out of bounds",
       "template": "{{ a[-4] }}",
       "data": {
-        "a": [1, 2, 3]
+        "a": [
+          1,
+          2,
+          3
+        ]
       },
       "result": ""
     }

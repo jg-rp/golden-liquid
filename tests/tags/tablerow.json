@@ -13,7 +13,10 @@
           ]
         }
       },
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td><td class=\"col3\">tag3</td><td class=\"col4\">tag4</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td><td class=\"col3\">tag3</td><td class=\"col4\">tag4</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "one row with limit",
@@ -28,7 +31,10 @@
           ]
         }
       },
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "one row with offset",
@@ -43,7 +49,10 @@
           ]
         }
       },
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag3</td><td class=\"col2\">tag4</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag3</td><td class=\"col2\">tag4</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "two columns",
@@ -58,62 +67,102 @@
           ]
         }
       },
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td></tr>\n<tr class=\"row2\"><td class=\"col1\">tag3</td><td class=\"col2\">tag4</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td></tr>\n<tr class=\"row2\"><td class=\"col1\">tag3</td><td class=\"col2\">tag4</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "two column range",
       "template": "{% tablerow i in (1..4) cols:2 %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "two column odd range",
       "template": "{% tablerow i in (1..5) cols:2 %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n<tr class=\"row3\"><td class=\"col1\">5 true</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n<tr class=\"row3\"><td class=\"col1\">5 true</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "two column odd range row numbers",
       "template": "{% tablerow i in (1..5) cols:2 %}{{ i }} {{ tablerowloop.row }}{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 1</td><td class=\"col2\">2 1</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 2</td><td class=\"col2\">4 2</td></tr>\n<tr class=\"row3\"><td class=\"col1\">5 3</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 1</td><td class=\"col2\">2 1</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 2</td><td class=\"col2\">4 2</td></tr>\n<tr class=\"row3\"><td class=\"col1\">5 3</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "no cols param",
       "template": "{% tablerow i in (1..2) %}\ncol: {{ tablerowloop.col }}\ncol0: {{ tablerowloop.col0 }}\ncol_first: {{ tablerowloop.col_first }}\ncol_last: {{ tablerowloop.col_last }}\nfirst: {{ tablerowloop.first }}\nindex: {{ tablerowloop.index }}\nindex0: {{ tablerowloop.index0 }}\nlast: {{ tablerowloop.last }}\nlength: {{ tablerowloop.length }}\nrindex: {{ tablerowloop.rindex }}\nrindex0: {{ tablerowloop.rindex0 }}\nrow: {{ tablerowloop.row }}\n{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">\ncol: 1\ncol0: 0\ncol_first: true\ncol_last: false\nfirst: true\nindex: 1\nindex0: 0\nlast: false\nlength: 2\nrindex: 2\nrindex0: 1\nrow: 1\n</td><td class=\"col2\">\ncol: 2\ncol0: 1\ncol_first: false\ncol_last: true\nfirst: false\nindex: 2\nindex0: 1\nlast: true\nlength: 2\nrindex: 1\nrindex0: 0\nrow: 1\n</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">\ncol: 1\ncol0: 0\ncol_first: true\ncol_last: false\nfirst: true\nindex: 1\nindex0: 0\nlast: false\nlength: 2\nrindex: 2\nrindex0: 1\nrow: 1\n</td><td class=\"col2\">\ncol: 2\ncol0: 1\ncol_first: false\ncol_last: true\nfirst: false\nindex: 2\nindex0: 1\nlast: true\nlength: 2\nrindex: 1\nrindex0: 0\nrow: 1\n</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "cols is a string",
       "template": "{% tablerow i in (1..4) cols:'2' %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "cols is a float",
       "template": "{% tablerow i in (1..4) cols:2.6 %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "limit is a string",
       "template": "{% tablerow i in (1..4) limit:'2' %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "offset is a string",
       "template": "{% tablerow i in (1..4) offset:'2' %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">3 true</td><td class=\"col2\">4 false</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     },
     {
       "name": "break from a tablerow loop",
       "template": "{% tablerow n in (1..3) cols:2 %}{{n}}{% break %}{{n}}{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td></tr>\n",
+      "tags": [
+        "break tag",
+        "tablerow tag"
+      ]
     },
     {
       "name": "continue from a tablerow loop",
       "template": "{% tablerow n in (1..3) cols:2 %}{{n}}{% continue %}{{n}}{% endtablerow %}",
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td><td class=\"col2\">2</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3</td></tr>\n"
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td><td class=\"col2\">2</td></tr>\n<tr class=\"row2\"><td class=\"col1\">3</td></tr>\n",
+      "tags": [
+        "continue tag",
+        "tablerow tag"
+      ]
     },
     {
       "name": "break from a tablerow loop inside a for loop",
       "template": "{% for i in (1..2) -%}\\n{% for j in (1..2) -%}\\n{% tablerow k in (1..3) %}{% break %}{% endtablerow -%}\\nloop j={{ j }}\\n{% endfor -%}\\nloop i={{ i }}\\n{% endfor -%}\\nafter loop\\n",
-      "result": "\\n\\n<tr class=\"row1\">\n<td class=\"col1\"></td></tr>\n\\nloop j=1\\n\\n<tr class=\"row1\">\n<td class=\"col1\"></td></tr>\n\\nloop j=2\\n\\nloop i=1\\n\\n\\n<tr class=\"row1\">\n<td class=\"col1\"></td></tr>\n\\nloop j=1\\n\\n<tr class=\"row1\">\n<td class=\"col1\"></td></tr>\n\\nloop j=2\\n\\nloop i=2\\n\\nafter loop\\n"
+      "result": "\\n\\n<tr class=\"row1\">\n<td class=\"col1\"></td></tr>\n\\nloop j=1\\n\\n<tr class=\"row1\">\n<td class=\"col1\"></td></tr>\n\\nloop j=2\\n\\nloop i=1\\n\\n\\n<tr class=\"row1\">\n<td class=\"col1\"></td></tr>\n\\nloop j=1\\n\\n<tr class=\"row1\">\n<td class=\"col1\"></td></tr>\n\\nloop j=2\\n\\nloop i=2\\n\\nafter loop\\n",
+      "tags": [
+        "break tag",
+        "for tag",
+        "tablerow tag"
+      ]
     }
   ]
 }

@@ -3,17 +3,26 @@
     {
       "name": "render a string literal",
       "template": "{% echo 'hello' %}",
-      "result": "hello"
+      "result": "hello",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "render an integer literal",
       "template": "{% echo 123 %}",
-      "result": "123"
+      "result": "123",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "render a float literal",
       "template": "{% echo 1.23 %}",
-      "result": "1.23"
+      "result": "1.23",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "render a variable from the global namespace",
@@ -23,17 +32,27 @@
           "title": "foo"
         }
       },
-      "result": "foo"
+      "result": "foo",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "render a variable from the local namespace",
       "template": "{% assign name = 'Brian' %}{% echo name %}",
-      "result": "Brian"
+      "result": "Brian",
+      "tags": [
+        "assign tag",
+        "echo tag"
+      ]
     },
     {
       "name": "render an undefined variable",
       "template": "{% echo age %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "render an undefined property",
@@ -43,7 +62,10 @@
           "title": "foo"
         }
       },
-      "result": ""
+      "result": "",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "access an array item by index",
@@ -56,7 +78,10 @@
           ]
         }
       },
-      "result": "garden"
+      "result": "garden",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "access an array item by negative index",
@@ -69,7 +94,10 @@
           ]
         }
       },
-      "result": "sports"
+      "result": "sports",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "access array item by index stored in a local variable",
@@ -82,7 +110,11 @@
           ]
         }
       },
-      "result": "garden"
+      "result": "garden",
+      "tags": [
+        "assign tag",
+        "echo tag"
+      ]
     },
     {
       "name": "render a global identifier with a filter",
@@ -92,7 +124,11 @@
           "title": "foo"
         }
       },
-      "result": "FOO"
+      "result": "FOO",
+      "tags": [
+        "echo tag",
+        "upcase filter"
+      ]
     },
     {
       "name": "dump an array from the global context",
@@ -105,12 +141,20 @@
           ]
         }
       },
-      "result": "sportsgarden"
+      "result": "sportsgarden",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "assign a variable the value of an existing variable",
       "template": "{% capture some %}hello{% endcapture %}{% assign other = some %}{% assign some = 'foo' %}{% echo some %}-{% echo other %}",
-      "result": "foo-hello"
+      "result": "foo-hello",
+      "tags": [
+        "assign tag",
+        "capture tag",
+        "echo tag"
+      ]
     },
     {
       "name": "traverse variables with bracketed identifiers",
@@ -130,17 +174,26 @@
           "locale": "bar"
         }
       },
-      "result": "it works!"
+      "result": "it works!",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "access an undefined variable by index",
       "template": "{% echo nosuchthing[0] %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "echo tag"
+      ]
     },
     {
       "name": "nothing to echo",
       "template": "{% echo %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "echo tag"
+      ]
     }
   ]
 }

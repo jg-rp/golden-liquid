@@ -3,47 +3,74 @@
     {
       "name": "replace substrings",
       "template": "{{ \"Take my protein pills and put my helmet on\" | replace_last: \"my\", \"your\" }}",
-      "result": "Take my protein pills and put your helmet on"
+      "result": "Take my protein pills and put your helmet on",
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | replace_last: 'rain', 'foo' }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "argument not a string",
       "template": "{{ \"hello5\" | replace_last: 5, \"your\" }}",
-      "result": "helloyour"
+      "result": "helloyour",
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "missing argument",
       "template": "{{ \"hello\" | replace_last: \"ll\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "missing arguments",
       "template": "{{ \"hello\" | replace_last }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | replace_last: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | replace_last: \"my\", \"your\" }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "undefined first argument",
       "template": "{{ \"Take my protein\" | replace_last: nosuchthing, \"#\" }}",
-      "result": "Take my protein#"
+      "result": "Take my protein#",
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "undefined second argument",
       "template": "{{ \"Take my protein pills and put my helmet on\" | replace_last: \"my\", nosuchthing }}",
-      "result": "Take my protein pills and put  helmet on"
+      "result": "Take my protein pills and put  helmet on",
+      "tags": [
+        "replace_last filter"
+      ]
     }
   ]
 }

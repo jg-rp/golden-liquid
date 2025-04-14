@@ -3,47 +3,74 @@
     {
       "name": "positive integer",
       "template": "{{ 5 | ceil }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "negative integer",
       "template": "{{ -5 | ceil }}",
-      "result": "-5"
+      "result": "-5",
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "positive float",
       "template": "{{ 5.4 | ceil }}",
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "negative float",
       "template": "{{ -5.4 | ceil }}",
-      "result": "-5"
+      "result": "-5",
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "zero",
       "template": "{{ 0 | ceil }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "positive string float",
       "template": "{{ \"5.1\" | ceil }}",
-      "result": "6"
+      "result": "6",
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "negative string float",
       "template": "{{ \"-5.1\" | ceil }}",
-      "result": "-5"
+      "result": "-5",
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "unexpected argument",
       "template": "{{ -3.1 | ceil: 1 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "string not a number",
       "template": "{{ \"hello\" | ceil }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "not a string, int or float",
@@ -51,12 +78,18 @@
       "data": {
         "a": {}
       },
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | ceil }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "ceil filter"
+      ]
     }
   ]
 }

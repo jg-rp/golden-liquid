@@ -3,57 +3,90 @@
     {
       "name": "positive integer",
       "template": "{{ 5 | abs }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "negative integer",
       "template": "{{ -5 | abs }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "positive float",
       "template": "{{ 5.4 | abs }}",
-      "result": "5.4"
+      "result": "5.4",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "negative float",
       "template": "{{ -5.4 | abs }}",
-      "result": "5.4"
+      "result": "5.4",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "zero",
       "template": "{{ 0 | abs }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "positive string integer",
       "template": "{{ '5' | abs }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "negative string integer",
       "template": "{{ '-5' | abs }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "positive string float",
       "template": "{{ '5.1' | abs }}",
-      "result": "5.1"
+      "result": "5.1",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "negative string float",
       "template": "{{ '-5.1' | abs }}",
-      "result": "5.1"
+      "result": "5.1",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "unexpected argument",
       "template": "{{ -3 | abs: 1 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "string not a number",
       "template": "{{ 'hello' | abs }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "not a string, int or float",
@@ -61,12 +94,18 @@
       "data": {
         "a": {}
       },
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | abs }}",
-      "result": "0"
+      "result": "0",
+      "tags": [
+        "abs filter"
+      ]
     }
   ]
 }

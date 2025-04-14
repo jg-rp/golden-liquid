@@ -3,22 +3,34 @@
     {
       "name": "make lower case",
       "template": "{{ \"HELLO\" | downcase }}",
-      "result": "hello"
+      "result": "hello",
+      "tags": [
+        "downcase filter"
+      ]
     },
     {
       "name": "not a string",
       "template": "{{ 5 | downcase }}",
-      "result": "5"
+      "result": "5",
+      "tags": [
+        "downcase filter"
+      ]
     },
     {
       "name": "unexpected argument",
       "template": "{{ \"HELLO\" | downcase: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "downcase filter"
+      ]
     },
     {
       "name": "undefined left value",
       "template": "{{ nosuchthing | downcase }}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "downcase filter"
+      ]
     }
   ]
 }
