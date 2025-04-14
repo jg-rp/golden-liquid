@@ -103,6 +103,7 @@
     },
     "tags": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "string",
         "enum": [

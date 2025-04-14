@@ -42,7 +42,7 @@ def build(tags, require_all_tags, exclude_tags)
     "tests" => test_cases
   }
 
-  validate_schema(test_suite)
+  validate_schema(test_suite, "golden liquid")
   test_suite
 end
 
@@ -59,19 +59,23 @@ def load_tests(path)
   # warn("Processing #{rel_path} with prefix #{prefix.inspect}")
 
   data = JSON.parse(path.read)
-  validate_schema(data)
+  validate_schema(data, rel_path)
   check_for_dupes(data)
 
-  data["tests"].each { |t| t["name"] = "#{prefix}, #{t["name"]}" }
-  data["tests"]
+  data["tests"].each do |t|
+    t["name"] = "#{prefix}, #{t["name"]}"
+    t["tags"] = t["tags"].sort if t["tags"]
+  end
+
+  data["tests"].sort! { |a, b| a["name"] <=> b["name"] }
 end
 
 # Raise an error if _data_ is not valid according to our schema.
-def validate_schema(data)
+def validate_schema(data, name)
   errors = SCHEMER.validate(data).to_a
   return if errors.empty?
 
-  raise errors.first["error"]
+  raise "#{name}: #{errors.first["error"]}"
 end
 
 # Raise an error if _data_ contains duplicate test names.
