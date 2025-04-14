@@ -19,7 +19,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | newline_to_br: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "newline_to_br filter"
+      ]
     },
     {
       "name": "reference implementation test 1",

@@ -43,7 +43,10 @@
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | truncate: 5, \"foo\", \"bar\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "undefined left value",
@@ -56,7 +59,10 @@
     {
       "name": "undefined first argument",
       "template": "{{ \"Ground control to Major Tom.\" | truncate: nosuchthing }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "undefined second argument",

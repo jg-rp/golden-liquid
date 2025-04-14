@@ -88,7 +88,10 @@
     {
       "name": "too many arguments",
       "template": "{{ nosuchthing | uniq: 'foo', 'bar' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "uniq filter"
+      ]
     },
     {
       "name": "array of objects with key property",

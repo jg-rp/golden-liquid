@@ -42,7 +42,14 @@
           "title": "foo"
         }
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "echo tag",
+        "for tag",
+        "if tag",
+        "liquid tag",
+        "upcase filter"
+      ]
     },
     {
       "name": "empty liquid tag",
@@ -147,7 +154,11 @@
     {
       "name": "can't close nested blocks",
       "template": "{%- if true -%}\n42\n{%- liquid endif -%}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "if tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "bare liquid tag in liquid tag",

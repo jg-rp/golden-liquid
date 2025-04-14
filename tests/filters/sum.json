@@ -199,7 +199,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "sum filter"
+      ]
     }
   ]
 }

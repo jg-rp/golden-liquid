@@ -85,7 +85,11 @@
           "a"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter",
+        "sort filter"
+      ]
     },
     {
       "name": "left value is not an array",
@@ -160,7 +164,10 @@
           "4"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "sort filter"
+      ]
     }
   ]
 }

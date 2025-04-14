@@ -22,12 +22,18 @@
     {
       "name": "not a string",
       "template": "{{ 5 | base64_decode }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "base64_decode filter"
+      ]
     },
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | base64_decode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "base64_decode filter"
+      ]
     },
     {
       "name": "undefined left value",

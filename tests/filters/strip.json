@@ -35,7 +35,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | strip: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "strip filter"
+      ]
     },
     {
       "name": "undefined left value",

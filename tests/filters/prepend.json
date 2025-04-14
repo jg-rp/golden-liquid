@@ -27,12 +27,18 @@
     {
       "name": "missing argument",
       "template": "{{ \"hello\" | prepend }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "prepend filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | prepend: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "prepend filter"
+      ]
     },
     {
       "name": "undefined left value",

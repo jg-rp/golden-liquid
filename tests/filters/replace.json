@@ -46,12 +46,18 @@
     {
       "name": "missing arguments",
       "template": "{{ \"hello\" | replace }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | replace: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace filter"
+      ]
     },
     {
       "name": "undefined left value",

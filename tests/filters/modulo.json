@@ -43,12 +43,18 @@
     {
       "name": "arg string not a number",
       "template": "{{ \"10\" | modulo: \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "too many args",
       "template": "{{ 5 | modulo: 1, '5' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "not a string, int or float",
@@ -72,7 +78,10 @@
     {
       "name": "undefined argument",
       "template": "{{ 5 | modulo: nosuchthing }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "modulo filter"
+      ]
     }
   ]
 }

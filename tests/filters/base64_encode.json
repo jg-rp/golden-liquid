@@ -30,7 +30,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | base64_encode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "base64_encode filter"
+      ]
     },
     {
       "name": "undefined left value",

@@ -287,7 +287,10 @@
     {
       "name": "string greater than int",
       "template": "{% if '2' > 1 %}true{% else %}false{% endif %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "string is less than string",
@@ -637,7 +640,8 @@
         "t": "hell"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -649,7 +653,8 @@
         "t": "lo"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -663,7 +668,8 @@
         "x": "foo"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -675,7 +681,8 @@
         "t": "lo"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -683,7 +690,8 @@
       "name": "not is not a valid operator",
       "template": "{% if not false %}TRUE{% else %}FALSE{% endif %}",
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     }

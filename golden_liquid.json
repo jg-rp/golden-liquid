@@ -68,7 +68,8 @@
         "-bar": "goodbye"
       },
       "tags": [
-        "strict"
+        "strict",
+        "assign tag"
       ],
       "invalid": true
     },
@@ -112,7 +113,8 @@
       "name": "identifiers, trailing question mark assign",
       "template": "{% assign foo? = 'hello' %}{{ foo? }}",
       "tags": [
-        "strict"
+        "strict",
+        "assign tag"
       ],
       "invalid": true
     },
@@ -154,7 +156,8 @@
         ]
       },
       "tags": [
-        "strict"
+        "strict",
+        "for tag"
       ],
       "invalid": true
     },
@@ -279,7 +282,8 @@
         "-bar": "goodbye"
       },
       "tags": [
-        "strict"
+        "strict",
+        "capture tag"
       ],
       "invalid": true
     },
@@ -343,7 +347,8 @@
       "template": "{% assign x = 1 + 2 %}{{ x }}",
       "tags": [
         "strict",
-        "absent"
+        "absent",
+        "assign tag"
       ],
       "invalid": true
     },
@@ -352,7 +357,8 @@
       "template": "{% assign x = 1 - 2 %}{{ x }}",
       "tags": [
         "strict",
-        "absent"
+        "absent",
+        "assign tag"
       ],
       "invalid": true
     },
@@ -361,7 +367,8 @@
       "template": "{% assign x = 2 %}{{ x * 3 }}",
       "tags": [
         "strict",
-        "absent"
+        "absent",
+        "assign tag"
       ],
       "invalid": true
     },
@@ -1309,7 +1316,10 @@
     {
       "name": "filters, abs, unexpected argument",
       "template": "{{ -3 | abs: 1 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "filters, abs, string not a number",
@@ -1365,12 +1375,18 @@
     {
       "name": "filters, append, missing argument",
       "template": "{{ \"hello\" | append }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "append filter"
+      ]
     },
     {
       "name": "filters, append, too many arguments",
       "template": "{{ \"hello\" | append: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "append filter"
+      ]
     },
     {
       "name": "filters, append, undefined left value",
@@ -1447,12 +1463,18 @@
     {
       "name": "filters, at least, missing arg",
       "template": "{{ 5 | at_least }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "filters, at least, too many args",
       "template": "{{ 5 | at_least: 1, 2}}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "filters, at least, undefined left value",
@@ -1553,12 +1575,18 @@
     {
       "name": "filters, at most, missing arg",
       "template": "{{ 5 | at_most }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "filters, at most, too many args",
       "template": "{{ 5 | at_most: 1, 2}}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "at_most filter"
+      ]
     },
     {
       "name": "filters, at most, undefined left value",
@@ -1606,12 +1634,18 @@
     {
       "name": "filters, base64 decode, not a string",
       "template": "{{ 5 | base64_decode }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "base64_decode filter"
+      ]
     },
     {
       "name": "filters, base64 decode, unexpected argument",
       "template": "{{ \"hello\" | base64_decode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "base64_decode filter"
+      ]
     },
     {
       "name": "filters, base64 decode, undefined left value",
@@ -1651,7 +1685,10 @@
     {
       "name": "filters, base64 encode, unexpected argument",
       "template": "{{ \"hello\" | base64_encode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "base64_encode filter"
+      ]
     },
     {
       "name": "filters, base64 encode, undefined left value",
@@ -1683,12 +1720,18 @@
     {
       "name": "filters, base64 url safe decode, not a string",
       "template": "{{ 5 | base64_url_safe_decode }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "base64_url_safe_decode filter"
+      ]
     },
     {
       "name": "filters, base64 url safe decode, unexpected argument",
       "template": "{{ \"hello\" | base64_url_safe_decode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "base64_url_safe_decode filter"
+      ]
     },
     {
       "name": "filters, base64 url safe decode, undefined left value",
@@ -1728,7 +1771,10 @@
     {
       "name": "filters, base64 url safe encode, unexpected argument",
       "template": "{{ \"hello\" | base64_url_safe_encode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "base64_url_safe_encode filter"
+      ]
     },
     {
       "name": "filters, base64 url safe encode, undefined left value",
@@ -1757,7 +1803,10 @@
     {
       "name": "filters, capitalize, unexpected argument",
       "template": "{{ \"hello\" | capitalize: 2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "capitalize filter"
+      ]
     },
     {
       "name": "filters, capitalize, undefined left value",
@@ -1826,7 +1875,10 @@
     {
       "name": "filters, ceil, unexpected argument",
       "template": "{{ -3.1 | ceil: 1 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "filters, ceil, string not a number",
@@ -1887,7 +1939,10 @@
     {
       "name": "filters, compact, too many arguments",
       "template": "{{ a | compact: 'foo', 'bar' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "compact filter"
+      ]
     },
     {
       "name": "filters, compact, left value is not an array",
@@ -1979,7 +2034,11 @@
           "b"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "filters, concat, non array-like argument is an error",
@@ -1991,7 +2050,11 @@
         ],
         "b": 5
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "filters, concat, left value is not array-like",
@@ -2053,7 +2116,11 @@
           "b"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "filters, concat, nested left value gets flattened",
@@ -2096,7 +2163,10 @@
     {
       "name": "filters, date, too many arguments",
       "template": "{{ 'March 14, 2016' | date: '%b %d, %y', 'foo' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "date filter"
+      ]
     },
     {
       "name": "filters, date, undefined left value",
@@ -2109,7 +2179,10 @@
     {
       "name": "filters, date, missing argument",
       "template": "{{ 'March 14, 2016' | date }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "date filter"
+      ]
     },
     {
       "name": "filters, date, undefined argument",
@@ -2249,7 +2322,10 @@
     {
       "name": "filters, default, too many arguments",
       "template": "{{ None | default: 'foo', 'bar', 'baz' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "filters, default, missing argument",
@@ -2393,12 +2469,18 @@
     {
       "name": "filters, divided by, arg string not a number",
       "template": "{{ \"10\" | divided_by: \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "divided_by filter"
+      ]
     },
     {
       "name": "filters, divided by, too many args",
       "template": "{{ 5 | divided_by: 1, '5' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "divided_by filter"
+      ]
     },
     {
       "name": "filters, divided by, not a string, int or float",
@@ -2422,12 +2504,18 @@
     {
       "name": "filters, divided by, undefined argument",
       "template": "{{ 10 | divided_by: nosuchthing }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "divided_by filter"
+      ]
     },
     {
       "name": "filters, divided by, divied by zero",
       "template": "{{ 10 | divided_by: 0 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "divided_by filter"
+      ]
     },
     {
       "name": "filters, divided by, zero divided by float",
@@ -2485,7 +2573,10 @@
     {
       "name": "filters, downcase, unexpected argument",
       "template": "{{ \"HELLO\" | downcase: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "downcase filter"
+      ]
     },
     {
       "name": "filters, downcase, undefined left value",
@@ -2514,7 +2605,10 @@
     {
       "name": "filters, escape, unexpected argument",
       "template": "{{ \"HELLO\" | escape: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "escape filter"
+      ]
     },
     {
       "name": "filters, escape, undefined left value",
@@ -2551,7 +2645,10 @@
     {
       "name": "filters, escape once, unexpected argument",
       "template": "{{ \"HELLO\" | escape_once: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "escape_once filter"
+      ]
     },
     {
       "name": "filters, escape once, undefined left value",
@@ -3111,7 +3208,10 @@
     {
       "name": "filters, floor, unexpected argument",
       "template": "{{ -3.1 | floor: 1 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "floor filter"
+      ]
     },
     {
       "name": "filters, floor, string not a number",
@@ -3195,7 +3295,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "filters, has, array of ints, string argument, default value",
@@ -3207,7 +3310,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "filters, has, mixed array, default value",
@@ -3587,7 +3693,10 @@
           "b"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter"
+      ]
     },
     {
       "name": "filters, last, range literal last filter left value",
@@ -3718,7 +3827,10 @@
     {
       "name": "filters, lstrip, unexpected argument",
       "template": "{{ \"hello\" | lstrip: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "lstrip filter"
+      ]
     },
     {
       "name": "filters, lstrip, undefined left value",
@@ -3778,7 +3890,11 @@
       "data": {
         "a": 123
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter",
+        "map filter"
+      ]
     },
     {
       "name": "filters, map, array containing a non object",
@@ -3795,7 +3911,11 @@
           []
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter",
+        "map filter"
+      ]
     },
     {
       "name": "filters, map, undefined argument",
@@ -3927,7 +4047,10 @@
     {
       "name": "filters, minus, too many args",
       "template": "{{ 5 | minus: 1, '5' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "minus filter"
+      ]
     },
     {
       "name": "filters, minus, not a string, int or float",
@@ -3999,12 +4122,18 @@
     {
       "name": "filters, modulo, arg string not a number",
       "template": "{{ \"10\" | modulo: \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "filters, modulo, too many args",
       "template": "{{ 5 | modulo: 1, '5' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "filters, modulo, not a string, int or float",
@@ -4028,7 +4157,10 @@
     {
       "name": "filters, modulo, undefined argument",
       "template": "{{ 5 | modulo: nosuchthing }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "modulo filter"
+      ]
     },
     {
       "name": "filters, newline to br, string with newlines",
@@ -4049,7 +4181,10 @@
     {
       "name": "filters, newline to br, unexpected argument",
       "template": "{{ \"hello\" | newline_to_br: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "newline_to_br filter"
+      ]
     },
     {
       "name": "filters, newline to br, reference implementation test 1",
@@ -4126,7 +4261,10 @@
     {
       "name": "filters, plus, too many args",
       "template": "{{ 5 | plus: 1, '5' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "plus filter"
+      ]
     },
     {
       "name": "filters, plus, not a string, int or float",
@@ -4190,12 +4328,18 @@
     {
       "name": "filters, prepend, missing argument",
       "template": "{{ \"hello\" | prepend }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "prepend filter"
+      ]
     },
     {
       "name": "filters, prepend, too many arguments",
       "template": "{{ \"hello\" | prepend: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "prepend filter"
+      ]
     },
     {
       "name": "filters, prepend, undefined left value",
@@ -4257,7 +4401,10 @@
           1
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "reject filter"
+      ]
     },
     {
       "name": "filters, reject, array of hashes, default value",
@@ -4419,12 +4566,22 @@
           "cat"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "filters, reject, too many arguments",
       "template": "{% assign b = a | reject: 'x', 'y', 'z' %}{% for obj in b %}{{ obj }}, {% endfor %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "filters, reject, input is undefined",
@@ -4660,12 +4817,18 @@
     {
       "name": "filters, remove, missing argument",
       "template": "{{ \"hello\" | remove }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove filter"
+      ]
     },
     {
       "name": "filters, remove, too many arguments",
       "template": "{{ \"hello\" | remove: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove filter"
+      ]
     },
     {
       "name": "filters, remove, undefined left value",
@@ -4710,12 +4873,18 @@
     {
       "name": "filters, remove first, missing argument",
       "template": "{{ \"hello\" | remove_first }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove_first filter"
+      ]
     },
     {
       "name": "filters, remove first, too many arguments",
       "template": "{{ \"hello\" | remove_first: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove_first filter"
+      ]
     },
     {
       "name": "filters, remove first, undefined left value",
@@ -4760,12 +4929,18 @@
     {
       "name": "filters, remove last, missing argument",
       "template": "{{ \"hello\" | remove_last }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "filters, remove last, too many arguments",
       "template": "{{ \"hello\" | remove_last: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "filters, remove last, undefined left value",
@@ -4829,12 +5004,18 @@
     {
       "name": "filters, replace, missing arguments",
       "template": "{{ \"hello\" | replace }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace filter"
+      ]
     },
     {
       "name": "filters, replace, too many arguments",
       "template": "{{ \"hello\" | replace: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace filter"
+      ]
     },
     {
       "name": "filters, replace, undefined left value",
@@ -4895,12 +5076,18 @@
     {
       "name": "filters, replace first, missing arguments",
       "template": "{{ \"hello\" | replace_first }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_first filter"
+      ]
     },
     {
       "name": "filters, replace first, too many arguments",
       "template": "{{ \"hello\" | replace_first: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_first filter"
+      ]
     },
     {
       "name": "filters, replace first, undefined left value",
@@ -4953,17 +5140,26 @@
     {
       "name": "filters, replace last, missing argument",
       "template": "{{ \"hello\" | replace_last: \"ll\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "filters, replace last, missing arguments",
       "template": "{{ \"hello\" | replace_last }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "filters, replace last, too many arguments",
       "template": "{{ \"hello\" | replace_last: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "filters, replace last, undefined left value",
@@ -5042,7 +5238,11 @@
       "data": {
         "a": []
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter",
+        "reverse filter"
+      ]
     },
     {
       "name": "filters, reverse, left value not an array",
@@ -5116,7 +5316,10 @@
     {
       "name": "filters, round, too many args",
       "template": "{{ 5 | round: 1, 2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "filters, round, undefined left value",
@@ -5217,7 +5420,10 @@
     {
       "name": "filters, rstrip, unexpected argument",
       "template": "{{ \"hello\" | rstrip: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "rstrip filter"
+      ]
     },
     {
       "name": "filters, rstrip, undefined left value",
@@ -5288,7 +5494,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "size filter"
+      ]
     },
     {
       "name": "filters, size, undefined left value",
@@ -5349,12 +5558,18 @@
     {
       "name": "filters, slice, first argument not an integer",
       "template": "{{ \"hello\" | slice: \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "filters, slice, second argument not an integer",
       "template": "{{ \"hello\" | slice: 5, \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "filters, slice, second argument is a string",
@@ -5367,12 +5582,18 @@
     {
       "name": "filters, slice, missing arguments",
       "template": "{{ \"hello\" | slice }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "filters, slice, too many arguments",
       "template": "{{ \"hello\" | slice: 1, 2, 3 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "filters, slice, undefined left value",
@@ -5385,7 +5606,10 @@
     {
       "name": "filters, slice, undefined first argument",
       "template": "{{ \"hello\" | slice: nosuchthing, 3 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "filters, slice, undefined second argument",
@@ -5416,12 +5640,18 @@
     {
       "name": "filters, slice, first argument is a float",
       "template": "{{ 'Liquid' | slice: 2.2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "filters, slice, second argument is a float",
       "template": "{{ 'Liquid' | slice: 1, 2.2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "filters, slice, negative first argument",
@@ -5540,7 +5770,11 @@
           "a"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter",
+        "sort filter"
+      ]
     },
     {
       "name": "filters, sort, left value is not an array",
@@ -5615,7 +5849,10 @@
           "4"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "sort filter"
+      ]
     },
     {
       "name": "filters, sort natural, array of strings",
@@ -5826,12 +6063,18 @@
     {
       "name": "filters, split, missing argument",
       "template": "{{ \"hello there\" | split }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "split filter"
+      ]
     },
     {
       "name": "filters, split, too many arguments",
       "template": "{{ \"hello there\" | split: \" \", \",\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "split filter"
+      ]
     },
     {
       "name": "filters, split, undefined left value",
@@ -5986,7 +6229,10 @@
     {
       "name": "filters, strip, unexpected argument",
       "template": "{{ \"hello\" | strip: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "strip filter"
+      ]
     },
     {
       "name": "filters, strip, undefined left value",
@@ -6029,7 +6275,10 @@
     {
       "name": "filters, strip html, unexpected argument",
       "template": "{{ \"hello\" | strip_html: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "strip_html filter"
+      ]
     },
     {
       "name": "filters, strip html, undefined left value",
@@ -6124,7 +6373,10 @@
     {
       "name": "filters, strip newlines, unexpected argument",
       "template": "{{ \"hello\" | strip_newlines: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "strip_newlines filter"
+      ]
     },
     {
       "name": "filters, strip newlines, reference implementation test 1",
@@ -6349,7 +6601,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "sum filter"
+      ]
     },
     {
       "name": "filters, times, int times int",
@@ -6394,12 +6649,18 @@
     {
       "name": "filters, times, missing arg",
       "template": "{{ 5 | times }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "filters, times, too many args",
       "template": "{{ 5 | times: 1, 2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "filters, times, undefined left value",
@@ -6460,7 +6721,10 @@
     {
       "name": "filters, truncate, too many arguments",
       "template": "{{ \"hello\" | truncate: 5, \"foo\", \"bar\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "filters, truncate, undefined left value",
@@ -6473,7 +6737,10 @@
     {
       "name": "filters, truncate, undefined first argument",
       "template": "{{ \"Ground control to Major Tom.\" | truncate: nosuchthing }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncate filter"
+      ]
     },
     {
       "name": "filters, truncate, undefined second argument",
@@ -6534,7 +6801,10 @@
     {
       "name": "filters, truncatewords, too many arguments",
       "template": "{{ \"hello\" | truncatewords: 5, \"foo\", \"bar\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "filters, truncatewords, reference implementation test 1",
@@ -6587,7 +6857,10 @@
     {
       "name": "filters, truncatewords, undefined first argument",
       "template": "{{ \"one two three four\" | truncatewords: nosuchthing }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "filters, truncatewords, undefined second argument",
@@ -6701,7 +6974,10 @@
     {
       "name": "filters, uniq, too many arguments",
       "template": "{{ nosuchthing | uniq: 'foo', 'bar' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "uniq filter"
+      ]
     },
     {
       "name": "filters, uniq, array of objects with key property",
@@ -6782,7 +7058,10 @@
     {
       "name": "filters, upcase, unexpected argument",
       "template": "{{ \"hello\" | upcase: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "upcase filter"
+      ]
     },
     {
       "name": "filters, upcase, undefined left value",
@@ -6811,7 +7090,10 @@
     {
       "name": "filters, url decode, unexpected argument",
       "template": "{{ \"hello\" | url_decode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "url_decode filter"
+      ]
     },
     {
       "name": "filters, url decode, undefined left value",
@@ -6840,7 +7122,10 @@
     {
       "name": "filters, url encode, unexpected argument",
       "template": "{{ \"hello\" | url_encode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "url_encode filter"
+      ]
     },
     {
       "name": "filters, url encode, undefined left value",
@@ -6925,7 +7210,10 @@
       "data": {
         "a": 123
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "where filter"
+      ]
     },
     {
       "name": "filters, where, missing argument",
@@ -6943,7 +7231,10 @@
           }
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "where filter"
+      ]
     },
     {
       "name": "filters, where, too many arguments",
@@ -6961,7 +7252,10 @@
           }
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "where filter"
+      ]
     },
     {
       "name": "filters, where, left value is undefined",
@@ -7379,7 +7673,10 @@
       "data": {
         "foo": "bar"
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "tags, case, switch on array",
@@ -7486,12 +7783,18 @@
     {
       "name": "tags, comment, malformed tags are not parsed",
       "template": "{% comment %}{% assign foo = '1'{% endcomment %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "tags, comment, incomplete tags are not parsed",
       "template": "{% comment %}{% {{ {%- endcomment %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "tags, comment, nested comment blocks",
@@ -7512,7 +7815,10 @@
     {
       "name": "tags, comment, unclosed nested comment blocks",
       "template": "{% comment %}    {% comment %}    {% comment %}    {% endcomment %}{% endcomment %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "tags, comment, raw inside comment block",
@@ -7645,42 +7951,66 @@
     {
       "name": "tags, doc, don't render docs",
       "template": "{% doc %}don't render me{% enddoc %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "tags, doc, doc arguments is an error",
       "template": "{% doc hello %}don't render me{% enddoc %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "tags, doc, doc tag block must be closed",
       "template": "{% doc %}don't render me",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "tags, doc, doc text is not parsed",
       "template": "{% doc %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}    {% raw %}{% enddoc %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "tags, doc, nested docs are not allowed",
       "template": "{% doc hello %}Hello{% doc %}{% enddoc %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "tags, doc, docs containing unclosed tags are ok",
       "template": "{% doc %}{% assign x = y {% enddoc %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "tags, doc, docs containing unclosed output are ok",
       "template": "{% doc %}{{ foo {% enddoc %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "tags, doc, whitespace control",
       "template": "foo\n {%- doc %}I'm a doc comment{% enddoc -%}  \tbar",
-      "result": "foobar"
+      "result": "foobar",
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "tags, echo, render a string literal",
@@ -8668,12 +8998,18 @@
     {
       "name": "tags, for, limit is a non-number string",
       "template": "{% for i in (1..4) limit: 'foo' %}{{ i }} {% endfor %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "tags, for, offset is a non-number string",
       "template": "{% for i in (1..4) offset: 'foo' %}{{ i }} {% endfor %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "tags, for, limit is not a string or number",
@@ -8685,7 +9021,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "tags, for, offset is not a string or number",
@@ -8697,7 +9036,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "tags, for, comma separated arguments",
@@ -9021,7 +9363,10 @@
     {
       "name": "tags, if, string greater than int",
       "template": "{% if '2' > 1 %}true{% else %}false{% endif %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "if tag"
+      ]
     },
     {
       "name": "tags, if, string is less than string",
@@ -9371,7 +9716,8 @@
         "t": "hell"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -9383,7 +9729,8 @@
         "t": "lo"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -9397,7 +9744,8 @@
         "x": "foo"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -9409,7 +9757,8 @@
         "t": "lo"
       },
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -9417,7 +9766,8 @@
       "name": "tags, if, not is not a valid operator",
       "template": "{% if not false %}TRUE{% else %}FALSE{% endif %}",
       "tags": [
-        "absent"
+        "absent",
+        "if tag"
       ],
       "invalid": true
     },
@@ -9859,7 +10209,10 @@
     {
       "name": "tags, inline comment, enforce leading hash",
       "template": "{%-\n  # spread inline comments\n  over multiple lines\n-%}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "tags, inline comment, can't comment tags",
@@ -9959,7 +10312,14 @@
           "title": "foo"
         }
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "echo tag",
+        "for tag",
+        "if tag",
+        "liquid tag",
+        "upcase filter"
+      ]
     },
     {
       "name": "tags, liquid, empty liquid tag",
@@ -10064,7 +10424,11 @@
     {
       "name": "tags, liquid, can't close nested blocks",
       "template": "{%- if true -%}\n42\n{%- liquid endif -%}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "if tag",
+        "liquid tag"
+      ]
     },
     {
       "name": "tags, liquid, bare liquid tag in liquid tag",

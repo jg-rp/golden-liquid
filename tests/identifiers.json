@@ -67,7 +67,8 @@
         "-bar": "goodbye"
       },
       "tags": [
-        "strict"
+        "strict",
+        "assign tag"
       ],
       "invalid": true
     },
@@ -111,7 +112,8 @@
       "name": "trailing question mark assign",
       "template": "{% assign foo? = 'hello' %}{{ foo? }}",
       "tags": [
-        "strict"
+        "strict",
+        "assign tag"
       ],
       "invalid": true
     },
@@ -153,7 +155,8 @@
         ]
       },
       "tags": [
-        "strict"
+        "strict",
+        "for tag"
       ],
       "invalid": true
     },
@@ -278,7 +281,8 @@
         "-bar": "goodbye"
       },
       "tags": [
-        "strict"
+        "strict",
+        "capture tag"
       ],
       "invalid": true
     },

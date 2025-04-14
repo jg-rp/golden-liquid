@@ -53,7 +53,11 @@
       "data": {
         "a": []
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter",
+        "reverse filter"
+      ]
     },
     {
       "name": "left value not an array",

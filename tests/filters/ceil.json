@@ -59,7 +59,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ -3.1 | ceil: 1 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "ceil filter"
+      ]
     },
     {
       "name": "string not a number",

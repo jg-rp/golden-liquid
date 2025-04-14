@@ -55,7 +55,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "array of ints, string argument, default value",
@@ -67,7 +70,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "has filter"
+      ]
     },
     {
       "name": "mixed array, default value",

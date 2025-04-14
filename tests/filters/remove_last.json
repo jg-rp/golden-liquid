@@ -27,12 +27,18 @@
     {
       "name": "missing argument",
       "template": "{{ \"hello\" | remove_last }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | remove_last: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "remove_last filter"
+      ]
     },
     {
       "name": "undefined left value",

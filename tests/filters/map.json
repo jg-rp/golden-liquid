@@ -50,7 +50,11 @@
       "data": {
         "a": 123
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter",
+        "map filter"
+      ]
     },
     {
       "name": "array containing a non object",
@@ -67,7 +71,11 @@
           []
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter",
+        "map filter"
+      ]
     },
     {
       "name": "undefined argument",

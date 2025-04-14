@@ -51,12 +51,18 @@
     {
       "name": "first argument not an integer",
       "template": "{{ \"hello\" | slice: \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "second argument not an integer",
       "template": "{{ \"hello\" | slice: 5, \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "second argument is a string",
@@ -69,12 +75,18 @@
     {
       "name": "missing arguments",
       "template": "{{ \"hello\" | slice }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | slice: 1, 2, 3 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "undefined left value",
@@ -87,7 +99,10 @@
     {
       "name": "undefined first argument",
       "template": "{{ \"hello\" | slice: nosuchthing, 3 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "undefined second argument",
@@ -118,12 +133,18 @@
     {
       "name": "first argument is a float",
       "template": "{{ 'Liquid' | slice: 2.2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "second argument is a float",
       "template": "{{ 'Liquid' | slice: 1, 2.2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "slice filter"
+      ]
     },
     {
       "name": "negative first argument",

@@ -61,7 +61,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "size filter"
+      ]
     },
     {
       "name": "undefined left value",

@@ -43,7 +43,10 @@
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | truncatewords: 5, \"foo\", \"bar\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "reference implementation test 1",
@@ -96,7 +99,10 @@
     {
       "name": "undefined first argument",
       "template": "{{ \"one two three four\" | truncatewords: nosuchthing }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "truncatewords filter"
+      ]
     },
     {
       "name": "undefined second argument",

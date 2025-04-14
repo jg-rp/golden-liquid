@@ -90,7 +90,10 @@
     {
       "name": "too many arguments",
       "template": "{{ None | default: 'foo', 'bar', 'baz' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "default filter"
+      ]
     },
     {
       "name": "missing argument",

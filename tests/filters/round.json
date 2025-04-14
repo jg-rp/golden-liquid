@@ -51,7 +51,10 @@
     {
       "name": "too many args",
       "template": "{{ 5 | round: 1, 2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "round filter"
+      ]
     },
     {
       "name": "undefined left value",

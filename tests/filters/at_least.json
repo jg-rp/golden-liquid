@@ -59,12 +59,18 @@
     {
       "name": "missing arg",
       "template": "{{ 5 | at_least }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "too many args",
       "template": "{{ 5 | at_least: 1, 2}}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "at_least filter"
+      ]
     },
     {
       "name": "undefined left value",

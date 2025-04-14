@@ -75,7 +75,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ -3 | abs: 1 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "abs filter"
+      ]
     },
     {
       "name": "string not a number",

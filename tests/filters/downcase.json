@@ -19,7 +19,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ \"HELLO\" | downcase: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "downcase filter"
+      ]
     },
     {
       "name": "undefined left value",

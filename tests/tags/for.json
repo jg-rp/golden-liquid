@@ -791,12 +791,18 @@
     {
       "name": "limit is a non-number string",
       "template": "{% for i in (1..4) limit: 'foo' %}{{ i }} {% endfor %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "offset is a non-number string",
       "template": "{% for i in (1..4) offset: 'foo' %}{{ i }} {% endfor %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "limit is not a string or number",
@@ -808,7 +814,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "offset is not a string or number",
@@ -820,7 +829,10 @@
           3
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "for tag"
+      ]
     },
     {
       "name": "comma separated arguments",

@@ -44,7 +44,11 @@
           "b"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "non array-like argument is an error",
@@ -56,7 +60,11 @@
         ],
         "b": 5
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "left value is not array-like",
@@ -118,7 +126,11 @@
           "b"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     },
     {
       "name": "nested left value gets flattened",

@@ -183,7 +183,10 @@
       "data": {
         "foo": "bar"
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "case tag"
+      ]
     },
     {
       "name": "switch on array",

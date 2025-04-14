@@ -35,7 +35,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | lstrip: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "lstrip filter"
+      ]
     },
     {
       "name": "undefined left value",

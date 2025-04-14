@@ -19,7 +19,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ \"HELLO\" | escape: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "escape filter"
+      ]
     },
     {
       "name": "undefined left value",

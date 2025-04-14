@@ -59,12 +59,18 @@
     {
       "name": "arg string not a number",
       "template": "{{ \"10\" | divided_by: \"foo\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "divided_by filter"
+      ]
     },
     {
       "name": "too many args",
       "template": "{{ 5 | divided_by: 1, '5' }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "divided_by filter"
+      ]
     },
     {
       "name": "not a string, int or float",
@@ -88,12 +94,18 @@
     {
       "name": "undefined argument",
       "template": "{{ 10 | divided_by: nosuchthing }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "divided_by filter"
+      ]
     },
     {
       "name": "divied by zero",
       "template": "{{ 10 | divided_by: 0 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "divided_by filter"
+      ]
     },
     {
       "name": "zero divided by float",

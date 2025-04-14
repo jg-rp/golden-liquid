@@ -19,7 +19,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | url_decode: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "url_decode filter"
+      ]
     },
     {
       "name": "undefined left value",

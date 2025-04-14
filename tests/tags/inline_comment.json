@@ -78,7 +78,10 @@
     {
       "name": "enforce leading hash",
       "template": "{%-\n  # spread inline comments\n  over multiple lines\n-%}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "# tag"
+      ]
     },
     {
       "name": "can't comment tags",

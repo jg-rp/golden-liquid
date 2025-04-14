@@ -19,7 +19,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | strip_newlines: 5 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "strip_newlines filter"
+      ]
     },
     {
       "name": "reference implementation test 1",

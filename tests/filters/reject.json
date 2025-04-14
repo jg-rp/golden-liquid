@@ -44,7 +44,10 @@
           1
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "reject filter"
+      ]
     },
     {
       "name": "array of hashes, default value",
@@ -206,12 +209,22 @@
           "cat"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{% assign b = a | reject: 'x', 'y', 'z' %}{% for obj in b %}{{ obj }}, {% endfor %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     },
     {
       "name": "input is undefined",

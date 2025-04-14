@@ -43,12 +43,18 @@
     {
       "name": "missing arg",
       "template": "{{ 5 | times }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "too many args",
       "template": "{{ 5 | times: 1, 2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "times filter"
+      ]
     },
     {
       "name": "undefined left value",

@@ -75,7 +75,10 @@
       "data": {
         "a": 123
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "where filter"
+      ]
     },
     {
       "name": "missing argument",
@@ -93,7 +96,10 @@
           }
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "where filter"
+      ]
     },
     {
       "name": "too many arguments",
@@ -111,7 +117,10 @@
           }
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "where filter"
+      ]
     },
     {
       "name": "left value is undefined",

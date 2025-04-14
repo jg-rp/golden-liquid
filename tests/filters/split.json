@@ -30,12 +30,18 @@
     {
       "name": "missing argument",
       "template": "{{ \"hello there\" | split }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "split filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello there\" | split: \" \", \",\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "split filter"
+      ]
     },
     {
       "name": "undefined left value",

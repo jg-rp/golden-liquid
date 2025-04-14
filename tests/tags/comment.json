@@ -45,12 +45,18 @@
     {
       "name": "malformed tags are not parsed",
       "template": "{% comment %}{% assign foo = '1'{% endcomment %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "incomplete tags are not parsed",
       "template": "{% comment %}{% {{ {%- endcomment %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "nested comment blocks",
@@ -71,7 +77,10 @@
     {
       "name": "unclosed nested comment blocks",
       "template": "{% comment %}    {% comment %}    {% comment %}    {% endcomment %}{% endcomment %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "comment tag"
+      ]
     },
     {
       "name": "raw inside comment block",

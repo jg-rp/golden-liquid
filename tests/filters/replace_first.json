@@ -35,12 +35,18 @@
     {
       "name": "missing arguments",
       "template": "{{ \"hello\" | replace_first }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_first filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | replace_first: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_first filter"
+      ]
     },
     {
       "name": "undefined left value",

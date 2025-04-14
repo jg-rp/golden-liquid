@@ -3,42 +3,66 @@
     {
       "name": "don't render docs",
       "template": "{% doc %}don't render me{% enddoc %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "doc arguments is an error",
       "template": "{% doc hello %}don't render me{% enddoc %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "doc tag block must be closed",
       "template": "{% doc %}don't render me",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "doc text is not parsed",
       "template": "{% doc %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}    {% raw %}{% enddoc %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "nested docs are not allowed",
       "template": "{% doc hello %}Hello{% doc %}{% enddoc %}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "docs containing unclosed tags are ok",
       "template": "{% doc %}{% assign x = y {% enddoc %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "docs containing unclosed output are ok",
       "template": "{% doc %}{{ foo {% enddoc %}",
-      "result": ""
+      "result": "",
+      "tags": [
+        "doc tag"
+      ]
     },
     {
       "name": "whitespace control",
       "template": "foo\n {%- doc %}I'm a doc comment{% enddoc -%}  \tbar",
-      "result": "foobar"
+      "result": "foobar",
+      "tags": [
+        "doc tag"
+      ]
     }
   ]
 }

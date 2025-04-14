@@ -126,7 +126,10 @@
           "b"
         ]
       },
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "join filter"
+      ]
     }
   ]
 }

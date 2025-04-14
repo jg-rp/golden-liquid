@@ -27,17 +27,26 @@
     {
       "name": "missing argument",
       "template": "{{ \"hello\" | replace_last: \"ll\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "missing arguments",
       "template": "{{ \"hello\" | replace_last }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "too many arguments",
       "template": "{{ \"hello\" | replace_last: \"how\", \"are\", \"you\" }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "replace_last filter"
+      ]
     },
     {
       "name": "undefined left value",

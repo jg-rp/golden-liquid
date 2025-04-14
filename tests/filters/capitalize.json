@@ -19,7 +19,10 @@
     {
       "name": "unexpected argument",
       "template": "{{ \"hello\" | capitalize: 2 }}",
-      "invalid": true
+      "invalid": true,
+      "tags": [
+        "capitalize filter"
+      ]
     },
     {
       "name": "undefined left value",
