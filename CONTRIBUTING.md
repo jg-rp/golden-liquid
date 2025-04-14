@@ -20,3 +20,9 @@ It's OK if you commit changes to `golden_liquid.json` after a local build. It wi
 We use tags to categorize test cases. Tags are arbitrary strings that can be used to filter tests output by the build script, `build.rb`.
 
 List current tags with `bundle exec ruby build.rb --list-tags`. Please consider adding these tags to new test cases where appropriate.
+
+#### Adding a new tag
+
+To help catch tag typos and avoid similar tags with the same meaning, we enumerate allowed tags in `golden_liquid.schema.json`. When adding a new tag, add it to the list of tags at the bottom of `golden_liquid.schema.json`, otherwise schema validation will fail.
+
+When the meaning of a tag is not obvious, update the readme with an explanation.
