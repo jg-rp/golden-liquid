@@ -66,10 +66,12 @@ Benchmark.ips do |x|
   end
 
   x.report("render (#{fixture.name}):") do
-    template.render!
+    template.render!(fixture.data)
   end
 
   x.report("both (#{fixture.name}):") do
-    Liquid::Template.parse(source, environment: env, line_numbers: true).render
+    Liquid::Template.parse(source,
+                           environment: env,
+                           line_numbers: true).render!(fixture.data)
   end
 end
