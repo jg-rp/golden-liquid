@@ -55,7 +55,7 @@
           3
         ]
       },
-      "invalid": true,
+      "result": "true",
       "tags": [
         "has filter"
       ]

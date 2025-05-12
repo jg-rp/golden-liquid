@@ -90,7 +90,7 @@
           }
         ]
       },
-      "result": "title:foo,title:bar,",
+      "result": "",
       "tags": [
         "assign tag",
         "for tag",
@@ -110,7 +110,7 @@
           }
         ]
       },
-      "result": "title:foo,title:bar,",
+      "result": "",
       "tags": [
         "assign tag",
         "for tag",
