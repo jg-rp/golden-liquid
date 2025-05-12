@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/Shopify/liquid.git
-  revision: dbe709c3bf2f8521764ae51b36dd551905dfad7e
+  revision: c6f05eaf832dd8f9461e7544682d9cf04dfb029a
   branch: main
   specs:
-    liquid (5.8.4)
+    liquid (5.8.6)
       bigdecimal
       strscan (>= 3.1.1)
 
@@ -57,7 +57,7 @@ GEM
       rubocop (>= 1.72.1)
     ruby-progressbar (1.13.0)
     simpleidn (0.2.3)
-    strscan (3.1.3)
+    strscan (3.1.5)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
