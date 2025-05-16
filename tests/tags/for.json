@@ -859,12 +859,31 @@
       ]
     },
     {
+      "name": "loop over an empty string",
+      "template": "{% for i in '' %}{{ i }} {% endfor %}",
+      "result": "",
+      "tags": [
+        "for tag"
+      ]
+    },
+    {
       "name": "loop over a string variable",
       "template": "{% for i in foo %}{{ i }} {% endfor %}",
       "data": {
         "foo": "hello"
       },
       "result": "hello ",
+      "tags": [
+        "for tag"
+      ]
+    },
+    {
+      "name": "loop over a non-iterable object",
+      "template": "{% for i in x %}{{ i }} {% endfor %}",
+      "data": {
+        "x": true
+      },
+      "result": "",
       "tags": [
         "for tag"
       ]
