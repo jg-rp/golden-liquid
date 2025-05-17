@@ -8727,6 +8727,17 @@
       ]
     },
     {
+      "name": "tags, for, loop over a non-iterable object",
+      "template": "{% for i in x %}{{ i }} {% endfor %}",
+      "data": {
+        "x": true
+      },
+      "result": "",
+      "tags": [
+        "for tag"
+      ]
+    },
+    {
       "name": "tags, for, loop over a string literal",
       "template": "{% for i in 'hello' %}{{ i }} {% endfor %}",
       "result": "hello ",
@@ -8757,6 +8768,14 @@
         }
       },
       "result": "garden sports ",
+      "tags": [
+        "for tag"
+      ]
+    },
+    {
+      "name": "tags, for, loop over an empty string",
+      "template": "{% for i in '' %}{{ i }} {% endfor %}",
+      "result": "",
       "tags": [
         "for tag"
       ]
