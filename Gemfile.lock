@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/Shopify/liquid.git
-  revision: 44dfa39568420bcb7a6565e5c7903fc6602fc4ae
-  branch: rigid-mode
+  revision: 1f58216f48b5671fe25090d1cb251bb083cc3858
+  branch: main
   specs:
     liquid (5.8.7)
       bigdecimal
@@ -15,7 +15,7 @@ GEM
     benchmark-ips (2.14.0)
     bigdecimal (3.3.1)
     hana (1.3.7)
-    json (2.15.1)
+    json (2.15.2)
     json_schemer (2.4.0)
       bigdecimal
       hana (~> 1.3)
@@ -26,7 +26,7 @@ GEM
     lru_redux (1.1.0)
     minitest (5.26.0)
     parallel (1.27.0)
-    parser (3.3.9.0)
+    parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
     prism (1.6.0)

@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "json"
-gem "liquid", git: "https://github.com/Shopify/liquid.git", branch: "rigid-mode"
+gem "liquid", git: "https://github.com/Shopify/liquid.git", branch: "main"
 gem "lru_redux"
 gem "minitest"
 gem "rubocop"
