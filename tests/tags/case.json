@@ -167,6 +167,15 @@
       ]
     },
     {
+      "name": "unexpected when token, rigid",
+      "template": "{% case title %}{% when 'foo' %}foo{% when 'bar' and 'Hello', 'Hello' %}bar{% endcase %}",
+      "invalid": true,
+      "tags": [
+        "case tag",
+        "rigid"
+      ]
+    },
+    {
       "name": "comma string literal",
       "template": "{% case foo %}{% when 'foo' %}bar{% when ',' %}comma{% endcase %}",
       "data": {

@@ -7717,6 +7717,15 @@
       ]
     },
     {
+      "name": "tags, case, unexpected when token, rigid",
+      "template": "{% case title %}{% when 'foo' %}foo{% when 'bar' and 'Hello', 'Hello' %}bar{% endcase %}",
+      "invalid": true,
+      "tags": [
+        "case tag",
+        "rigid"
+      ]
+    },
+    {
       "name": "tags, case, whitespace",
       "template": "{% case title %}  \n\t{% when 'foo' %}foo\n{% when 'Hello' %}bar{% endcase %}",
       "data": {

@@ -22,7 +22,14 @@ describe "Golden" do
   golden["tests"].each do |t|
     it t["name"] do
       file_system.templates = t["templates"]
-      mode = t["tags"].is_a?(Array) && t["tags"].include?("strict") ? :strict : :lax
+      tags = t["tags"] || []
+      mode = if tags.include?("strict")
+               :strict
+             elsif tags.include?("rigid")
+               :rigid
+             else
+               :lax
+             end
       if t["invalid"]
         assert_raises Liquid::Error do
           Liquid::Template.parse(
