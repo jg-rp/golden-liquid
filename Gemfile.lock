@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/Shopify/liquid.git
-  revision: 1f58216f48b5671fe25090d1cb251bb083cc3858
+  revision: 248f3a412f59da16fc184bc0bbd92522a1f62393
   branch: main
   specs:
-    liquid (5.8.7)
+    liquid (5.10.0)
       bigdecimal
       strscan (>= 3.1.1)
 
@@ -32,7 +32,7 @@ GEM
     prism (1.6.0)
     racc (1.8.1)
     rainbow (3.1.1)
-    rake (13.3.0)
+    rake (13.3.1)
     regexp_parser (2.11.3)
     rubocop (1.81.6)
       json (~> 2.3)

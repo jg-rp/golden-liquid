@@ -65,7 +65,8 @@ Tags are used to categorize test cases. This allows consumers of this test suite
 
 - `strict` - Indicates that the test case should be parsed and rendered in strict mode, if a strict mode is available.
 - `rigid` - Indicates tha the test case should be parsed and rendered in rigid mode. Rigid mode was added to Shopify/liquid in version 5.9.0.
-- `absent` - Indicates that the test cases is asserting the absence of a feature. For example, the absence of a logical `not` operator.
+- `absent` - Indicates that the test case is asserting the absence of a feature. For example, the absence of a logical `not` operator.
+- `error string` - Indicates that the test case renders an error message rather than raising an exception.
 - `utc` - The test case assumes the host timezone is set to UTC
 
 Pull requests to add or update tags are welcome.
