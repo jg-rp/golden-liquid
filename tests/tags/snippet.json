@@ -1,0 +1,123 @@
+{
+  "tests": [
+    {
+      "name": "basic",
+      "template": "{% snippet a %}b{% endsnippet %}",
+      "result": "",
+      "tags": ["snippet tag"]
+    },
+    {
+      "name": "basic, render",
+      "template": "{% snippet a %}b{% endsnippet %}{% render a %}",
+      "result": "b",
+      "tags": ["snippet tag", "render tag"]
+    },
+    {
+      "name": "basic, render twice",
+      "template": "{% snippet a %}b{% endsnippet %}{% render a %}{% render a %}",
+      "result": "bb",
+      "tags": ["snippet tag", "render tag"]
+    },
+    {
+      "name": "multiple",
+      "template": "{% snippet a %}b{% endsnippet %}{% snippet c %}d{% endsnippet %}{% render a %}{% render c %}",
+      "result": "bd",
+      "tags": ["snippet tag", "render tag"]
+    },
+    {
+      "name": "name shadows global variable",
+      "template": "{% snippet a %}b{% endsnippet %}{% render a %}",
+      "data": { "a": "c" },
+      "result": "b",
+      "tags": ["snippet tag", "render tag"]
+    },
+    {
+      "name": "name overrides local variable",
+      "template": "{% assign a = 'c' %}{% snippet a %}b{% endsnippet %}{% render a %}",
+      "result": "b",
+      "tags": ["snippet tag", "render tag", "assign tag"]
+    },
+    {
+      "name": "redefine",
+      "template": "{% snippet a %}b{% endsnippet %}{% snippet a %}c{% endsnippet %}{% render a %}",
+      "result": "c",
+      "tags": ["snippet tag", "render tag"]
+    },
+    {
+      "name": "render scope",
+      "template": "{% assign z = 42 %}{% snippet a %}{{z}}{% assign x = 'y' %}{{b}}{% endsnippet %}{% render a, b: 'c' %}{{x}}",
+      "result": "c",
+      "tags": ["snippet tag", "render tag", "assign tag"]
+    },
+    {
+      "name": "single quoted name",
+      "template": "{% snippet 'a' %}b{% endsnippet %}",
+      "invalid": true,
+      "tags": ["snippet tag"]
+    },
+    {
+      "name": "double quoted name",
+      "template": "{% snippet \"a\" %}b{% endsnippet %}",
+      "invalid": true,
+      "tags": ["snippet tag"]
+    },
+    {
+      "name": "dotted name",
+      "template": "{% snippet a.b %}c{% endsnippet %}",
+      "invalid": true,
+      "tags": ["snippet tag"]
+    },
+    {
+      "name": "junk after name",
+      "template": "{% snippet a foo %}b{% endsnippet %}",
+      "invalid": true,
+      "tags": ["snippet tag"]
+    },
+    {
+      "name": "render, quoted name",
+      "template": "{% snippet a %}b{% endsnippet %}{% render \"a\" %}",
+      "result": "Liquid error (line 1): internal",
+      "tags": ["snippet tag", "render tag", "error string"]
+    },
+    {
+      "name": "nested",
+      "template": "{% snippet a %}b{% snippet c %}d{% endsnippet %}{% render c %}{% endsnippet %}{% render a %}",
+      "result": "bd",
+      "tags": ["snippet tag", "render tag"]
+    },
+    {
+      "name": "nested, scope",
+      "template": "{% snippet a %}b{% snippet c %}d{% endsnippet %}{% endsnippet %}{% render a %}{% render c %}",
+      "result": "bLiquid error (line 1): internal",
+      "tags": ["snippet tag", "render tag", "error string"]
+    },
+    {
+      "name": "late binding, true",
+      "template": "{% if x %}{% snippet a %}b{% endsnippet %}{% else %}{% snippet a %}c{% endsnippet %}{% endif %}{% render a %}",
+      "result": "b",
+      "data": { "x": true },
+      "tags": ["snippet tag", "render tag", "if tag"]
+    },
+    {
+      "name": "late binding, false",
+      "template": "{% if x %}{% snippet a %}b{% endsnippet %}{% else %}{% snippet a %}c{% endsnippet %}{% endif %}{% render a %}",
+      "result": "c",
+      "data": { "x": false },
+      "tags": ["snippet tag", "render tag", "if tag"]
+    },
+    {
+      "name": "from a partial template, render",
+      "template": "{% render \"p\" %}{% render a %}",
+      "templates": { "p": "{% snippet a %}b{% endsnippet %}c" },
+      "result": "cLiquid error (line 1): internal",
+      "tags": ["snippet tag", "render tag", "error string"]
+    },
+    {
+      "name": "from a partial template, include",
+      "template": "{% include \"p\" %}{% render a %}",
+      "templates": { "p": "{% snippet a %}b{% endsnippet %}c" },
+      "result": "cb",
+      "tags": ["snippet tag", "render tag", "include tag"]
+    }
+  ]
+}
