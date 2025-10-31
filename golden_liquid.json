@@ -10910,7 +10910,7 @@
       ]
     },
     {
-      "name": "tags, snippet, name shadows global",
+      "name": "tags, snippet, name shadows global variable",
       "template": "{% snippet a %}b{% endsnippet %}{% render a %}",
       "data": {
         "a": "c"
