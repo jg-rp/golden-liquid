@@ -25,7 +25,7 @@
       "tags": ["snippet tag", "render tag"]
     },
     {
-      "name": "name shadows global",
+      "name": "name shadows global variable",
       "template": "{% snippet a %}b{% endsnippet %}{% render a %}",
       "data": { "a": "c" },
       "result": "b",
