@@ -25,8 +25,8 @@ describe "Golden" do
       tags = t["tags"] || []
       mode = if tags.include?("strict")
                :strict
-             elsif tags.include?("rigid")
-               :rigid
+             elsif tags.include?("strict2")
+               :strict2
              else
                :lax
              end

@@ -1,5 +1,8 @@
 # Golden Liquid Change Log
 
+> [!IMPORTANT]
+> This change log is no longer used. We're now following a rolling release. See Git commit history for changes.
+
 ## 2025-03-20
 
 **Breaking changes**

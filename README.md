@@ -64,7 +64,7 @@ Individual test files and `golden_liquid.json` are validated against `golden_liq
 Tags are used to categorize test cases. This allows consumers of this test suite to easily exclude or target entire categories of tests, or enable/disable features in certain cases.
 
 - `strict` - Indicates that the test case should be parsed and rendered in strict mode, if a strict mode is available.
-- `rigid` - Indicates tha the test case should be parsed and rendered in rigid mode. Rigid mode was added to Shopify/liquid in version 5.9.0.
+- `strict2` - Indicates tha the test case should be parsed and rendered in strict2 mode. strict2 mode was added to Shopify/liquid in version 5.11.0.
 - `absent` - Indicates that the test case is asserting the absence of a feature. For example, the absence of a logical `not` operator.
 - `error string` - Indicates that the test case renders an error message rather than raising an exception.
 - `utc` - The test case assumes the host timezone is set to UTC

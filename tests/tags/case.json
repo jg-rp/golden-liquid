@@ -167,12 +167,12 @@
       ]
     },
     {
-      "name": "unexpected when token, rigid",
+      "name": "unexpected when token, strict2",
       "template": "{% case title %}{% when 'foo' %}foo{% when 'bar' and 'Hello', 'Hello' %}bar{% endcase %}",
       "invalid": true,
       "tags": [
         "case tag",
-        "rigid"
+        "strict2"
       ]
     },
     {
