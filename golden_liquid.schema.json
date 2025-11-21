@@ -167,7 +167,7 @@
           "replace_first filter",
           "replace_last filter",
           "reverse filter",
-          "rigid",
+          "strict2",
           "round filter",
           "rstrip filter",
           "size filter",
