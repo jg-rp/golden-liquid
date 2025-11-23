@@ -77,7 +77,8 @@
       "template": "{{ 'March 14, 2016' | date: '%s' }}",
       "result": "1457913600",
       "tags": [
-        "date filter"
+        "date filter",
+        "utc"
       ]
     }
   ]

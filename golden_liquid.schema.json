@@ -190,6 +190,7 @@
           "upcase filter",
           "url_decode filter",
           "url_encode filter",
+          "utc",
           "where filter"
         ]
       }
