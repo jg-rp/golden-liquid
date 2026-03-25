@@ -9,6 +9,14 @@
       ]
     },
     {
+      "name": "multi-word string",
+      "template": "{{ \"hello world\" | capitalize }}",
+      "result": "Hello world",
+      "tags": [
+        "capitalize filter"
+      ]
+    },
+    {
       "name": "already capitalized string",
       "template": "{{ \"Hello\" | capitalize }}",
       "result": "Hello",
