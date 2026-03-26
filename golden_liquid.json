@@ -1801,6 +1801,14 @@
       ]
     },
     {
+      "name": "filters, capitalize, multi-word string",
+      "template": "{{ \"hello world\" | capitalize }}",
+      "result": "Hello world",
+      "tags": [
+        "capitalize filter"
+      ]
+    },
+    {
       "name": "filters, capitalize, undefined left value",
       "template": "{{ nosuchthing | capitalize }}",
       "result": "",
