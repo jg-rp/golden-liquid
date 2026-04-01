@@ -10859,45 +10859,54 @@
     },
     {
       "name": "tags, tablerow, one row",
-      "template": "{% tablerow tag in collection.tags %}{{ tag }}{% endtablerow %}",
+      "template": "{% tablerow label in collection.labels %}{{ label }}{% endtablerow %}",
       "data": {
         "collection": {
-          "tags": [
-            "tablerow tag"
+          "labels": [
+            "label1",
+            "label2",
+            "label3",
+            "label4"
           ]
         }
       },
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td><td class=\"col3\">tag3</td><td class=\"col4\">tag4</td></tr>\n",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">label1</td><td class=\"col2\">label2</td><td class=\"col3\">label3</td><td class=\"col4\">label4</td></tr>\n",
       "tags": [
         "tablerow tag"
       ]
     },
     {
       "name": "tags, tablerow, one row with limit",
-      "template": "{% tablerow tag in collection.tags limit: 2 %}{{ tag }}{% endtablerow %}",
+      "template": "{% tablerow label in collection.labels limit: 2 %}{{ label }}{% endtablerow %}",
       "data": {
         "collection": {
-          "tags": [
-            "tablerow tag"
+          "labels": [
+            "label1",
+            "label2",
+            "label3",
+            "label4"
           ]
         }
       },
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td></tr>\n",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">label1</td><td class=\"col2\">label2</td></tr>\n",
       "tags": [
         "tablerow tag"
       ]
     },
     {
       "name": "tags, tablerow, one row with offset",
-      "template": "{% tablerow tag in collection.tags offset: 2 %}{{ tag }}{% endtablerow %}",
+      "template": "{% tablerow label in collection.labels offset: 2 %}{{ label }}{% endtablerow %}",
       "data": {
         "collection": {
-          "tags": [
-            "tablerow tag"
+          "labels": [
+            "label1",
+            "label2",
+            "label3",
+            "label4"
           ]
         }
       },
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag3</td><td class=\"col2\">tag4</td></tr>\n",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">label3</td><td class=\"col2\">label4</td></tr>\n",
       "tags": [
         "tablerow tag"
       ]
@@ -10928,15 +10937,18 @@
     },
     {
       "name": "tags, tablerow, two columns",
-      "template": "{% tablerow tag in collection.tags cols:2 %}{{ tag }}{% endtablerow %}",
+      "template": "{% tablerow label in collection.labels cols:2 %}{{ label }}{% endtablerow %}",
       "data": {
         "collection": {
-          "tags": [
-            "tablerow tag"
+          "labels": [
+            "label1",
+            "label2",
+            "label3",
+            "label4"
           ]
         }
       },
-      "result": "<tr class=\"row1\">\n<td class=\"col1\">tag1</td><td class=\"col2\">tag2</td></tr>\n<tr class=\"row2\"><td class=\"col1\">tag3</td><td class=\"col2\">tag4</td></tr>\n",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">label1</td><td class=\"col2\">label2</td></tr>\n<tr class=\"row2\"><td class=\"col1\">label3</td><td class=\"col2\">label4</td></tr>\n",
       "tags": [
         "tablerow tag"
       ]
