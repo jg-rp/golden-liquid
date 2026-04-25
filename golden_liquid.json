@@ -2,6 +2,381 @@
   "description": "Golden Liquid test suite",
   "tests": [
     {
+      "name": "blank and empty, array of length 0 is equal to blank",
+      "template": "{% if a == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "a": []
+      },
+      "result": "TRUE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, array of length 0 is equal to empty",
+      "template": "{% if a == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "a": []
+      },
+      "result": "TRUE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, array of length 1 is not equal to blank",
+      "template": "{% if a == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "a": [
+          "a"
+        ]
+      },
+      "result": "FALSE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, array of length 1 is not equal to empty",
+      "template": "{% if a == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "a": [
+          "a"
+        ]
+      },
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, blank coerces to an empty string",
+      "template": "{{ blank | split: '' | join: '-' }}",
+      "data": {},
+      "result": "",
+      "tags": [
+        "blank"
+      ]
+    },
+    {
+      "name": "blank and empty, blank coerces to zero",
+      "template": "{{ blank | plus: 1 }}",
+      "data": {},
+      "result": "1",
+      "tags": [
+        "blank"
+      ]
+    },
+    {
+      "name": "blank and empty, blank does not equal empty",
+      "template": "{% if blank == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "blank",
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, blank is a reserved word",
+      "template": "{{ blank }}",
+      "data": {
+        "blank": "x"
+      },
+      "result": "",
+      "tags": [
+        "blank"
+      ]
+    },
+    {
+      "name": "blank and empty, blank is truthy",
+      "template": "{% if blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, blank on left of a relational operators is false",
+      "template": "{% if blank <= 1 or blank >= 1 %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, blank on right of a relational operators is false",
+      "template": "{% if  1 >= blank or 1 <= blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, empty coerces to an empty string",
+      "template": "{{ empty | split: '' | join: '-' }}",
+      "data": {},
+      "result": "",
+      "tags": [
+        "empty"
+      ]
+    },
+    {
+      "name": "blank and empty, empty does not equal blank",
+      "template": "{% if empty == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "blank",
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, empty is a reserved word",
+      "template": "{{ empty }}",
+      "data": {
+        "empty": "x"
+      },
+      "result": "",
+      "tags": [
+        "empty"
+      ]
+    },
+    {
+      "name": "blank and empty, empty is truthy",
+      "template": "{% if empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, empty on left of a relational operators is false",
+      "template": "{% if empty <= 1 or empty >= 1 %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, empty on right of a relational operators is false",
+      "template": "{% if  1 >= empty or 1 <= empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, false is equal to blank",
+      "template": "{% if false == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, false is not equal to empty",
+      "template": "{% if false == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, nil is equal to blank",
+      "template": "{% if nil == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, nil is not equal to empty",
+      "template": "{% if nil == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, null is equal to blank",
+      "template": "{% if nil == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, null is not equal to empty",
+      "template": "{% if nil == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, object with no properties is equal to blank",
+      "template": "{% if obj == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {}
+      },
+      "result": "TRUE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, object with no properties is equal to empty",
+      "template": "{% if obj == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {}
+      },
+      "result": "TRUE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, object with one property is not equal to blank",
+      "template": "{% if obj == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "a": "b"
+        }
+      },
+      "result": "FALSE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, object with one property is not equal to empty",
+      "template": "{% if obj == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "a": "b"
+        }
+      },
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, string of length 0 is equal to blank",
+      "template": "{% if '' == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, string of length 0 is equal to empty",
+      "template": "{% if '' == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, string of length 1 is not equal to blank",
+      "template": "{% if 'a' == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, string of length 1 is not equal to empty",
+      "template": "{% if 'a' == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, true is not equal to blank",
+      "template": "{% if true == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, true is not equal to empty",
+      "template": "{% if true == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, undefined is equal to blank",
+      "template": "{% if nosuchthing == blank %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, undefined is not equal to empty",
+      "template": "{% if nosuchthing == empty %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "FALSE",
+      "tags": [
+        "empty",
+        "if tag"
+      ]
+    },
+    {
       "name": "identifiers, ascii lowercase",
       "template": "{% assign foo = 'hello' %}{{ foo }} {{ bar }}",
       "data": {
