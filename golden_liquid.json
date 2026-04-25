@@ -133,6 +133,15 @@
       ]
     },
     {
+      "name": "blank and empty, empty coerces to zero",
+      "template": "{{ empty | plus: 1 }}",
+      "data": {},
+      "result": "1",
+      "tags": [
+        "empty"
+      ]
+    },
+    {
       "name": "blank and empty, empty does not equal blank",
       "template": "{% if empty == blank %}TRUE{% else %}FALSE{% endif %}",
       "data": {},
