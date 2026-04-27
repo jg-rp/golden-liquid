@@ -2,6 +2,28 @@
   "description": "Golden Liquid test suite",
   "tests": [
     {
+      "name": "blank and empty, alias blank",
+      "template": "{% assign x = blank %}{% if '' == x %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "assign tag",
+        "blank",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, alias empty",
+      "template": "{% assign x = empty %}{% if '' == x %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": [
+        "assign tag",
+        "empty",
+        "if tag"
+      ]
+    },
+    {
       "name": "blank and empty, array of length 0 is equal to blank",
       "template": "{% if a == blank %}TRUE{% else %}FALSE{% endif %}",
       "data": {
@@ -211,6 +233,27 @@
       "tags": [
         "empty",
         "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, loop over blank",
+      "template": "{% for x in blank %}{% endfor %}",
+      "data": {},
+      "result": "",
+      "tags": [
+        "blank",
+        "for tag",
+        "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, loop over empty",
+      "template": "{% for x in blank %}{{ x }}{% endfor %}",
+      "data": {},
+      "result": "",
+      "tags": [
+        "empty",
+        "for tag"
       ]
     },
     {

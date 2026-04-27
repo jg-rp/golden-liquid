@@ -255,6 +255,34 @@
       "data": {},
       "result": "1",
       "tags": ["empty"]
+    },
+    {
+      "name": "loop over blank",
+      "template": "{% for x in blank %}{% endfor %}",
+      "data": {},
+      "result": "",
+      "tags": ["blank", "for tag"]
+    },
+    {
+      "name": "loop over empty",
+      "template": "{% for x in blank %}{{ x }}{% endfor %}",
+      "data": {},
+      "result": "",
+      "tags": ["empty", "for tag"]
+    },
+    {
+      "name": "alias blank",
+      "template": "{% assign x = blank %}{% if '' == x %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": ["blank", "assign tag", "if tag"]
+    },
+    {
+      "name": "alias empty",
+      "template": "{% assign x = empty %}{% if '' == x %}TRUE{% else %}FALSE{% endif %}",
+      "data": {},
+      "result": "TRUE",
+      "tags": ["empty", "assign tag", "if tag"]
     }
   ]
 }
