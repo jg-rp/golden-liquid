@@ -17,7 +17,7 @@
       ]
     },
     {
-      "name": "don't render comments with tags",
+      "name": "don't render comments with nested tags",
       "template": "{% comment %}{% if true %}{{ title }}{% endif %}{% endcomment %}",
       "result": "",
       "tags": [
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "name": "commented tags are not parsed",
+      "name": "fully formed nested tags are not parsed",
       "template": "{% comment %}    {% if true %}    {% if ... %}    {%- for ? -%}    {% while true %}    {%    unless if    %}    {% endcase %}{% endcomment %}",
       "result": "",
       "tags": [
@@ -43,7 +43,15 @@
       ]
     },
     {
-      "name": "malformed tags are not parsed",
+      "name": "fully formed nested output markup is not parsed",
+      "template": "{% comment %}{{ ! }}  {% endcomment %}",
+      "result": "",
+      "tags": [
+        "comment tag"
+      ]
+    },
+    {
+      "name": "incomplete nested tags are a syntax error",
       "template": "{% comment %}{% assign foo = '1'{% endcomment %}",
       "invalid": true,
       "tags": [
@@ -51,9 +59,25 @@
       ]
     },
     {
-      "name": "incomplete tags are not parsed",
-      "template": "{% comment %}{% {{ {%- endcomment %}",
+      "name": "incomplete nested output markup is a syntax error",
+      "template": "{% comment %}{{ {%- endcomment %}",
       "invalid": true,
+      "tags": [
+        "comment tag"
+      ]
+    },
+    {
+      "name": "closing tag delimiters are not parsed",
+      "template": "{% comment %} %} %}{% endcomment %}",
+      "result": "",
+      "tags": [
+        "comment tag"
+      ]
+    },
+    {
+      "name": "closing output delimiters are not parsed",
+      "template": "{% comment %} }} }} {%- endcomment %}",
+      "result": "",
       "tags": [
         "comment tag"
       ]
@@ -75,7 +99,7 @@
       ]
     },
     {
-      "name": "unclosed nested comment blocks",
+      "name": "unbalanced nested comment blocks",
       "template": "{% comment %}    {% comment %}    {% comment %}    {% endcomment %}{% endcomment %}",
       "invalid": true,
       "tags": [
@@ -83,9 +107,17 @@
       ]
     },
     {
-      "name": "raw inside comment block",
+      "name": "nested raw block",
       "template": "{% comment %}    {% raw %}    {% endcomment %}    {% endraw %}{% endcomment %}",
       "result": "",
+      "tags": [
+        "comment tag"
+      ]
+    },
+    {
+      "name": "unbalanced nested raw tag",
+      "template": "{% comment %}    {% raw %} ! {% endcomment %}",
+      "invalid": true,
       "tags": [
         "comment tag"
       ]
