@@ -6726,6 +6726,14 @@
       ]
     },
     {
+      "name": "filters, squish, left is undefined",
+      "template": "{{ nosuchthing | squish }}",
+      "result": "",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
       "name": "filters, squish, line terminators collapse to a single space",
       "template": "{{ \"Hello\n\t\r\nthere\n\t\r\nWorld!\" | squish }}",
       "result": "Hello there World!",
