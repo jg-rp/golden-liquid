@@ -182,6 +182,7 @@
           "strip filter",
           "strip_html filter",
           "strip_newlines filter",
+          "squish filter",
           "sum filter",
           "tablerow tag",
           "times filter",
