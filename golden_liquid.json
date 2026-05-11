@@ -6630,6 +6630,134 @@
       ]
     },
     {
+      "name": "filters, squish, any whitespace before between and after",
+      "template": "{{ \" \n\t\r\nHello  \n\t\r\n \n\t\r\n World!  \n\t\r\n\" | squish }}",
+      "result": "Hello World!",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, empty string",
+      "template": "{{ \"\" | squish }}",
+      "result": "",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, just space after",
+      "template": "{{ \"HelloWorld!  \" | squish }}",
+      "result": "HelloWorld!",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, just space before",
+      "template": "{{ \" HelloWorld!\" | squish }}",
+      "result": "HelloWorld!",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, just space between",
+      "template": "{{ \"Hello   World!\" | squish }}",
+      "result": "Hello World!",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, just whitespace",
+      "template": "{{ \" \n\t\r\" | squish }}",
+      "result": "",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, left is a float",
+      "template": "{{ 5.2 | squish }}",
+      "result": "5.2",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, left is an integer",
+      "template": "{{ 5 | squish }}",
+      "result": "5",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, left is false",
+      "template": "{{ false | squish }}",
+      "result": "false",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, left is nil",
+      "template": "{{ nil | squish }}",
+      "result": "",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, left is null",
+      "template": "{{ null | squish }}",
+      "result": "",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, left is true",
+      "template": "{{ true | squish }}",
+      "result": "true",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, line terminators collapse to a single space",
+      "template": "{{ \"Hello\n\t\r\nthere\n\t\r\nWorld!\" | squish }}",
+      "result": "Hello there World!",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, many words",
+      "template": "{{ \" \n\t\r\nHello  \n\t\r\nthere \n\t\r\nWorld!  \n\t\r\n\" | squish }}",
+      "result": "Hello there World!",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, space before and after",
+      "template": "{{ \" HelloWorld!   \" | squish }}",
+      "result": "HelloWorld!",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
+      "name": "filters, squish, space before between and after",
+      "template": "{{ \" Hello    World!   \" | squish }}",
+      "result": "Hello World!",
+      "tags": [
+        "squish filter"
+      ]
+    },
+    {
       "name": "filters, strip, left and right padded",
       "template": "{{ \" \t\r\n  hello  \t\r\n \" | strip }}",
       "result": "hello",
