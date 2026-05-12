@@ -1418,10 +1418,7 @@
       "data": {
         "s": "hello"
       },
-      "results": [
-        "h",
-        ""
-      ]
+      "result": "h"
     },
     {
       "name": "special, first of an array",
@@ -1488,10 +1485,7 @@
       "data": {
         "s": "hello"
       },
-      "results": [
-        "o",
-        ""
-      ]
+      "result": "o"
     },
     {
       "name": "special, last of an array",
@@ -3591,10 +3585,7 @@
     {
       "name": "filters, first, first of a string",
       "template": "{{ 'hello' | first }}",
-      "results": [
-        "",
-        "h"
-      ],
+      "result": "h",
       "tags": [
         "first filter"
       ]
@@ -4234,10 +4225,7 @@
     {
       "name": "filters, last, last of a string",
       "template": "{{ 'hello' | last }}",
-      "results": [
-        "",
-        "o"
-      ],
+      "result": "o",
       "tags": [
         "last filter"
       ]
