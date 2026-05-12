@@ -448,16 +448,6 @@
       "result": "hello"
     },
     {
-      "name": "identifiers, allowed symbols, repeated parens",
-      "template": "{% assign (aA1_-.[])(a)(foo) = 'hello' %}{{ [\"(aA1_-.[])(a)(foo)\"] }}",
-      "data": {},
-      "tags": [
-        "assign tag",
-        "strict"
-      ],
-      "result": "hello"
-    },
-    {
       "name": "identifiers, ascii lowercase",
       "template": "{% assign foo = 'hello' %}{{ foo }} {{ bar }}",
       "data": {
@@ -737,6 +727,16 @@
         "strict"
       ],
       "result": "hello goodbye"
+    },
+    {
+      "name": "identifiers, repeated parens",
+      "template": "{% assign (aA1_-.[])(a)(foo) = 'hello' %}{{ [\"(aA1_-.[])(a)(foo)\"] }}",
+      "data": {},
+      "tags": [
+        "assign tag",
+        "strict"
+      ],
+      "result": "hello"
     },
     {
       "name": "identifiers, trailing question mark assign",
