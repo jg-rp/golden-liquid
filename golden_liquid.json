@@ -448,16 +448,6 @@
       "result": "hello"
     },
     {
-      "name": "identifiers, allowed symbols, repeated parens",
-      "template": "{% assign (aA1_-.[])(a)(foo) = 'hello' %}{{ [\"(aA1_-.[])(a)(foo)\"] }}",
-      "data": {},
-      "tags": [
-        "assign tag",
-        "strict"
-      ],
-      "result": "hello"
-    },
-    {
       "name": "identifiers, ascii lowercase",
       "template": "{% assign foo = 'hello' %}{{ foo }} {{ bar }}",
       "data": {
@@ -737,6 +727,16 @@
         "strict"
       ],
       "result": "hello goodbye"
+    },
+    {
+      "name": "identifiers, repeated parens",
+      "template": "{% assign (aA1_-.[])(a)(foo) = 'hello' %}{{ [\"(aA1_-.[])(a)(foo)\"] }}",
+      "data": {},
+      "tags": [
+        "assign tag",
+        "strict"
+      ],
+      "result": "hello"
     },
     {
       "name": "identifiers, trailing question mark assign",
@@ -1418,10 +1418,7 @@
       "data": {
         "s": "hello"
       },
-      "results": [
-        "h",
-        ""
-      ]
+      "result": "h"
     },
     {
       "name": "special, first of an array",
@@ -1488,10 +1485,7 @@
       "data": {
         "s": "hello"
       },
-      "results": [
-        "o",
-        ""
-      ]
+      "result": "o"
     },
     {
       "name": "special, last of an array",
@@ -3591,10 +3585,7 @@
     {
       "name": "filters, first, first of a string",
       "template": "{{ 'hello' | first }}",
-      "results": [
-        "",
-        "h"
-      ],
+      "result": "h",
       "tags": [
         "first filter"
       ]
@@ -4234,10 +4225,7 @@
     {
       "name": "filters, last, last of a string",
       "template": "{{ 'hello' | last }}",
-      "results": [
-        "",
-        "o"
-      ],
+      "result": "o",
       "tags": [
         "last filter"
       ]

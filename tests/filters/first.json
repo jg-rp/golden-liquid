@@ -72,10 +72,7 @@
     {
       "name": "first of a string",
       "template": "{{ 'hello' | first }}",
-      "results": [
-        "",
-        "h"
-      ],
+      "result": "h",
       "tags": [
         "first filter"
       ]

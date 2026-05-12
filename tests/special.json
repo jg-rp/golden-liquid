@@ -50,10 +50,7 @@
       "data": {
         "s": "hello"
       },
-      "results": [
-        "h",
-        ""
-      ]
+      "result": "h"
     },
     {
       "name": "first of an object",
@@ -86,10 +83,7 @@
       "data": {
         "s": "hello"
       },
-      "results": [
-        "o",
-        ""
-      ]
+      "result": "o"
     },
     {
       "name": "last of a object",
