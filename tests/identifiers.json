@@ -38,7 +38,7 @@
     },
     {
       "name": "only digits",
-      "template": "{% assign 123 = 'hello' %}{{ 123 }} {{ 456 }}",
+      "template": "{% assign 123 = 'hello' %}{{ 123 }} {{ 456 }} {{ [\"123\"] }} {{ [\"456\"] }}",
       "data": {
         "456": "goodbye"
       },
@@ -46,7 +46,49 @@
         "assign tag",
         "strict"
       ],
-      "result": "123 456"
+      "result": "123 456 hello goodbye"
+    },
+    {
+      "name": "allowed symbols",
+      "template": "{% assign aA1_-.[] = 'hello' %}{{ [\"aA1_-.[]\"] }}",
+      "data": {},
+      "tags": [
+        "assign tag",
+        "strict"
+      ],
+      "result": "hello"
+    },
+    {
+      "name": "allowed symbols, parens",
+      "template": "{% assign (aA1_-.[]) = 'hello' %}{{ [\"(aA1_-.[])\"] }}",
+      "data": {},
+      "tags": [
+        "assign tag",
+        "strict"
+      ],
+      "result": "hello"
+    },
+    {
+      "name": "repeated parens",
+      "template": "{% assign (aA1_-.[])(a)(foo) = 'hello' %}{{ [\"(aA1_-.[])(a)(foo)\"] }}",
+      "data": {},
+      "tags": [
+        "assign tag",
+        "strict"
+      ],
+      "result": "hello"
+    },
+    {
+      "name": "only digits, self",
+      "template": "{% assign 123 = 'hello' %}",
+      "data": {
+        "456": "goodbye"
+      },
+      "tags": [
+        "assign tag",
+        "strict2"
+      ],
+      "invalid": true
     },
     {
       "name": "hyphens",
@@ -255,12 +297,12 @@
     },
     {
       "name": "capture only digits",
-      "template": "{% capture 123 %}hello{% endcapture %}{{ 123 }}",
+      "template": "{% capture 123 %}hello{% endcapture %}{{ 123 }} {{ [\"123\"] }}",
       "tags": [
         "capture tag",
         "strict"
       ],
-      "result": "123"
+      "result": "123 hello"
     },
     {
       "name": "capture hyphens",
