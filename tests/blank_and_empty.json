@@ -10,12 +10,78 @@
       "tags": ["blank"]
     },
     {
+      "name": "blank followed by variable segments is not a reserved word",
+      "template": "{{ blank.a }}",
+      "data": {
+        "blank": {
+          "a": 42
+        }
+      },
+      "result": "42",
+      "tags": ["blank"]
+    },
+    {
+      "name": "blank followed by variable segments is not a reserved word in a condition",
+      "template": "{% if blank.a == 42 %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "blank": {
+          "a": 42
+        }
+      },
+      "result": "TRUE",
+      "tags": ["blank"]
+    },
+    {
+      "name": "blank followed by variable segments is not a reserved word on the right of a comparison",
+      "template": "{% if 42 == blank.a %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "blank": {
+          "a": 42
+        }
+      },
+      "result": "TRUE",
+      "tags": ["blank"]
+    },
+    {
+      "name": "blank followed by bracketed segments is not a reserved word",
+      "template": "{{ blank['a'] }}",
+      "data": {
+        "blank": {
+          "a": 42
+        }
+      },
+      "result": "42",
+      "tags": ["blank"]
+    },
+    {
       "name": "empty is a reserved word",
       "template": "{{ empty }}",
       "data": {
         "empty": "x"
       },
       "result": "",
+      "tags": ["empty"]
+    },
+    {
+      "name": "empty followed by bracketed segments is not a reserved word",
+      "template": "{{ empty.b }}",
+      "data": {
+        "empty": {
+          "b": "hello"
+        }
+      },
+      "result": "hello",
+      "tags": ["empty"]
+    },
+    {
+      "name": "empty followed by bracketed segments is an error",
+      "template": "{{ empty['b'] }}",
+      "data": {
+        "empty": {
+          "b": "hello"
+        }
+      },
+      "result": "hello",
       "tags": ["empty"]
     },
     {

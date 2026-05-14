@@ -105,6 +105,58 @@
       ]
     },
     {
+      "name": "blank and empty, blank followed by bracketed segments is not a reserved word",
+      "template": "{{ blank['a'] }}",
+      "data": {
+        "blank": {
+          "a": 42
+        }
+      },
+      "result": "42",
+      "tags": [
+        "blank"
+      ]
+    },
+    {
+      "name": "blank and empty, blank followed by variable segments is not a reserved word",
+      "template": "{{ blank.a }}",
+      "data": {
+        "blank": {
+          "a": 42
+        }
+      },
+      "result": "42",
+      "tags": [
+        "blank"
+      ]
+    },
+    {
+      "name": "blank and empty, blank followed by variable segments is not a reserved word in a condition",
+      "template": "{% if blank.a == 42 %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "blank": {
+          "a": 42
+        }
+      },
+      "result": "TRUE",
+      "tags": [
+        "blank"
+      ]
+    },
+    {
+      "name": "blank and empty, blank followed by variable segments is not a reserved word on the right of a comparison",
+      "template": "{% if 42 == blank.a %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "blank": {
+          "a": 42
+        }
+      },
+      "result": "TRUE",
+      "tags": [
+        "blank"
+      ]
+    },
+    {
       "name": "blank and empty, blank is a reserved word",
       "template": "{{ blank }}",
       "data": {
@@ -172,6 +224,32 @@
         "blank",
         "empty",
         "if tag"
+      ]
+    },
+    {
+      "name": "blank and empty, empty followed by bracketed segments is an error",
+      "template": "{{ empty['b'] }}",
+      "data": {
+        "empty": {
+          "b": "hello"
+        }
+      },
+      "result": "hello",
+      "tags": [
+        "empty"
+      ]
+    },
+    {
+      "name": "blank and empty, empty followed by bracketed segments is not a reserved word",
+      "template": "{{ empty.b }}",
+      "data": {
+        "empty": {
+          "b": "hello"
+        }
+      },
+      "result": "hello",
+      "tags": [
+        "empty"
       ]
     },
     {
@@ -600,6 +678,20 @@
       "result": "hello goodbye"
     },
     {
+      "name": "identifiers, false followed by variable segments is not a reserved word",
+      "template": "{% if false.x == 7 %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "false": {
+          "x": 7
+        }
+      },
+      "tags": [
+        "if tag",
+        "strict"
+      ],
+      "result": "TRUE"
+    },
+    {
       "name": "identifiers, hyphen in for loop target",
       "template": "{% for x in f-oo %}{{ x }}{% endfor %}",
       "data": {
@@ -691,6 +783,22 @@
         "strict"
       ],
       "result": "hello goodbye"
+    },
+    {
+      "name": "identifiers, nil followed by variable segments is not a reserved word",
+      "template": "{% if nil.x.y == 42 %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "nil": {
+          "x": {
+            "y": 42
+          }
+        }
+      },
+      "tags": [
+        "if tag",
+        "strict"
+      ],
+      "result": "TRUE"
     },
     {
       "name": "identifiers, only digits",
@@ -789,6 +897,20 @@
         "strict"
       ],
       "result": "goodbye"
+    },
+    {
+      "name": "identifiers, true followed by variable segments is not a reserved word",
+      "template": "{% if true.x == true['x'] %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "false": {
+          "x": 7
+        }
+      },
+      "tags": [
+        "if tag",
+        "strict"
+      ],
+      "result": "TRUE"
     },
     {
       "name": "identifiers, underscore",

@@ -374,6 +374,50 @@
         "strict"
       ],
       "invalid": true
+    },
+    {
+      "name": "false followed by variable segments is not a reserved word",
+      "template": "{% if false.x == 7 %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "false": {
+          "x": 7
+        }
+      },
+      "tags": [
+        "if tag",
+        "strict"
+      ],
+      "result": "TRUE"
+    },
+    {
+      "name": "true followed by variable segments is not a reserved word",
+      "template": "{% if true.x == true['x'] %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "false": {
+          "x": 7
+        }
+      },
+      "tags": [
+        "if tag",
+        "strict"
+      ],
+      "result": "TRUE"
+    },
+    {
+      "name": "nil followed by variable segments is not a reserved word",
+      "template": "{% if nil.x.y == 42 %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "nil": {
+          "x": {
+            "y": 42
+          }
+        }
+      },
+      "tags": [
+        "if tag",
+        "strict"
+      ],
+      "result": "TRUE"
     }
   ]
 }
