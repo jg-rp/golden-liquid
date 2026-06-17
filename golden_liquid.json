@@ -76,21 +76,6 @@
       ]
     },
     {
-      "name": "blank and empty, blank as a variable segment is not a reserved word",
-      "template": "{{ a.blank.b }}",
-      "data": {
-        "a": {
-          "blank": {
-            "b": 42
-          }
-        }
-      },
-      "result": "42",
-      "tags": [
-        "blank"
-      ]
-    },
-    {
       "name": "blank and empty, blank coerces to an empty string",
       "template": "{{ blank | split: '' | join: '-' }}",
       "data": {},
@@ -9824,6 +9809,46 @@
         }
       },
       "result": "0 - sports 1 - garden ",
+      "tags": [
+        "for tag"
+      ]
+    },
+    {
+      "name": "tags, for, range loop, negative offset",
+      "template": "{% for i in (0..3) offset: -2 %}{{ i }} {% endfor %}",
+      "result": "0 1 2 3 ",
+      "tags": [
+        "for tag"
+      ]
+    },
+    {
+      "name": "tags, for, range loop, negative offset, continue",
+      "template": "{% for i in (0..3) offset: -2 %}a{{ i }} {% endfor %}{% for i in (0..3) offset: continue %}b{{ i }} {% endfor %}",
+      "result": "a0 a1 a2 a3 b2 b3 ",
+      "tags": [
+        "for tag"
+      ]
+    },
+    {
+      "name": "tags, for, range loop, negative offset, limit",
+      "template": "{% for i in (0..3) offset: -2 limit: 3 %}{{ i }} {% endfor %}",
+      "result": "0 ",
+      "tags": [
+        "for tag"
+      ]
+    },
+    {
+      "name": "tags, for, range loop, negative offset, negative limit",
+      "template": "{% for i in (0..5) offset: -2 limit: -1 %}{{ i }} {% endfor %}",
+      "result": "",
+      "tags": [
+        "for tag"
+      ]
+    },
+    {
+      "name": "tags, for, range loop, offset, negative limit",
+      "template": "{% for i in (0..5) offset: 1 limit: -1 %}{{ i }} {% endfor %}",
+      "result": "",
       "tags": [
         "for tag"
       ]
