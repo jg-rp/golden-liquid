@@ -141,6 +141,25 @@
         "slice filter"
       ],
       "result": "..5"
+    },
+    {
+      "name": "float literal is truncated",
+      "template": "{{ (2.3..5) | join: '#' }}",
+      "result": "2#3#4#5",
+      "tags": [
+        "join filter"
+      ]
+    },
+    {
+      "name": "float from a variable is an error",
+      "template": "{{ (x..5) | join: '#' }}",
+      "data": {
+        "x": 2.3
+      },
+      "invalid": true,
+      "tags": [
+        "join filter"
+      ]
     }
   ]
 }

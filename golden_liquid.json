@@ -1442,6 +1442,25 @@
       ]
     },
     {
+      "name": "range, float from a variable is an error",
+      "template": "{{ (x..5) | join: '#' }}",
+      "data": {
+        "x": 2.3
+      },
+      "invalid": true,
+      "tags": [
+        "join filter"
+      ]
+    },
+    {
+      "name": "range, float literal is truncated",
+      "template": "{{ (2.3..5) | join: '#' }}",
+      "result": "2#3#4#5",
+      "tags": [
+        "join filter"
+      ]
+    },
+    {
       "name": "range, integer literals",
       "template": "{{ (1..5) | join: '#' }}",
       "result": "1#2#3#4#5",
