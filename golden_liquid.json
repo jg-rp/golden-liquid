@@ -6372,6 +6372,27 @@
       ]
     },
     {
+      "name": "filters, sort, array of objects with a numeric key",
+      "template": "{% assign x = a | sort: 'n' %}{% for obj in x %}{{ obj.n }} {% endfor %}",
+      "data": {
+        "a": [
+          {
+            "n": 10
+          },
+          {
+            "n": 9
+          },
+          {
+            "n": 100
+          }
+        ]
+      },
+      "result": "9 10 100 ",
+      "tags": [
+        "sort filter"
+      ]
+    },
+    {
       "name": "filters, sort, array of objects with missing key",
       "template": "{% assign x = a | sort: 'title' %}{% for obj in x %}{% for i in obj %}({{ i[0] }},{{ i[1] }}){% endfor %}{% endfor %}",
       "data": {
