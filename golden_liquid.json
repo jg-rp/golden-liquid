@@ -2429,6 +2429,14 @@
       ]
     },
     {
+      "name": "filters, capitalize, mixed case string",
+      "template": "{{ 'hELLO wORLD' | capitalize }}",
+      "result": "Hello world",
+      "tags": [
+        "capitalize filter"
+      ]
+    },
+    {
       "name": "filters, capitalize, multi-word string",
       "template": "{{ \"hello world\" | capitalize }}",
       "result": "Hello world",
@@ -2448,6 +2456,14 @@
       "name": "filters, capitalize, unexpected argument",
       "template": "{{ \"hello\" | capitalize: 2 }}",
       "invalid": true,
+      "tags": [
+        "capitalize filter"
+      ]
+    },
+    {
+      "name": "filters, capitalize, upper case string",
+      "template": "{{ 'HELLO' | capitalize }}",
+      "result": "Hello",
       "tags": [
         "capitalize filter"
       ]
@@ -2627,6 +2643,28 @@
       ]
     },
     {
+      "name": "filters, concat, hashes are kept as items",
+      "template": "{% assign x = a | concat: b %}{{ x | size }}:{% for h in x %}{{ h.k }} {% endfor %}",
+      "data": {
+        "a": [
+          {
+            "k": "a",
+            "l": 1,
+            "m": 2
+          }
+        ],
+        "b": [
+          {
+            "k": "b"
+          }
+        ]
+      },
+      "result": "2:a b ",
+      "tags": [
+        "concat filter"
+      ]
+    },
+    {
       "name": "filters, concat, left value contains non string",
       "template": "{{ a | concat: b | join: '#' }}",
       "data": {
@@ -2702,6 +2740,26 @@
         ]
       },
       "result": "a#x#b#y#z#c#d",
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
+    },
+    {
+      "name": "filters, concat, nil items are kept",
+      "template": "{% assign x = a | concat: b %}{{ x | size }}:{{ x | join: '#' }}",
+      "data": {
+        "a": [
+          1,
+          null,
+          2
+        ],
+        "b": [
+          null,
+          3
+        ]
+      },
+      "result": "5:1##2##3",
       "tags": [
         "concat filter",
         "join filter"
@@ -2789,6 +2847,42 @@
       ]
     },
     {
+      "name": "filters, date, blank padded hours",
+      "template": "{{ '2024-01-01 09:00:00 +00:00' | date: '%k|%l' }}",
+      "result": " 9| 9",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "filters, date, fractional seconds",
+      "template": "{{ '2024-01-01 00:00:00.005 +00:00' | date: '%N %3N %L' }}",
+      "result": "005000000 005 005",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "filters, date, iso week date in the next year",
+      "template": "{{ '2024-12-30 12:00:00 +00:00' | date: '%V %G %g' }}",
+      "result": "01 2025 25",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "filters, date, iso week date in the previous year",
+      "template": "{{ '2021-01-01 12:00:00 +00:00' | date: '%V %G %g' }}",
+      "result": "53 2020 20",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
       "name": "filters, date, literal percent",
       "template": "{{ 'March 14, 2016' | date: '%%%b %d, %y' }}",
       "result": "%Mar 14, 16",
@@ -2810,6 +2904,15 @@
       "result": "-1152098955",
       "tags": [
         "date filter"
+      ]
+    },
+    {
+      "name": "filters, date, no padding flag on zero",
+      "template": "{{ '2024-01-01 09:00:00 +00:00' | date: '%-M %-S %-H' }}",
+      "result": "0 0 9",
+      "tags": [
+        "date filter",
+        "utc"
       ]
     },
     {
@@ -5977,9 +6080,41 @@
       ]
     },
     {
+      "name": "filters, round, half at decimal places",
+      "template": "{{ 1.125 | round: 2 }}",
+      "result": "1.13",
+      "tags": [
+        "round filter"
+      ]
+    },
+    {
+      "name": "filters, round, half below one rounds up",
+      "template": "{{ 0.5 | round }}",
+      "result": "1",
+      "tags": [
+        "round filter"
+      ]
+    },
+    {
+      "name": "filters, round, half rounds up",
+      "template": "{{ 2.5 | round }}",
+      "result": "3",
+      "tags": [
+        "round filter"
+      ]
+    },
+    {
       "name": "filters, round, integer",
       "template": "{{ 5 | round }}",
       "result": "5",
+      "tags": [
+        "round filter"
+      ]
+    },
+    {
+      "name": "filters, round, negative half rounds away from zero",
+      "template": "{{ -2.5 | round }}",
+      "result": "-3",
       "tags": [
         "round filter"
       ]
@@ -6368,6 +6503,27 @@
       "tags": [
         "assign tag",
         "for tag",
+        "sort filter"
+      ]
+    },
+    {
+      "name": "filters, sort, array of objects with a numeric key",
+      "template": "{% assign x = a | sort: 'n' %}{% for obj in x %}{{ obj.n }} {% endfor %}",
+      "data": {
+        "a": [
+          {
+            "n": 10
+          },
+          {
+            "n": 9
+          },
+          {
+            "n": 100
+          }
+        ]
+      },
+      "result": "9 10 100 ",
+      "tags": [
         "sort filter"
       ]
     },
@@ -7534,6 +7690,14 @@
       ]
     },
     {
+      "name": "filters, truncatewords, as many words as the word count",
+      "template": "{{ 'one two three' | truncatewords: 3 }}",
+      "result": "one two three",
+      "tags": [
+        "truncatewords filter"
+      ]
+    },
+    {
       "name": "filters, truncatewords, custom end",
       "template": "{{ \"Ground control to Major Tom.\" | truncatewords: 3, \"--\" }}",
       "result": "Ground control to--",
@@ -7649,6 +7813,14 @@
       "name": "filters, truncatewords, undefined second argument",
       "template": "{{ \"one two three four\" | truncatewords: 2, nosuchthing }}",
       "result": "one two",
+      "tags": [
+        "truncatewords filter"
+      ]
+    },
+    {
+      "name": "filters, truncatewords, untruncated input keeps its whitespace",
+      "template": "[{{ '  one   two ' | truncatewords: 5 }}]",
+      "result": "[  one   two ]",
       "tags": [
         "truncatewords filter"
       ]
@@ -8232,6 +8404,42 @@
       ]
     },
     {
+      "name": "tags, capture, capture assign",
+      "template": "{% capture x %}{% assign y = 2 %}{% endcapture %}[{{ x }}{{ y }}]",
+      "result": "[2]",
+      "tags": [
+        "assign tag",
+        "capture tag"
+      ]
+    },
+    {
+      "name": "tags, capture, capture cycle",
+      "template": "{% capture x %}{% cycle 'a', 'b' %}{% endcapture %}[{{ x }}]{% cycle 'a', 'b' %}",
+      "result": "[a]b",
+      "tags": [
+        "capture tag",
+        "cycle tag"
+      ]
+    },
+    {
+      "name": "tags, capture, capture decrement",
+      "template": "{% capture x %}{% decrement a %}{% endcapture %}[{{ x }}]{% decrement a %}",
+      "result": "[-1]-2",
+      "tags": [
+        "capture tag",
+        "decrement tag"
+      ]
+    },
+    {
+      "name": "tags, capture, capture increment",
+      "template": "{% capture x %}{% increment a %}{% endcapture %}[{{ x }}]{% increment a %}",
+      "result": "[0]1",
+      "tags": [
+        "capture tag",
+        "increment tag"
+      ]
+    },
+    {
       "name": "tags, capture, capture into a variable with a hyphen",
       "template": "{% capture this-thing %}Hello, {{ customer.first_name }}.{% endcapture %}{{ this-thing }}",
       "data": {
@@ -8253,6 +8461,14 @@
         }
       },
       "result": "Hello, Holly.",
+      "tags": [
+        "capture tag"
+      ]
+    },
+    {
+      "name": "tags, capture, capture whitespace",
+      "template": "{% capture x %}  {% endcapture %}[{{ x }}]",
+      "result": "[  ]",
       "tags": [
         "capture tag"
       ]
@@ -8732,6 +8948,15 @@
       ]
     },
     {
+      "name": "tags, cycle, whitespace in a block",
+      "template": "{% if true %} {% cycle 'a', 'b' %} {% endif %}",
+      "result": " a ",
+      "tags": [
+        "cycle tag",
+        "if tag"
+      ]
+    },
+    {
       "name": "tags, cycle, with identifier",
       "template": "{% cycle 'foo': 'some', 'other' %}{% cycle 'some', 'other' %}{% cycle 'foo': 'some', 'other' %}",
       "result": "somesomeother",
@@ -8754,6 +8979,15 @@
       "result": "-1-1 -2-2",
       "tags": [
         "decrement tag"
+      ]
+    },
+    {
+      "name": "tags, decrement, whitespace in a block",
+      "template": "{% if true %} {% decrement a %} {% endif %}",
+      "result": " -1 ",
+      "tags": [
+        "decrement tag",
+        "if tag"
       ]
     },
     {
@@ -10367,6 +10601,19 @@
       "invalid": true
     },
     {
+      "name": "tags, if, object contains key",
+      "template": "{% if obj contains 'foo' %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        }
+      },
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
+    },
+    {
       "name": "tags, if, object contains nil",
       "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
       "data": {
@@ -10382,6 +10629,19 @@
     {
       "name": "tags, if, object contains undefined",
       "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        }
+      },
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
+    },
+    {
+      "name": "tags, if, object contains value",
+      "template": "{% if obj contains 'bar' %}TRUE{% else %}FALSE{% endif %}",
       "data": {
         "obj": {
           "foo": "bar"
@@ -10993,6 +11253,15 @@
       "name": "tags, increment, named counters are in scope for subsequent expressions",
       "template": "{% increment foo %} {% increment foo %} {% if foo > 0 %}{{ foo }}{% endif %}",
       "result": "0 1 2",
+      "tags": [
+        "if tag",
+        "increment tag"
+      ]
+    },
+    {
+      "name": "tags, increment, whitespace in a block",
+      "template": "{% if true %} {% increment a %} {% endif %}",
+      "result": " 0 ",
       "tags": [
         "if tag",
         "increment tag"
@@ -11675,6 +11944,22 @@
       "name": "tags, tablerow, limit is a string",
       "template": "{% tablerow i in (1..4) limit:'2' %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
       "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
+    },
+    {
+      "name": "tags, tablerow, negative offset",
+      "template": "{% tablerow i in (1..3) offset: -1 %}{{ i }}{% endtablerow %}",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td><td class=\"col2\">2</td><td class=\"col3\">3</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
+    },
+    {
+      "name": "tags, tablerow, negative offset and limit",
+      "template": "{% tablerow i in (1..3) offset: -1 limit: 2 %}{{ i }}{% endtablerow %}",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td></tr>\n",
       "tags": [
         "tablerow tag"
       ]

@@ -163,6 +163,22 @@
         "for tag",
         "tablerow tag"
       ]
+    },
+    {
+      "name": "negative offset",
+      "template": "{% tablerow i in (1..3) offset: -1 %}{{ i }}{% endtablerow %}",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td><td class=\"col2\">2</td><td class=\"col3\">3</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
+    },
+    {
+      "name": "negative offset and limit",
+      "template": "{% tablerow i in (1..3) offset: -1 limit: 2 %}{{ i }}{% endtablerow %}",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
     }
   ]
 }

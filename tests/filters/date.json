@@ -80,6 +80,51 @@
         "date filter",
         "utc"
       ]
+    },
+    {
+      "name": "no padding flag on zero",
+      "template": "{{ '2024-01-01 09:00:00 +00:00' | date: '%-M %-S %-H' }}",
+      "result": "0 0 9",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "blank padded hours",
+      "template": "{{ '2024-01-01 09:00:00 +00:00' | date: '%k|%l' }}",
+      "result": " 9| 9",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "fractional seconds",
+      "template": "{{ '2024-01-01 00:00:00.005 +00:00' | date: '%N %3N %L' }}",
+      "result": "005000000 005 005",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "iso week date in the next year",
+      "template": "{{ '2024-12-30 12:00:00 +00:00' | date: '%V %G %g' }}",
+      "result": "01 2025 25",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "iso week date in the previous year",
+      "template": "{{ '2021-01-01 12:00:00 +00:00' | date: '%V %G %g' }}",
+      "result": "53 2020 20",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
     }
   ]
 }

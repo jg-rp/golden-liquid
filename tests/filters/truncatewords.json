@@ -127,6 +127,22 @@
       "tags": [
         "truncatewords filter"
       ]
+    },
+    {
+      "name": "as many words as the word count",
+      "template": "{{ 'one two three' | truncatewords: 3 }}",
+      "result": "one two three",
+      "tags": [
+        "truncatewords filter"
+      ]
+    },
+    {
+      "name": "untruncated input keeps its whitespace",
+      "template": "[{{ '  one   two ' | truncatewords: 5 }}]",
+      "result": "[  one   two ]",
+      "tags": [
+        "truncatewords filter"
+      ]
     }
   ]
 }

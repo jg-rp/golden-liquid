@@ -39,6 +39,22 @@
       "tags": [
         "capitalize filter"
       ]
+    },
+    {
+      "name": "mixed case string",
+      "template": "{{ 'hELLO wORLD' | capitalize }}",
+      "result": "Hello world",
+      "tags": [
+        "capitalize filter"
+      ]
+    },
+    {
+      "name": "upper case string",
+      "template": "{{ 'HELLO' | capitalize }}",
+      "result": "Hello",
+      "tags": [
+        "capitalize filter"
+      ]
     }
   ]
 }

@@ -694,6 +694,32 @@
         "if tag"
       ],
       "invalid": true
+    },
+    {
+      "name": "object contains key",
+      "template": "{% if obj contains 'foo' %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        }
+      },
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
+    },
+    {
+      "name": "object contains value",
+      "template": "{% if obj contains 'bar' %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        }
+      },
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
     }
   ]
 }
