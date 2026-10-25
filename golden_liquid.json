@@ -1010,6 +1010,18 @@
       ]
     },
     {
+      "name": "output, array index far out of bounds",
+      "template": "[{{ a[9999999999] }}]",
+      "data": {
+        "a": [
+          1,
+          2,
+          3
+        ]
+      },
+      "result": "[]"
+    },
+    {
       "name": "output, array index out of bounds",
       "template": "{{ a[3] }}",
       "data": {
@@ -1142,6 +1154,18 @@
       "tags": [
         "join filter"
       ]
+    },
+    {
+      "name": "output, negative array index far out of bounds",
+      "template": "[{{ a[-9999999999] }}]",
+      "data": {
+        "a": [
+          1,
+          2,
+          3
+        ]
+      },
+      "result": "[]"
     },
     {
       "name": "output, negative array index out of bounds",
