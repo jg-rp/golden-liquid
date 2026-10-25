@@ -2429,6 +2429,14 @@
       ]
     },
     {
+      "name": "filters, capitalize, mixed case string",
+      "template": "{{ 'hELLO wORLD' | capitalize }}",
+      "result": "Hello world",
+      "tags": [
+        "capitalize filter"
+      ]
+    },
+    {
       "name": "filters, capitalize, multi-word string",
       "template": "{{ \"hello world\" | capitalize }}",
       "result": "Hello world",
@@ -2448,6 +2456,14 @@
       "name": "filters, capitalize, unexpected argument",
       "template": "{{ \"hello\" | capitalize: 2 }}",
       "invalid": true,
+      "tags": [
+        "capitalize filter"
+      ]
+    },
+    {
+      "name": "filters, capitalize, upper case string",
+      "template": "{{ 'HELLO' | capitalize }}",
+      "result": "Hello",
       "tags": [
         "capitalize filter"
       ]
