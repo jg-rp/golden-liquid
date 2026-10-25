@@ -2847,6 +2847,42 @@
       ]
     },
     {
+      "name": "filters, date, blank padded hours",
+      "template": "{{ '2024-01-01 09:00:00 +00:00' | date: '%k|%l' }}",
+      "result": " 9| 9",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "filters, date, fractional seconds",
+      "template": "{{ '2024-01-01 00:00:00.005 +00:00' | date: '%N %3N %L' }}",
+      "result": "005000000 005 005",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "filters, date, iso week date in the next year",
+      "template": "{{ '2024-12-30 12:00:00 +00:00' | date: '%V %G %g' }}",
+      "result": "01 2025 25",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
+      "name": "filters, date, iso week date in the previous year",
+      "template": "{{ '2021-01-01 12:00:00 +00:00' | date: '%V %G %g' }}",
+      "result": "53 2020 20",
+      "tags": [
+        "date filter",
+        "utc"
+      ]
+    },
+    {
       "name": "filters, date, literal percent",
       "template": "{{ 'March 14, 2016' | date: '%%%b %d, %y' }}",
       "result": "%Mar 14, 16",
@@ -2868,6 +2904,15 @@
       "result": "-1152098955",
       "tags": [
         "date filter"
+      ]
+    },
+    {
+      "name": "filters, date, no padding flag on zero",
+      "template": "{{ '2024-01-01 09:00:00 +00:00' | date: '%-M %-S %-H' }}",
+      "result": "0 0 9",
+      "tags": [
+        "date filter",
+        "utc"
       ]
     },
     {
@@ -7645,6 +7690,14 @@
       ]
     },
     {
+      "name": "filters, truncatewords, as many words as the word count",
+      "template": "{{ 'one two three' | truncatewords: 3 }}",
+      "result": "one two three",
+      "tags": [
+        "truncatewords filter"
+      ]
+    },
+    {
       "name": "filters, truncatewords, custom end",
       "template": "{{ \"Ground control to Major Tom.\" | truncatewords: 3, \"--\" }}",
       "result": "Ground control to--",
@@ -7760,6 +7813,14 @@
       "name": "filters, truncatewords, undefined second argument",
       "template": "{{ \"one two three four\" | truncatewords: 2, nosuchthing }}",
       "result": "one two",
+      "tags": [
+        "truncatewords filter"
+      ]
+    },
+    {
+      "name": "filters, truncatewords, untruncated input keeps its whitespace",
+      "template": "[{{ '  one   two ' | truncatewords: 5 }}]",
+      "result": "[  one   two ]",
       "tags": [
         "truncatewords filter"
       ]
@@ -8887,6 +8948,15 @@
       ]
     },
     {
+      "name": "tags, cycle, whitespace in a block",
+      "template": "{% if true %} {% cycle 'a', 'b' %} {% endif %}",
+      "result": " a ",
+      "tags": [
+        "cycle tag",
+        "if tag"
+      ]
+    },
+    {
       "name": "tags, cycle, with identifier",
       "template": "{% cycle 'foo': 'some', 'other' %}{% cycle 'some', 'other' %}{% cycle 'foo': 'some', 'other' %}",
       "result": "somesomeother",
@@ -8909,6 +8979,15 @@
       "result": "-1-1 -2-2",
       "tags": [
         "decrement tag"
+      ]
+    },
+    {
+      "name": "tags, decrement, whitespace in a block",
+      "template": "{% if true %} {% decrement a %} {% endif %}",
+      "result": " -1 ",
+      "tags": [
+        "decrement tag",
+        "if tag"
       ]
     },
     {
@@ -11180,6 +11259,15 @@
       ]
     },
     {
+      "name": "tags, increment, whitespace in a block",
+      "template": "{% if true %} {% increment a %} {% endif %}",
+      "result": " 0 ",
+      "tags": [
+        "if tag",
+        "increment tag"
+      ]
+    },
+    {
       "name": "tags, inline comment, can't comment tags",
       "template": "{%- # {% echo 'hello world' %} -%}",
       "result": " -%}",
@@ -11856,6 +11944,22 @@
       "name": "tags, tablerow, limit is a string",
       "template": "{% tablerow i in (1..4) limit:'2' %}{{ i }} {{ tablerowloop.col_first }}{% endtablerow %}",
       "result": "<tr class=\"row1\">\n<td class=\"col1\">1 true</td><td class=\"col2\">2 false</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
+    },
+    {
+      "name": "tags, tablerow, negative offset",
+      "template": "{% tablerow i in (1..3) offset: -1 %}{{ i }}{% endtablerow %}",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td><td class=\"col2\">2</td><td class=\"col3\">3</td></tr>\n",
+      "tags": [
+        "tablerow tag"
+      ]
+    },
+    {
+      "name": "tags, tablerow, negative offset and limit",
+      "template": "{% tablerow i in (1..3) offset: -1 limit: 2 %}{{ i }}{% endtablerow %}",
+      "result": "<tr class=\"row1\">\n<td class=\"col1\">1</td></tr>\n",
       "tags": [
         "tablerow tag"
       ]
