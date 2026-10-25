@@ -454,6 +454,30 @@
         ]
       },
       "result": ""
+    },
+    {
+      "name": "array index far out of bounds",
+      "template": "[{{ a[9999999999] }}]",
+      "data": {
+        "a": [
+          1,
+          2,
+          3
+        ]
+      },
+      "result": "[]"
+    },
+    {
+      "name": "negative array index far out of bounds",
+      "template": "[{{ a[-9999999999] }}]",
+      "data": {
+        "a": [
+          1,
+          2,
+          3
+        ]
+      },
+      "result": "[]"
     }
   ]
 }
