@@ -161,6 +161,48 @@
         "concat filter",
         "join filter"
       ]
+    },
+    {
+      "name": "hashes are kept as items",
+      "template": "{% assign x = a | concat: b %}{{ x | size }}:{% for h in x %}{{ h.k }} {% endfor %}",
+      "data": {
+        "a": [
+          {
+            "k": "a",
+            "l": 1,
+            "m": 2
+          }
+        ],
+        "b": [
+          {
+            "k": "b"
+          }
+        ]
+      },
+      "result": "2:a b ",
+      "tags": [
+        "concat filter"
+      ]
+    },
+    {
+      "name": "nil items are kept",
+      "template": "{% assign x = a | concat: b %}{{ x | size }}:{{ x | join: '#' }}",
+      "data": {
+        "a": [
+          1,
+          null,
+          2
+        ],
+        "b": [
+          null,
+          3
+        ]
+      },
+      "result": "5:1##2##3",
+      "tags": [
+        "concat filter",
+        "join filter"
+      ]
     }
   ]
 }
