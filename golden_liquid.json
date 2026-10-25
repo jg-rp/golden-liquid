@@ -8253,6 +8253,42 @@
       ]
     },
     {
+      "name": "tags, capture, capture assign",
+      "template": "{% capture x %}{% assign y = 2 %}{% endcapture %}[{{ x }}{{ y }}]",
+      "result": "[2]",
+      "tags": [
+        "assign tag",
+        "capture tag"
+      ]
+    },
+    {
+      "name": "tags, capture, capture cycle",
+      "template": "{% capture x %}{% cycle 'a', 'b' %}{% endcapture %}[{{ x }}]{% cycle 'a', 'b' %}",
+      "result": "[a]b",
+      "tags": [
+        "capture tag",
+        "cycle tag"
+      ]
+    },
+    {
+      "name": "tags, capture, capture decrement",
+      "template": "{% capture x %}{% decrement a %}{% endcapture %}[{{ x }}]{% decrement a %}",
+      "result": "[-1]-2",
+      "tags": [
+        "capture tag",
+        "decrement tag"
+      ]
+    },
+    {
+      "name": "tags, capture, capture increment",
+      "template": "{% capture x %}{% increment a %}{% endcapture %}[{{ x }}]{% increment a %}",
+      "result": "[0]1",
+      "tags": [
+        "capture tag",
+        "increment tag"
+      ]
+    },
+    {
       "name": "tags, capture, capture into a variable with a hyphen",
       "template": "{% capture this-thing %}Hello, {{ customer.first_name }}.{% endcapture %}{{ this-thing }}",
       "data": {
@@ -8274,6 +8310,14 @@
         }
       },
       "result": "Hello, Holly.",
+      "tags": [
+        "capture tag"
+      ]
+    },
+    {
+      "name": "tags, capture, capture whitespace",
+      "template": "{% capture x %}  {% endcapture %}[{{ x }}]",
+      "result": "[  ]",
       "tags": [
         "capture tag"
       ]
