@@ -177,6 +177,22 @@
       "tags": [
         "default filter"
       ]
+    },
+    {
+      "name": "default equal to allow_false true",
+      "template": "{{ nosuchthing | default: true, allow_false: true }}",
+      "result": "true",
+      "tags": [
+        "default filter"
+      ]
+    },
+    {
+      "name": "default equal to allow_false false",
+      "template": "{{ nosuchthing | default: false, allow_false: false }}",
+      "result": "false",
+      "tags": [
+        "default filter"
+      ]
     }
   ]
 }
