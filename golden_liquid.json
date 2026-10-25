@@ -8865,9 +8865,25 @@
       ]
     },
     {
+      "name": "tags, cycle, different integers, same length",
+      "template": "{% cycle 1, 2 %}{% cycle 3, 4 %}{% cycle 1, 2 %}",
+      "result": "132",
+      "tags": [
+        "cycle tag"
+      ]
+    },
+    {
       "name": "tags, cycle, different items",
       "template": "{% cycle '1', '2', '3' %}{% cycle '1', '2' %}{% cycle '1', '2', '3' %}",
       "result": "112",
+      "tags": [
+        "cycle tag"
+      ]
+    },
+    {
+      "name": "tags, cycle, different items, same length",
+      "template": "{% cycle 'a', 'b' %}{% cycle 'x', 'y' %}{% cycle 'a', 'b' %}",
+      "result": "axb",
       "tags": [
         "cycle tag"
       ]
