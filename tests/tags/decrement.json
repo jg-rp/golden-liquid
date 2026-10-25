@@ -16,6 +16,15 @@
         "decrement tag",
         "increment tag"
       ]
+    },
+    {
+      "name": "whitespace in a block",
+      "template": "{% if true %} {% decrement a %} {% endif %}",
+      "result": " -1 ",
+      "tags": [
+        "decrement tag",
+        "if tag"
+      ]
     }
   ]
 }
