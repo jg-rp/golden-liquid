@@ -102,6 +102,15 @@
       "tags": [
         "cycle tag"
       ]
+    },
+    {
+      "name": "whitespace in a block",
+      "template": "{% if true %} {% cycle 'a', 'b' %} {% endif %}",
+      "result": " a ",
+      "tags": [
+        "cycle tag",
+        "if tag"
+      ]
     }
   ]
 }

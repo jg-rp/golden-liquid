@@ -41,6 +41,15 @@
         "if tag",
         "increment tag"
       ]
+    },
+    {
+      "name": "whitespace in a block",
+      "template": "{% if true %} {% increment a %} {% endif %}",
+      "result": " 0 ",
+      "tags": [
+        "increment tag",
+        "if tag"
+      ]
     }
   ]
 }
