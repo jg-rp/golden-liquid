@@ -6019,9 +6019,41 @@
       ]
     },
     {
+      "name": "filters, round, half at decimal places",
+      "template": "{{ 1.125 | round: 2 }}",
+      "result": "1.13",
+      "tags": [
+        "round filter"
+      ]
+    },
+    {
+      "name": "filters, round, half below one rounds up",
+      "template": "{{ 0.5 | round }}",
+      "result": "1",
+      "tags": [
+        "round filter"
+      ]
+    },
+    {
+      "name": "filters, round, half rounds up",
+      "template": "{{ 2.5 | round }}",
+      "result": "3",
+      "tags": [
+        "round filter"
+      ]
+    },
+    {
       "name": "filters, round, integer",
       "template": "{{ 5 | round }}",
       "result": "5",
+      "tags": [
+        "round filter"
+      ]
+    },
+    {
+      "name": "filters, round, negative half rounds away from zero",
+      "template": "{{ -2.5 | round }}",
+      "result": "-3",
       "tags": [
         "round filter"
       ]
