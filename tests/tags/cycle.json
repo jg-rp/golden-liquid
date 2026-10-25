@@ -104,6 +104,22 @@
       ]
     },
     {
+      "name": "different items, same length",
+      "template": "{% cycle 'a', 'b' %}{% cycle 'x', 'y' %}{% cycle 'a', 'b' %}",
+      "result": "axb",
+      "tags": [
+        "cycle tag"
+      ]
+    },
+    {
+      "name": "different integers, same length",
+      "template": "{% cycle 1, 2 %}{% cycle 3, 4 %}{% cycle 1, 2 %}",
+      "result": "132",
+      "tags": [
+        "cycle tag"
+      ]
+    },
+    {
       "name": "whitespace in a block",
       "template": "{% if true %} {% cycle 'a', 'b' %} {% endif %}",
       "result": " a ",
