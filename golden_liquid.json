@@ -10388,6 +10388,19 @@
       "invalid": true
     },
     {
+      "name": "tags, if, object contains key",
+      "template": "{% if obj contains 'foo' %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        }
+      },
+      "result": "TRUE",
+      "tags": [
+        "if tag"
+      ]
+    },
+    {
       "name": "tags, if, object contains nil",
       "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
       "data": {
@@ -10403,6 +10416,19 @@
     {
       "name": "tags, if, object contains undefined",
       "template": "{% if obj contains nosuchthing %}TRUE{% else %}FALSE{% endif %}",
+      "data": {
+        "obj": {
+          "foo": "bar"
+        }
+      },
+      "result": "FALSE",
+      "tags": [
+        "if tag"
+      ]
+    },
+    {
+      "name": "tags, if, object contains value",
+      "template": "{% if obj contains 'bar' %}TRUE{% else %}FALSE{% endif %}",
       "data": {
         "obj": {
           "foo": "bar"
