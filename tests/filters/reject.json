@@ -432,6 +432,52 @@
         "for tag",
         "reject filter"
       ]
+    },
+    {
+      "name": "only false and null are falsy",
+      "template": "{% assign b = a | reject: 'x' %}{% for obj in b %}{{ obj.i }},{% endfor %}",
+      "data": {
+        "a": [
+          {
+            "x": 0,
+            "i": 0
+          },
+          {
+            "x": 1,
+            "i": 1
+          },
+          {
+            "x": true,
+            "i": 2
+          },
+          {
+            "x": false,
+            "i": 3
+          },
+          {
+            "x": null,
+            "i": 4
+          },
+          {
+            "x": "",
+            "i": 5
+          },
+          {
+            "x": [],
+            "i": 6
+          },
+          {
+            "x": {},
+            "i": 7
+          }
+        ]
+      },
+      "result": "3,4,",
+      "tags": [
+        "assign tag",
+        "for tag",
+        "reject filter"
+      ]
     }
   ]
 }

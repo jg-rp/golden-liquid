@@ -19,10 +19,10 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
-          # uses .ruby-version
+          ruby-version: '4.0'
           bundler-cache: false
       - name: Build and test
         run: |
